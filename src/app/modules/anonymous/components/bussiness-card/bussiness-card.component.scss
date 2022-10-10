@@ -47,6 +47,13 @@ span.img-responsive img {
     overflow: hidden;
   }
 
+  .card-container {
+    max-width: 240px;
+    min-width: 240px;
+    margin: auto;
+    overflow: hidden;
+  }
+
   img {
     max-width: 100%;
     width: 230px !important;

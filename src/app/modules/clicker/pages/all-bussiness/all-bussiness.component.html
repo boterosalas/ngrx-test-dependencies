@@ -1,6 +1,13 @@
+<app-banner
+  title="Negocios"
+  color="primary"
+  img="/assets/img/banners/banner-negocios-pc.jpg"
+  imgMobile="/assets/img/banners/banner-negocios-mobile.jpg"
+></app-banner>
 <br />
 <br />
-<div class="mt-3 mb-5 container-fluid">
+
+<div class="mt-3 mb-5 max-1600-container">
   <app-slider
     *ngIf="auth.isLoggedIn()"
     Class="gtmHomeClicBanner"
@@ -10,7 +17,7 @@
   ></app-slider>
 </div>
 
-<div class="container pt-3" ngClass.xs="pr-3 pl-3 px-5">
+<div class="max-1600-container pt-3" ngClass.xs="pr-3 pl-3 px-5">
   <div fxLayout="row" fxLayoutAlign="space-between center" fxLayout.xs="column">
     <mat-form-field class="px-4 select">
       <mat-placeholder>FILTRAR POR CATEGORÍA</mat-placeholder>
@@ -22,14 +29,20 @@
       </mat-select>
     </mat-form-field>
 
-    <span fxLayout="row" fxLayoutGap="5px" class="locations" ngClass.gt-xs="mr-7" ngClass.xs="mb-3">
+    <!-- <span fxLayout="row" fxLayoutGap="5px" class="locations" ngClass.gt-xs="mr-7" ngClass.xs="mb-3"> -->
+    <span fxLayout="row" fxLayoutGap="5px" class="locations" ngClass.gt-xs="mr-24" ngClass.xs="mb-3">
       <i class="tio-poi mr-2 f-14"></i> Aprovecha el descuento en los puntos físicos de los negocios con este sello</span
     >
   </div>
 
-  <div fxLayout="row wrap" fxLayout.gt-xs="row wrap" ngClass.gt-xs="p-3" fxLayoutAlign="start center" fxLayoutGap="20px grid">
+  <!-- <div fxLayout="row wrap" fxLayout.gt-xs="row wrap" ngClass.gt-xs="p-3" fxLayoutAlign="start center" fxLayoutGap="20px grid"> -->
+  <div fxLayout="row wrap" fxLayout.gt-xs="row wrap" fxLayoutGap.lt-md="20px grid" fxLayoutAlign="start start">
     <ng-container *ngFor="let bussines of bussiness; let i = index">
       <app-bussiness-card
+        fxFlex.gt-md="20"
+        fxFlex.gt-sm="33"
+        fxFlex="50"
+        class="mb-3"
         *ngIf="bussines.code !== 'envios-clickam'"
         (bussiness)="bussinessNavigation(bussines)"
         [phygital]="bussines.phygital"

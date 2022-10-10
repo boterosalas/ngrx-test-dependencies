@@ -6,7 +6,7 @@
     class="goals gtmHomeClicMenuLightboxtusmedallas"
   >
     <span matPrefix class="pr-2 gtmHomeClicMenuLightboxtusmedallas"
-      ><img loading="lazy"src="assets/img/gamification/icon-prize-btn-menu.svg" alt="prize"
+      ><img loading="lazy" src="assets/img/gamification/icon-prize-btn-menu.svg" alt="prize"
     /></span>
     {{ 'MEDALS.MEDALS' | translate }}
   </span>
@@ -27,10 +27,20 @@
         matRipple
       >
         <span *ngIf="showIcon">
-          <img loading="lazy"src="assets/img/dashboard/icon-{{ i }}.svg" alt="icon" />
+          <img loading="lazy" src="assets/img/dashboard/icon-{{ i }}.svg" alt="icon" />
         </span>
-        <a mat-list-item ngClass="cursor-pointer gtmHomeClicMenuLightbox{{ item.description | trim}} f-16 {{ item.description }}" id="{{ section }}{{ i }}">
-          <span *ngIf="item.active" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="gtmHomeClicMenuLightbox{{ item.description | trim}}">
+        <a
+          mat-list-item
+          ngClass="cursor-pointer gtmHomeClicMenuLightbox{{ item.description | trim }} f-16 {{ item.description }}"
+          id="{{ section }}{{ i }}"
+        >
+          <span
+            *ngIf="item.active"
+            fxLayout="row"
+            fxLayoutGap="10px"
+            fxLayoutAlign="start center"
+            ngClass="gtmHomeClicMenuLightbox{{ item.description | trim }}"
+          >
             <i *ngIf="item.icon" ngClass="{{ item.icon }} icmen"></i>
             {{ item.description }}</span
           ></a
@@ -39,14 +49,21 @@
     </span>
 
     <span *ngIf="item.description !== 'Sin Grupo'">
-
       <mat-list role="list" *ngIf="item.menus === null">
-        <mat-list-item class="individual">
-          <span *ngIf="item.active" routerLinkActive="active"  (click)="hide()" routerLink="{{ item.route }}" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" ngClass="{{ item.description }} f-16 lifont">
+        <mat-list-item class="individual" routerLink="{{ item.route }}">
+          <span
+            *ngIf="item.active"
+            routerLinkActive="active"
+            (click)="hide()"
+            fxLayout="row"
+            fxLayoutGap="10px"
+            fxLayoutAlign="start center"
+            ngClass="{{ item.description }} f-16 lifont"
+          >
             <i *ngIf="item.icon" ngClass="{{ item.icon }} icsub"></i>
             {{ item.description }}
           </span>
-        </mat-list-item> 
+        </mat-list-item>
       </mat-list>
       <mat-accordion *ngIf="item.menus !== null">
         <mat-expansion-panel class="no-bg">
@@ -63,14 +80,13 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
           <mat-list role="list">
-            <mat-list-item *ngFor="let item of item.menus" class="pl-4">
+            <mat-list-item *ngFor="let item of item.menus" class="pl-4" routerLink="{{ item.route }}">
               <span
                 *ngIf="item.active"
                 routerLinkActive="active"
-                routerLink="{{ item.route }}"
                 (click)="hide()"
                 class="menu-mobile"
-                ngClass="gtmHomeClicMenuLightbox{{ item.description | trim}} "
+                ngClass="gtmHomeClicMenuLightbox{{ item.description | trim }} "
                 matRipple
                 >{{ item.description }}</span
               >

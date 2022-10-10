@@ -2,7 +2,7 @@
 @import 'general';
 
 footer {
-  background: #3D2F59;
+  background: #3d2f59;
   padding: 3% 6%;
 
   display: grid;
@@ -38,7 +38,8 @@ footer {
 
     section {
       width: 100%;
-      border-bottom: 1px solid #3D2F59;
+      border-bottom: 1px solid #3d2f59;
+      margin-bottom: 13px;
     }
 
     ul {
@@ -59,7 +60,6 @@ footer {
     text-decoration: none;
     color: #ffffff;
   }
-
 
   ul {
     text-align: left;
@@ -140,4 +140,12 @@ footer {
     margin: 0 0 1rem;
     padding-top: 1rem;
   }
+}
+hr {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  border: 0 none;
+  height: 1px;
+  background-color: #8d7eb7;
 }

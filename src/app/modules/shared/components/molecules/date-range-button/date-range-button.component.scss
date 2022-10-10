@@ -1,52 +1,63 @@
 @import 'variables';
 @import 'general';
 
-.p-range {
-  font-size: 11px;
-  font-family: $font-galano-bold !important;
-  color: #a7a3b1;
-}
-
-.form-control {
-    padding-left: 35px !important;
-    font-family: $font-galano !important;
-  }
-  
-  .border-input {
-    border: none;
-    outline: none;
-    height: 32px;
-  }
-  
-  .border-radius {
-    border-radius: 5px;
-  }
-
-  .text-color-table {
-    color: $primary-color !important;
-    font-size: 14px !important;
-    margin-left: 5px;
-  }
-
-
-.icon-date {
+.form-group {
+  display: flex;
+  flex-direction: column;
   position: relative;
-  top: 4px;
-  left: 30px;
-  font-size: 22px;
-  color: $purple2;
+  .input-group-container {
+    width: 100%;
+    .p-range {
+      font-size: 11px;
+      font-family: $font-galano-bold !important;
+      color: #a7a3b1;
+      padding-left: 10px;
+    }
+    .input-container {
+      border-radius: 5px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      .icon-container {
+        padding-left: 10px;
+        .icon-date {
+          font-size: 22px;
+          color: $purple2;
+        }
+      }
+      .input-control {
+        font-family: $font-galano !important;
+        border: none;
+        outline: none;
+        flex: 1;
+      }
+      ::ng-deep {
+        .md-drppicker {
+          left: 0px !important;
+          top: 40px !important;
+        }
+      }
+    }
+  }
+  .buttons-group {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    .tio-remove_from_trash {
+      color: red;
+      margin-right: 10px;
+    }
+  }
 }
-
-.ng-hor{
-    margin-left: -22px;
-}
-
-.move{
-  width: 355px;
-}
-
-.red-text{
-  color:red;
-  position: relative;
-  top: 5px;
+@media (min-width: 600px) {
+  .form-group {
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+    .input-group-container {
+      width: 50%;
+      padding-right: 10px;
+      max-width: 300px;
+    }
+  }
 }

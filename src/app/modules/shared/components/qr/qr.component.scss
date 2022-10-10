@@ -1,0 +1,154 @@
+@import 'variables';
+//  Desktop
+.qr {
+  &__container {
+    transition: 400ms;
+    @media (max-width: 600px) {
+      display: none;
+    }
+  }
+  &__hidden {
+    transform: translateX(194px);
+    transition: 400ms;
+  }
+  &__content {
+    width: 151px;
+    height: 192px;
+    border-radius: 12px;
+
+    background-color: #230040;
+    color: $white;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__toggle-button {
+    width: 42px;
+    height: 57px;
+    border-radius: 12px 0 0 12px;
+    background-color: $secondary-color;
+    cursor: pointer;
+    position: relative;
+    top: -70px;
+    left: -42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+      background-color: #ce0f0f;
+    }
+  }
+  &__cross {
+    background: transparent;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    cursor: pointer;
+  }
+  &__cross:after {
+    content: '';
+    height: 16px;
+    border-left: 2px solid $white;
+    position: absolute;
+    transform: rotate(45deg);
+  }
+
+  &__cross:before {
+    content: '';
+    height: 16px;
+    border-left: 2px solid $white;
+    position: absolute;
+    transform: rotate(-45deg);
+  }
+
+  &__image {
+    width: 102px;
+    height: 102px;
+    border-radius: 5px;
+    position: absolute;
+    top: 28px;
+  }
+  &__title {
+    position: absolute;
+    top: 142px;
+  }
+}
+
+// Mobile
+.download-app {
+  &__container {
+    position: fixed;
+    bottom: 30px;
+    right: 16px;
+    @media (min-width: 600px) {
+      display: none;
+    }
+  }
+  &__content {
+    width: 196px;
+    height: 57px;
+    overflow: hidden;
+    background-color: $secondary-color;
+    color: $white;
+    border-radius: 12px;
+    padding-left: 11.39px;
+    transition: 250ms;
+    display: flex;
+    align-items: center;
+  }
+  &__content > img {
+    cursor: pointer;
+  }
+  &__content-closed {
+    width: 48px;
+    height: 48px;
+    transition: 250ms;
+  }
+  &__title {
+    margin-left: 10px;
+    width: 110px;
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    cursor: pointer;
+  }
+  &__title > span {
+    margin-bottom: 4px;
+  }
+  &__title-hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 100ms, opacity 100ms linear;
+  }
+  &__cross {
+    background: transparent;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    top: -13px;
+    left: 18px;
+    cursor: pointer;
+  }
+  &__cross:after {
+    content: '';
+    height: 16px;
+    border-left: 2px solid $white;
+    position: absolute;
+    transform: rotate(45deg);
+  }
+
+  &__cross:before {
+    content: '';
+    height: 16px;
+    border-left: 2px solid $white;
+    position: absolute;
+    transform: rotate(-45deg);
+  }
+}

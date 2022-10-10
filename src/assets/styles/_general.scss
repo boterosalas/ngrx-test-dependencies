@@ -164,8 +164,11 @@ mat-form-field.select-custom {
 }
 
 .maincontent {
+  width: 100%;
   background: $bg-gray;
   padding-top: 58px;
+  overflow-x: hidden;
+  padding-bottom: 5px;
 }
 
 .mat-sidenav {
@@ -259,12 +262,6 @@ body {
 
 .mat-drawer-container {
   background: none !important;
-}
-
-.maincontent {
-  overflow-x: hidden;
-  padding-bottom: 5px;
-  // min-height: 520px;
 }
 
 .login {
@@ -2227,40 +2224,48 @@ app-menu-help-center {
   }
 }
 
-.card {
+.card-bg {
   &-0 {
     .mat-card {
-      background: transparent linear-gradient(90deg, #735cf2 0%, #968bf4 100%) 0% 0% no-repeat padding-box;
+      // background: transparent linear-gradient(90deg, #735cf2 0%, #968bf4 100%) 0% 0% no-repeat padding-box;
+      background: transparent linear-gradient(90deg, #7b54c4 0%, #9a6eeb 100%) 0% 0% no-repeat padding-box;
     }
   }
   &-1 {
     .mat-card {
-      background: transparent linear-gradient(90deg, #5f71da 0%, #608ddd 100%) 0% 0% no-repeat padding-box;
+      // background: transparent linear-gradient(90deg, #5f71da 0%, #608ddd 100%) 0% 0% no-repeat padding-box;
+      background: transparent linear-gradient(90deg, #92d4d4 0%, #70c2cb 100%) 0% 0% no-repeat padding-box;
     }
   }
   &-2 {
     .mat-card {
-      background: transparent linear-gradient(90deg, #7b54c4 0%, #9a6eeb 100%) 0% 0% no-repeat padding-box;
+      // background: transparent linear-gradient(90deg, #7b54c4 0%, #9a6eeb 100%) 0% 0% no-repeat padding-box;
+
+      background: transparent linear-gradient(90deg, #fcca90 0%, #ffb664 100%) 0% 0% no-repeat padding-box;
     }
   }
   &-3 {
     .mat-card {
-      background: transparent linear-gradient(90deg, #92d4d4 0%, #70c2cb 100%) 0% 0% no-repeat padding-box;
+      // background: transparent linear-gradient(90deg, #92d4d4 0%, #70c2cb 100%) 0% 0% no-repeat padding-box;
+      background: transparent linear-gradient(90deg, #a3bcf9 0%, #868ff8 100%) 0% 0% no-repeat padding-box;
     }
   }
   &-4 {
     .mat-card {
-      background: transparent linear-gradient(90deg, #ffacf6 0%, #fd92f1 100%) 0% 0% no-repeat padding-box;
+      background: transparent linear-gradient(90deg, #ff8646 0%, #f7bc80 100%) 0% 0% no-repeat padding-box;
+      // background: transparent linear-gradient(90deg, #ffacf6 0%, #fd92f1 100%) 0% 0% no-repeat padding-box;
     }
   }
   &-5 {
     .mat-card {
-      background: transparent linear-gradient(90deg, #ff8646 0%, #f7bc80 100%) 0% 0% no-repeat padding-box;
+      // background: transparent linear-gradient(90deg, #ff8646 0%, #f7bc80 100%) 0% 0% no-repeat padding-box;
+      background: transparent linear-gradient(90deg, #ffacf6 0%, #fd92f1 100%) 0% 0% no-repeat padding-box;
     }
   }
   &-6 {
     .mat-card {
-      background: transparent linear-gradient(90deg, #fcca90 0%, #ffb664 100%) 0% 0% no-repeat padding-box;
+      // background: transparent linear-gradient(90deg, #fcca90 0%, #ffb664 100%) 0% 0% no-repeat padding-box;
+      background: transparent linear-gradient(90deg, #5f71da 0%, #608ddd 100%) 0% 0% no-repeat padding-box;
     }
   }
   &-7 {
@@ -2271,34 +2276,6 @@ app-menu-help-center {
   &-8 {
     .mat-card {
       background: transparent linear-gradient(90deg, #ff9696 0%, #ff7c7c 100%) 0% 0% no-repeat padding-box;
-    }
-  }
-}
-
-.card-partner {
-  &-0 {
-    .mat-card {
-      background: transparent linear-gradient(90deg, #7b54c4 0%, #9a6eeb 100%) 0% 0% no-repeat padding-box;
-    }
-  }
-  &-1 {
-    .mat-card {
-      background: transparent linear-gradient(90deg, #92d4d4 0%, #70c2cb 100%) 0% 0% no-repeat padding-box;
-    }
-  }
-  &-2 {
-    .mat-card {
-      background: transparent linear-gradient(90deg, #ff8646 0%, #f7bc80 100%) 0% 0% no-repeat padding-box;
-    }
-  }
-  &-3 {
-    .mat-card {
-      background: transparent linear-gradient(90deg, #a3bcf9 0%, #868ff8 100%) 0% 0% no-repeat padding-box;
-    }
-  }
-  &-5 {
-    .mat-card {
-      background: transparent linear-gradient(90deg, #ff8646 0%, #f7bc80 100%) 0% 0% no-repeat padding-box;
     }
   }
 }
@@ -3097,7 +3074,10 @@ app-date-range form input {
 }
 
 .max-1600-container {
-  margin: auto;
   width: 100%;
   max-width: 1600px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
