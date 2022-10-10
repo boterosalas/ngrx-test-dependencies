@@ -147,8 +147,5 @@ export class ReportPartnerComponent implements OnInit {
       endDate: this.endDate.format('YYYY-MM-DD'),
       idBusiness: this.decodeToken.idbusiness || '75',
     };
-    this.link.getSalesByShops(params).subscribe((res: any) => {
-      this.phygitalReportData = res.objectResponse;
-    });
   }
 }
