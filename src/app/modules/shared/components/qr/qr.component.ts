@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocationHref } from 'src/app/helpers/window-location';
 
 @Component({
   selector: 'app-qr',
@@ -30,10 +31,7 @@ export class QrComponent implements OnInit {
       } else if (/android|x11/i.test(this.userAgent)) {
         this.store = playStore;
       }
-      this.redirectToStore(window, this.store);
+      LocationHref.redirect(this.store);
     }
-  }
-  redirectToStore(window: any, store: string) {
-    window.location.href = store;
   }
 }
