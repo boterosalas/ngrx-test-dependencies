@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
+import jasmine from 'jasmine';
 import { empty, Observable } from 'rxjs';
+import { LocationHref } from 'src/app/helpers/window-location';
 import { LoginformComponent } from 'src/app/modules/anonymous/components/loginform/loginform.component';
 // import 'rxjs/add/observable/empty';
 
@@ -10,6 +12,7 @@ import { QrComponent } from './qr.component';
 describe('QrComponent', () => {
   let component: QrComponent;
   let fixture: ComponentFixture<QrComponent>;
+  let locationSpy: jasmine.Spy;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -20,6 +23,8 @@ describe('QrComponent', () => {
     fixture = TestBed.createComponent(QrComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    locationSpy = spyOn(LocationHref, 'redirect').and.callFake(() => true);
   });
 
   it('should create', () => {
@@ -47,15 +52,9 @@ describe('QrComponent', () => {
     downloadAppTitle.nativeElement.click();
     expect(component.detectStore).toHaveBeenCalled();
   });
-  it('Redirect to play store', () => {
-    const window = { location: { href: '' } };
-    component.redirectToStore(window, 'https://www.example.com');
-    expect(window.location.href).toBe('https://www.example.com');
-  });
-  it('RedirectTo called', () => {
-    spyOn(component, 'redirectToStore');
-    const downloadAppTitle = fixture.debugElement.query(By.css('span.download-app__title'));
-    downloadAppTitle.nativeElement.click();
-    expect(component.redirectToStore).toHaveBeenCalled();
+
+  it('Test redirect', () => {
+    component.detectStore();
+    expect(locationSpy).toHaveBeenCalled();
   });
 });

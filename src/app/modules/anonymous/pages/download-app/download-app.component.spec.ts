@@ -2,6 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { LocationHref } from 'src/app/helpers/window-location';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { HomeComponent } from '../home/home.component';
@@ -14,6 +15,7 @@ let mockWindow = { location: { assign: '' } };
 describe('DownloadAppComponent', () => {
   let component: DownloadAppComponent;
   let fixture: ComponentFixture<DownloadAppComponent>;
+  let locationSpy: jasmine.Spy;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -33,17 +35,15 @@ describe('DownloadAppComponent', () => {
     fixture = TestBed.createComponent(DownloadAppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    locationSpy = spyOn(LocationHref, 'redirect').and.callFake(() => true);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  // it('should test window open event', () => {
-  //   component.userAgent = 'iPhone iPad';
-  //   const appStore = 'https://apps.apple.com/co/app/clickam/id1495823258';
-  //   const playStore = 'https://play.google.com/store/apps/details?id=com.clickam.appcompania';
-  //   component.ngOnInit();
-  //   // console.log('User agent: ', component.userAgent);
-  //   // expect(window.location.href).toEqual(appStore);
-  // });
+  it('Should redirect', () => {
+    component.userAgent = 'iphone ipad';
+    component.ngOnInit();
+    expect(locationSpy).toHaveBeenCalled();
+  });
 });
