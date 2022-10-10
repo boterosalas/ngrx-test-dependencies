@@ -148,7 +148,6 @@ export class ReportPartnerComponent implements OnInit {
       idBusiness: this.decodeToken.idbusiness || '75',
     };
     this.link.getSalesByShops(params).subscribe((res: any) => {
-      console.log('res', res);
       this.phygitalReportData = res.objectResponse;
     });
   }

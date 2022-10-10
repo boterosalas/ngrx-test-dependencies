@@ -15,7 +15,7 @@ describe('ReportPartnerComponent', () => {
   let component: ReportPartnerComponent;
   let fixture: ComponentFixture<ReportPartnerComponent>;
 
-  let mockLinksService = jasmine.createSpyObj('LinksService', ['getBussinessPartnerKPI']);
+  let mockLinksService = jasmine.createSpyObj('LinksService', ['getBussinessPartnerKPI','getSalesByShops']);
   let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
 
@@ -64,6 +64,7 @@ describe('ReportPartnerComponent', () => {
       providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },{ provide: LinksService, useValue: mockLinksService }],
     }).compileComponents();
     mockLinksService.getBussinessPartnerKPI.and.returnValue(of(kpi));
+    mockLinksService.getSalesByShops.and.returnValue(of({}));
   });
 
   beforeEach(() => {
