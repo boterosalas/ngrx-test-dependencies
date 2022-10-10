@@ -9,7 +9,7 @@ import { Observable, of, throwError, concat } from 'rxjs';
   providedIn: 'root',
 })
 export class LinksService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   url = environment.URL_REFERAL;
   ulrReport = environment.URL_REPORTS;
@@ -23,6 +23,7 @@ export class LinksService {
   apiGetReports = 'reports/getreports';
 
   apikpibussiness = 'Reports/getkpibusiness';
+  apiSalesByShops = 'reports/salesbyshops'
   apiGetComparativeDates = 'reports/getcomparativedates';
 
   apikpiTotal = 'Reports/getkpitotaldata';
@@ -38,7 +39,7 @@ export class LinksService {
   apigetReportTerms = 'reports/getterms';
   apigetReportCommissions = 'reports/getadmincommissions';
   apiUsers = 'Reports/getUsers';
-  apiExportFilterUsers= 'reports/getusersfilter';
+  apiExportFilterUsers = 'reports/getusersfilter';
   insurance = 'Insurance/ProcessFiles';
   apiSaveLink = 'Link/SaveLink';
   apiSaveLinkRefered = 'link/savelinkreferred';
@@ -80,7 +81,6 @@ export class LinksService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + this.authorization,
-      
     }),
   };
 
@@ -90,7 +90,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -99,13 +99,13 @@ export class LinksService {
   public sendPickingfile(formdata) {
     const data = new FormData();
     data.append('file', formdata.file);
-   
+
     return this.http.post(`${environment.URL_COMISSION}${this.apiPicking}`, formdata, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -117,7 +117,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -129,19 +129,19 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
   }
 
   public saveCutOffDate(value: number) {
-    return this.http.post(`${this.urlComission + this.apiSaveCutOffDate}`, {value: value}, this.httpOptions).pipe(
+    return this.http.post(`${this.urlComission + this.apiSaveCutOffDate}`, { value: value }, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -153,7 +153,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -165,7 +165,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -178,7 +178,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -193,7 +193,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -208,7 +208,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -223,7 +223,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -240,7 +240,7 @@ export class LinksService {
           errors.pipe(
             delay(3000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         ),
         map((resp: ResponseService) => {
@@ -261,7 +261,7 @@ export class LinksService {
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })
-  );
+    );
   }
 
   public getKPI(date: any) {
@@ -272,7 +272,7 @@ export class LinksService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + authorization,
-        
+
       }),
     };
     return this.http.get(`${this.urlComission}${this.apiKPI}?start=${date.start}&end=${date.end}`, httpOptions).pipe(
@@ -280,7 +280,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -296,7 +296,7 @@ export class LinksService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + authorization,
-        
+
       }),
     };
     return this.http.get(`${this.urlReports}${this.apikpiresume}`, httpOptions).pipe(
@@ -304,7 +304,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -321,7 +321,7 @@ export class LinksService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + authorization,
-        
+
       }),
     };
     const datesGet0 = date.start.split('T');
@@ -331,7 +331,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -346,7 +346,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -355,13 +355,17 @@ export class LinksService {
     );
   }
 
+  public getSalesByShops(params: any) {
+    return this.http.get(`${this.urlReports}${this.apiSalesByShops}?start=${params.startDate}&end=${params.endDate}&idbusiness=${params.idBusiness}`, this.httpOptions)
+  }
+
   public getComparedates(params: any) {
     return this.http.get(`${this.urlReports}${this.apiGetComparativeDates}?start=${params.startDate}&end=${params.endDate}&startcompare=${params.startcompare}&endcompare=${params.endcompare}&export=${params.export}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -378,7 +382,7 @@ export class LinksService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + authorization,
-        
+
       }),
     };
     const datesGet0 = date.start.split('T');
@@ -388,7 +392,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -397,13 +401,13 @@ export class LinksService {
     );
   }
 
-  public getPayment(userId: string, params:any ) {
+  public getPayment(userId: string, params: any) {
     return this.http.get(`${this.urlComission}${this.apiHistory}?userid=${userId}&from=${params.from}&to=${params.to}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -420,7 +424,7 @@ export class LinksService {
           errors.pipe(
             delay(3000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         ),
         map((resp: ResponseService) => {
@@ -435,7 +439,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -450,7 +454,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -465,7 +469,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -477,7 +481,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -491,7 +495,7 @@ export class LinksService {
           errors.pipe(
             delay(3000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         )
       );
@@ -503,7 +507,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -515,7 +519,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -524,16 +528,16 @@ export class LinksService {
   public getReport(params: any) {
     return this.http.get(`${this.urlReports}${this.apiGetReports}?from=${params.from}&to=${params.to}`, this.httpOptions).pipe(
       retryWhen((errors) =>
-      errors.pipe(
-        delay(3000),
-        take(3),
-        tap((errorStatus) => {})
-      )
-    ),
-    map((resp: any) => {
-      return resp.objectResponse;
-    })
-  );
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      ),
+      map((resp: any) => {
+        return resp.objectResponse;
+      })
+    );
   }
 
   public getReportTerms() {
@@ -542,7 +546,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -554,19 +558,19 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
   }
 
-  public getReportUser(id?:string) {
+  public getReportUser(id?: string) {
     return this.http.get(`${this.ulrReport}${this.apiGetReport}?userid=${id}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -578,7 +582,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -590,7 +594,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -602,7 +606,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -613,7 +617,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -629,7 +633,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -644,7 +648,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -656,7 +660,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((user: any) => {
@@ -671,7 +675,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -683,7 +687,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       )
     );
@@ -695,7 +699,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((user: any) => {
@@ -712,7 +716,7 @@ export class LinksService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + authorization,
-        
+
       }),
     };
 
@@ -721,7 +725,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -734,7 +738,7 @@ export class LinksService {
     const httpOptionsForm = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
-        
+
       }),
     };
 
@@ -743,7 +747,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -756,7 +760,7 @@ export class LinksService {
     const httpOptionsForm = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
-        
+
       }),
     };
 
@@ -765,7 +769,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -780,7 +784,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -795,7 +799,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -810,7 +814,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -827,7 +831,7 @@ export class LinksService {
           errors.pipe(
             delay(3000),
             take(3),
-            tap((errorStatus) => {})
+            tap((errorStatus) => { })
           )
         ),
         map((resp: ResponseService) => {
@@ -842,7 +846,7 @@ export class LinksService {
         errors.pipe(
           delay(3000),
           take(1),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {

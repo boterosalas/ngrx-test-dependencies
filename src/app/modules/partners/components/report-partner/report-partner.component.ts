@@ -16,27 +16,27 @@ export class ReportPartnerComponent implements OnInit {
   startCompareDate = undefined;
   endDate = moment(new Date());
   endCompareDate = undefined;
+  phygitalReportData = [];
   items = [];
-  name: string;
+  name: string = '';
   icon: string;
-  selectedDate:boolean;
+  selectedDate: boolean;
   showCashier = false;
-  showPatner = false;
+  showPartner = false;
+  decodeToken = decode(localStorage.getItem('ACCESS_TOKEN'))
 
-  constructor(private link: LinksService, private utils: UtilsService) {}
+  constructor(private link: LinksService, private utils: UtilsService) { }
 
   ngOnInit(): void {
-    this.getPartnersKPI();
-    const token = localStorage.getItem('ACCESS_TOKEN');
-    const tokenDecode = decode(token);
+    this.resetDates();
 
-    if(tokenDecode.role === 'PARTNER') {
-      this.showPatner = true;
+    if (this.decodeToken.role === 'PARTNER') {
+      this.showPartner = true;
       this.showCashier = false;
     }
 
-    if(tokenDecode.role === 'PARTNER-CASHIER') {
-      this.showPatner = false;
+    if (this.decodeToken.role === 'PARTNER-CASHIER') {
+      this.showPartner = false;
       this.showCashier = true;
     }
   }
@@ -45,7 +45,7 @@ export class ReportPartnerComponent implements OnInit {
     this.startDate = moment(e.startDate);
     this.endDate = moment(e.endDate);
     this.selectedDate = true;
-    
+
     const params = {
       startDate: this.startDate.format('YYYY-MM-DD'),
       endDate: this.endDate.format('YYYY-MM-DD'),
@@ -53,7 +53,8 @@ export class ReportPartnerComponent implements OnInit {
     };
 
 
-    if(this.startCompareDate === undefined) {
+    if (!this.startCompareDate) {
+      this.getSales();
       this.link.getBussinessPartnerKPI(params).subscribe((kpiFilter: ResponseService) => {
         this.items = kpiFilter.objectResponse.kpi;
       });
@@ -69,9 +70,8 @@ export class ReportPartnerComponent implements OnInit {
       this.link.getComparedates(params).subscribe((compare: ResponseService) => {
         this.items = compare.objectResponse.kpi;
       });
-  
-    }
 
+    }
 
   }
 
@@ -98,7 +98,7 @@ export class ReportPartnerComponent implements OnInit {
       export: true,
     };
 
-    if (this.startCompareDate !== undefined || this.endCompareDate !== undefined) {
+    if (this.startCompareDate || this.endCompareDate) {
       const paramsCompare = {
         startDate: this.startDate.format('YYYY-MM-DD'),
         endDate: this.endDate.format('YYYY-MM-DD'),
@@ -111,10 +111,16 @@ export class ReportPartnerComponent implements OnInit {
         this.utils.openSnackBar(exportCompare.userMessage, 'cerrar');
       });
     } else {
+      this.getSales();
       this.link.getBussinessPartnerKPI(params).subscribe((exportKpi: ResponseService) => {
         this.utils.openSnackBar(exportKpi.userMessage, 'cerrar');
       });
     }
+  }
+
+  resetDates(){
+    this.getPartnersKPI();
+    this.getSales();
   }
 
   public getPartnersKPI() {
@@ -131,6 +137,18 @@ export class ReportPartnerComponent implements OnInit {
       this.items = kpi.objectResponse.kpi;
       this.name = kpi.objectResponse.business;
       this.icon = kpi.objectResponse.icon;
+    });
+
+  }
+
+  getSales(){
+    const params = {
+      startDate: this.startDate.format('YYYY-MM-DD'),
+      endDate: this.endDate.format('YYYY-MM-DD'),
+      idBusiness: this.decodeToken.idbusiness || '75',
+    };
+    this.link.getSalesByShops(params).subscribe((res: any) => {
+      this.phygitalReportData = res.objectResponse;
     });
   }
 }
