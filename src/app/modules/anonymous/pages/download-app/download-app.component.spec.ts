@@ -36,11 +36,11 @@ describe('DownloadAppComponent', () => {
   });
   
   it('should create', () => {
-    spyOn(component, 'redirectTo').and.callFake(() => true);
+    spyOn(component, 'redirectTo').and.stub();
     expect(component).toBeTruthy();
   });
   it('Should redirect', () => {
-    const locationSpy = spyOn(component, 'redirectTo').and.callFake(() => true);
+    const locationSpy = spyOn(component, 'redirectTo').and.stub();
     component.userAgent = 'iphone ipad';
     component.ngOnInit();
     expect(locationSpy).toHaveBeenCalled();
