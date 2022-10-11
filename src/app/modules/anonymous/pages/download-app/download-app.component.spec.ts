@@ -9,7 +9,7 @@ import { HomeComponent } from '../home/home.component';
 
 import { DownloadAppComponent } from './download-app.component';
 
-xdescribe('DownloadAppComponent', () => {
+describe('DownloadAppComponent', () => {
   let component: DownloadAppComponent;
   let fixture: ComponentFixture<DownloadAppComponent>;
   let locationSpy: jasmine.Spy;
