@@ -162,7 +162,7 @@
     </div>
 
     <app-header class="fix" *ngIf="!hideFH" (sidenav)="drawer.toggle()" [name]="firstName"></app-header>
-    <app-qr class="qr"></app-qr>
+    <app-qr class="qr" *ngIf="auth.isLoggedIn() === false || (auth.getRole$ | async) === 'CLICKER'"></app-qr>
 
     <div ngClass="maincontent {{ classPage }}-page">
       <router-outlet></router-outlet>
