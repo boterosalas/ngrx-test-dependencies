@@ -12,7 +12,7 @@ import { DownloadAppComponent } from './download-app.component';
 // mock the window object
 let mockWindow = { location: { assign: '' } };
 
-xdescribe('DownloadAppComponent', () => {
+describe('DownloadAppComponent', () => {
   let component: DownloadAppComponent;
   let fixture: ComponentFixture<DownloadAppComponent>;
   let locationSpy: jasmine.Spy;
