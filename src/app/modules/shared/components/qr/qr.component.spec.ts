@@ -3,7 +3,7 @@ import { By } from '@angular/platform-browser';
 import { LocationHref } from 'src/app/helpers/window-location';
 import { QrComponent } from './qr.component';
 
-xdescribe('QrComponent', () => {
+describe('QrComponent', () => {
   let component: QrComponent;
   let fixture: ComponentFixture<QrComponent>;
   let locationSpy: jasmine.Spy;
