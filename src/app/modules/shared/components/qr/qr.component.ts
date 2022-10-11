@@ -30,7 +30,7 @@ export class QrComponent implements OnInit {
       } else if (/android|x11/i.test(this.userAgent)) {
         this.store = playStore;
       }
-      this.redirect(this.store);
+      LocationHref.redirect(this.store);
     }
   }
 

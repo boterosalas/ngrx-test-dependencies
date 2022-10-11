@@ -16,9 +16,9 @@ export class DownloadAppComponent implements OnInit {
     const playStore = 'https://play.google.com/store/apps/details?id=com.clickam.appcompania';
 
     if (/iphone|ipad|phone/i.test(this.userAgent)) {
-      this.redirectTo(appStore);
+      LocationHref.redirect(appStore);
     } else if (/android|x11/i.test(this.userAgent)) {
-      this.redirectTo(playStore);
+      LocationHref.redirect(playStore);
     } else {
       this.router.navigateByUrl('/inicio');
     }
