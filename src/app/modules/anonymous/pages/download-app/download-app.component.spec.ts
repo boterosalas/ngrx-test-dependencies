@@ -16,6 +16,9 @@ describe('DownloadAppComponent', () => {
   let component: DownloadAppComponent;
   let fixture: ComponentFixture<DownloadAppComponent>;
   let locationSpy: jasmine.Spy;
+  beforeAll(() => {
+    window.onbeforeunload = () => true;
+  });
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

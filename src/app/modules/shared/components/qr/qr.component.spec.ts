@@ -13,7 +13,9 @@ describe('QrComponent', () => {
   let component: QrComponent;
   let fixture: ComponentFixture<QrComponent>;
   let locationSpy: jasmine.Spy;
-
+  beforeAll(() => {
+    window.onbeforeunload = () => true;
+  });
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [QrComponent],
