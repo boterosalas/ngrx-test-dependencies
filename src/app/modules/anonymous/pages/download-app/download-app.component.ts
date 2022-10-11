@@ -20,7 +20,7 @@ export class DownloadAppComponent implements OnInit {
     } else if (/android|x11/i.test(this.userAgent)) {
       this.redirectTo(playStore);
     } else {
-      this.router.navigate(['/inicio']);
+      this.router.navigateByUrl('/inicio');
     }
   }
 
