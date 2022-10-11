@@ -16,11 +16,15 @@ export class DownloadAppComponent implements OnInit {
     const playStore = 'https://play.google.com/store/apps/details?id=com.clickam.appcompania';
 
     if (/iphone|ipad|phone/i.test(this.userAgent)) {
-      LocationHref.redirect(appStore);
+      this.redirectTo(appStore);
     } else if (/android|x11/i.test(this.userAgent)) {
-      LocationHref.redirect(playStore);
+      this.redirectTo(playStore);
     } else {
       this.router.navigate(['/inicio']);
     }
+  }
+
+  redirectTo(url: string){
+    window.location.href = url;
   }
 }
