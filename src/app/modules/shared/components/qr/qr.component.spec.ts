@@ -9,7 +9,7 @@ import { LoginformComponent } from 'src/app/modules/anonymous/components/loginfo
 
 import { QrComponent } from './qr.component';
 
-describe('QrComponent', () => {
+xdescribe('QrComponent', () => {
   let component: QrComponent;
   let fixture: ComponentFixture<QrComponent>;
   let locationSpy: jasmine.Spy;
