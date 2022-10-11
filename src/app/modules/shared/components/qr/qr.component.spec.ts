@@ -15,8 +15,10 @@ describe('QrComponent', () => {
 
     fixture = TestBed.createComponent(QrComponent);
     component = fixture.componentInstance;
+    locationSpy = spyOn(LocationHref, 'redirect').and.callFake(
+      () => true
+    );
     fixture.detectChanges();
-    locationSpy = spyOn(component, 'redirect').and.stub();
   });
 
   it('should create', () => {
