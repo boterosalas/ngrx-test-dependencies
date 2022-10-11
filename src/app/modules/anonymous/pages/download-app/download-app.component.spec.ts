@@ -12,7 +12,7 @@ import { DownloadAppComponent } from './download-app.component';
 describe('DownloadAppComponent', () => {
   let component: DownloadAppComponent;
   let fixture: ComponentFixture<DownloadAppComponent>;
-  // let locationSpy: jasmine.Spy;
+  let locationSpy: jasmine.Spy;
   // beforeAll(() => {
   //   window.onbeforeunload = () => true;
   // });
@@ -32,6 +32,9 @@ describe('DownloadAppComponent', () => {
 
     fixture = TestBed.createComponent(DownloadAppComponent);
     component = fixture.componentInstance;
+    locationSpy = spyOn(LocationHref, 'redirect').and.callFake(
+      () => true
+    );
     fixture.detectChanges();
   });
   
@@ -40,7 +43,6 @@ describe('DownloadAppComponent', () => {
     expect(component).toBeTruthy();
   });
   it('Should redirect', () => {
-    const locationSpy = spyOn(component, 'redirectTo').and.stub();
     component.userAgent = 'iphone ipad';
     component.ngOnInit();
     expect(locationSpy).toHaveBeenCalled();
