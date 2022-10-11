@@ -12,7 +12,7 @@ import { DownloadAppComponent } from './download-app.component';
 describe('DownloadAppComponent', () => {
   let component: DownloadAppComponent;
   let fixture: ComponentFixture<DownloadAppComponent>;
-  let locationSpy: jasmine.Spy;
+  // let locationSpy: jasmine.Spy;
   // beforeAll(() => {
   //   window.onbeforeunload = () => true;
   // });
@@ -24,7 +24,7 @@ describe('DownloadAppComponent', () => {
         AppMaterialModule,
         BrowserAnimationsModule,
         SharedModule,
-        // RouterTestingModule,
+        RouterTestingModule,
         HttpClientTestingModule,
         RouterTestingModule.withRoutes([{ path: 'inicio', component: HomeComponent }]),
       ],
@@ -33,13 +33,14 @@ describe('DownloadAppComponent', () => {
     fixture = TestBed.createComponent(DownloadAppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    locationSpy = spyOn(component, 'redirectTo').and.callFake(() => true);
   });
-
+  
   it('should create', () => {
+    spyOn(component, 'redirectTo').and.callFake(() => true);
     expect(component).toBeTruthy();
   });
   it('Should redirect', () => {
+    const locationSpy = spyOn(component, 'redirectTo').and.callFake(() => true);
     component.userAgent = 'iphone ipad';
     component.ngOnInit();
     expect(locationSpy).toHaveBeenCalled();
