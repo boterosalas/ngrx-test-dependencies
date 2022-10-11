@@ -9,16 +9,13 @@ import { HomeComponent } from '../home/home.component';
 
 import { DownloadAppComponent } from './download-app.component';
 
-// mock the window object
-let mockWindow = { location: { assign: '' } };
-
 describe('DownloadAppComponent', () => {
   let component: DownloadAppComponent;
   let fixture: ComponentFixture<DownloadAppComponent>;
   let locationSpy: jasmine.Spy;
-  beforeAll(() => {
-    window.onbeforeunload = () => true;
-  });
+  // beforeAll(() => {
+  //   window.onbeforeunload = () => true;
+  // });
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -27,12 +24,10 @@ describe('DownloadAppComponent', () => {
         AppMaterialModule,
         BrowserAnimationsModule,
         SharedModule,
-        RouterTestingModule,
-        RouterTestingModule,
+        // RouterTestingModule,
         HttpClientTestingModule,
         RouterTestingModule.withRoutes([{ path: 'inicio', component: HomeComponent }]),
       ],
-      providers: [{ provide: 'Window', useValue: mockWindow }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DownloadAppComponent);

@@ -1,31 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { RouterTestingModule } from '@angular/router/testing';
-import jasmine from 'jasmine';
-import { empty, Observable } from 'rxjs';
 import { LocationHref } from 'src/app/helpers/window-location';
-import { LoginformComponent } from 'src/app/modules/anonymous/components/loginform/loginform.component';
-// import 'rxjs/add/observable/empty';
-
 import { QrComponent } from './qr.component';
 
 describe('QrComponent', () => {
   let component: QrComponent;
   let fixture: ComponentFixture<QrComponent>;
   let locationSpy: jasmine.Spy;
-  beforeAll(() => {
-    window.onbeforeunload = () => true;
-  });
+  
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [QrComponent],
-      imports: [RouterTestingModule.withRoutes([{ path: 'inicio', component: LoginformComponent }])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(QrComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-
     locationSpy = spyOn(LocationHref, 'redirect').and.callFake(() => true);
   });
 

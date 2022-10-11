@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { LocationHref } from 'src/app/helpers/window-location';
 
 @Component({
@@ -13,7 +12,7 @@ export class QrComponent implements OnInit {
   store: string = '';
   userAgent: string = '';
 
-  constructor(private router: Router) {}
+  constructor() {}
   ngOnInit(): void {}
   toggleShow() {
     this.isQrOpen = !this.isQrOpen;
