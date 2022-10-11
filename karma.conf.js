@@ -4,7 +4,7 @@
 module.exports = function (config) {
   config.set({
     basePath: '',
-    frameworks: ['parallel','jasmine', '@angular-devkit/build-angular'],
+    frameworks: ['parallel', 'jasmine', '@angular-devkit/build-angular'],
     plugins: [
       require('karma-jasmine'),
       require('karma-parallel'),
@@ -46,10 +46,9 @@ module.exports = function (config) {
       },
     },
     restartOnFileChange: true,
-    restartOnFileChange: true,
-    captureTimeout: 210000,
+    captureTimeout: 400000,
     browserDisconnectTolerance: 3,
-    browserDisconnectTimeout: 310000,
-    browserNoActivityTimeout: 310000,
+    browserDisconnectTimeout: 400000,
+    browserNoActivityTimeout: 400000,
   });
 };
