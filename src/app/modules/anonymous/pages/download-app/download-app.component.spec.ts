@@ -33,7 +33,7 @@ describe('DownloadAppComponent', () => {
     fixture = TestBed.createComponent(DownloadAppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    locationSpy = spyOn(LocationHref, 'redirect').and.callFake(() => true);
+    locationSpy = spyOn(component, 'redirectTo').and.callFake(() => true);
   });
 
   it('should create', () => {
