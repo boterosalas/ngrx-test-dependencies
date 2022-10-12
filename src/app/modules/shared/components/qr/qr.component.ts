@@ -33,8 +33,4 @@ export class QrComponent implements OnInit {
       LocationHref.redirect(this.store);
     }
   }
-
-  redirect(url: string){
-    window.location.href = url;
-  }
 }
