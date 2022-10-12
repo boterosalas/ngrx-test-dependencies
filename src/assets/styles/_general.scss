@@ -1772,16 +1772,7 @@ button.swal2-cancel.updatecancel.swal2-styled {
   font-size: 14px;
 }
 
-@media screen and (min-width: 768px) {
-  .share-mobile {
-    display: none;
-  }
-}
-
 @media screen and (max-width: 768px) {
-  .share-desktop {
-    display: none !important;
-  }
 
   .mat-bottom-sheet-container {
     padding: 8px 25px !important;
@@ -1902,10 +1893,6 @@ app-product.no-slider img {
   span {
     line-height: 0 !important;
   }
-}
-
-.mt-2.share-desktop button {
-  min-width: 125px;
 }
 
 .mt-help {

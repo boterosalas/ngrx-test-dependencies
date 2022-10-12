@@ -46,15 +46,12 @@ export class ReportPartnerComponent implements OnInit {
     this.endDate = moment(e.endDate);
     this.selectedDate = true;
 
-    const params = {
-      startDate: this.startDate.format('YYYY-MM-DD'),
-      endDate: this.endDate.format('YYYY-MM-DD'),
-      export: false,
-    };
-
-
     if (!this.startCompareDate) {
-      this.getSales();
+      const params = {
+        startDate: this.startDate.format('YYYY-MM-DD'),
+        endDate: this.endDate.format('YYYY-MM-DD'),
+        export: false,
+      };
       this.link.getBussinessPartnerKPI(params).subscribe((kpiFilter: ResponseService) => {
         this.items = kpiFilter.objectResponse.kpi;
       });
@@ -111,16 +108,14 @@ export class ReportPartnerComponent implements OnInit {
         this.utils.openSnackBar(exportCompare.userMessage, 'cerrar');
       });
     } else {
-      this.getSales();
       this.link.getBussinessPartnerKPI(params).subscribe((exportKpi: ResponseService) => {
         this.utils.openSnackBar(exportKpi.userMessage, 'cerrar');
       });
     }
   }
 
-  resetDates(){
+  resetDates() {
     this.getPartnersKPI();
-    this.getSales();
   }
 
   public getPartnersKPI() {
@@ -139,13 +134,5 @@ export class ReportPartnerComponent implements OnInit {
       this.icon = kpi.objectResponse.icon;
     });
 
-  }
-
-  getSales(){
-    const params = {
-      startDate: this.startDate.format('YYYY-MM-DD'),
-      endDate: this.endDate.format('YYYY-MM-DD'),
-      idBusiness: this.decodeToken.idbusiness || '75',
-    };
   }
 }

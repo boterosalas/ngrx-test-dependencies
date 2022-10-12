@@ -158,14 +158,14 @@
   top: -3px;
 }
 
-.card{
-  &.purple{
+.card {
+  &.purple {
     background: $primary-color;
     color: #ffffff;
   }
 }
 
-.underline{
+.underline {
   text-decoration: underline;
 }
 
@@ -173,18 +173,18 @@
   color: #ffffff;
 }
 
-.fix{
+.fix {
   position: fixed;
   right: 20px;
   bottom: 20px;
   z-index: 10;
 }
 
-.shared{
+.shared {
   background: none;
   color: $primary-color;
   font-size: 20px;
-  border: 1px solid #2E235C10;
+  border: 1px solid #2e235c10;
   border-radius: 50%;
   padding: 10px;
   width: 40px;
@@ -228,8 +228,18 @@
 .connector {
   flex-grow: 1; //fill the space
   width: 10px;
-  content: "";
+  content: '';
   display: block;
   height: 1px;
   background-color: $primary-color;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.copy-link{
+  width: 100%;
+  min-width: 125px;
+  max-width: 220px;
 }

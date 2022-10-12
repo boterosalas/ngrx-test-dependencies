@@ -70,8 +70,8 @@ export class DiscountComponent implements OnInit, OnDestroy {
 
   getDefaultSale(obj: any) {
     let allShops = [];
-    Object.keys(obj).map(title => {
-      obj[title].map(sale => {
+    Object.keys(obj).forEach(title => {
+      obj[title].forEach(sale => {
         allShops.push(sale)
       })
     });
