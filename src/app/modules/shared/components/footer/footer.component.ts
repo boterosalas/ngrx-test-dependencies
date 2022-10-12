@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit, OnDestroy {
+  @Input() role: any;
   panelOpenState = false;
   sectionsLinks: any;
   private subscription: Subscription = new Subscription();
@@ -25,6 +26,7 @@ export class FooterComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getSections();
+    console.log('ROL',this.role)
   }
 
   goTerms() {
