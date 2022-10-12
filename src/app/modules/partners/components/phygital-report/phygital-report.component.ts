@@ -1,6 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { LinksService } from 'src/app/services/links.service';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-phygital-report',

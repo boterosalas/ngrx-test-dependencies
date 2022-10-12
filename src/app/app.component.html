@@ -226,7 +226,7 @@
       </div>
     </ng-template>
 
-    <app-footer *ngIf="!hideFH"></app-footer>
+    <app-footer *ngIf="!hideFH" [role]="auth.getRole$ | async"></app-footer>
 
     <app-loader></app-loader>
   </mat-sidenav-content>
