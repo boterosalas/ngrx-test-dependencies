@@ -4,8 +4,7 @@ import { LinksService } from 'src/app/services/links.service';
 
 @Component({
   selector: 'app-phygital-report',
-  templateUrl: './phygital-report.component.html',
-  styleUrls: ['./phygital-report.component.scss']
+  templateUrl: './phygital-report.component.html'
 })
 export class PhygitalReportComponent {
 
