@@ -10,18 +10,20 @@
 >
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <h3 class="f-18">{{ item.title }}</h3>
-      <i class="tio-info f-20 purple2-text" matTooltipClass="purple-tip" [matTooltip]="item.tooltip"></i>
+      <i class="tio-info f-20 purple2-text" matTooltipClass="purple-tip" [matTooltip]="item.tooltip" (click)="tooltip.show()" #tooltip="matTooltip"></i>
     </div>
 
     <mat-card style="border-radius: 10px !important">
       <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
         <div fxLayout="column">
-          <span class="galano-bold f-22 word-break" *ngIf="i === 1 && item.changed === null">
+          <span class="galano-bold f-22 word-break" *ngIf="(i===1 || i===4 || i===5) && item.changed === null;else numberTemplate">
             {{ item.number | currency: '':'symbol':'1.0-0' }}
           </span>
-          <span class="galano-bold f-22" *ngIf="i !== 1 && item.changed === null">
-            {{ item.number }}
-          </span>
+          <ng-template #numberTemplate>
+            <span class="galano-bold f-22" *ngIf="i !== 1 && item.changed === null">
+              {{ item.number }}
+            </span>
+          </ng-template>
 
           <div *ngIf="item.changed !== null" fxLayout="column">
             <div class="galano-bold f-22">

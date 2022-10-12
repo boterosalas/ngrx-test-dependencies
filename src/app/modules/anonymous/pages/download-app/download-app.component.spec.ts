@@ -39,7 +39,6 @@ describe('DownloadAppComponent', () => {
   });
   
   it('should create', () => {
-    spyOn(component, 'redirectTo').and.stub();
     expect(component).toBeTruthy();
   });
   it('Should redirect', () => {

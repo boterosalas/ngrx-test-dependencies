@@ -1,7 +1,7 @@
 <mat-card class="card mat-card-box-shadow">
   <app-title showTitleh3="true" text="Calcular descuento"></app-title>
 
-  <form class="discount" [formGroup]="discountForm" fxLayout="row" fxLayoutGap="20px">
+  <form class="discount" [formGroup]="discountForm" fxLayout="row" fxLayoutGap="20px" #discountFormDirective="ngForm">
     <mat-form-field>
       <input matInput id="document" type="text" placeholder="NÚMERO DE DOCUMENTO" formControlName="identification" />
       <mat-error
@@ -85,57 +85,67 @@
     </p>
   </div>
 
-  <form [formGroup]="valueForm" *ngIf="validUser" fxLayoutGap="20px">
-    <mat-form-field>
-      <input
-        matInput
-        id="value"
-        type="text"
-        placeholder="VALOR DE LOS PRODUCTOS"
-        formControlName="value"
-        (focusout)="calculateDiscount()"
-      />
+  <form [formGroup]="valueForm" #valueFormDirective="ngForm">
+    <div *ngIf="validUser" fxLayoutGap="20px">
+      <mat-form-field>
+        <input
+          matInput
+          id="value"
+          type="text"
+          placeholder="VALOR DE LOS PRODUCTOS"
+          formControlName="value"
+          (focusout)="calculateDiscount()"
+        />
 
-      <mat-error id="numbervalue" *ngIf="valueForm.controls.value.invalid && valueForm.controls.value.errors.pattern">{{
-        'GENERIC.ONLY_NUMBERS' | translate
-      }}</mat-error>
-    </mat-form-field>
-    <mat-form-field *ngIf="showResults && !ivaIncluido">
-      <input matInput id="discount" type="text" placeholder="VALOR IVA" value="{{ valoriva | currency: '':'symbol':'1.0-0' }}" readonly />
-    </mat-form-field>
-    <mat-form-field *ngIf="showResults && !ivaIncluido">
-      <input matInput id="discount" type="text" placeholder="VALOR SIN IVA" value="{{ valorAntesIva | currency: '':'symbol':'1.0-0' }}" readonly />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>TIENDA</mat-label>
-      <mat-select formControlName="maritalStatus">
-        <mat-option value="tienda1">
-          <span>Tienda 1</span>
-        </mat-option>
-        <mat-option value="tienda2">
-          <span>Tienda 2</span>
-        </mat-option>
-        <mat-option value="tienda3">
-          <span>Tienda 3</span>
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+        <mat-error id="numbervalue" *ngIf="valueForm.controls.value.invalid && valueForm.controls.value.errors.pattern">{{
+          'GENERIC.ONLY_NUMBERS' | translate
+        }}</mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="showResults && !ivaIncluido">
+        <input matInput id="discount" type="text" placeholder="VALOR IVA" value="{{ valoriva | currency: '':'symbol':'1.0-0' }}" readonly />
+      </mat-form-field>
+      <mat-form-field *ngIf="showResults && !ivaIncluido">
+        <input
+          matInput
+          id="discount"
+          type="text"
+          placeholder="VALOR SIN IVA"
+          value="{{ valorAntesIva | currency: '':'symbol':'1.0-0' }}"
+          readonly
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>TIENDA</mat-label>
+        <mat-select formControlName="shopControl">
+          <mat-optgroup *ngFor="let city of cityNames" [label]="city">
+            <mat-option *ngFor="let sale of salesObjectGroupByCities[city]" [value]="sale.id">
+              {{ sale.description }}
+            </mat-option>
+          </mat-optgroup>
+        </mat-select>
+        <mat-error
+        id="requireddocument"
+        *ngIf="valueForm.controls.shopControl.invalid && valueForm.controls.shopControl.errors.required"
+        >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Tienda' } }}</mat-error
+      >
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="showResults">
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+        <app-title showTitleh3="true" text="Resultado"></app-title>
+        <span class="border-gray-title"></span>
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px">
+        <mat-form-field>
+          <input matInput id="discount" type="text" placeholder="DESCUENTO" value="{{ discount }} %" readonly />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput id="total" type="text" placeholder="TOTAL A PAGAR" value="{{ total | currency: '':'symbol':'1.0-0' }}" readonly />
+        </mat-form-field>
+
+        <app-button title="CONFIRMAR VENTA" [haveIcon]="false" (click)="confirmSale(discountFormDirective,valueFormDirective)" classButton="shadow-purple"></app-button>
+      </div>
+    </div>
   </form>
-
-  <div *ngIf="showResults">
-    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-      <app-title showTitleh3="true" text="Resultado"></app-title>
-      <span class="border-gray-title"></span>
-    </div>
-    <div fxLayout="row" fxLayoutGap="10px">
-      <mat-form-field>
-        <input matInput id="discount" type="text" placeholder="DESCUENTO" value="{{ discount }} %" readonly />
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput id="total" type="text" placeholder="TOTAL A PAGAR" value="{{ total | currency: '':'symbol':'1.0-0' }}" readonly />
-      </mat-form-field>
-
-      <app-button title="CONFIRMAR VENTA" [haveIcon]="false" (click)="confirmSale()" classButton="shadow-purple"></app-button>
-    </div>
-  </div>
 </mat-card>

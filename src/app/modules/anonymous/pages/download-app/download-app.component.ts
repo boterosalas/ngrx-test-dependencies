@@ -23,8 +23,4 @@ export class DownloadAppComponent implements OnInit {
       this.router.navigateByUrl('/inicio');
     }
   }
-
-  redirectTo(url: string){
-    window.location.href = url;
-  }
 }
