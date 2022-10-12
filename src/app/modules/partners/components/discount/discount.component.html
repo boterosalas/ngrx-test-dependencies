@@ -1,7 +1,14 @@
 <mat-card class="card mat-card-box-shadow">
   <app-title showTitleh3="true" text="Calcular descuento"></app-title>
 
-  <form class="discount" [formGroup]="discountForm" fxLayout="row" fxLayoutGap="20px" #discountFormDirective="ngForm">
+  <form
+    class="discount"
+    [formGroup]="discountForm"
+    fxLayout.xs="column"
+    fxLayout.lt-xs="column"
+    fxLayoutGap="10px"
+    #discountFormDirective="ngForm"
+  >
     <mat-form-field>
       <input matInput id="document" type="text" placeholder="NÚMERO DE DOCUMENTO" formControlName="identification" />
       <mat-error
@@ -71,7 +78,7 @@
     <button
       mat-raised-button
       id="discount"
-      class="mt-2 center button button-height"
+      class="mt-3 center button button-height"
       color="orange"
       (click)="validate()"
       [disabled]="!discountForm.valid"
@@ -86,7 +93,7 @@
   </div>
 
   <form [formGroup]="valueForm" #valueFormDirective="ngForm">
-    <div *ngIf="validUser" fxLayoutGap="20px">
+    <div *ngIf="validUser" fxLayout.xs="column" fxLayout.lt-xs="column" fxLayoutGap="10px">
       <mat-form-field>
         <input
           matInput
@@ -123,11 +130,9 @@
             </mat-option>
           </mat-optgroup>
         </mat-select>
-        <mat-error
-        id="requireddocument"
-        *ngIf="valueForm.controls.shopControl.invalid && valueForm.controls.shopControl.errors.required"
-        >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Tienda' } }}</mat-error
-      >
+        <mat-error id="requireddocument" *ngIf="valueForm.controls.shopControl.invalid && valueForm.controls.shopControl.errors.required">{{
+          'GENERIC.REQUIRED' | translate: { formValue: 'Tienda' }
+        }}</mat-error>
       </mat-form-field>
     </div>
 
@@ -136,7 +141,7 @@
         <app-title showTitleh3="true" text="Resultado"></app-title>
         <span class="border-gray-title"></span>
       </div>
-      <div fxLayout="row" fxLayoutGap="10px">
+      <div fxLayout.xs="column" fxLayout.lt-xs="column" fxLayoutGap="10px">
         <mat-form-field>
           <input matInput id="discount" type="text" placeholder="DESCUENTO" value="{{ discount }} %" readonly />
         </mat-form-field>
@@ -144,7 +149,14 @@
           <input matInput id="total" type="text" placeholder="TOTAL A PAGAR" value="{{ total | currency: '':'symbol':'1.0-0' }}" readonly />
         </mat-form-field>
 
-        <app-button title="CONFIRMAR VENTA" [haveIcon]="false" (click)="confirmSale(discountFormDirective,valueFormDirective)" classButton="shadow-purple"></app-button>
+        <button
+          mat-raised-button
+          class="mt-3 center button button-height"
+          color="orange"
+          (click)="confirmSale(discountFormDirective, valueFormDirective)"
+        >
+          <span>CONFIRMAR VENTA</span>
+        </button>
       </div>
     </div>
   </form>

@@ -1,5 +1,5 @@
-<button (click)="actionButtton()" [id]="id" [ngClass]="classButton + ' ' + gtm" mat-raised-button [color]="color" [(disabled)]="disabled">
-    <span [ngClass]="gtm" [fxLayout]="direction" [fxLayoutAlign]="align" fxLayoutGap="{'10px': haveIcon}">
+<button (click)="actionButtton()" [id]="id" [ngClass]="classButton + ' ' + gtm" mat-raised-button [color]="color" [(disabled)]="disabled" class="btn">
+    <span class="btn-content" [ngClass]="gtm" [fxLayout]="direction" [fxLayoutAlign]="align" fxLayoutGap="{'10px': haveIcon}">
         <span [ngClass]="{'mr-2': haveIcon } + ' ' + gtm" *ngIf="haveTitle">
             {{ title }}
         </span>
