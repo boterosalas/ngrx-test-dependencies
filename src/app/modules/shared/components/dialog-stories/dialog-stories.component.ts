@@ -59,7 +59,6 @@ export class DialogStoriesComponent implements OnInit {
     } else {
       this.pause(this.data.id);
     }
-
     this.dialogRef.close();
   }
 

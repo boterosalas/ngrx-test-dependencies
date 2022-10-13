@@ -1,8 +1,8 @@
 @import 'variables';
 
 .slide {
-  width: 100px;
-  height: 120px;
+  min-width: 100px;
+  // min-height: 120px;
   cursor: pointer;
 }
 
@@ -17,6 +17,6 @@
   }
 }
 
-.st{
-    min-height: 100px;
-}
+// .st{
+//     min-height: 100px;
+// }

@@ -1,10 +1,25 @@
 <mat-card class="card mat-card-box-shadow px-3 py-1" *ngIf="storiesBusiness.length > 0">
+
+
   <span>
     <app-title showTitleh3="true" text="COMPRAR O REFERIR"></app-title>
-    <ul class="p-0" fxLayout="row" fxLayoutGap="50px" fxLayoutAlign="center center">
+
+    <!-- <ul class="p-0" fxLayout="row" fxLayoutGap="50px" fxLayoutAlign="center center">
       <li class="story-container" *ngFor="let story of storiesBusiness; let i = index">
         <app-button-story [story]="story" [index]="i" (openStory)="openDialogStories($event)"></app-button-story>
       </li>
-    </ul>
+    </ul> -->
+
+    <ngx-slick-carousel fxLayoutGap="10px" fxLayoutAlign="start" class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+      <div ngxSlickItem fxLayoutAlign="center center" *ngFor="let story of storiesBusiness; let i = index" class="slide m-2 p-0">
+        <div class="st" fxLayout="column" fxLayoutAlign="center center">
+          <app-button-story [story]="story" [index]="i" (openStory)="openDialogStories($event)"></app-button-story>
+        </div>
+      </div>
+    </ngx-slick-carousel>
   </span>
+
+
+
+
 </mat-card>

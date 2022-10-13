@@ -18,6 +18,16 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
   storiesBusiness = [];
   bussiness: any;
   userId: string;
+  slideConfig = {
+    // slidesToShow: 6,
+    slidesToScroll: 1,
+    dots: false,
+    autoplay: false,
+    infinite: false,
+    arrows: false,
+    swipeToSlide: true,
+    variableWidth: true,
+  };
 
   constructor(private user: UserService, private dialog: MatDialog, private content: ContentService, private router: Router) {}
 
@@ -42,7 +52,6 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
       const splitExt = nameFile.split('.');
       return splitExt[splitExt.length - 1].toLocaleLowerCase();
     }
-
     return null;
   }
 
@@ -66,12 +75,12 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
       height: '100vh',
     });
 
-    this.subscription = stories.beforeClosed().subscribe((storie) => {
-      vidPause = true;
-      this.router.navigateByUrl('/notificaciones', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/inicio']);
-      });
-    });
+    // this.subscription = stories.beforeClosed().subscribe((storie) => {
+    //   vidPause = true;
+    //   this.router.navigateByUrl('/notificaciones', { skipLocationChange: true }).then(() => {
+    //     this.router.navigate(['/inicio']);
+    //   });
+    // });
   }
 
   public getStories() {

@@ -1,9 +1,8 @@
-
-  <ngx-slick-carousel fxLayoutGap="10px" class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-    <div ngxSlickItem  fxLayoutAlign="center center" *ngFor="let slide of slider; let i = index" class="slide m-2 p-0">
-      <div class="st" fxLayout="column" fxLayoutAlign="center center">
-        <app-image imageClass="img-slide" [src]="slide.imageurl" [alt]="slide.description" ></app-image>
-        <span class=" discount">{{slide.infoaditional}}</span>
-      </div>
+<ngx-slick-carousel fxLayoutGap="10px" fxLayoutAlign="start" class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+  <div ngxSlickItem fxLayoutAlign="center center" *ngFor="let slide of slider; let i = index" class="slide m-2 p-0">
+    <div class="st" fxLayout="column" fxLayoutAlign="center center">
+      <app-image imageClass="img-slide" [src]="slide.imageurl" [alt]="slide.description"></app-image>
+      <span class="discount">{{ slide.infoaditional }}</span>
     </div>
-  </ngx-slick-carousel>
+  </div>
+</ngx-slick-carousel>

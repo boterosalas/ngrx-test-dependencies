@@ -112,25 +112,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   testimonials = [];
 
   slideConfig = {
-    slidesToShow: 8,
+    slidesToShow: 6,
     slidesToScroll: 1,
     dots: false,
-    dotClass: 'slick-dots orange',
     autoplay: true,
     autoplaySpeed: 5000,
     infinite: true,
     arrows: true,
-    variableWidth: false,
     lazyLoad: 'ondemand',
-    responsive: [
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 3,
-          variableWidth: true,
-        },
-      },
-    ],
+    swipeToSlide: true,
+    variableWidth: true,
   };
 
   slideConfigProductsLogged = {
