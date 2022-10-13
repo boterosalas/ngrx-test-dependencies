@@ -5,13 +5,8 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './card-report.component.html',
   styleUrls: ['./card-report.component.scss']
 })
-export class CardReportComponent implements OnInit {
+export class CardReportComponent{
 
   @Input() items: object;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

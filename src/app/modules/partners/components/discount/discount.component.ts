@@ -103,7 +103,6 @@ export class DiscountComponent implements OnInit, OnDestroy {
 
   resetFormControlErrors(formGroup: FormGroup) {
     const titles = Object.keys(formGroup.controls);
-    console.log('titles',titles)
   }
 
   public confirmSale(discountFormDirective: FormGroupDirective, valueFormDirective: FormGroupDirective) {

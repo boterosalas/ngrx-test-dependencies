@@ -36,48 +36,46 @@
         <input class="mb-4" id="urlLink" matInput [value]="url" #linkInput readonly />
         <br />
         <span fxLayout="row">
-          <div class="share-desktop w-100" fxHide.xs="true" id="share" fxLayout="row wrap" fxLayoutAlign="space-around">
-            <div fxLayout="column" class="mb-10">
-              <div fxLayout="row" fxLayoutGap="10px">
-                <span class="share-refer gtmRfiereYGanaClicReferirwhatsapp" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
-                  <a
-                    (click)="generateLink()"
-                    href="https://web.whatsapp.com/send?text={{ urlWhatsapp }}"
-                    target="_blank"
-                    data-action="share/whatsapp/share"
-                    ngClass="shared gtmRfiereYGanaClicReferirwhatsapp"
-                  >
-                    <i ngClass="fab fa-whatsapp gtmRfiereYGanaClicReferirwhatsapp"></i>
-                  </a>
-                </span>
+          <div class="share-desktop w-100" fxHide.xs="true" id="share" fxLayout="row wrap-reverse" fxLayoutAlign="space-around">
+            <div fxLayout="row" class="mb-10" fxLayoutGap="10px">
+              <span class="share-refer gtmRfiereYGanaClicReferirwhatsapp" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
+                <a
+                  (click)="generateLink()"
+                  href="https://web.whatsapp.com/send?text={{ urlWhatsapp }}"
+                  target="_blank"
+                  data-action="share/whatsapp/share"
+                  ngClass="shared gtmRfiereYGanaClicReferirwhatsapp"
+                >
+                  <i ngClass="fab fa-whatsapp gtmRfiereYGanaClicReferirwhatsapp"></i>
+                </a>
+              </span>
 
-                <span class="share-refer gtmRfiereYGanaClicReferirFacebook" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
-                  <button
-                    theme="circles-dark"
-                    shareButton="facebook"
-                    [url]="url"
-                    ngClass="shared mr-2 gtmRfiereYGanaClicReferirFacebook"
-                    (click)="generateLink()"
-                  >
-                    <i ngClass="fab fa-facebook-f gtmRfiereYGanaClicReferirFacebook"></i>
-                  </button>
-                </span>
+              <span class="share-refer gtmRfiereYGanaClicReferirFacebook" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
+                <button
+                  theme="circles-dark"
+                  shareButton="facebook"
+                  [url]="url"
+                  ngClass="shared mr-2 gtmRfiereYGanaClicReferirFacebook"
+                  (click)="generateLink()"
+                >
+                  <i ngClass="fab fa-facebook-f gtmRfiereYGanaClicReferirFacebook"></i>
+                </button>
+              </span>
 
-                <span class="share-refer gtmRfiereYGanaClicReferirTwitter" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
-                  <button
-                    theme="circles-dark"
-                    shareButton="twitter"
-                    [url]="url"
-                    (click)="generateLink()"
-                    ngClass="shared mr-2 gtmRfiereYGanaClicReferirTwitter"
-                  >
-                    <i ngClass="fab fa-twitter gtmRfiereYGanaClicReferirTwitter"></i>
-                  </button>
-                </span>
-              </div>
+              <span class="share-refer gtmRfiereYGanaClicReferirTwitter" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
+                <button
+                  theme="circles-dark"
+                  shareButton="twitter"
+                  [url]="url"
+                  (click)="generateLink()"
+                  ngClass="shared mr-2 gtmRfiereYGanaClicReferirTwitter"
+                >
+                  <i ngClass="fab fa-twitter gtmRfiereYGanaClicReferirTwitter"></i>
+                </button>
+              </span>
             </div>
             <div fxLayout="column" class="mb-10 copy-link">
-              <app-button title="Copiar enlace" [align]="'center center'" color="orange" (click)="copyLink(linkInput)" haveIcon=false gtm="gtmPanelInvitaYGanaCopiarLink"></app-button>
+              <app-button title="Copiar enlace" width="100%" [align]="'center center'" color="orange" (click)="copyLink(linkInput)" haveIcon=false gtm="gtmPanelInvitaYGanaCopiarLink"></app-button>
             </div>
           </div>
 
@@ -95,7 +93,7 @@
       <mat-card fxFlex.gt-xs="33" class="card mat-card-box-shadow" fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="center space-around"> 
         <div fxLayout="row" fxLayoutAlign.xs="space-between center" fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="space-between center">
           <app-title showTitleh3="true" text="PASO A PASO"></app-title>
-          <span class="text-secondary underline cursor-pointer gtmPanelPasoPasoVerMas" fxHide.xs="false" fxHide.sm="true" [routerLink]="['/negocios']">Ver más</span>
+          <a class="text-secondary underline cursor-pointer gtmPanelPasoPasoVerMas" fxHide.xs="false" fxHide.sm="true" [routerLink]="['/negocios']">Ver más</a>
         </div>
         <div class="connected-steps px-3" *ngIf="missions.length">
           <div class="step-active">1</div>
@@ -110,7 +108,7 @@
           <p>Ganar</p>
         </div>
         <div fxLayout="row" fxLayoutAlign="center center" fxHide.xs="true" fxHide.sm="false" fxHide.gt-sm="true">
-          <span class="text-secondary underline cursor-pointer gtmPanelPasoPasoVerMas" [routerLink]="['/negocios']">Ver más</span>
+          <a class="text-secondary underline cursor-pointer gtmPanelPasoPasoVerMas" [routerLink]="['/negocios']">Ver más</a>
         </div>
       </mat-card>
     </div>
@@ -199,7 +197,7 @@
   </div>
 
   <!-- image -->
-  <div class="container py-5"  *ngIf="firstBuy === 'true'">
+  <div class="max-1600-container py-3 gtmHomeBannerGanaMas"  *ngIf="firstBuy === 'true'">
     <app-image
       fxHide.xs="true"
       imageClass="cursor-pointer w-100 gtmHomeBannerGanaMas"

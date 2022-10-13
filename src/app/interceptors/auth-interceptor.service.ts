@@ -71,7 +71,6 @@ export class AuthInterceptor implements HttpInterceptor {
               this.loaderService.hide();
               this.countError2 = 0;
             }, 15000);
-            return;
           }
         }
         return throwError(err);

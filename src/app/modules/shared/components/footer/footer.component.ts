@@ -26,7 +26,6 @@ export class FooterComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getSections();
-    console.log('ROL',this.role)
   }
 
   goTerms() {
