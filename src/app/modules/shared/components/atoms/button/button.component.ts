@@ -18,6 +18,7 @@ export class ButtonComponent implements OnInit {
   @Input() haveTitle = true;
   @Input() color = 'orange';
   @Input() direction = 'row';
+  @Input() width;
   @Input() align = 'space-between center';
 
   constructor() { }

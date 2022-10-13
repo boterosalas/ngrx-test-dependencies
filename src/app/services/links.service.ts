@@ -23,6 +23,7 @@ export class LinksService {
   apiGetReports = 'reports/getreports';
 
   apikpibussiness = 'Reports/getkpibusiness';
+  apiSalesByShops = 'reports/salesbyshops';
   apiGetComparativeDates = 'reports/getcomparativedates';
 
   apikpiTotal = 'Reports/getkpitotaldata';
@@ -352,6 +353,10 @@ export class LinksService {
         return resp;
       })
     );
+  }
+
+  public getSalesByShops(params: any) {
+    return this.http.get(`${this.urlReports}${this.apiSalesByShops}?start=${params.startDate}&end=${params.endDate}&idbusiness=${params.idBusiness}`, this.httpOptions)
   }
 
   public getComparedates(params: any) {

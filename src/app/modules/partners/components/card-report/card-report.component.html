@@ -1,6 +1,6 @@
 <article
   *ngFor="let item of items; let i = index"
-  class="card-bg-{{ i }} white"
+  class="white"
   ngClass.gt-xs=""
   fxLayout="column"
   fxLayoutAlign="space-between stretch"
@@ -8,23 +8,34 @@
   fxFlex.gt-xs="50"
   fxFlex="100"
 >
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <h3 class="f-18">{{ item.title }}</h3>
-      <i class="tio-info f-20 purple2-text" matTooltipClass="purple-tip" [matTooltip]="item.tooltip" (click)="tooltip.show()" #tooltip="matTooltip"></i>
-    </div>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <h3 class="f-18">{{ item.title }}</h3>
+    <i
+      class="tio-info f-20 purple2-text"
+      matTooltipClass="purple-tip"
+      [matTooltip]="item.tooltip"
+      (click)="tooltip.show()"
+      #tooltip="matTooltip"
+    ></i>
+  </div>
 
-    <mat-card style="border-radius: 10px !important">
-      <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
-        <div fxLayout="column">
-          <span class="galano-bold f-22 word-break" *ngIf="(i===1 || i===4 || i===5) && !item.changed;else numberTemplate">
-            {{ item.number | currency: '':'symbol':'1.0-0' }}
-          </span>
-          <ng-template #numberTemplate>
-            <span class="galano-bold f-22" *ngIf="i !== 1 && !item.changed">
+  <mat-card style="border-radius: 10px !important" [ngStyle]="{'background': item.background}">
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
+      <div fxLayout="column">
+        <ng-container *ngIf="!item.changed; else changedTemplate">
+          <ng-container [ngSwitch]="item.type">
+            <span class="galano-bold f-22 word-break" *ngSwitchCase="'currency'">
+              {{ item.number | currency: '':'symbol':'1.0-0' }}
+            </span>
+            <span class="galano-bold f-22 word-break" *ngSwitchCase="'number'">
               {{ item.number }}
             </span>
-          </ng-template>
-
+            <span class="galano-bold f-22 word-break" *ngSwitchDefault>
+              {{ item.number }}
+            </span>
+          </ng-container>
+        </ng-container>
+        <ng-template #changedTemplate>
           <div *ngIf="item.changed" fxLayout="column">
             <div class="galano-bold f-22">
               <span fxLayout="row" fxLayoutGap="10px">
@@ -33,17 +44,23 @@
                 <i *ngIf="item.changed === 'SUBIO'" class="tio-arrow_large_upward"></i>
               </span>
             </div>
-
-            <span *ngIf="i !== 1">{{ item.number }} frente a {{ item.numbercompare }}</span>
-
-            <span *ngIf="i === 1"
-              >{{ item.number | currency: '':'symbol':'1.0-0' }} frente a {{ item.numbercompare | currency: '':'symbol':'1.0-0' }}</span
-            >
+            <ng-container [ngSwitch]="item.type">
+              <span class="galano-bold f-22 word-break" *ngSwitchCase="'currency'">
+                {{ item.number | currency: '':'symbol':'1.0-0' }} frente a {{ item.numbercompare | currency: '':'symbol':'1.0-0' }}
+              </span>
+              <span class="galano-bold f-22 word-break" *ngSwitchCase="'number'">
+                {{ item.number }} frente a {{ item.numbercompare }}
+              </span>
+              <span class="galano-bold f-22 word-break" *ngSwitchDefault>
+                {{ item.number }}
+              </span>
+            </ng-container>
           </div>
-        </div>
-        <div fxLayout="column">
-          <img loading="lazy" [src]="item.icon" alt="icon" />
-        </div>
+        </ng-template>
       </div>
+      <div fxLayout="column">
+        <img loading="lazy" [src]="item.icon" [alt]="item.title" />
+      </div>
+    </div>
   </mat-card>
 </article>

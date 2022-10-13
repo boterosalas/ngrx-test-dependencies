@@ -29,13 +29,10 @@ export class ReportPartnerComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetDates();
-
     if (this.decodeToken.role === 'PARTNER') {
       this.showPartner = true;
       this.showCashier = false;
-    }
-
-    if (this.decodeToken.role === 'PARTNER-CASHIER') {
+    }else if (this.decodeToken.role === 'PARTNER-CASHIER') {
       this.showPartner = false;
       this.showCashier = true;
     }
@@ -45,13 +42,13 @@ export class ReportPartnerComponent implements OnInit {
     this.startDate = moment(e.startDate);
     this.endDate = moment(e.endDate);
     this.selectedDate = true;
-
     if (!this.startCompareDate) {
       const params = {
         startDate: this.startDate.format('YYYY-MM-DD'),
         endDate: this.endDate.format('YYYY-MM-DD'),
         export: false,
       };
+      this.getSales();
       this.link.getBussinessPartnerKPI(params).subscribe((kpiFilter: ResponseService) => {
         this.items = kpiFilter.objectResponse.kpi;
       });
@@ -63,11 +60,9 @@ export class ReportPartnerComponent implements OnInit {
         endcompare: this.endCompareDate.format('YYYY-MM-DD'),
         export: false,
       };
-
       this.link.getComparedates(params).subscribe((compare: ResponseService) => {
         this.items = compare.objectResponse.kpi;
       });
-
     }
 
   }
@@ -82,7 +77,6 @@ export class ReportPartnerComponent implements OnInit {
       endcompare: this.endCompareDate.format('YYYY-MM-DD'),
       export: false,
     };
-
     this.link.getComparedates(params).subscribe((compare: ResponseService) => {
       this.items = compare.objectResponse.kpi;
     });
@@ -94,7 +88,6 @@ export class ReportPartnerComponent implements OnInit {
       endDate: this.endDate.format('YYYY-MM-DD'),
       export: true,
     };
-
     if (this.startCompareDate || this.endCompareDate) {
       const paramsCompare = {
         startDate: this.startDate.format('YYYY-MM-DD'),
@@ -103,11 +96,11 @@ export class ReportPartnerComponent implements OnInit {
         endcompare: this.endCompareDate.format('YYYY-MM-DD'),
         export: true,
       };
-
       this.link.getComparedates(paramsCompare).subscribe((exportCompare: ResponseService) => {
         this.utils.openSnackBar(exportCompare.userMessage, 'cerrar');
       });
     } else {
+      this.getSales();
       this.link.getBussinessPartnerKPI(params).subscribe((exportKpi: ResponseService) => {
         this.utils.openSnackBar(exportKpi.userMessage, 'cerrar');
       });
@@ -116,23 +109,31 @@ export class ReportPartnerComponent implements OnInit {
 
   resetDates() {
     this.getPartnersKPI();
+    this.getSales();
   }
 
   public getPartnersKPI() {
-
     this.startCompareDate = undefined;
-
     const params = {
       startDate: this.startDate.format('YYYY-MM-DD'),
       endDate: this.endDate.format('YYYY-MM-DD'),
       export: false,
     };
-
     this.link.getBussinessPartnerKPI(params).subscribe((kpi: ResponseService) => {
       this.items = kpi.objectResponse.kpi;
       this.name = kpi.objectResponse.business;
       this.icon = kpi.objectResponse.icon;
     });
-
+  }
+  
+  getSales(){
+    const params = {
+      startDate: this.startDate.format('YYYY-MM-DD'),
+      endDate: this.endDate.format('YYYY-MM-DD'),
+      idBusiness: this.decodeToken.idbusiness,
+    };
+    this.link.getSalesByShops(params).subscribe((res: any) => {
+      this.phygitalReportData = res.objectResponse;
+    });
   }
 }
