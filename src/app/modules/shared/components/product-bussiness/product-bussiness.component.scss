@@ -77,11 +77,11 @@
     width: 100%;
     display: flex;
     margin-top: 0;
-    img {
-      border-top-right-radius: 0px !important;
-      border-bottom-right-radius: 0px !important;
-      border-bottom-left-radius: 10px !important;
-    }
+    // img {
+    //   border-top-right-radius: 0px !important;
+    //   border-bottom-right-radius: 0px !important;
+    //   border-bottom-left-radius: 10px !important;
+    // }
   }
   .button-properties {
     max-width: 70%;
@@ -131,10 +131,6 @@
 
 .logo-aliance {
   width: 25px;
-}
-
-.border-rad {
-  border-radius: 10px;
 }
 
 @media screen and (max-width: 350px) {
@@ -222,4 +218,40 @@ h3.size {
 }
 .heigth-automatic {
   height: auto !important;
+}
+
+.product-image{
+  min-width: 120px;
+  @media (min-width:400px) {
+    min-width: 140px;    
+  }
+  @media (min-width:700px) {
+    min-width: 160px;    
+  }
+  &__image{
+    border-radius: 5px 0px 0px 5px;
+  }
+}
+
+h3.min-width-auto{
+  min-width: auto;
+}
+
+.w-100{
+  width: 100%;
+}
+
+.border-radius-10{
+  border-radius: 10px;
+}
+
+.px-10{
+  padding: 0px 10px;
+}
+
+.card-product{
+  &__content{
+    border-radius: 10px;
+    overflow: hidden;
+  }
 }
