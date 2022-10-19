@@ -3,7 +3,7 @@
     <div class="qr__cross" (click)="toggleShow()"></div>
     <img
       class="qr__image"
-      src="https://webclickamdev.blob.core.windows.net/img-ofertas/qr/qr-descargar-app-clickam.png"
+      [src]="environment.URL_BLOB + 'img-ofertas/qr/qr-image.png'"
       alt="qr-descargar-app-clickam"
     />
     <span class="qr__title">
@@ -12,7 +12,7 @@
     </span>
   </div>
   <div class="qr__toggle-button" (click)="toggleShow()">
-    <img src="https://webclickamdev.blob.core.windows.net/img-ofertas/qr/clickam-white-blue.png" alt="" />
+    <img [src]="environment.URL_BLOB + 'img-ofertas/qr/clickam-white-blue.png'" alt="" />
   </div>
 </div>
 
@@ -20,7 +20,7 @@
   <div class=" download-app__content {{ isQrOpen ? '' : 'download-app__content-closed' }}">
     <img
       (click)="detectStore()"
-      src="https://webclickamdev.blob.core.windows.net/img-ofertas/qr/descargar-app-icon.png"
+      [src]="environment.URL_BLOB + 'img-ofertas/qr/descargar-app-icon.png'"
       alt="download-app-icon"
     />
     <span (click)="detectStore()" class="download-app__title {{ isQrOpen ? '' : 'download-app__title-hidden' }}">
