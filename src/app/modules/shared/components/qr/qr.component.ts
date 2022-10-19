@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationHref } from 'src/app/helpers/window-location';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-qr',
@@ -11,6 +12,7 @@ export class QrComponent implements OnInit {
   isQrOpen: boolean = true;
   store: string = '';
   userAgent: string = '';
+  environment = environment;
 
   constructor() {}
   ngOnInit(): void {}
