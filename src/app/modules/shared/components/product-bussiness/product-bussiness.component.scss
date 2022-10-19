@@ -228,8 +228,16 @@ h3.size {
   @media (min-width:700px) {
     min-width: 160px;    
   }
+  &__container{
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+  }
   &__image{
-    border-radius: 5px 0px 0px 5px;
+    border-radius: 0px;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
 }
 
@@ -251,7 +259,7 @@ h3.min-width-auto{
 
 .card-product{
   &__content{
-    border-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
   }
 }

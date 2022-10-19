@@ -19,8 +19,6 @@
             {{ nombreProducto | truncate: '50' }}
           </h3>
           <div class="w-100">
-            <span class="f-13" ngClass.gt-xs="f-18" *ngIf="precio !== 0"></span>
-
             <span
               *ngIf="precio !== 0"
               fxLayout="row"
@@ -55,7 +53,7 @@
                   (click)="product()"
                   [disabled]="precio === 0"
                 >
-                  <span id="{{ butonid }}">{{ textoboton }}</span>
+                  <span>{{ textoboton }}</span>
                 </button>
               </span>
             </span>
@@ -83,48 +81,58 @@
 </mat-card>
 
 <mat-card class="mat-elevation-z0 card-product card-other fade-in p-1" *ngIf="otro">
-  <mat-card-content fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between" class="card-product__content">
+  <mat-card-content
+    fxLayout="row"
+    fxLayoutGap="0px"
+    fxLayoutGap.gt-xs="10px"
+    fxLayoutAlign="space-between stretch"
+    class="card-product__content"
+  >
     <span fxFlex="30" fxLayoutAlign="start center" class="product-image">
-      <div class="{{ container }}" fxLayout="row" fxLayoutAlign="center">
-        <img loading="lazy" class="product-image__image" src="{{ imagen }}" alt="{{ altimagen }}" />
-      </div>
+      <img loading="lazy" class="product-image__image" src="{{ imagen }}" alt="{{ altimagen }}" />
     </span>
-    <span
-      fxLayout="row wrap"
-      fxFlex="70"
-      fxLayoutAlign="start center"
-      class="px-10">
-      
-        <span fxFlex="100" fxLayout="column" fxLayoutAlign="start start">
-          <h3 class="mt-3 mb-0 min-width-auto" ngClass.gt-xs="f-18" id="{{ idne }}" matTooltip="{{ nombreProducto }}">
-            {{ nombreProducto | truncate: '30' }}
-          </h3>
-          <p>
-            <span class="f-13" ngClass.gt-xs="f-18">Recompensa:</span>
-            <span class="d-block orange-text f-13" ngClass.gt-xs="f-18">
-              {{ porcentaje }}
-            </span>
-          </p>
-        </span>
-
-        <div fxFlex="100" fxLayout="row wrap" fxFlex fxLayoutAlign="end" fxLayoutGap="10px" class="mt-2 mb-2">
-            <button id="{{ butonid }}" mat-raised-button color="orange" *ngIf="clickear" [(ngClass)]="Class" (click)="product()">
-              <span [(ngClass)]="Class">{{ textoboton }}</span>
-            </button>
-          
-            <button id="{{ butonid }}" mat-raised-button color="purple2" *ngIf="phygital" [(ngClass)]="Class" (click)="phygitalModal()">
-              <span [(ngClass)]="Class">Punto físico</span>
-            </button>
-        </div>
-
+    <span fxLayout="row wrap" fxFlex="70" fxLayoutAlign="start center" class="px-10">
+      <span fxFlex="100" fxLayout="column" fxLayoutAlign="start start">
+        <h3 class="mt-3 mb-0 min-width-auto" ngClass.gt-sm="f-18" id="{{ idne }}" matTooltip="{{ nombreProducto }}">
+          {{ nombreProducto | truncate: '30' }}
+        </h3>
+        <p>
+          <span class="f-13" ngClass.gt-xs="f-18">Recompensa:</span>
+          <span class="d-block orange-text f-13" ngClass.gt-sm="f-18">
+            {{ porcentaje }}
+          </span>
+        </p>
+      </span>
+      <div fxFlex="100" fxLayout="row wrap" fxFlex fxLayoutAlign="start" class="mt-2 mb-2">
+        <button
+          id="{{ butonid }}"
+          mat-raised-button
+          color="orange"
+          *ngIf="clickear"
+          style="margin-right: 10px"
+          [(ngClass)]="Class"
+          (click)="product()"
+        >
+          <span [(ngClass)]="Class">Clickear</span>
+        </button>
+        <button id="{{ butonid }}" mat-raised-button color="purple2" *ngIf="phygital" [(ngClass)]="Class" (click)="phygitalModal()">
+          <span [(ngClass)]="Class">Punto físico</span>
+        </button>
+      </div>
     </span>
   </mat-card-content>
 </mat-card>
 
 <mat-card class="mat-elevation-z0 p-0 fade-in" *ngIf="categoria">
-  <mat-card-content fxLayout="row" fxLayout.gt-xs="column" fxLayoutGap="10px" fxLayoutAlign.xs="center center" class="category border-radius-10">
+  <mat-card-content
+    fxLayout="row"
+    fxLayout.gt-xs="column"
+    fxLayoutGap="10px"
+    fxLayoutAlign.xs="center center"
+    class="category border-radius-10"
+  >
     <span fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
-      <img loading="lazy"(click)="product()" [src]="foto" class="img-responsive mb-3 cursor-pointer {{ Class }}{{ nombreProducto }}" />
+      <img loading="lazy" (click)="product()" [src]="foto" class="img-responsive mb-3 cursor-pointer {{ Class }}{{ nombreProducto }}" />
     </span>
   </mat-card-content>
 </mat-card>
