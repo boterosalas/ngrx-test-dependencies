@@ -11,6 +11,7 @@ export const environment = {
   // URL_MASTER: 'https://apimexito.azure-api.net/PD-clickam-md-apimasterdata/api/',
   URL_MASTER: 'https://lawrencio.grupo-exito.com/apiew/clickam/v1/VBTWYUCZDJ/',
   URL_EXTERNAL: 'https://lawrencio.grupo-exito.com/apiew/clickam/v1/WTCHMPSSJP/',
+  URL_BLOB: 'https://webclickampdn.blob.core.windows.net/',
   PDF: 'https://webclickampdn.blob.core.windows.net/clickacademy/pdf/',
   firebaseConfig: {
     apiKey: 'AIzaSyAZNoC1LqIWsTtXhjaWBneju-b_-xSIpnw',
