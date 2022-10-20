@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 import { MatDialog } from '@angular/material/dialog';
 import { HomeComponent } from '../../pages/home/home.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 class MockUserService extends UserService {
   userInfo$ = new BehaviorSubject<any>({
@@ -93,6 +94,7 @@ describe('SliderStoriesComponent', () => {
           AppMaterialModule,
           HttpClientTestingModule,
           BrowserAnimationsModule,
+          SlickCarouselModule,
           RouterTestingModule.withRoutes([
             { path: 'inicio', component: HomeComponent },
             { path: 'notificaciones', component: HomeComponent },

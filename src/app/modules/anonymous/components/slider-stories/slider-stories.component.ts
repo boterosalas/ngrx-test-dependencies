@@ -75,12 +75,12 @@ export class SliderStoriesComponent implements OnInit, OnDestroy {
       height: '100vh',
     });
 
-    // this.subscription = stories.beforeClosed().subscribe((storie) => {
-    //   vidPause = true;
-    //   this.router.navigateByUrl('/notificaciones', { skipLocationChange: true }).then(() => {
-    //     this.router.navigate(['/inicio']);
-    //   });
-    // });
+    this.subscription = stories.beforeClosed().subscribe((storie) => {
+      vidPause = true;
+      this.router.navigateByUrl('/notificaciones', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/inicio']);
+      });
+    });
   }
 
   public getStories() {
