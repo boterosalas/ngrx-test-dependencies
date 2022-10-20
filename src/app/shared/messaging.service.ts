@@ -53,14 +53,18 @@ export class MessagingService {
    * @param userId userId
    */
   requestPermission(userId) {
-    this.angularFireMessaging.requestToken.subscribe(
-      (token) => {
-        this.updateToken(userId, token);
-      },
-      (err) => {
-        console.error('Unable to get permission to notify.', err);
+    Notification.requestPermission().then((permission) => {
+      if (permission === 'granted') {
+        this.angularFireMessaging.requestToken.subscribe({
+          next: (token) => {
+            this.updateToken(userId, token);
+          },
+          error: (err) => {
+            console.error('Unable to get permission to notify.', err);
+          }
+        });
       }
-    );
+    })
   }
 
   /**
