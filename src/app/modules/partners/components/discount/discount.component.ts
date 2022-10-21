@@ -32,6 +32,7 @@ export class DiscountComponent implements OnInit, OnDestroy {
   total: string;
   showResults = false;
   idBusiness: number;
+  userId: number;
   ivaIncluido = false;
   cityNames: any[] = [];
   salesObjectGroupByCities: {};
@@ -50,6 +51,7 @@ export class DiscountComponent implements OnInit, OnDestroy {
     const token = localStorage.getItem('ACCESS_TOKEN');
     const tokenDecode = decode(token);
     this.idBusiness = tokenDecode.idbusiness;
+    this.userId = tokenDecode.userid;
   }
 
   public validate() {
@@ -62,7 +64,7 @@ export class DiscountComponent implements OnInit, OnDestroy {
         })
         this.validUser = false;
       } else {
-        this.getShops(this.idBusiness);
+        this.getShops(this.idBusiness,this.userId);
         this.validUser = true;
       }
     })
@@ -78,12 +80,12 @@ export class DiscountComponent implements OnInit, OnDestroy {
     return allShops.find(shop => shop.isdefault);
   }
 
-  getShops(idBusiness: any) {
-    this.getCities$ = this.content.getCities(idBusiness).subscribe(res => {
+  getShops(idBusiness: any, userId: any) {
+    this.getCities$ = this.content.getShopsWithDefault(idBusiness, userId).subscribe(res => {
       this.cityNames = Object.keys(res);
       this.salesObjectGroupByCities = res;
       const defaultSale = this.getDefaultSale(res);
-      defaultSale && this.valueForm.controls.shopControl.setValue(defaultSale);
+      defaultSale && this.valueForm.controls.shopControl.setValue(defaultSale.id);
     })
   }
 
