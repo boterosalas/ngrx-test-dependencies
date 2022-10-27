@@ -39,30 +39,23 @@ export class PopupComponent implements OnInit, OnDestroy {
     private breakPointService: BreakpointService,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
-    console.log('DATA', data)
     if(data.length > 1) {
       this.showArrowButtons = true;
       this.slideConfig.dots = true;
     }
-    // this.data = data.map(element => {
-    //   element.imageurlweb = 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-web/20220616103851_web.jpg';
-    //   element.imageurlmobile = 'https://i.pinimg.com/originals/fb/a7/e9/fba7e90aae11ba301fe88f9da2a35875.jpg';
-    //   return element;
-    // })
   }
 
   ngOnInit() {
     this.dialogRef.beforeClosed()
       .subscribe(() => {
         this.saveVisitOffer();
-        console.log('CERRANDING', this.currentId);
       });
     this.breakpoint();
   }
 
   breakpoint() {
     this.breakpointSubscription = this.breakPointService
-      .isWidthLessThanBreakpoint('700')
+      .isWidthLessThanBreakpoint('800')
       .subscribe((res: boolean) => {
         this.isMobile = res;
       });

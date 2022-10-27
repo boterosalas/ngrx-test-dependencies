@@ -1,0 +1,19 @@
+.section-container{
+    background-color: #5F71DA;
+    padding: 10px 0px;
+    .text-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 0px auto 0px auto;
+        .info-text{
+            color: #FFFFFF;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .close-icon{
+            color: #FFFFFF;
+            cursor: pointer;
+        }
+    }
+}
