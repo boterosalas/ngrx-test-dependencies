@@ -315,7 +315,7 @@ export class AppComponent implements OnInit, OnDestroy {
     const routeSplit = locationHref.split('/');
     const currentRoute = `/${routeSplit[routeSplit.length - 1]}`;
     const popupsToshow = this.popups.filter((popup: any) => !popup.new && popup.seccion === currentRoute);
-    // popupsToshow.length > 0 && this.openPopUp(popupsToshow);
+    popupsToshow.length > 0 && this.openPopUp(popupsToshow);
   }
 
   public openPopUp(popupsToshow: any) {
