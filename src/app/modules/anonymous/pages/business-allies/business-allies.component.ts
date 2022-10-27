@@ -20,7 +20,7 @@ export class BusinessAlliesComponent implements OnInit, OnDestroy {
     autoplay: true,
     autoplaySpeed: 5000,
     infinite: true,
-    arrows: true,
+    arrows: false,
     variableWidth: false,
     lazyLoad: 'ondemand',
     responsive: [

@@ -16,6 +16,8 @@ export const environment = {
   // URL_EXTERNAL: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/LVTPAHQJUX/',
   // PDF: 'https://webclickamdev.blob.core.windows.net/clickacademy/pdf/',
   // SUBSCRIPTION: 'f5edbcd2315e479aad33d80c58052fcc',
+  QA_CONTENT: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/JQFZDWVVLN/',
+  DEV_CONTENT: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/JRSYVXFRAL/',
   URL_SECURITY: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/UVCGDWUHSS/',
   URL_PROFILE: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/HAKUBMQPYR/',
   URL_VALIDATE_EMPLOYEE: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/HAKUBMQPYR/',

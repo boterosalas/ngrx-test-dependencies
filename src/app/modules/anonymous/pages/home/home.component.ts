@@ -118,7 +118,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     autoplay: true,
     autoplaySpeed: 5000,
     infinite: true,
-    arrows: true,
+    arrows: false,
     lazyLoad: 'ondemand',
     swipeToSlide: true,
     variableWidth: true,
@@ -132,7 +132,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     autoplay: true,
     autoplaySpeed: 5000,
     infinite: false,
-    arrows: true,
+    arrows: false,
     variableWidth: false,
     lazyLoad: 'ondemand',
     responsive: [

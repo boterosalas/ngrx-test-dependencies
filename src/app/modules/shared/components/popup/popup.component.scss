@@ -1,44 +1,131 @@
 @import 'variables';
 
-.hidden {
-  display: none;
-}
-
 .sectionPopUp {
   position: relative;
-}
-
-#closeDialog {
-  position: absolute;
-  right: 10px;
-  top: 8px;
-
-  .mat-icon {
-    background-color: rgb(0 0 0 / 50%);
+  padding-top: 50px;
+  .close-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #2c1b4a;
+    font-size: 20px;
+  }
+  .carousel-container {
+    max-width: 740px;
+    width: 100%;
+    position: relative;
+    .slick-list {
+      overflow: hidden;
+      .slick-track {
+        .slick-slide {
+          position: relative;
+          .slick-image-container {
+            max-height: 400px;
+            padding: 0px 20px;
+            .slick-image {
+              margin: auto;
+              width: auto;
+              height: auto;
+              max-width: 100%;
+              max-height: 400px;
+              object-fit: contain;
+              object-position: center;
+              border-radius: 12px;
+            }
+          }
+          .buttons-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 16px 0px 20px 0px;
+            .buttonPopUp {
+              background-color: #ff3f4c;
+              padding: 14px 22px;
+              border: none;
+              border-radius: 10px;
+              color: white;
+              text-decoration: none;
+              font-size: 14px;
+              box-shadow: 0px 3px 9px #3a226a80;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+    .btn-arrow {
+      width: 32px;
+        height: 32px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 38%;
+      border: none;
+      box-shadow: 0px 8px 13px #2c1b4a80;
+      background-color: #2c1b4a;
+      cursor: pointer;
+      &.btn-prev {
+        left: 10px;
+        i {
+          font-size: 14px;
+          color: #ffffff;
+        }
+      }
+      &.btn-next {
+        right: 10px;
+        i {
+          font-size: 14px;
+          color: #ffffff;
+        }
+      }
+    }
+    .slick-dots {
+      margin-bottom: 20px;
+      position: initial;
+    }
   }
 }
 
-.imageContainer {
-  display: block;
-  max-width: 100%;
-  max-height: 80vh;
-  object-fit: cover;
-  object-position: center;
+@media (min-width: 700px) {
+  .sectionPopUp {
+    .carousel-container {
+      .btn-arrow {
+      width: 40px;
+      height: 40px;
+        &.btn-prev {
+          i {
+            font-size: 19px;
+          }
+        }
+        &.btn-next {
+          i {
+            font-size: 19px;
+          }
+        }
+      }
+    }
+  }
 }
 
-.buttonPopUp {
-  position: absolute;
-  display: block;
-  bottom: 20px;
-  left: 50%;
-  transform: translate(-50%, 0);
-  background-color: #ff3f4c;
-  padding: 14px 22px;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  text-decoration: none;
-  font-size: 14px;
-  box-shadow: 0px 3px 9px #3a226a80;
-  text-align: center;
+@media (min-width: 1000px) {
+  .sectionPopUp {
+    .carousel-container {
+      .btn-arrow {
+      width: 50px;
+      height: 50px;
+        &.btn-prev {
+          i {
+            font-size: 23px;
+          }
+        }
+        &.btn-next {
+          i {
+            font-size: 23px;
+          }
+        }
+      }
+    }
+  }
 }

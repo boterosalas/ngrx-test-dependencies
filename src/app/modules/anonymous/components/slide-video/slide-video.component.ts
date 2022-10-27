@@ -27,7 +27,7 @@ export class SlideVideoComponent implements OnInit {
     autoplay: false,
     autoplaySpeed: 5000,
     infinite: false,
-    arrows: true,
+    arrows: false,
     responsive: [
       {
         breakpoint: 600,

@@ -1773,7 +1773,6 @@ button.swal2-cancel.updatecancel.swal2-styled {
 }
 
 @media screen and (max-width: 768px) {
-
   .mat-bottom-sheet-container {
     padding: 8px 25px !important;
   }
@@ -2629,6 +2628,26 @@ h3#bussiness2 {
   }
 }
 
+.cdk-overlay-pane.transversal-popup{
+  width: 94% !important;
+  max-width: 400px !important;
+  min-width: 290px !important;
+  max-height: 80vh !important;
+
+  .mat-dialog-container {
+    padding: 0;
+    border-radius: 10px;
+  }
+}
+@media screen and(min-width:800px){
+  .cdk-overlay-pane.transversal-popup{
+    width: 94% !important;
+    max-width: 740px !important;
+    min-width: 290px !important;
+    max-height: 80vh !important;
+  }
+}
+
 .cdk-overlay-pane.dynamic-popup {
   max-height: 80vh;
 
@@ -2896,11 +2915,6 @@ h3#bussiness2 {
     cursor: pointer;
     display: block;
   }
-}
-
-.slick-prev,
-.slick-next {
-  display: none !important;
 }
 
 .arrow-position {

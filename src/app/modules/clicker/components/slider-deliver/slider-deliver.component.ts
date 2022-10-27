@@ -16,7 +16,7 @@ export class SliderDeliverComponent implements OnInit {
       autoplay: true,
       autoplaySpeed: 10000,
       infinite: true,
-      arrows: true,
+      arrows: false,
     };
     sliderWeb = ['/assets/img/deliver/web/BannerOmniMobile.png'];
     sliderMobile = [

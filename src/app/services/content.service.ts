@@ -1447,6 +1447,7 @@ export class ContentService {
   }
 
   public saveVisitOffer(data: any) {
+    console.log('data',data)
     return this.http.post(`${this.url + this.apiSaveVisitOffer}`, data, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(

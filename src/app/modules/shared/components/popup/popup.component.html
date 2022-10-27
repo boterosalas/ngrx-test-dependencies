@@ -1,9 +1,48 @@
 <section class="sectionPopUp">
-  <a id="closeDialog" matRipple (click)="onNoClick()"><mat-icon class="close cursor-pointer">close</mat-icon></a>
-  <div>
-    <!-- Imagen Web -->
+  <mat-icon class="close-icon cursor-pointer" id="closeDialog" (click)="closeMatDialog()">close</mat-icon>
+  <div class="carousel-container">
+    <ngx-slick-carousel
+       #slickModal="slick-carousel"
+      [config]="slideConfig"
+      (init)="slick($event)"
+      (beforeChange)="slick($event,true)"
+      (afterChange)="afterChange($event)"
+    >
+      <div ngxSlickItem *ngFor="let story of data; let i = index" [attr.data-key]="story.id">
+        <div class="slick-image-container">
+          <!-- Imagen Web -->
+          <img *ngIf="!isMobile" loading="lazy" class="slick-image" [src]="story.imageurlweb" [alt]="story.textbutton" />
+          <!-- Imagen Mobile -->
+          <img *ngIf="isMobile" loading="lazy" class="slick-image" [src]="story.imageurlmobile" [alt]="story.textbutton" />
+        </div>
+        <div class="buttons-container">
+          <a
+            *ngIf="story.textbutton && story.link"
+            href="{{ story.link }}"
+            class="buttonPopUp"
+            [style.backgroundColor]="story.colorbutton"
+            target="_blank"
+            >{{ story.textbutton }}</a
+          >
+          <button *ngIf="story.textbutton && !story.link" class="buttonPopUp" [style.backgroundColor]="story.colorbutton">
+            {{ story.textbutton }}
+          </button>
+        </div>
+      </div>
+    </ngx-slick-carousel>
+    <div *ngIf="showArrowButtons">
+      <button class="btn-arrow btn-prev" (click)="prev()">
+        <i class="tio-back_ui"></i>
+      </button>
+      <button class="btn-arrow btn-next" (click)="next()">
+        <i class="tio-next_ui"></i>
+      </button>
+    </div>
+  </div>
+  <!-- <div>
+    Imagen Web
     <img loading="lazy"class="imageContainer" fxShow.xs="false" src="{{ data.imageUrlWeb }}" alt="{{ data.textbutton }}" />
-    <!-- Imagen Mobile -->
+    Imagen Mobile
     <img loading="lazy"class="imageContainer" fxShow.gt-xs="false" src="{{ data.imageUrlMobile }}" alt="{{ data.textbutton }}" />
     <a
       *ngIf="data.textbutton && data.BLink"
@@ -17,5 +56,5 @@
     <button *ngIf="data.textbutton && !data.BLink" (click)="onNoClick()" class="buttonPopUp" [style.backgroundColor]="data.colorbutton">
       {{ data.textbutton }}
     </button>
-  </div>
+  </div> -->
 </section>

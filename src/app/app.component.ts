@@ -83,6 +83,7 @@ export class AppComponent implements OnInit, OnDestroy {
   idCampaign: number;
   slowConection = false;
   documentType: string;
+  popups: any[] = [];
 
   constructor(
     private translate: TranslateService,
@@ -131,9 +132,7 @@ export class AppComponent implements OnInit, OnDestroy {
         });
       } else if (url instanceof NavigationEnd && this.role === 'CLICKER') {
         clearTimeout(this.timeout);
-        this.timeout = setTimeout(() => {
-          this.getPopUps();
-        }, 500);
+        this.triggerPopup();
       }
     });
 
@@ -158,7 +157,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.initService();
-
     this.showAnimation1 = true;
     if (isPlatformBrowser(this.platformId)) {
       this.innerWidth = window.innerWidth;
@@ -306,37 +304,26 @@ export class AppComponent implements OnInit, OnDestroy {
   public getPopUps() {
     if (this.auth.isLoggedIn() && this.newTerms && this.onboardingViwed) {
       this.content.getPopup().subscribe((resp) => {
-        const locationHref = location.href;
-        const routeSplit = locationHref.split('/');
-        const currentRoute = '/' + routeSplit[routeSplit.length - 1];
-
-        const popUp = resp.find((x) => !x.new && x.seccion === currentRoute);
-
-        if (popUp) {
-          const infoPopUp = {
-            imageUrlWeb: popUp.imageurlweb,
-            imageUrlMobile: popUp.imageurlmobile,
-            textbutton: popUp.textbutton,
-            colorbutton: popUp.colorbutton,
-            BLink: popUp.link,
-          };
-          this.openPopUp(infoPopUp);
-          this.idPopup = popUp.id;
-        }
+        this.popups = resp;
+        this.triggerPopup();
       });
     }
   }
 
-  public openPopUp(infoPopUp) {
-    const dialog = this.dialog.open(PopupComponent, {
-      data: {
-        ...infoPopUp,
-      },
-      panelClass: 'dynamic-popup',
-    });
+  triggerPopup() {
+    const locationHref = location.href;
+    const routeSplit = locationHref.split('/');
+    const currentRoute = `/${routeSplit[routeSplit.length - 1]}`;
+    const popupsToshow = this.popups.filter((popup: any) => !popup.new && popup.seccion === currentRoute);
+    popupsToshow.length > 0 && this.openPopUp(popupsToshow);
+  }
 
-    dialog.beforeClosed().subscribe((resp) => {
-      this.saveVisitOffer(this.idPopup);
+  public openPopUp(popupsToshow: any) {
+    this.dialog.open(PopupComponent, {
+      data: [
+        ...popupsToshow,
+      ],
+      panelClass: 'transversal-popup',
     });
   }
 
@@ -344,8 +331,7 @@ export class AppComponent implements OnInit, OnDestroy {
     const token = localStorage.getItem('ACCESS_TOKEN');
     const tokenDecode = decode(token);
     const userId = tokenDecode.userid;
-
-    this.content.saveVisitOffer({ idoffer, userId }).subscribe((resp) => {});
+    this.content.saveVisitOffer({ idoffer, userId }).subscribe();
   }
 
   public hideLogin() {
@@ -403,6 +389,7 @@ export class AppComponent implements OnInit, OnDestroy {
             this.termsAndConditions();
           }
           this.showModalsSecuence();
+          this.getPopUps();
         });
       }
     });
