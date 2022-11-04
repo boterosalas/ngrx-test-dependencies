@@ -88,9 +88,7 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
     this.nameFileCert = '';
     this.nameFileRUT = '';
     this.externalClickerForm();
-    this.getDepartments();
     this.getBanks();
-    this.filter();
   }
 
   /**
@@ -102,18 +100,8 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
     return departments ? departments.description : undefined;
   }
 
-  public filter() {
-    this.filteredDepartments = this.externalForm.controls.department.valueChanges.pipe(
-      map((department) => (typeof department === 'string' ? department : department.description)),
-      map((department) => (department ? this._filterDepartments(department) : this.departments.slice()))
-    );
-  }
-
   private externalClickerForm() {
     this.externalForm = this.fb.group({
-      department: [null, Validators.required],
-      city: [null, Validators.required],
-      address: [null, Validators.required],
       bank: [null, Validators.required],
       typeAccount: [null, Validators.required],
       numberAccount: [
@@ -255,12 +243,12 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
       cellphone: this.phone,
       firstNames: this.name,
       lastNames: this.lastName,
-      department: this.departmentCode,
-      municipality: this.cityCode,
+      // department: this.departmentCode,
+      // municipality: this.cityCode,
       bank: this.externalForm.controls.bank.value,
       bankAccountNumber: btoa(this.externalForm.controls.numberAccount.value),
       typeBankAccount: this.externalForm.controls.typeAccount.value,
-      address: this.externalForm.controls.address.value,
+      // address: this.externalForm.controls.address.value,
     };
 
     this.subscription = this.registerUser.updateUser(registerForm).subscribe(
@@ -327,65 +315,6 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Metodo para seleccionar el departamento
-   * @param department departamento
-   *
-   */
-
-  public selectDepartment(department) {
-    this.departmentCode = department.code;
-    this.cities = department.municipalities;
-    this.externalForm.controls.city.setValue('');
-    const valueDepartment = this.externalForm.controls.department.valueChanges;
-    this.filterCities();
-
-    this.subscription = valueDepartment.subscribe((resp) => {
-      if (resp !== '') {
-        this.getDepartments();
-        // this.externalForm.controls.city.enable();
-      } else {
-        // this.externalForm.controls.city.disable();
-        this.externalForm.controls.city.setValue('');
-      }
-    });
-  }
-
-  // Metodo para validar el departamento
-
-  public checkDepartment() {
-    if (
-      this.externalForm.controls.department.value.code !== this.departmentCode ||
-      this.externalForm.controls.department.value.code === undefined ||
-      this.departmentCode === undefined
-    ) {
-      this.externalForm.controls.department.setErrors({ incorrect: true });
-    }
-  }
-
-  public selectCity(city) {
-    this.cityCode = city.code;
-    this.cityValue = city.description;
-  }
-
-  // Metodo para validar la ciudad
-
-  public checkCity() {
-    if (this.externalForm.controls.city.value !== this.cityValue) {
-      this.externalForm.controls.city.setErrors({ incorrectCity: true });
-    }
-  }
-
-  /**
-   * Metodo para listar los departamentos
-   */
-
-  public getDepartments() {
-    this.subscription = this.personalInfo.getDepartments().subscribe((res: ResponseService) => {
-      this.departments = res.objectResponse;
-    });
-  }
-
-  /**
    * Metodo para listar los bancos
    */
 
@@ -393,23 +322,6 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
     this.subscription = this.personalInfo.getBanks().subscribe((res: ResponseService) => {
       this.banks = res.objectResponse;
     });
-  }
-
-  public filterCities() {
-    this.filteredCities = this.externalForm.controls.city.valueChanges.pipe(
-      startWith(''),
-      map((city) => (city ? this._filterCities(city) : this.cities.slice()))
-    );
-  }
-
-  private _filterDepartments(value: any) {
-    const filterValue = value.toLowerCase();
-    return this.departments.filter((department) => department.description.toLowerCase().indexOf(filterValue) === 0);
-  }
-
-  private _filterCities(value: string) {
-    const filterValue = value.toLowerCase();
-    return this.cities.filter((city: any) => city.description.toLowerCase().indexOf(filterValue) === 0);
   }
 
   ngOnDestroy(): void {
