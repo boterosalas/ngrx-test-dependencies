@@ -9,6 +9,7 @@ import { Subscription, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ResponseService } from 'src/app/interfaces/response';
 import Swal from 'sweetalert2';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-payment-info',
@@ -21,6 +22,7 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
     private registerUser: UserService,
     private router: Router,
     private loading: LoaderService,
+    private _snackBar: MatSnackBar,
     private utils: UtilsService,
     private personalInfo: MasterDataService
   ) {}
@@ -108,10 +110,10 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
         null,
         [Validators.required, Validators.pattern(this.numberPattern), Validators.minLength(5), Validators.maxLength(20)],
       ],
-      ced1: [null, Validators.required],
-      ced2: [null, Validators.required],
-      cert: [null, Validators.required],
-      rut: [],
+      ced1: [null],
+      ced2: [null],
+      cert: [null],
+      rut: [null],
     });
   }
 
@@ -153,6 +155,9 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
         this.subscription = this.registerUser.uploadFiles(formData).subscribe((response: ResponseService) => {
           if (response.state === 'Success') {
             error = null;
+            this._snackBar.open(response.userMessage, 'Cerrar', {
+              duration: 5000,
+            });
           } else {
             Swal.fire({
               title: 'Error al subir archivo',
@@ -240,9 +245,9 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
 
   public sendPayment() {
     const registerForm = {
-      cellphone: this.phone,
-      firstNames: this.name,
-      lastNames: this.lastName,
+      // cellphone: this.phone,
+      // firstNames: this.name,
+      // lastNames: this.lastName,
       // department: this.departmentCode,
       // municipality: this.cityCode,
       bank: this.externalForm.controls.bank.value,

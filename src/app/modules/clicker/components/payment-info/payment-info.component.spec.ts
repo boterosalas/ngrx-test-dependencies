@@ -227,25 +227,20 @@ describe('PaymentInfoComponent', () => {
     component = fixture.componentInstance;
     component.filteredDepartments = new Observable<any>();
     fixture.detectChanges();
-    component.phone = '123456789';
-    component.name = 'David';
-    component.lastName = 'Tets';
+    // component.phone = '123456789';
+    // component.name = 'David';
+    // component.lastName = 'Tets';
     component.departmentCode = '20';
     component.cityCode = '1';
     component.externalForm.controls.bank.setValue('Bancolombia');
     component.externalForm.controls.numberAccount.setValue('123456789');
     component.externalForm.controls.typeAccount.setValue('ahorros');
-    component.externalForm.controls.address.setValue('calle falsa 123');
-    component.externalForm.controls.department.setValue('Antioquia');
+    // component.externalForm.controls.address.setValue('calle falsa 123');
+    // component.externalForm.controls.department.setValue('Antioquia');
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('get departments', () => {
-    component.getDepartments();
-    expect(mockMasterDataService.getDepartments).toHaveBeenCalled();
   });
 
   it('get Banks', () => {
@@ -256,29 +251,6 @@ describe('PaymentInfoComponent', () => {
   it('displayDepartment', () => {
     component.displayDepartment('Antioquia');
     expect(component.displayDepartment).not.toBeUndefined();
-  });
-
-  it('select department', () => {
-    const department = {
-      code: 1,
-      municipalities: ['Medelin', 'Sabaneta'],
-    };
-    component.selectDepartment(department);
-    expect(department.code).toBe(1);
-  });
-
-  it('checkDepartment', () => {
-    component.checkDepartment();
-    expect(component.externalForm.controls.department.hasError).toBeTruthy();
-  });
-
-  it('select city', () => {
-    const city = {
-      code: 20,
-      description: 'Medellín',
-    };
-    component.selectCity(city);
-    expect(city.description).toBe('Medellín');
   });
 
   it('onFileChangeFiles rut', () => {
@@ -307,10 +279,5 @@ describe('PaymentInfoComponent', () => {
     const mockEvt = { target: { files: [mockFile] } };
     component.onFileChangeFiles(mockEvt, 'IdentificationCard2');
     expect(component.onFileChangeFiles).not.toBeNull();
-  });
-
-  it('send payment', () => {
-    component.sendPayment();
-    expect(component.phone).not.toBeUndefined();
   });
 });
