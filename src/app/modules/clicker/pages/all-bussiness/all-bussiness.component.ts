@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ContentService } from 'src/app/services/content.service';
 import { distinctUntilChanged } from 'rxjs/operators';
+import { FiendlyUrl } from 'src/app/helpers/friendly-url';
 
 @Component({
   selector: 'app-all-bussiness',
@@ -48,6 +49,7 @@ export class AllBussinessComponent implements OnInit, OnDestroy {
       .getBusinessByCategory(id)
       .pipe(distinctUntilChanged())
       .subscribe((bussiness) => {
+        this.content.bussinessList = bussiness;
         this.bussiness = bussiness;
       });
   }
@@ -60,17 +62,19 @@ export class AllBussinessComponent implements OnInit, OnDestroy {
       imageurl: bussiness.imageurl,
       description: bussiness.description,
     };
-    this.router.navigate([
-      '/bussiness',
-      {
-        id: params.id,
-        code: params.code,
-        infoAditional: params.infoAditional,
-        imageurl: params.imageurl,
-        allBussiness: true,
-        description: params.description,
-      },
-    ]);
+    const bussinessNameUrl = FiendlyUrl.removeAccentsAndSpaces(bussiness.description)
+    this.router.navigateByUrl(`/negocios/${bussinessNameUrl}`)
+    // this.router.navigate([
+    //   '/bussiness',
+    //   {
+    //     id: params.id,
+    //     code: params.code,
+    //     infoAditional: params.infoAditional,
+    //     imageurl: params.imageurl,
+    //     allBussiness: true,
+    //     description: params.description,
+    //   },
+    // ]);
   }
 
   public carousel() {

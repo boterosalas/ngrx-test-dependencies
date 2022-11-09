@@ -14,6 +14,7 @@ export class ContentService {
 
   token = localStorage.getItem('ACCESS_TOKEN');
   authorization = this.token;
+  public bussinessList: any[] = [];
 
   httpOptions = {
     headers: new HttpHeaders({

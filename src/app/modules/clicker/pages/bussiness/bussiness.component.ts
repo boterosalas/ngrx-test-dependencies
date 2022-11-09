@@ -17,6 +17,7 @@ import { NgNavigatorShareService } from 'ng-navigator-share';
 import { isPlatformBrowser } from '@angular/common';
 import Swal from 'sweetalert2';
 import { PhygitalLocationComponent } from '../../components/phygital-location/phygital-location.component';
+import { FiendlyUrl } from 'src/app/helpers/friendly-url';
 
 declare var dataLayer: any;
 
@@ -26,11 +27,11 @@ declare var dataLayer: any;
   styleUrls: ['./bussiness.component.scss'],
 })
 export class BussinessComponent implements OnInit, OnDestroy {
-  id: string;
+  id: string = '0';
   hasproduct: boolean;
   title: string;
-  phygital:boolean;
-  clickear:boolean;
+  phygital: boolean;
+  clickear: boolean;
   percent: string;
   percentBussiness = 'Hasta 9.6%';
   bussiness = [];
@@ -61,7 +62,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   @ViewChild('templateCategories', { static: false })
   templateCategories: TemplateRef<any>;
- 
+
   @ViewChild('templateEC', { static: false }) templateEC: TemplateRef<any>;
 
   urlshorten = '';
@@ -105,8 +106,8 @@ export class BussinessComponent implements OnInit, OnDestroy {
   caseSpecial: string;
   tips = [];
   invisible = false;
-  nonEditedContent: string;
-  isContentToggled: boolean;
+  nonEditedContent: string = 'Éxito es una cadena colombiana de supermercados perteneciente al Grupo Éxito. Nació en un local 4X4 en el centro de Medellín y ahora tiene alrededor de 240 almacenes ubicados en toda Colombia.';
+  bussinessNameUrl: string;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -123,41 +124,16 @@ export class BussinessComponent implements OnInit, OnDestroy {
     private dialogModal: MatDialog,
     @Inject(PLATFORM_ID) private platformId: object
   ) {
-    this.ngNavigatorShareService = ngNavigatorShareService;
+    this.bussinessNameUrl = this.route.snapshot.paramMap.get('bussinessNameUrl');
+    if (this.content.bussinessList.length > 0) {
+      const currentBussiness = this.getCurrentBussiness(this.bussinessNameUrl);      
+      this.setBussinessInfo(currentBussiness);
+      this.getBussinessInfo();
+    } else {
+      this.getBussinessByCategory();
+    }
 
-    this.subscription = this.route.params.subscribe((route) => {
-      if (route.id === undefined && route.code === undefined && route.imageurl === undefined && route.infoAditional === undefined) {
-        this.id = '1';
-        this.title = 'exito';
-        this.image = 'https://webclickamdev.blob.core.windows.net/img-ofertas/pic-business/ico-exito.svg';
-        this.percent = 'Hasta 9.6% de ganancia';
-        this.description = 'Almacenes Éxito';
-      } else {
-        this.id = route.id;
-        this.title = route.code;
-        this.description = route.description;
-        this.image = route.imageurl;
-        this.percent = route.infoAditional;
-        this.allBussiness = route.allBussiness;
-        this.content.getCommissionsByBussiness(this.id).subscribe((resp) => {
-          this.commision = (resp[0].commissionvalue / 1000000).toFixed(1);
-        });
-        this.content.getBusinessById(this.id).subscribe((resp) => {
-          this.hasproduct = resp.hasproduct;
-          this.infoBussiness = resp.about;
-          this.tips = resp.tips;
-          this.nonEditedContent = this.infoBussiness;
-          this.infoBussiness = this.formatContent(this.infoBussiness);
-          this.phygital = resp.phygital;
-          this.clickear = resp.buttonclickear;
-          if (resp.terms.length > 0) {
-            this.generalInfo = resp.terms[0].description;
-            this.exceptionsInfo = resp.terms[1].description;
-            this.caseSpecial = resp.terms[2].description;
-          }
-        });
-      }
-    });
+    this.ngNavigatorShareService = ngNavigatorShareService;
   }
 
   ngOnInit() {
@@ -168,7 +144,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
     }
 
     this.getDate();
-    this.getContentBussiness();
     this.links.getSellers().subscribe((resp: any) => {
       this.sellersExito = resp.sellersExito;
       this.sellersMarketPlace = resp.sellersMarketPlace;
@@ -192,6 +167,53 @@ export class BussinessComponent implements OnInit, OnDestroy {
       { value: 'OrderByNameASC', description: 'Productos de la A-Z' },
       { value: 'OrderByNameDESC', description: 'Productos de la Z-A' },
     ];
+  }
+
+  getCurrentBussiness(bussinessNameUrl) {
+    return this.content.bussinessList.find(b => FiendlyUrl.removeAccentsAndSpaces(b.description) === bussinessNameUrl);
+  }
+
+  getBussinessInfo() {
+    this.subscription = this.content.getCommissionsByBussiness(this.id).subscribe((resp) => {
+      console.log('Comisiones',resp)
+      this.commision = (resp[0].commissionvalue / 1000000).toFixed(1);
+    });
+    this.subscription = this.content.getBusinessById(this.id).subscribe((resp) => {
+      this.setBussinessInfo(resp);
+      this.getContentBussiness();
+    });
+  }
+
+  setBussinessInfo(data: any) {
+    console.log('DATA',data)
+    this.id = data.id;
+    this.hasproduct = data.hasproduct;
+    this.tips = data.tips;
+    this.title = data.description;
+    this.image = data.imageurl;
+    this.description = data.description;
+    // this.nonEditedContent = data.about;
+    this.infoBussiness = this.formatContent(data.about);
+    this.phygital = data.phygital;
+    this.clickear = data.buttonclickear;
+    this.percent = data.infoaditional;
+    if (data.terms.length > 0) {
+      this.generalInfo = data.terms[0].description;
+      this.exceptionsInfo = data.terms[1].description;
+      this.caseSpecial = data.terms[2].description;
+    }
+  }
+
+  getBussinessByCategory(id: number = 0) {
+    this.subscription = this.content
+      .getBusinessByCategory(id)
+      .pipe(distinctUntilChanged())
+      .subscribe((bussiness) => {
+        this.content.bussinessList = bussiness;
+        const currentBussiness = this.getCurrentBussiness(this.bussinessNameUrl);      
+        this.setBussinessInfo(currentBussiness);
+        this.getBussinessInfo();
+      });
   }
 
   /**
@@ -233,10 +255,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
       this.invisible = true;
       return content ? `${content.substr(0, 250)}` : '';
     }
-  }
-  toggleContent() {
-    this.isContentToggled = !this.isContentToggled;
-    this.infoBussiness = this.isContentToggled ? this.nonEditedContent : this.formatContent(this.infoBussiness);
   }
 
   public vermas() {
@@ -506,13 +524,13 @@ export class BussinessComponent implements OnInit, OnDestroy {
       this.mostrarProductos = 3;
     }
     if (isPlatformBrowser(this.platformId)) {
-    dataLayer.push({
-      event: 'pushEventGA',
-      categoria: 'NegocioExito',
-      accion: 'ClicBuscar',
-      etiqueta: term,
-    });
-  }
+      dataLayer.push({
+        event: 'pushEventGA',
+        categoria: 'NegocioExito',
+        accion: 'ClicBuscar',
+        etiqueta: term,
+      });
+    }
     const params = { term, order, page, count };
     this.subscription = this.sp.biggySearchExito(params).subscribe(
       (searchExito: any) => {
@@ -683,7 +701,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
     });
   }
 
-  searchOtherbusiness(searchText:string){
+  searchOtherbusiness(searchText: string) {
     const data = {
       id: this.title,
       text: searchText

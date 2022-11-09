@@ -1,6 +1,83 @@
 @import 'variables';
 @import 'general';
 
+.bussines-section {
+  margin-top: 20px;
+  .info-about {
+    width: 100%;
+    padding: 20px 0px;
+    .img-container {
+      margin: auto;
+      img {
+        margin: auto;
+        max-width: 300px;
+        width: 100%;
+      }
+    }
+    .text-info-container {
+      .bussiness-name {
+        margin: 32px 0px 12px 0px;
+        font-size: 24px;
+      }
+      .discount-percent {
+        color: $secondary-color;
+        font-size: 16px;
+        margin: 0px;
+        font-weight: bold;
+      }
+      .bussiness-description {
+        margin: 12px 0px 0px 0px;
+        white-space: break-spaces;
+      }
+    }
+    .commission-container {
+      .payment-date {
+        color: #37236a;
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        margin: 24px 0px 0px 0px;
+      }
+      .commision-payment {
+        color: #a7a3b1;
+        font-size: 12px;
+        text-align: center;
+        margin: 0px;
+      }
+    }
+  }
+}
+@media screen and (min-width: 600px) {
+  .bussines-section {
+    .info-about {
+      .img-container {
+        img {
+        }
+      }
+      .text-info-container {
+        .bussiness-name {
+          margin: 0px 0px 12px 0px;
+          font-size: 32px;
+        }
+        .discount-percent {
+          font-size: 20px;
+        }
+        .bussiness-description {
+          
+        }
+      }
+      .commission-container {
+        .payment-date {
+          
+        }
+        .commision-payment {
+          
+        }
+      }
+    }
+  }
+}
+
 .full {
   position: fixed;
   width: 100%;
@@ -58,9 +135,7 @@
     width: 200px;
   }
 }
-.red-text {
-  color: $secondary-color;
-}
+
 .border-inferior {
   border-bottom: 1px solid #0000001a;
 }
@@ -129,15 +204,6 @@
     margin-top: 10px;
     width: 200px;
   }
-
-  .order {
-    grid-template-columns: 1fr !important;
-
-    .comisions {
-      grid-row: 5 !important;
-      grid-column: 1;
-    }
-  }
 }
 .imagen-absolute-oferts {
   position: absolute;
@@ -160,16 +226,7 @@
 .border-up-gray {
   border-top: 1px solid #e8e7e9;
 }
-.payment-date {
-  color: #37236a;
-  font-size: 27px;
-  text-align: center;
-}
-.commision-payment {
-  color: #a7a3b1;
-  font-size: 14px;
-  text-align: center;
-}
+
 .nothing-text {
   font-size: 18px !important;
   font-family: $font-galano-bold;
@@ -195,19 +252,11 @@
 .subtitle-tips-other {
   font-size: 20px;
 }
-.break {
-  white-space: break-spaces;
-}
 
 .order {
   display: grid;
   grid-template-columns: 30% 70%;
   grid-column-gap: 20px;
-}
-
-.about {
-  grid-row: 1;
-  grid-column: 1;
 }
 
 .comisions {
@@ -241,6 +290,6 @@
   grid-column: 2;
 }
 
-.no-border{
+.no-border {
   border: none;
 }

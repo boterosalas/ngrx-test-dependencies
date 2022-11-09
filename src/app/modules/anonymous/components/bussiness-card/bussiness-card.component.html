@@ -1,33 +1,29 @@
 <div class="card-container">
-
   <mat-card
-  (click)="navigateBussiness()"
-  class="bussiness cursor-pointer gtmHomeClicNegocios{{ title }} mat-elevation-z0 position-relative"
-  ngClass.xs="p-3"
-  fxLayoutAlign="center center"
-  
+    (click)="navigateBussiness()"
+    class="bussiness cursor-pointer gtmHomeClicNegocios{{ title }} mat-elevation-z0 position-relative"
+    ngClass.xs="p-3"
+    fxLayoutAlign="center center"
   >
-  <div class="position-absolute infomarketing radius-label" *ngIf="infomarketing">{{infomarketing}}</div>
-  
-  <div class="gtmHomeClicNegocios{{ title }} inner-business " fxLayout="column" fxLayoutAlign="center center">
-    <span fxLayout="column" class="img-responsive gtmHomeClicNegocios{{ title }}">
-      <img loading="lazy"[src]="img" class="heigth-imagen gtmHomeClicNegocios{{ title }}" alt="{{ title }}" />
+    <div class="position-absolute infomarketing radius-label" *ngIf="infomarketing">{{ infomarketing }}</div>
+
+    <div class="gtmHomeClicNegocios{{ title }} inner-business " fxLayout="column" fxLayoutAlign="center center">
+      <span fxLayout="column" class="img-responsive gtmHomeClicNegocios{{ title }}">
+        <img loading="lazy" [src]="img" class="heigth-imagen gtmHomeClicNegocios{{ title }}" alt="{{ title }}" />
+      </span>
+    </div>
+
+    <div class="position-absolute phygital radius-label" *ngIf="phygital"><i class="tio-poi"></i></div>
+  </mat-card>
+
+  <span class="mt-2" fxLayout="column" class="gtmHomeClicNegocios{{ title }}">
+    <span class="title-bussiness line-clamp galano-medium m-0 gtmHomeClicNegocios{{ title }}">
+      {{ title }}
     </span>
-  </div>
-
-  <div class="position-absolute phygital radius-label" *ngIf="phygital"> <i class="tio-poi"></i></div>
-  
-</mat-card>
-
-<span class="mt-2" fxLayout="column" class="gtmHomeClicNegocios{{ title }}">
-  <span class="title-bussiness line-clamp galano-medium m-0 gtmHomeClicNegocios{{ title }}">
-    {{ title }}
+    <p *ngIf="code === 'movil-exito'" class="m-0">Antes el 5%</p>
+    <span class="percent purple-text gtmHomeClicNegocios{{ title }} galano-bold f-16">{{ percent }}</span>
+    <span *ngIf="description" class="line-clamp f-12 mw-235 w-95 title-bussiness galano-medium m-0 gtmHomeClicNegocios{{ title }}">
+      {{ description }}
+    </span>
   </span>
-  <p *ngIf="code === 'movil-exito'" class="m-0">Antes el 5%</p>
-  <span class="percent purple-text gtmHomeClicNegocios{{ title }} galano-bold f-16">{{ percent }}</span>
-  <span *ngIf="description" class="line-clamp f-12 mw-235 w-95 title-bussiness galano-medium m-0 gtmHomeClicNegocios{{ title }}">
-    {{ description }}
-  </span>
-</span>
-
 </div>

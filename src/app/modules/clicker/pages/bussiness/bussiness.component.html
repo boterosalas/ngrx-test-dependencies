@@ -1,223 +1,217 @@
-<app-banner
+<!-- <app-banner
   color="purple"
   title="{{ 'HOME.BUSSINESS' | translate }}"
   img="/assets/img/banners/banner-negocios-pc.jpg"
   imgMobile="/assets/img/banners/banner-negocios-mobile.jpg"
-></app-banner>
-
-<div class="container" fxLayoutAlign="end end" ngClass.xs="mb-3">
-  <span>
-    <app-back-button (click)="goback()"></app-back-button>
-  </span>
-</div>
-
-<div class="container order">
+></app-banner> -->
+<section class="bussines-section max-1600-container">
+  <div fxLayout="row" fxLayoutAlign="start start" ngClass.xs="mb-3">
+    <span>
+      <app-back-button (click)="goback()"></app-back-button>
+    </span>
+  </div>
+  <mat-card class="info-about">
+    <div fxLayout="column" fxLayout.sm="row" fxLayout.gt-sm="row" fxFlex fxLayoutAlign="center" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center">
+      <div class="img-container" fxFlex fxFlex.sm="20" fxFlex.gt-sm="20" fxLayout="row" fxLayoutAlign="center">
+        <img loading="lazy" [src]="image" [alt]="description" />
+      </div>
+      <div class="text-info-container" fxFlex fxFlex.gt-xs="55" fxFlex.gt-sm="60">
+        <h2 class="bussiness-name">{{ description }}</h2>
+        <p class="discount-percent">{{ percent }}</p>
+        <p class="bussiness-description">{{ nonEditedContent }}</p>
+      </div>
+      <div class="commission-container" fxFlex fxFlex.gt-xs="25" fxFlex.gt-sm="20" fxLayout="column" fxLayoutAlign="start center">
+        <p class="payment-date">+{{ commision }} M</p>
+        <p class="commision-payment">Recompensas pagadas</p>
+      </div>
+    </div>
+  </mat-card>
   <div>
-    <mat-card class="about">
-      <div fxLayout="column" class="about-bussiness">
-        <span class="border-inferior" fxLayout="column" fxLayoutAlign="center center">
-          <img loading="lazy"[src]="image" alt="logo afiliado" />
-          <h3 class="red-text">{{ percent }}</h3>
-        </span>
-        <div></div>
-        <div>
-          <h4 class="subtitle-about mb-0 mt-4">Sobre el negocio:</h4>
-          <p class="break" fxShow.xs="false">{{ nonEditedContent }}</p>
-          <p class="break" fxShow.gt-xs="false">{{ infoBussiness }}</p>
-          <div fxShow.gt-xs="false" fxLayout="row" fxLayoutAlign="end end">
-            <a *ngIf="!isContentToggled && invisible === false" (click)="toggleContent()" style="color: #8d7eb7" i18n
-              >Ver más
-              <mat-icon class="arrow-down">keyboard_arrow_down</mat-icon>
-            </a>
-            <a *ngIf="isContentToggled && invisible === false" (click)="toggleContent()" style="color: #8d7eb7" i18n
-              >Ver menos <mat-icon class="arrow-down">keyboard_arrow_up</mat-icon></a
+    <div>
+      
+
+      <div fxHide.xs="true">
+        <mat-card class="mt-3 comisions">
+          <div class="about-bussiness">
+            <h3 class="subtitle-tips-other border-inferior">Recompensas</h3>
+            <p>En {{ description }} nuestros clickers han recibido a la fecha:</p>
+            <span>
+              <p class="payment-date">+{{ commision }} M</p>
+            </span>
+            <span>
+              <p class="commision-payment">RECOMPENSAS PAGADAS A LA FECHA</p>
+            </span>
+          </div>
+        </mat-card>
+
+        <mat-card class="mt-3 tips">
+          <div class="about-bussiness">
+            <h3 class="subtitle-tips-other border-inferior">Tips de venta</h3>
+            <div *ngFor="let item of tips">
+              <h4 class="subtitle-about title-tip">{{ item.title }}</h4>
+              <p class="description-tip">{{ item.description }}</p>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+    <div>
+      <div fxLayout="row" class="card-library mt-2 container">
+        <img loading="lazy"class="imagen-absolute-oferts" fxHide.xs="true" src="/assets/img/banners/oferts.png" alt="ofertas" />
+        <img loading="lazy"class="imagen-resposive-mobile" fxHide.gt-xs="true" src="/assets/img/banners/oferts_mobile.png" alt="ofertas" />
+        <div class="position-relative banner-mobile heigth-image">
+          <h3 class="mb-1">Descarga las mejores ofertas para compartir.</h3>
+          <button mat-raised-button class="button-oferts" color="orange" (click)="libraryRoute()" id="download-users">Ver Ofertas</button>
+        </div>
+      </div>
+
+      <div class="terms">
+        <mat-card>
+          <div class="mb-2">
+            <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.xs="column">
+              <h3 class="text-productos mt-0 mb-0">Términos & Condiciones</h3>
+              <span class="text-terms-conditions cursor-pointer" (click)="vermas()" *ngIf="visibleTerms === false">
+                {{ visibleTerms ? 'Ver menos' : 'Ver más' }}
+                <mat-icon *ngIf="visibleTerms" class="arrow-down">keyboard_arrow_up</mat-icon>
+                <mat-icon *ngIf="!visibleTerms" class="arrow-down">keyboard_arrow_down</mat-icon>
+              </span>
+            </div>
+            <div class="border-up-gray" *ngIf="visibleTerms">
+              <h4 class="subtitle-about mb-0">Excepciones</h4>
+              <p class="break mt-0">{{ generalInfo }}</p>
+              <h4 class="subtitle-about mt-1 mb-0">Casos especiales</h4>
+              <p class="break mt-0">{{ exceptionsInfo }}</p>
+              <h4 class="subtitle-about mb-0">Tiempos de verificación</h4>
+              <p class="break mt-0">{{ caseSpecial }}</p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end end">
+              <span class="text-terms-conditions cursor-pointer" (click)="vermas()" *ngIf="visibleTerms === true">
+                {{ visibleTerms ? 'Ver menos' : 'Ver más' }}
+                <mat-icon *ngIf="visibleTerms" class="arrow-down">keyboard_arrow_up</mat-icon>
+                <mat-icon *ngIf="!visibleTerms" class="arrow-down">keyboard_arrow_down</mat-icon>
+              </span>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+      <app-search class="search" *ngIf="id === '1' && hasproduct" (search)="searchBiggyExito($event)"></app-search>
+      <app-search class="search" *ngIf="id === '2' && hasproduct" (search)="searchBiggyCarulla($event)"></app-search>
+
+      <app-search class="search" *ngIf="id !== '2' && id !== '1' && hasproduct" (search)="searchOtherbusiness($event)"></app-search>
+
+      <div *ngIf="showResults" class="results">
+        <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.xs="column">
+          <h3 class="text-productos border-bottom-orange-init">Resultados de búsqueda</h3>
+          <button mat-raised-button color="orange" (click)="deleteSearch()" class="button-selected mr-4 mb-4">Borrar resultados</button>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="10px">
+          <ng-container class="mt-4" *ngFor="let product of productsListExito | slice: 0:mostrarProductos; let i = index">
+            <app-product-bussiness
+              class="product-exito"
+              fxLayout="column"
+              fxFlex="24"
+              fxFlex.xs="100"
+              fxFlex.sm="30"
+              idne="productTitle{{ i }}"
+              butonid="btnLink{{ i }}"
+              [nombreProducto]="product.title"
+              [descuento]="product.oldprice"
+              [precio]="product.price"
+              [imagen]="!!product.image.value ? product.image.value : '/assets/img/Na.svg'"
+              [altimagen]="product.name"
+              [pluexito]="product.plu"
+              [phygital]="phygital"
+              [clickear]="product.buttonclickear"
+              textoboton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+              exito="true"
+              (infoProduct)="dataProduct(product)"
+            ></app-product-bussiness>
+          </ng-container>
+          <span class="w-100" fxLayout="row" fxLayoutAlign="center center">
+            <button
+              mat-raised-button
+              class="button-height f-18 bw mb-3 blue-ligth"
+              (click)="verMasProductos()"
+              [disabled]="mostrarProductos > totalItems"
             >
-          </div>
-        </div>
-      </div>
-    </mat-card>
-
-    <div fxHide.xs="true">
-      <mat-card class="mt-3 comisions">
-        <div class="about-bussiness">
-          <h3 class="subtitle-tips-other border-inferior">Recompensas</h3>
-          <p>En {{ description }} nuestros clickers han recibido a la fecha:</p>
-          <span>
-            <p class="payment-date">+{{ commision }} M</p>
-          </span>
-          <span>
-            <p class="commision-payment">RECOMPENSAS PAGADAS A LA FECHA</p>
+              Mostrar más
+            </button>
           </span>
         </div>
-      </mat-card>
-
-      <mat-card class="mt-3 tips">
-        <div class="about-bussiness">
-          <h3 class="subtitle-tips-other border-inferior">Tips de venta</h3>
-          <div *ngFor="let item of tips">
-            <h4 class="subtitle-about title-tip">{{ item.title }}</h4>
-            <p class="description-tip">{{ item.description }}</p>
-          </div>
-        </div>
-      </mat-card>
-    </div>
-  </div>
-
-  <div>
-    <div fxLayout="row" class="card-library mt-2 container">
-      <img loading="lazy"class="imagen-absolute-oferts" fxHide.xs="true" src="/assets/img/banners/oferts.png" alt="ofertas" />
-      <img loading="lazy"class="imagen-resposive-mobile" fxHide.gt-xs="true" src="/assets/img/banners/oferts_mobile.png" alt="ofertas" />
-      <div class="position-relative banner-mobile heigth-image">
-        <h3 class="mb-1">Descarga las mejores ofertas para compartir.</h3>
-        <button mat-raised-button class="button-oferts" color="orange" (click)="libraryRoute()" id="download-users">Ver Ofertas</button>
-      </div>
-    </div>
-
-    <div class="terms">
-      <mat-card>
-        <div class="mb-2">
-          <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.xs="column">
-            <h3 class="text-productos mt-0 mb-0">Términos & Condiciones</h3>
-            <span class="text-terms-conditions cursor-pointer" (click)="vermas()" *ngIf="visibleTerms === false">
-              {{ visibleTerms ? 'Ver menos' : 'Ver más' }}
-              <mat-icon *ngIf="visibleTerms" class="arrow-down">keyboard_arrow_up</mat-icon>
-              <mat-icon *ngIf="!visibleTerms" class="arrow-down">keyboard_arrow_down</mat-icon>
-            </span>
-          </div>
-          <div class="border-up-gray" *ngIf="visibleTerms">
-            <h4 class="subtitle-about mb-0">Excepciones</h4>
-            <p class="break mt-0">{{ generalInfo }}</p>
-            <h4 class="subtitle-about mt-1 mb-0">Casos especiales</h4>
-            <p class="break mt-0">{{ exceptionsInfo }}</p>
-            <h4 class="subtitle-about mb-0">Tiempos de verificación</h4>
-            <p class="break mt-0">{{ caseSpecial }}</p>
-          </div>
-          <div fxLayout="row" fxLayoutAlign="end end">
-            <span class="text-terms-conditions cursor-pointer" (click)="vermas()" *ngIf="visibleTerms === true">
-              {{ visibleTerms ? 'Ver menos' : 'Ver más' }}
-              <mat-icon *ngIf="visibleTerms" class="arrow-down">keyboard_arrow_up</mat-icon>
-              <mat-icon *ngIf="!visibleTerms" class="arrow-down">keyboard_arrow_down</mat-icon>
-            </span>
-          </div>
-        </div>
-      </mat-card>
-    </div>
-
-    <app-search class="search" *ngIf="id === '1' && hasproduct" (search)="searchBiggyExito($event)"></app-search>
-    <app-search class="search" *ngIf="id === '2' && hasproduct" (search)="searchBiggyCarulla($event)"></app-search>
-
-    <app-search class="search" *ngIf="id !== '2' && id !== '1' && hasproduct" (search)="searchOtherbusiness($event)"></app-search>
-
-    <div *ngIf="showResults" class="results">
-      <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.xs="column">
-        <h3 class="text-productos border-bottom-orange-init">Resultados de búsqueda</h3>
-        <button mat-raised-button color="orange" (click)="deleteSearch()" class="button-selected mr-4 mb-4">Borrar resultados</button>
       </div>
 
-      <div fxLayout="column" fxLayoutGap="10px">
-        <ng-container class="mt-4" *ngFor="let product of productsListExito | slice: 0:mostrarProductos; let i = index">
-          <app-product-bussiness
-            class="product-exito"
+      <div class="not-found" *ngIf="showNotFound">
+        <app-not-found></app-not-found>
+      </div>
+
+      <div class="products" *ngIf="bussiness.length !== 0">
+        <h3 class="text-productos border-bottom-orange-init">Categorías</h3>
+
+        <div fxLayout="column" fxLayoutGap="10px" fxLayoutGap.xs="0px">
+          <div
             fxLayout="column"
-            fxFlex="24"
-            fxFlex.xs="100"
+            fxFlex="100"
             fxFlex.sm="30"
-            idne="productTitle{{ i }}"
-            butonid="btnLink{{ i }}"
-            [nombreProducto]="product.title"
-            [descuento]="product.oldprice"
-            [precio]="product.price"
-            [imagen]="!!product.image.value ? product.image.value : '/assets/img/Na.svg'"
-            [altimagen]="product.name"
-            [pluexito]="product.plu"
-            [phygital]="phygital"
-            [clickear]="product.buttonclickear"
-            textoboton="{{ 'PRODUCTS.GET_LINK' | translate }}"
-            exito="true"
-            (infoProduct)="dataProduct(product)"
-          ></app-product-bussiness>
-        </ng-container>
-        <span class="w-100" fxLayout="row" fxLayoutAlign="center center">
-          <button
-            mat-raised-button
-            class="button-height f-18 bw mb-3 blue-ligth"
-            (click)="verMasProductos()"
-            [disabled]="mostrarProductos > totalItems"
+            fxFlex.gt-sm="24"
+            class="mb-3"
+            *ngFor="let bussiness of bussiness; let i = index"
           >
-            Mostrar más
-          </button>
-        </span>
-      </div>
-    </div>
-
-    <div class="not-found" *ngIf="showNotFound">
-      <app-not-found></app-not-found>
-    </div>
-
-    <div class="products" *ngIf="bussiness.length !== 0">
-      <h3 class="text-productos border-bottom-orange-init">Categorías</h3>
-
-      <div fxLayout="column" fxLayoutGap="10px" fxLayoutGap.xs="0px">
-        <div
-          fxLayout="column"
-          fxFlex.xs="100"
-          fxFlex.sm="30"
-          fxFlex.gt-sm="24"
-          class="mb-3"
-          *ngFor="let bussiness of bussiness; let i = index"
-        >
-          <app-product-bussiness
-            id="bussiness{{ i }}"
-            butonid="gtmNegocio{{ title }}{{ bussiness.description | trim }}"
-            [nombreProducto]="bussiness.description"
-            [precio]="bussiness.commission"
-            [porcentaje]="bussiness.infoaditional"
-            [imagen]="bussiness.imageurl"
-            [altimagen]="bussiness.description"
-            [phygital]="phygital"
-            [clickear]="clickear"
-            otro="true"
-            Class="mb-1 button-20 gtmNegocio{{ title }}{{ bussiness.description | trim }}"
-            container="img-container-viajes"
-            textoboton="{{ 'PRODUCTS.GET_LINK' | translate }}"
-            (infoProduct)="dataSliderCategory(bussiness)"
-            (infoPhygital)="location(bussiness)"
-          ></app-product-bussiness>
-        </div>
-      </div>
-    </div>
-
-    <div *ngIf="bussiness.length === 0" fxLayout="column" fxLayoutAlign="center center">
-      <mat-icon class="nothing-icon">push_pin</mat-icon>
-      <p class="nothing-text">Aún no tenemos categorías para este negocio</p>
-    </div>
-
-    <div fxHide.gt-xs="true">
-      <mat-card class="mt-3 comisions">
-        <div class="about-bussiness">
-          <h3 class="subtitle-tips-other border-inferior">Recompensas</h3>
-          <p>En {{ description }} nuestros clickers han recibido a la fecha:</p>
-          <span>
-            <p class="payment-date">+{{ commision }} M</p>
-          </span>
-          <span>
-            <p class="commision-payment">RECOMPENSAS PAGADAS A LA FECHA</p>
-          </span>
-        </div>
-      </mat-card>
-
-      <mat-card class="mt-3 tips">
-        <div class="about-bussiness">
-          <h3 class="subtitle-tips-other border-inferior">Tips de venta</h3>
-          <div *ngFor="let item of tips">
-            <h4 class="subtitle-about title-tip">{{ item.title }}</h4>
-            <p class="description-tip">{{ item.description }}</p>
+            <app-product-bussiness
+              id="bussiness{{ i }}"
+              butonid="gtmNegocio{{ title }}{{ bussiness.description | trim }}"
+              [nombreProducto]="bussiness.description"
+              [precio]="bussiness.commission"
+              [porcentaje]="bussiness.infoaditional"
+              [imagen]="bussiness.imageurl"
+              [altimagen]="bussiness.description"
+              [phygital]="phygital"
+              [clickear]="clickear"
+              otro="true"
+              Class="mb-1 button-20 gtmNegocio{{ title }}{{ bussiness.description | trim }}"
+              container="img-container-viajes"
+              textoboton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+              (infoProduct)="dataSliderCategory(bussiness)"
+              (infoPhygital)="location(bussiness)"
+            ></app-product-bussiness>
           </div>
         </div>
-      </mat-card>
+      </div>
+
+      <div *ngIf="bussiness.length === 0" fxLayout="column" fxLayoutAlign="center center">
+        <mat-icon class="nothing-icon">push_pin</mat-icon>
+        <p class="nothing-text">Aún no tenemos categorías para este negocio</p>
+      </div>
+
+      <div fxHide.gt-xs="true">
+        <mat-card class="mt-3 comisions">
+          <div class="about-bussiness">
+            <h3 class="subtitle-tips-other border-inferior">Recompensas</h3>
+            <p>En {{ description }} nuestros clickers han recibido a la fecha:</p>
+            <span>
+              <p class="payment-date">+{{ commision }} M</p>
+            </span>
+            <span>
+              <p class="commision-payment">RECOMPENSAS PAGADAS A LA FECHA</p>
+            </span>
+          </div>
+        </mat-card>
+
+        <mat-card class="mt-3 tips">
+          <div class="about-bussiness">
+            <h3 class="subtitle-tips-other border-inferior">Tips de venta</h3>
+            <div *ngFor="let item of tips">
+              <h4 class="subtitle-about title-tip">{{ item.title }}</h4>
+              <p class="description-tip">{{ item.description }}</p>
+            </div>
+          </div>
+        </mat-card>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- template share -->
 

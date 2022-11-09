@@ -71,11 +71,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'bussiness',
-    component: BussinessComponent,
-    canActivate: [AuthGuard],
-  },
-  {
     path: 'historial-links',
     component: LinksHistorialComponent,
     canActivate: [AuthGuard],
@@ -88,6 +83,11 @@ const routes: Routes = [
   {
     path: 'negocios',
     component: AllBussinessComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'negocios/:bussinessNameUrl',
+    component: BussinessComponent,
     canActivate: [AuthGuard],
   },
   {
