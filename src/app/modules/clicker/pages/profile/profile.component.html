@@ -4,7 +4,7 @@
   imgMobile="/assets/img/banners/banner-perfil-mobile.jpg"
 ></app-banner>
 
-<div class="container mb-4" [ngClass]="{ 'd-none': profile === false, 'd-block': profile === true }">
+<div class="container mb-4" [ngClass]="{ 'd-none': !profile, 'd-block': profile }">
 
   <mat-tab-group #tabGroup>
     <mat-tab>
@@ -21,12 +21,13 @@
       <app-aditional-info-form></app-aditional-info-form>
     </mat-tab>
 
-    <mat-tab *ngIf="managedPayments === false || isEmployee === false">
+    <mat-tab *ngIf="!managedPayments || !isEmployee">
       <ng-template mat-tab-label>
         <span class="gtmPerfilClicGestionarPagosClickam">DATOS FINANCIEROS</span>
       </ng-template>
-      <app-payment-info *ngIf="(auth.getRole$ | async) !== 'ADMIN' && managedPayments === false && isEmployee === false"></app-payment-info>
-      <app-profile-form [showBankInfo]="true" [showInfoAccount]="false" *ngIf="(auth.getRole$ | async) !== 'ADMIN' && managedPayments === true && isEmployee === false"></app-profile-form>
+      <!-- <app-payment-info *ngIf="(auth.getRole$ | async) !== 'ADMIN' && !isEmployee"></app-payment-info> -->
+      <app-payment-info *ngIf="(auth.getRole$ | async) !== 'ADMIN' && !managedPayments && !isEmployee"></app-payment-info>
+      <app-profile-form [showBankInfo]="true" [showInfoAccount]="false" *ngIf="(auth.getRole$ | async) !== 'ADMIN' && managedPayments && !isEmployee"></app-profile-form>
     </mat-tab>
 
     <mat-tab>
