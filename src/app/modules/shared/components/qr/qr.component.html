@@ -15,18 +15,3 @@
     <img [src]="environment.URL_BLOB + 'img-ofertas/qr/clickam-white-blue.png'" alt="" />
   </div>
 </div>
-
-<div class="download-app__container">
-  <div class=" download-app__content {{ isQrOpen ? '' : 'download-app__content-closed' }}">
-    <img
-      (click)="detectStore()"
-      [src]="environment.URL_BLOB + 'img-ofertas/qr/descargar-app-icon.png'"
-      alt="download-app-icon"
-    />
-    <span (click)="detectStore()" class="download-app__title {{ isQrOpen ? '' : 'download-app__title-hidden' }}">
-      <span>Descarga aquí</span>
-      <span>nuestra App</span>
-    </span>
-    <div [hidden]="!isQrOpen" class="download-app__cross" (click)="toggleShow()"></div>
-  </div>
-</div>
