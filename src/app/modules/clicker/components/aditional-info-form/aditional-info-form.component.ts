@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { map, Observable, startWith, Subscription } from 'rxjs';
 import { MasterDataService } from 'src/app/services/master-data.service';
+import { ResponseService } from 'src/app/interfaces/response';
 
 @Component({
   selector: 'app-aditional-info-form',
@@ -16,11 +17,12 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
     public user: UserService,
     private _snackBar: MatSnackBar,
     private personalInfo: MasterDataService
-  ) {}
+  ) { }
 
   personalForm: UntypedFormGroup;
   profesionalForm: UntypedFormGroup;
   livingForm: UntypedFormGroup;
+  addressForm: UntypedFormGroup;
 
   educationLevel = [];
   fixedIncome = [];
@@ -37,7 +39,6 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
     { id: 5, description: 5 },
     { id: 6, description: 6 },
   ];
-
   people = [
     { id: 0, description: 0 },
     { id: 1, description: 1 },
@@ -45,7 +46,6 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
     { id: 3, description: 3 },
     { id: 4, description: '4+' },
   ];
-
   dependant = [
     { id: 0, description: 0 },
     { id: 1, description: 1 },
@@ -53,6 +53,15 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
     { id: 3, description: 3 },
     { id: 4, description: '4+' },
   ];
+
+  departments = [];
+  cities: [];
+  department: any = {};
+  city: any = {};
+  address: string;
+  disabledCity: boolean;
+  filteredDepartments: any[];
+  filteredCities: any[];
 
   userId: string;
   userInfo: any;
@@ -84,6 +93,15 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
         this.userInfo = val;
         this.userId = val.userId;
         this.birthDate = val.birthDate;
+        this.department = {
+          code: val.department,
+          description: val.departmentName
+        };
+        this.city = {
+          code: val.municipality,
+          description: val.municipalityName
+        };
+        this.address = val.address;
         this.maritalStatusOb = {
           id: val.maritalStatus,
           description: val.maritalStatusDescription,
@@ -129,10 +147,14 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
       this.personalFormInfo();
       this.profesionalFormInfo();
       this.livingFormInfo();
+      this.addressFormInfo();
+      this.getDepartments();
+      this.filterDepartments();
+      this.filterCities();
     });
   }
 
-  public personalFormInfo() {
+  personalFormInfo() {
     this.personalForm = this.fb.group({
       birthDate: [this.birthDate, Validators.required],
       maritalStatus: [this.maritalStatusOb['id'], Validators.required],
@@ -141,7 +163,7 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  public profesionalFormInfo() {
+  profesionalFormInfo() {
     this.profesionalForm = this.fb.group({
       occupation: [this.occupationOb['id'], Validators.required],
       fixedIncome: [this.fixedIncomeOb['id'], Validators.required],
@@ -149,7 +171,7 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  public livingFormInfo() {
+  livingFormInfo() {
     this.livingForm = this.fb.group({
       stratum: [this.stratumOb['id'], Validators.required],
       typeHousing: [this.typeHousingOb['id'], Validators.required],
@@ -159,7 +181,15 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  public getBasicData() {
+  addressFormInfo() {
+    this.addressForm = this.fb.group({
+      department: [this.department],
+      city: [this.city],
+      address: [this.address]
+    });
+  }
+
+  getBasicData() {
     this.user.getBasicData().subscribe((resp) => {
       this.educationLevel = resp.EducationLevel;
       this.fixedIncome = resp.FixedIncome;
@@ -187,6 +217,9 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
     this.userInfo.dependents = this.livingForm.controls.dependant.value;
     this.userInfo.mobility = this.livingForm.controls.mobility.value;
     this.userInfo.receiveCommunications = this.receiveCommunications;
+    this.userInfo.department = this.addressForm.controls.department.value.code;
+    this.userInfo.municipality = this.addressForm.controls.city.value.code;
+    this.userInfo.address = this.addressForm.controls.address.value;
     this.userInfo.bankAccountNumber = null;
 
     this.subscription = this.user.updateUser(this.userInfo).subscribe(
@@ -206,6 +239,78 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
     this._snackBar.open(message, action, {
       duration: 3000,
     });
+  }
+
+  getDepartments() {
+    this.subscription = this.personalInfo.getDepartments().subscribe((res: ResponseService) => {
+      this.departments = res.objectResponse;
+      console.log('THIS.DEPARTMENTS', this.departments)
+      const auxDepartment = this.departments.find(dep => dep.code === this.department.code);
+      this.cities = auxDepartment ? auxDepartment.municipalities : [];
+    });
+  }
+
+  selectDepartment(department) {
+    console.log('department',department)
+    this.department = { code: department.code, description: department.description };
+    this.cities = department.municipalities;
+    this.addressForm.controls.city.setValue('');
+  }
+
+  checkDepartment() {
+    if (
+      this.addressForm.controls.department.value.code !== this.department.code ||
+      !this.addressForm.controls.department.value.code || !this.department.code
+    ) {
+      this.addressForm.controls.department.setErrors({ incorrect: true });
+    }
+  }
+
+  selectCity(city) {
+    this.city = {
+      code: city.code,
+      description: city.description
+    };
+  }
+
+  checkCity() {
+    if (this.addressForm.controls.city.value.code !== this.city.code) {
+      this.addressForm.controls.city.setErrors({ incorrectCity: true });
+    }
+  }
+
+  displayElement(item?: any): string | undefined {
+    return item ? item.description : undefined;
+  }
+
+  filterDepartments() {
+    this.addressForm.controls.department.valueChanges.subscribe((res)=>{
+      if(res){
+        this.filteredDepartments = this.departments.filter((dep: any) => dep.description.toLocaleLowerCase().includes(res));
+      }else{
+        this.filteredDepartments = this.departments;
+      }
+    });
+  }
+
+  filterCities() {
+    this.addressForm.controls.city.valueChanges.subscribe((res) => {
+      if(res){
+        this.filteredCities = this.cities.filter((city: any) => city.description.toLocaleLowerCase().includes(res));
+      }else{
+        this.filteredCities = this.cities;
+      }
+    });
+  }
+
+  private _filterDepartments(value: any) {
+    const filterValue = value.toLocaleLowerCase();
+    return this.departments.filter((department) => department.description.toLocaleLowerCase().indexOf(filterValue) === 0);
+  }
+
+  private _filterCities(city: any) {
+    const filterValue = city.description.toLocaleLowerCase();
+    return this.cities.filter((city: any) => city.description.toLocaleLowerCase().indexOf(filterValue) === 0);
   }
 
   ngOnDestroy(): void {
