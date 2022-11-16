@@ -16,7 +16,7 @@ export class UserService {
 
   urlReports = environment.URL_REPORTS;
   url = environment.URL_PROFILE;
-  urlEmployee = environment.URL_VALIDATE_EMPLOYEE;
+  urlEmployee = environment.URL_PROFILE;
   urlContent = environment.URL_CONTENT;
 
   apiProfile = 'userprofile/GetUserProfile';

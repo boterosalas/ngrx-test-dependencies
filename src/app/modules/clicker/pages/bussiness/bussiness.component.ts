@@ -238,7 +238,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
       this.title = data.description;
       this.image = data.imageurl;
       this.description = data.description;
-      // this.nonEditedContent = data.about;
+      this.nonEditedContent = data.about;
       this.infoBussiness = this.formatContent(data.about);
       this.phygital = data.phygital;
       this.clickear = data.buttonclickear;

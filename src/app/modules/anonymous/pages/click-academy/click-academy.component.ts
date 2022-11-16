@@ -15,7 +15,7 @@ export class ClickAcademyComponent implements OnInit {
   constructor(private user: UserService, private router: Router, private auth: AuthService) {}
 
   ngOnInit() {
-    this.pdf = environment.PDF;
+    this.pdf = `${environment.URL_BLOB}clickacademy/pdf/`;
   }
 
   public resetOnboarding() {

@@ -38,7 +38,7 @@ describe('BussinessComponent', () => {
     'getCommissionsByBussiness',
     'getBusinessById',
     'getBusinessByCategory'
-  ],{
+  ], {
     bussinessList: []
   });
 
@@ -248,8 +248,8 @@ describe('BussinessComponent', () => {
         ClickerModule,
         AppMaterialModule,
         RouterTestingModule.withRoutes([
-          { path: 'inicio', component: HomeComponent}
-      ]),
+          { path: 'inicio', component: HomeComponent }
+        ]),
         HttpClientTestingModule,
         BrowserAnimationsModule,
         JwtModule.forRoot({
@@ -263,7 +263,7 @@ describe('BussinessComponent', () => {
           },
         }),
       ],
-      schemas:[NO_ERRORS_SCHEMA],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [
         { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: ContentService, useValue: mockContentService },
@@ -330,9 +330,61 @@ describe('BussinessComponent', () => {
     expect(component.reference).toBeTruthy();
   });
 
+  it('Should set desktop image', () => {
+    component.offersImageBreakpoint();
+    expect(component.isMobile).toBe(false);
+    expect(component.seeOffersImage).toBe('/assets/img/banners/oferts.png');
+  });
+
+  it('Should set mobile image', () => {
+    mockBreakPointService.isWidthLessThanBreakpoint.and.returnValue(of(true));
+    component.offersImageBreakpoint();
+    expect(component.isMobile).toBe(true);
+    expect(component.seeOffersImage).toBe('/assets/img/banners/oferts_mobile.png');
+  });
+
+  it('Should return undefined', () => {
+    const element = component.getCurrentBussiness('almacenes-exito');
+    expect(element).toBe(undefined);
+  });
+
+  it('Should setBussinessInfo correctly', () => {
+    const data = {
+      id: 7,
+      hasproduct: true,
+      tips: [],
+      description: 'description',
+      imageurl: 'imageurl',
+      about: 'about',
+      phygital: false,
+      buttonclickear: true,
+      infoaditional: 'infoaditional',
+      terms: []
+    };
+    component.setBussinessInfo(data);
+    expect(component.id).toBe(data.id);
+    expect(component.hasproduct).toBe(data.hasproduct);
+    expect(component.saleTips).toBe(data.tips);
+    expect(component.title).toBe(data.description);
+    expect(component.image).toBe(data.imageurl);
+    expect(component.description).toBe(data.description);
+    expect(component.nonEditedContent).toBe(data.about);
+    expect(component.infoBussiness).toBe(data.about);
+    expect(component.phygital).toBe(data.phygital);
+    expect(component.clickear).toBe(data.buttonclickear);
+    expect(component.percent).toBe(data.infoaditional);
+    expect(component.isLoading).toBe(false);
+  });
+
+  it('Should navigate to /negocios', () => {
+    const navigateSpy = spyOn((<any>component).router,'navigateByUrl').and.callFake(()=>true);
+    component.setBussinessInfo(null);
+    expect(navigateSpy).toHaveBeenCalledWith('/negocios');
+  })
+
   it('data category', () => {
     component.urlshorten = 'http://tynyurl.com/xsxsx';
-    component.dataSliderCategory('container',categorys);
+    component.dataSliderCategory('container', categorys);
     expect(mockDialog.open).toBeTruthy();
   });
 
@@ -394,7 +446,7 @@ describe('BussinessComponent', () => {
     };
 
     component.id = 2;
-    component.dataProduct('container',product);
+    component.dataProduct('container', product);
     expect(product).toBeDefined();
   });
 

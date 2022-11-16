@@ -8,6 +8,8 @@ import { BackButtonComponent } from './back-button.component';
 describe('BackButtonComponent', () => {
   let component: BackButtonComponent;
   let fixture: ComponentFixture<BackButtonComponent>;
+  const mockPreviousRouteService = jasmine.createSpyObj('PreviousRouteService',['getPreviousUrl']);
+
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -17,7 +19,7 @@ describe('BackButtonComponent', () => {
         RouterTestingModule
       ],
       providers: [
-        PreviousRouteService,
+        {provide: PreviousRouteService, useValue: mockPreviousRouteService},
       ]
     })
     .compileComponents();
@@ -31,5 +33,17 @@ describe('BackButtonComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('Should set /inicio to component.route', () => {
+    mockPreviousRouteService.getPreviousUrl.and.callFake(()=>null);
+    component.ngOnInit();
+    expect(component.route).toBe('/inicio');
+  });
+
+  it('Should set route to component.route', () => {
+    mockPreviousRouteService.getPreviousUrl.and.callFake(()=>'/negocios');
+    component.ngOnInit();
+    expect(component.route).toBe('/negocios');
   });
 });
