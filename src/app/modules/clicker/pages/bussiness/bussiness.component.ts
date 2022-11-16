@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, OnDestroy, Inject, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContentService } from 'src/app/services/content.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -18,6 +18,7 @@ import { isPlatformBrowser } from '@angular/common';
 import Swal from 'sweetalert2';
 import { PhygitalLocationComponent } from '../../components/phygital-location/phygital-location.component';
 import { FiendlyUrl } from 'src/app/helpers/friendly-url';
+import { BreakpointService } from 'src/app/services/breakpoint.service';
 
 declare var dataLayer: any;
 
@@ -25,9 +26,13 @@ declare var dataLayer: any;
   selector: 'app-bussiness',
   templateUrl: './bussiness.component.html',
   styleUrls: ['./bussiness.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class BussinessComponent implements OnInit, OnDestroy {
-  id: string = '0';
+  isLoading: boolean = true;
+  bussinessIsLoading: boolean = true;
+  searchingIsLoading: boolean = false;
+  id: number = 0;
   hasproduct: boolean;
   title: string;
   phygital: boolean;
@@ -41,6 +46,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
   templateTerms: TemplateRef<any>;
 
   private subscription: Subscription = new Subscription();
+  offersImageBreakpoint$: Subscription = new Subscription();
+  isMobile: boolean = true;
+  seeOffersImage: string = '';
   private ngNavigatorShareService: NgNavigatorShareService;
   image: string;
   template: any;
@@ -51,7 +59,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
   termsForm: UntypedFormGroup;
   idCustomerForm: UntypedFormGroup;
   date: any;
-  business: string;
+  business: number;
   plu: string;
   formLink: UntypedFormGroup;
   enableCopy = true;
@@ -86,34 +94,58 @@ export class BussinessComponent implements OnInit, OnDestroy {
   productsList: Array<any>;
   productsListBiggy: Array<any>;
   productsListTransform: Array<any>;
-  productsListExito = [];
+  searchProductList = [];
   totalItems: number;
   showResults: boolean;
   showNotFound: boolean;
   orderOptions: any;
   orderValue: string;
   sellerId: string;
-  mostrarProductos = 3;
+  showSearchProducts = 4;
+  showCategoriesProducts = 8;
   sellerName: string;
   showReferenceButton = true;
-  allBussiness: string;
   visibleTerms = false;
   commision: any;
   description: string;
   infoBussiness: string;
-  generalInfo: string;
-  exceptionsInfo: string;
-  caseSpecial: string;
-  tips = [];
+  generalInfo: string = '';
+  exceptionsInfo: string = '';
+  caseSpecial: string = '';
+  // generalInfo: string = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.';
+  // exceptionsInfo: string = 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using "Content here, content here", making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for "lorem ipsum" will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).';
+  // caseSpecial: string = 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
+  saleTips = [
+    {
+      title: 'Conoce muy bien los productos',
+      description: 'Cuando ingresas a exito.com y escoges algún producto, en la parte inferior encontrarás las especificaciones, así podrás llenarte de argumentos a la hora de ofrecerlos, menciona siempre los atributos y beneficios.'
+    },
+    {
+      title: 'Estrategia de descuentos',
+      description: 'Habla desde el ahorro que obtendrá el cliente al comprar los productos, si el descuento es en porcentaje, realiza el cálculo y menciona el valor que ahorrará, ellos la mayoría de veces evitan hacer la operación matemática.'
+    },
+    {
+      title: 'Ofrece los múltiples métodos de pago',
+      description: 'Una fortaleza de este e-commerce son los múltiples medio de pago que le puedes ofrecer a tus clientes: Tarjeta Éxito, Tarjeta de crédito: Visa, MasterCard, American Express, Diners, Tarjeta débito, Tarjeta Codensa, Consignación en cuenta Bancolombia, Pago contra entrega: solo para pedidos de mercado, Pago en cajas de Almacenes Éxito, Carulla, Surtimax o Super Inter, Tarjeta presente (opción empleados Grupo Éxito)'
+    },
+    {
+      title: 'Descuentos TODAS las semanas',
+      description: '• Lunes de vida sana: Productos saludables con descuentos. • Martes para brillar: Productos de aseo para el hogar con descuentos. • Miércoles de Mercado con descuento. • Juernes de rumba, descuentos en licores.'
+    },
+    {
+      title: 'Grandes eventos de descuentos',
+      description: 'Existen grandes eventos de descuentos en nuestro E-commerce como: Jueves Online, Mi descuento, Aniversario Éxito, Megapromo, Black Days, Cyberdays, Días de precios especiales, SingleDays, Hot Sale, PromOnline.'
+    },
+  ];
   invisible = false;
-  nonEditedContent: string = 'Éxito es una cadena colombiana de supermercados perteneciente al Grupo Éxito. Nació en un local 4X4 en el centro de Medellín y ahora tiene alrededor de 240 almacenes ubicados en toda Colombia.';
+  nonEditedContent: string = '';
+  // nonEditedContent: string = 'Éxito es una cadena colombiana de supermercados perteneciente al Grupo Éxito. Nació en un local 4X4 en el centro de Medellín y ahora tiene alrededor de 240 almacenes ubicados en toda Colombia.';
   bussinessNameUrl: string;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private content: ContentService,
     private utils: UtilsService,
-    private sp: ContentService,
     private dialog: MatBottomSheet,
     private fb: UntypedFormBuilder,
     private user: UserService,
@@ -122,11 +154,12 @@ export class BussinessComponent implements OnInit, OnDestroy {
     private token: TokenService,
     ngNavigatorShareService: NgNavigatorShareService,
     private dialogModal: MatDialog,
+    private breakPointService: BreakpointService,
     @Inject(PLATFORM_ID) private platformId: object
   ) {
     this.bussinessNameUrl = this.route.snapshot.paramMap.get('bussinessNameUrl');
     if (this.content.bussinessList.length > 0) {
-      const currentBussiness = this.getCurrentBussiness(this.bussinessNameUrl);      
+      const currentBussiness = this.getCurrentBussiness(this.bussinessNameUrl);
       this.setBussinessInfo(currentBussiness);
       this.getBussinessInfo();
     } else {
@@ -167,6 +200,20 @@ export class BussinessComponent implements OnInit, OnDestroy {
       { value: 'OrderByNameASC', description: 'Productos de la A-Z' },
       { value: 'OrderByNameDESC', description: 'Productos de la Z-A' },
     ];
+    this.offersImageBreakpoint();
+  }
+
+  offersImageBreakpoint() {
+    this.offersImageBreakpoint$ = this.breakPointService
+      .isWidthLessThanBreakpoint('600')
+      .subscribe((res: boolean) => {
+        this.isMobile = res;
+        if (res) {
+          this.seeOffersImage = '/assets/img/banners/oferts_mobile.png'
+        } else {
+          this.seeOffersImage = '/assets/img/banners/oferts.png'
+        }
+      });
   }
 
   getCurrentBussiness(bussinessNameUrl) {
@@ -175,7 +222,6 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
   getBussinessInfo() {
     this.subscription = this.content.getCommissionsByBussiness(this.id).subscribe((resp) => {
-      console.log('Comisiones',resp)
       this.commision = (resp[0].commissionvalue / 1000000).toFixed(1);
     });
     this.subscription = this.content.getBusinessById(this.id).subscribe((resp) => {
@@ -185,22 +231,26 @@ export class BussinessComponent implements OnInit, OnDestroy {
   }
 
   setBussinessInfo(data: any) {
-    console.log('DATA',data)
-    this.id = data.id;
-    this.hasproduct = data.hasproduct;
-    this.tips = data.tips;
-    this.title = data.description;
-    this.image = data.imageurl;
-    this.description = data.description;
-    // this.nonEditedContent = data.about;
-    this.infoBussiness = this.formatContent(data.about);
-    this.phygital = data.phygital;
-    this.clickear = data.buttonclickear;
-    this.percent = data.infoaditional;
-    if (data.terms.length > 0) {
-      this.generalInfo = data.terms[0].description;
-      this.exceptionsInfo = data.terms[1].description;
-      this.caseSpecial = data.terms[2].description;
+    if (data) {
+      this.id = data.id;
+      this.hasproduct = data.hasproduct;
+      this.saleTips = data.tips;
+      this.title = data.description;
+      this.image = data.imageurl;
+      this.description = data.description;
+      // this.nonEditedContent = data.about;
+      this.infoBussiness = this.formatContent(data.about);
+      this.phygital = data.phygital;
+      this.clickear = data.buttonclickear;
+      this.percent = data.infoaditional;
+      if (data.terms.length > 0) {
+        this.generalInfo = data.terms[0].description;
+        this.exceptionsInfo = data.terms[1].description;
+        this.caseSpecial = data.terms[2].description;
+      }
+      this.isLoading = false;
+    } else {
+      this.router.navigateByUrl('/negocios');
     }
   }
 
@@ -210,7 +260,7 @@ export class BussinessComponent implements OnInit, OnDestroy {
       .pipe(distinctUntilChanged())
       .subscribe((bussiness) => {
         this.content.bussinessList = bussiness;
-        const currentBussiness = this.getCurrentBussiness(this.bussinessNameUrl);      
+        const currentBussiness = this.getCurrentBussiness(this.bussinessNameUrl);
         this.setBussinessInfo(currentBussiness);
         this.getBussinessInfo();
       });
@@ -257,28 +307,18 @@ export class BussinessComponent implements OnInit, OnDestroy {
     }
   }
 
-  public vermas() {
-    if (this.visibleTerms === true) {
-      this.visibleTerms = false;
-    } else {
-      this.visibleTerms = true;
-    }
+  vermas() {
+    this.visibleTerms = !this.visibleTerms;
   }
+
   public getContentBussiness() {
     this.subscription = this.content
       .getBusinessContent(this.id)
       .pipe(distinctUntilChanged())
       .subscribe((bussiness) => {
         this.bussiness = bussiness;
+        this.bussinessIsLoading = false;
       });
-  }
-
-  public goback() {
-    if (this.allBussiness === 'true') {
-      this.router.navigate(['/negocios']);
-    } else {
-      this.router.navigate(['./']);
-    }
   }
 
   private formShareLink() {
@@ -353,89 +393,90 @@ export class BussinessComponent implements OnInit, OnDestroy {
    *
    */
 
-  public dataSliderCategory(sliderInfo) {
-    const token = localStorage.getItem('ACCESS_TOKEN');
-    if (token !== null && sliderInfo.business !== 'clickam') {
-      this.tokenInfo = this.token.userInfo();
-      this.idClicker = this.tokenInfo.idclicker;
+  public dataSliderCategory(clickFrom, sliderInfo) {
+    if (clickFrom === 'button' || (clickFrom === 'container' && this.isMobile)) {
+      const token = localStorage.getItem('ACCESS_TOKEN');
+      if (token !== null && sliderInfo.business !== 'clickam') {
+        this.tokenInfo = this.token.userInfo();
+        this.idClicker = this.tokenInfo.idclicker;
 
-      const dataCategoryUrl = sliderInfo.link;
-      this.showForm = false;
-      this.urlshorten = '';
-      this.reference = false;
-      this.showFormCustomer = true;
-      this.url = `${dataCategoryUrl}`;
-      setTimeout(() => {
-        this.saveLink();
-      }, 500);
-      this.idCustomerForm.controls.identification.setValue('');
-      this.idCustomerForm.reset();
-      this.formShareLink();
-      const home = true;
-      this.business = sliderInfo.idbusiness;
-      this.plu = sliderInfo.description;
-      const infoaditional = sliderInfo.infoaditional;
-      const img = sliderInfo.imageurl;
-      const showCloseIcon = true;
-      const showClose = false;
-      const buttonClose = 'Cerrar';
-      const showshowTitle = false;
-      const title = sliderInfo.description;
-      const showProduct = true;
-      const id = sliderInfo.productId;
-      // this.classButton = (sliderInfo.description).replace(" ", "");
-      this.classButtonWhatsapp = `gtmClicLightboxIconoWhatsApp${this.title}${sliderInfo.description}`
-        .replace(/\s/g, '')
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '');
-      this.classButtonTwitter = `gtmClicLightboxIconoTwitter${this.title}${sliderInfo.description}`
-        .replace(/\s/g, '')
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '');
-      this.classButtonFacebook = `gtmClicLightboxIconoFacebook${this.title}${sliderInfo.description}`
-        .replace(/\s/g, '')
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '');
-      this.classButtonShare = `gtmClicLightboxCompartir${this.title}${sliderInfo.description}`
-        .replace(/\s/g, '')
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '');
-      this.classButtonBuy = `gtmClicLightboxComprar${this.title}${sliderInfo.description}`
-        .replace(/\s/g, '')
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '');
-      this.classButtonRefer = `gtmClicLightboxReferir${this.title}${sliderInfo.description}`
-        .replace(/\s/g, '')
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '');
-      this.classButtonCopy = `gtmClicLightboxCopiarLink${this.title}${sliderInfo.description}`
-        .replace(/\s/g, '')
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '');
+        const dataCategoryUrl = sliderInfo.link;
+        this.showForm = false;
+        this.urlshorten = '';
+        this.reference = false;
+        this.showFormCustomer = true;
+        this.url = `${dataCategoryUrl}`;
+        setTimeout(() => {
+          this.saveLink();
+        }, 500);
+        this.idCustomerForm.controls.identification.setValue('');
+        this.idCustomerForm.reset();
+        this.formShareLink();
+        const home = true;
+        this.business = sliderInfo.idbusiness;
+        this.plu = sliderInfo.description;
+        const infoaditional = sliderInfo.infoaditional;
+        const img = sliderInfo.imageurl;
+        const showCloseIcon = true;
+        const showClose = false;
+        const buttonClose = 'Cerrar';
+        const showshowTitle = false;
+        const title = sliderInfo.description;
+        const showProduct = true;
+        const id = sliderInfo.productId;
+        this.classButtonWhatsapp = `gtmClicLightboxIconoWhatsApp${this.title}${sliderInfo.description}`
+          .replace(/\s/g, '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '');
+        this.classButtonTwitter = `gtmClicLightboxIconoTwitter${this.title}${sliderInfo.description}`
+          .replace(/\s/g, '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '');
+        this.classButtonFacebook = `gtmClicLightboxIconoFacebook${this.title}${sliderInfo.description}`
+          .replace(/\s/g, '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '');
+        this.classButtonShare = `gtmClicLightboxCompartir${this.title}${sliderInfo.description}`
+          .replace(/\s/g, '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '');
+        this.classButtonBuy = `gtmClicLightboxComprar${this.title}${sliderInfo.description}`
+          .replace(/\s/g, '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '');
+        this.classButtonRefer = `gtmClicLightboxReferir${this.title}${sliderInfo.description}`
+          .replace(/\s/g, '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '');
+        this.classButtonCopy = `gtmClicLightboxCopiarLink${this.title}${sliderInfo.description}`
+          .replace(/\s/g, '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '');
 
-      const template = this.templateCategories;
+        const template = this.templateCategories;
 
-      const dialogref = this.dialog.open(DialogComponent, {
-        data: {
-          template,
-          infoaditional,
-          showClose,
-          img,
-          showCloseIcon,
-          showProduct,
-          buttonClose,
-          showshowTitle,
-          id,
-          title,
-          home,
-        },
-      });
+        const dialogref = this.dialog.open(DialogComponent, {
+          data: {
+            template,
+            infoaditional,
+            showClose,
+            img,
+            showCloseIcon,
+            showProduct,
+            buttonClose,
+            showshowTitle,
+            id,
+            title,
+            home,
+          },
+        });
 
-      dialogref.afterDismissed().subscribe(() => {
-        this.enableCopy = true;
-      });
-    } else {
-      this.router.navigate(['/' + sliderInfo.link]);
+        dialogref.afterDismissed().subscribe(() => {
+          this.enableCopy = true;
+        });
+      } else {
+        this.router.navigate(['/' + sliderInfo.link]);
+      }
     }
   }
 
@@ -444,71 +485,77 @@ export class BussinessComponent implements OnInit, OnDestroy {
    * @param product producto
    */
 
-  public dataProduct(product) {
-    this.tokenInfo = this.token.userInfo();
-    this.idClicker = this.tokenInfo.idclicker;
-    this.reference = false;
-    this.urlshorten = '';
-    const productUrl = product.url;
-    if (this.id === '1') {
-      this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign={1}`;
-    }
-    if (this.id === '2') {
-      this.url = `https://www.carulla.com${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign={1}`;
-    }
-    this.idCustomerForm.controls.identification.setValue('');
-    this.idCustomerForm.reset();
-    setTimeout(() => {
-      this.saveLink();
-    }, 500);
-    this.formShareLink();
-    const title = product.title;
-    const id = product.plu;
-    const img = product.image.value;
-    const price = product.price;
-    const discount = product.oldprice;
-    const template = this.templateEC;
-    const showClose = false;
-    const showCloseIcon = true;
-    const showProduct = true;
-    const showshowTitle = false;
-    const buttonClose = 'Cerrar';
-    const showPlu = true;
-    const plu = product.plu;
-    this.plu = product.plu;
-    const business = product.business;
-    const home = true;
-    const exito = true;
-    this.business = this.id;
+  public dataProduct(clickFrom, product) {
+    if (clickFrom === 'button' || (clickFrom === 'container' && this.isMobile)) {
+      this.tokenInfo = this.token.userInfo();
+      this.idClicker = this.tokenInfo.idclicker;
+      this.reference = false;
+      this.urlshorten = '';
+      const productUrl = product.url;
+      if (this.id === 1) {
+        this.url = `${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign={1}`;
+      }
+      if (this.id === 2) {
+        this.url = `https://www.carulla.com${productUrl}?utm_source=clickam&utm_medium=referral&utm_campaign={1}`;
+      }
+      this.idCustomerForm.controls.identification.setValue('');
+      this.idCustomerForm.reset();
+      setTimeout(() => {
+        this.saveLink();
+      }, 500);
+      this.formShareLink();
+      const title = product.title;
+      const id = product.plu;
+      const img = product.image.value;
+      const price = product.price;
+      const discount = product.oldprice;
+      const template = this.templateEC;
+      const showClose = false;
+      const showCloseIcon = true;
+      const showProduct = true;
+      const showshowTitle = false;
+      const buttonClose = 'Cerrar';
+      const showPlu = true;
+      const plu = product.plu;
+      this.plu = product.plu;
+      const business = product.business;
+      const home = true;
+      const exito = true;
+      this.business = this.id;
 
-    const dialogref = this.dialog.open(DialogComponent, {
-      data: {
-        title,
-        template,
-        showClose,
-        showCloseIcon,
-        img,
-        plu,
-        price,
-        showProduct,
-        showPlu,
-        showshowTitle,
-        buttonClose,
-        id,
-        discount,
-        business,
-        home,
-        exito,
-      },
-    });
+      const dialogref = this.dialog.open(DialogComponent, {
+        data: {
+          title,
+          template,
+          showClose,
+          showCloseIcon,
+          img,
+          plu,
+          price,
+          showProduct,
+          showPlu,
+          showshowTitle,
+          buttonClose,
+          id,
+          discount,
+          business,
+          home,
+          exito,
+        },
+      });
 
-    dialogref.afterDismissed().subscribe(() => {
-      this.enableCopy = true;
-    });
+      dialogref.afterDismissed().subscribe(() => {
+        this.enableCopy = true;
+      });
+    }
   }
 
-  verMasProductos() {
-    this.mostrarProductos += 3;
+  showMoreSearchProducts() {
+    this.showSearchProducts += 4;
+  }
+
+  showMoreCategories() {
+    this.showCategoriesProducts += 8;
   }
 
   public searchBiggyExito(
@@ -517,74 +564,80 @@ export class BussinessComponent implements OnInit, OnDestroy {
     page = 1,
     count = 100 // Cantidad máxima que permite el servicio
   ) {
-    this.productsListExito = [];
-    if (term !== this.paginate) {
-      this.paginate = term;
-      this.pageIndex = 0;
-      this.mostrarProductos = 3;
-    }
-    if (isPlatformBrowser(this.platformId)) {
-      dataLayer.push({
-        event: 'pushEventGA',
-        categoria: 'NegocioExito',
-        accion: 'ClicBuscar',
-        etiqueta: term,
-      });
-    }
-    const params = { term, order, page, count };
-    this.subscription = this.sp.biggySearchExito(params).subscribe(
-      (searchExito: any) => {
-        this.productsListBiggy = searchExito.products;
-        this.productsListTransform = [...this.productsListBiggy];
-        this.productsListTransform.forEach((searchExito) => {
-          if (!!searchExito.skus[0] && !!searchExito.skus[0].sellers[0]) {
-            const sellerSkus = searchExito.skus[0].sellers;
-            const filterSkus = sellerSkus.filter(
-              (idSeller) => this.sellersExito.includes(idSeller.id) || this.sellersMarketPlace.includes(idSeller.id)
-            );
-
-            if (!!filterSkus[0]) {
-              this.sellerId = filterSkus[0].id;
-              this.sellerName = filterSkus[0].name;
-            } else {
-              this.sellerId = '';
-              this.sellerName = '';
-            }
-          }
-
-          const object = {
-            title: searchExito.name,
-            plu: searchExito.id,
-            url: searchExito.url,
-            oldprice: searchExito.oldPrice,
-            price: searchExito.price,
-            image: searchExito.images[0],
-            seller: this.sellerId,
-            business: this.sellerName,
-          };
-
-          if ((this.sellersExito.includes(object.seller) || this.sellersMarketPlace.includes(object.seller)) && object.oldprice !== 0) {
-            this.productsListExito.push(object);
-          }
-
-          return object;
+    if (typeof term === 'string') {
+      this.searchingIsLoading = true;
+      this.searchProductList = [];
+      if (term !== this.paginate) {
+        this.paginate = term;
+        this.pageIndex = 0;
+        this.showSearchProducts = 4;
+      }
+      if (isPlatformBrowser(this.platformId)) {
+        dataLayer.push({
+          event: 'pushEventGA',
+          categoria: 'NegocioExito',
+          accion: 'ClicBuscar',
+          etiqueta: term,
         });
+      }
+      const params = { term, order, page, count };
+      this.subscription = this.content.biggySearchExito(params).subscribe({
+        next: (searchExito: any) => {
+          this.productsListBiggy = searchExito.products;
+          this.productsListTransform = [...this.productsListBiggy];
+          this.productsListTransform.forEach((searchExito) => {
+            if (!!searchExito.skus[0] && !!searchExito.skus[0].sellers[0]) {
+              const sellerSkus = searchExito.skus[0].sellers;
+              const filterSkus = sellerSkus.filter(
+                (idSeller) => this.sellersExito.includes(idSeller.id) || this.sellersMarketPlace.includes(idSeller.id)
+              );
 
-        this.totalItems = this.productsListExito.length;
+              if (!!filterSkus[0]) {
+                this.sellerId = filterSkus[0].id;
+                this.sellerName = filterSkus[0].name;
+              } else {
+                this.sellerId = '';
+                this.sellerName = '';
+              }
+            }
 
-        if (this.productsListExito.length > 0) {
-          this.showResults = true;
-          this.showNotFound = false;
-        } else {
+            const object = {
+              title: searchExito.name,
+              plu: searchExito.id,
+              url: searchExito.url,
+              oldprice: searchExito.oldPrice,
+              price: searchExito.price,
+              image: searchExito.images[0],
+              seller: this.sellerId,
+              business: this.sellerName,
+            };
+
+            if ((this.sellersExito.includes(object.seller) || this.sellersMarketPlace.includes(object.seller)) && object.oldprice !== 0) {
+              this.searchProductList.push(object);
+            }
+
+            return object;
+          });
+
+          this.totalItems = this.searchProductList.length;
+
+          if (this.searchProductList.length > 0) {
+            this.showResults = true;
+            this.showNotFound = false;
+          } else {
+            this.showNotFound = true;
+            this.showResults = false;
+          }
+        },
+        error: () => {
           this.showNotFound = true;
           this.showResults = false;
+        },
+        complete: () => {
+          this.searchingIsLoading = false;
         }
-      },
-      (error) => {
-        this.showNotFound = true;
-        this.showResults = false;
-      }
-    );
+      });
+    }
   }
 
   public searchBiggyCarulla(
@@ -593,85 +646,87 @@ export class BussinessComponent implements OnInit, OnDestroy {
     page = 1,
     count = 100 // Cantidad máxima que permite el servicio
   ) {
-    this.productsListExito = [];
-    if (term !== this.paginate) {
-      this.paginate = term;
-      this.pageIndex = 0;
-      this.productsListExito = [];
-      this.mostrarProductos = 3;
-    }
+    if (typeof term === 'string') {
+      this.searchingIsLoading = true;
+      this.searchProductList = [];
+      if (term !== this.paginate) {
+        this.paginate = term;
+        this.pageIndex = 0;
+        this.searchProductList = [];
+        this.showSearchProducts = 4;
+      }
 
-    dataLayer.push({
-      event: 'pushEventGA',
-      categoria: 'NegocioCarulla',
-      accion: 'ClicBuscar',
-      etiqueta: term,
-    });
+      dataLayer.push({
+        event: 'pushEventGA',
+        categoria: 'NegocioCarulla',
+        accion: 'ClicBuscar',
+        etiqueta: term,
+      });
 
-    const params = { term, order, page, count };
-    this.subscription = this.sp.biggySearchCarulla(params).subscribe(
-      (searchCarulla: any) => {
-        this.productsListBiggy = searchCarulla.products;
-        this.productsListTransform = [...this.productsListBiggy];
-        this.productsListTransform.forEach((searchCarulla) => {
-          if (!!searchCarulla.skus[0] && !!searchCarulla.skus[0].sellers[0]) {
-            const sellerSkus = searchCarulla.skus[0].sellers;
-            const filterSkus = sellerSkus.filter((idSeller) => idSeller.id === '1' || idSeller.id === '10078');
-            if (!!filterSkus[0]) {
-              this.sellerId = filterSkus[0].id;
-              this.sellerName = filterSkus[0].name;
-            } else {
-              this.sellerId = '';
-              this.sellerName = '';
+      const params = { term, order, page, count };
+      this.subscription = this.content.biggySearchCarulla(params).subscribe({
+        next: (searchCarulla: any) => {
+          this.productsListBiggy = searchCarulla.products;
+          this.productsListTransform = [...this.productsListBiggy];
+          this.productsListTransform.forEach((searchCarulla) => {
+            if (!!searchCarulla.skus[0] && !!searchCarulla.skus[0].sellers[0]) {
+              const sellerSkus = searchCarulla.skus[0].sellers;
+              const filterSkus = sellerSkus.filter((idSeller) => idSeller.id === '1' || idSeller.id === '10078');
+              if (!!filterSkus[0]) {
+                this.sellerId = filterSkus[0].id;
+                this.sellerName = filterSkus[0].name;
+              } else {
+                this.sellerId = '';
+                this.sellerName = '';
+              }
             }
+
+            const object = {
+              title: searchCarulla.name,
+              plu: searchCarulla.id,
+              url: searchCarulla.url,
+              oldprice: searchCarulla.oldPrice,
+              price: searchCarulla.price,
+              image: searchCarulla.images[0],
+              seller: this.sellerId,
+              business: this.sellerName,
+            };
+
+            if ((object.seller === '1' || object.seller === '10078') && object.oldprice !== 0) {
+              this.searchProductList.push(object);
+            }
+
+            return object;
+          });
+
+          this.totalItems = this.searchProductList.length;
+
+          if (this.searchProductList.length > 0) {
+            this.showResults = true;
+            this.showNotFound = false;
+          } else {
+            this.showNotFound = true;
+            this.showResults = false;
           }
-
-          const object = {
-            title: searchCarulla.name,
-            plu: searchCarulla.id,
-            url: searchCarulla.url,
-            oldprice: searchCarulla.oldPrice,
-            price: searchCarulla.price,
-            image: searchCarulla.images[0],
-            seller: this.sellerId,
-            business: this.sellerName,
-          };
-
-          if ((object.seller === '1' || object.seller === '10078') && object.oldprice !== 0) {
-            this.productsListExito.push(object);
-          }
-
-          return object;
-        });
-
-        this.totalItems = this.productsListExito.length;
-
-        if (this.productsListExito.length > 0) {
-          this.showResults = true;
-          this.showNotFound = false;
-        } else {
+        },
+        error: () => {
           this.showNotFound = true;
           this.showResults = false;
+        },
+        complete: () => {
+          this.searchingIsLoading = false;
         }
-      },
-      (error) => {
-        this.showNotFound = true;
-        this.showResults = false;
-      }
-    );
+      });
+    }
   }
 
   libraryRoute() {
-    this.router.navigate([
-      '/biblioteca',
-      {
-        id: this.id,
-      },
-    ]);
+    this.router.navigate(['/biblioteca', { id: this.id }]);
   }
 
   deleteSearch() {
     this.showResults = false;
+    this.showSearchProducts = 4;
   }
 
   /**
@@ -701,19 +756,9 @@ export class BussinessComponent implements OnInit, OnDestroy {
     });
   }
 
-  searchOtherbusiness(searchText: string) {
-    const data = {
-      id: this.title,
-      text: searchText
-    }
-
-    return data;
-
-  }
-
-  public location(data) {
+  public location() {
     this.dialogModal.open(PhygitalLocationComponent, {
-      data
+      data: this.id
     });
   }
 

@@ -9,8 +9,7 @@ import { ContentService } from 'src/app/services/content.service';
 })
 export class PhygitalLocationComponent implements OnInit {
 
-  business:string;
-  idBusiness: number;
+  idBussiness: number;
   img: string;
   cities = [];
   locations = [];
@@ -18,9 +17,8 @@ export class PhygitalLocationComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<any>, @Inject(MAT_DIALOG_DATA) public data: any, private content:ContentService) { }
 
   ngOnInit(): void {
-    this.business = this.data.description;
-    this.idBusiness = this.data.idbusiness;
-    this.getCities(this.idBusiness);
+    this.idBussiness = this.data;
+    this.getCities(this.idBussiness);
   }
 
   public getCities(id:number) {
@@ -29,7 +27,7 @@ export class PhygitalLocationComponent implements OnInit {
     })
   }
 
-  public getPoints(id = this.idBusiness, city:string) {
+  public getPoints(id = this.idBussiness, city:string) {
     this.content.getLocations(id,city).subscribe(location => {
       this.locations = location;
     })

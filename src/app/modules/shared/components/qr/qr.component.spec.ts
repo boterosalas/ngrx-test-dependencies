@@ -40,12 +40,6 @@ describe('QrComponent', () => {
     component.detectStore();
     expect(component.isQrOpen).toBeTrue();
   });
-  it('Call open store method', () => {
-    spyOn(component, 'detectStore');
-    const downloadAppTitle = fixture.debugElement.query(By.css('span.download-app__title'));
-    downloadAppTitle.nativeElement.click();
-    expect(component.detectStore).toHaveBeenCalled();
-  });
 
   it('Test redirect', () => {
     component.detectStore();

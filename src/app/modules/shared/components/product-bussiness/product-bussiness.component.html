@@ -1,8 +1,8 @@
-<mat-card class="mat-elevation-z0 card-product card-other fade-in p-1 cursor-pointer" *ngIf="exito" (click)="product()">
+<!-- <mat-card class="mat-elevation-z0 card-product card-other fade-in p-1 cursor-pointer" *ngIf="exito" (click)="product()">
   <mat-card-content fxLayout="row" fxLayout.gt-xs="row" fxLayoutGap="10px" fxLayoutAlign.xs="space-around">
     <span fxLayout="column" fxFlex="20" fxFlex.xs="40" fxFLex.gt-xs="100" fxLayoutAlign="center">
       <div class="{{ container }}">
-        <img loading="lazy"class="img-responsive ch-100 heigth-automatic" mat-card-image src="{{ imagen }}" alt="{{ altimagen }}" />
+        <img loading="lazy" class="img-responsive ch-100 heigth-automatic" mat-card-image src="{{ imagen }}" alt="{{ altimagen }}" />
       </div>
     </span>
     <span
@@ -135,4 +135,24 @@
       <img loading="lazy" (click)="product()" [src]="foto" class="img-responsive mb-3 cursor-pointer {{ Class }}{{ nombreProducto }}" />
     </span>
   </mat-card-content>
-</mat-card>
+</mat-card> -->
+
+<article class="product-container" (click)="product('container')">
+  <div class="image-container">
+    <img class="image-item" [src]="imagen" alt="" />
+  </div>
+
+  <div class="description-container">
+    <div class="text-container">
+      <div class="product-name-and-gain">
+        <h3 class="product-name product-text-base">{{ nombreProducto | truncate: '50' }}</h3>
+      </div>
+      <div class="product-info">
+        <p class="product-text-base" *ngIf="porcentaje">{{ porcentaje }}</p>
+        <p class="product-text-base" *ngIf="precio">{{ precio | currency: '':'symbol':'1.0-0' }}</p>
+        <p class="product-plu" *ngIf="pluexito">PLU: {{ pluexito }}</p>
+      </div>
+    </div>
+    <button class="btn-clickam" (click)="product('button')">Referir o comprar</button>
+  </div>
+</article>

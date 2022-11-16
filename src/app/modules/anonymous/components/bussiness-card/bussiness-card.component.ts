@@ -1,9 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { FiendlyUrl } from 'src/app/helpers/friendly-url';
 
 @Component({
   selector: 'app-bussiness-card',
   templateUrl: './bussiness-card.component.html',
   styleUrls: ['./bussiness-card.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class BussinessCardComponent implements OnInit {
   @Input() img: string;
@@ -19,7 +21,7 @@ export class BussinessCardComponent implements OnInit {
   constructor() {}
 
   navigateBussiness() {
-    this.bussiness.emit(event);
+    this.bussiness.emit();
   }
 
   ngOnInit() {}

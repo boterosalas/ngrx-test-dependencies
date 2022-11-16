@@ -28,7 +28,12 @@
 
   <div class="max-1600-container">
     <div fxFlex="100" fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
-      <mat-card fxFlex.gt-xs="33" class="card mat-card-box-shadow cursor-pointer" [routerLink]="['/reportes']" fxLayoutAlign="space-between center">
+      <mat-card
+        fxFlex.gt-xs="33"
+        class="card mat-card-box-shadow cursor-pointer"
+        [routerLink]="['/reportes']"
+        fxLayoutAlign="space-between center"
+      >
         <app-sales-info class="w-100"></app-sales-info>
       </mat-card>
 
@@ -76,7 +81,15 @@
               </span>
             </div>
             <div fxLayout="column" class="mb-10 copy-link">
-              <app-button title="Copiar enlace" width="100%" [align]="'center center'" color="orange" (click)="copyLink(linkInput)" haveIcon=false gtm="gtmPanelInvitaYGanaCopiarLink"></app-button>
+              <app-button
+                title="Copiar enlace"
+                width="100%"
+                [align]="'center center'"
+                color="orange"
+                (click)="copyLink(linkInput)"
+                haveIcon="false"
+                gtm="gtmPanelInvitaYGanaCopiarLink"
+              ></app-button>
             </div>
           </div>
 
@@ -91,10 +104,21 @@
         </span>
       </mat-card>
 
-      <mat-card fxFlex.gt-xs="33" class="card mat-card-box-shadow" fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="center space-around"> 
-        <div fxLayout="row" fxLayoutAlign.xs="space-between center" fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="space-between center">
+      <mat-card fxFlex.gt-xs="33" class="card mat-card-box-shadow" fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="center space-around">
+        <div
+          fxLayout="row"
+          fxLayoutAlign.xs="space-between center"
+          fxLayoutAlign.sm="start center"
+          fxLayoutAlign.gt-sm="space-between center"
+        >
           <app-title showTitleh3="true" text="PASO A PASO"></app-title>
-          <a class="text-secondary underline cursor-pointer gtmPanelPasoPasoVerMas" fxHide.xs="false" fxHide.sm="true" [routerLink]="['/negocios']">Ver más</a>
+          <a
+            class="text-secondary underline cursor-pointer gtmPanelPasoPasoVerMas"
+            fxHide.xs="false"
+            fxHide.sm="true"
+            [routerLink]="['/negocios']"
+            >Ver más</a
+          >
         </div>
         <div class="connected-steps px-3" *ngIf="missions.length">
           <div class="step-active">1</div>
@@ -137,7 +161,7 @@
       </mat-card>
     </div>
   </section>
-  
+
   <section fxLayout="row" fxLayout.xs="column" class="max-1600-container mt-4 mb-4" fxLayoutGap="20px">
     <div fxLayout="column" fxFlex="100" fxFlex.xs="100" fxLayoutGap="20px">
       <mat-card class="card mat-card-box-shadow">
@@ -164,13 +188,14 @@
   <section fxLayout="row" fxLayout.xs="column" class="max-1600-container mt-4 mb-4" fxLayoutGap="20px">
     <div fxLayout="column" fxFlex="100" fxFlex.xs="100" fxLayoutGap="20px">
       <mat-card class="card mat-card-box-shadow">
-          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayout.xs="column">
-            <app-title showTitleh3="true" text="NEGOCIOS ALIADOS"></app-title>
-            <span fxLayout="row" fxLayoutGap="5px" class="locations" ngClass.xs="mb-3"> <i class="tio-poi mr-2 f-14"></i> Aprovecha el descuento en los puntos físicos de los negocios con este sello</span>
-          </div>
-
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayout.xs="column">
+          <app-title showTitleh3="true" text="NEGOCIOS ALIADOS"></app-title>
+          <span fxLayout="row" fxLayoutGap="5px" class="locations" ngClass.xs="mb-3">
+            <i class="tio-poi mr-2 f-14"></i> 
+            Aprovecha el descuento en los puntos físicos de los negocios con este sello
+          </span>
+        </div>
         <app-business-list></app-business-list>
-
       </mat-card>
     </div>
   </section>
@@ -198,7 +223,7 @@
   </div>
 
   <!-- image -->
-  <div class="max-1600-container py-3 gtmHomeBannerGanaMas"  *ngIf="firstBuy === 'true'">
+  <div class="max-1600-container py-3 gtmHomeBannerGanaMas" *ngIf="firstBuy === 'true'">
     <app-image
       fxHide.xs="true"
       imageClass="cursor-pointer w-100 gtmHomeBannerGanaMas"

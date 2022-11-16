@@ -28,13 +28,31 @@ beforeEach(waitForAsync(() => {
     expect(component).toBeTruthy();
   });
 
-  it('search product', () => {
-    spyOn(component.search, 'emit');
-    const nativeElement = fixture.nativeElement;
-    const button = nativeElement.querySelector('button');
-    button.dispatchEvent(new Event('click'));
-    fixture.detectChanges();
-    component.searchProduct();
-    expect(component.search.emit).toHaveBeenCalled();
+  it('Should call cleanSearch when call handleSearch', () => {
+    component.isSearching = true;
+    const cleanSearchSpy = spyOn(component,'cleanSearch').and.callFake(()=>true);
+    component.handleSearch();
+    expect(cleanSearchSpy).toHaveBeenCalled();
   });
+
+  it('Should call searchProduct when call handleSearch', () => {
+    component.isSearching = false;
+    const searchProductSpy = spyOn(component,'searchProduct').and.callFake(()=>true);
+    component.handleSearch();
+    expect(searchProductSpy).toHaveBeenCalled();
+  });
+
+  it('Should emit search', () => {
+    component.searchForm.controls.search.setValue('leche');
+    const searchSpy = spyOn(component.search,'emit').and.callFake(()=>true);
+    component.searchProduct();
+    expect(searchSpy).toHaveBeenCalled();
+    expect(component.isSearching).toBe(true);
+  });
+  
+  it('Should clean Search', () => {
+    component.cleanSearch();
+    expect(component.searchForm.controls.search.value).toBe('');
+    expect(component.isSearching).toBe(false);
+  })
 });

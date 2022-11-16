@@ -19,13 +19,13 @@
 
   <app-title
     showTitleh3="true"
-    text="TIENDAS FÍSICAS DISPONIBLES - {{ business }}"
+    text="TIENDAS FÍSICAS DISPONIBLES"
     commonClass="purple2-text text-center uppercase"
   ></app-title>
 
   <mat-form-field class="w-100">
     <mat-select placeholder="CIUDAD" id="city">
-      <mat-option *ngFor="let item of cities | keyvalue" value="{{ item.key }}" (click)="getPoints(idBusiness, item.key)">{{
+      <mat-option *ngFor="let item of cities | keyvalue" value="{{ item.key }}" (click)="getPoints(idBussiness, item.key)">{{
         item.key
       }}</mat-option>
     </mat-select>

@@ -1,1 +1,22 @@
 @import 'variables';
+
+.back-button{
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    color: $color-p;
+    display: flex;
+    align-items: center;
+    .back-button-icon{
+        padding: 0px;
+        border-radius: 50%;
+        box-shadow: 0px 0px 9px #9aaacf4d;
+        margin-right: 12px;
+        .mat-icon{
+            width: 32px;
+            height: 32px;
+            vertical-align: sub;
+            font-size: 32px;
+        }
+    }
+}

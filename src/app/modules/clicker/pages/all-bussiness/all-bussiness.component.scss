@@ -57,3 +57,23 @@
 .mr-24{
   margin-right: 24px;
 }
+.bussiness-cards-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  .bussiness-card {
+    width: 50%;
+    padding: 12px;
+    @media screen and (min-width: 800px) {
+      width: 33.3%;
+    }
+    @media screen and (min-width: 1100px) {
+      width: 25%;
+    }
+    @media screen and (min-width: 1300px) {
+      width: 20%;
+    }
+  }
+}

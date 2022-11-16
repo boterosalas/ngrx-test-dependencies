@@ -1,220 +1,184 @@
-<!-- <app-banner
-  color="purple"
-  title="{{ 'HOME.BUSSINESS' | translate }}"
-  img="/assets/img/banners/banner-negocios-pc.jpg"
-  imgMobile="/assets/img/banners/banner-negocios-mobile.jpg"
-></app-banner> -->
 <section class="bussines-section max-1600-container">
-  <div fxLayout="row" fxLayoutAlign="start start" ngClass.xs="mb-3">
-    <span>
-      <app-back-button (click)="goback()"></app-back-button>
-    </span>
+  <div class="go-back-container">
+    <app-back-button></app-back-button>
   </div>
-  <mat-card class="info-about">
-    <div fxLayout="column" fxLayout.sm="row" fxLayout.gt-sm="row" fxFlex fxLayoutAlign="center" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center">
-      <div class="img-container" fxFlex fxFlex.sm="20" fxFlex.gt-sm="20" fxLayout="row" fxLayoutAlign="center">
-        <img loading="lazy" [src]="image" [alt]="description" />
-      </div>
-      <div class="text-info-container" fxFlex fxFlex.gt-xs="55" fxFlex.gt-sm="60">
+
+  <mat-card class="info-about" *ngIf="!isLoading">
+    <div class="img-container">
+      <img *ngIf="image" loading="lazy" [src]="image" [alt]="description" />
+    </div>
+    <div class="bussiness-info-container">
+      <div class="text-info-container">
         <h2 class="bussiness-name">{{ description }}</h2>
         <p class="discount-percent">{{ percent }}</p>
         <p class="bussiness-description">{{ nonEditedContent }}</p>
       </div>
-      <div class="commission-container" fxFlex fxFlex.gt-xs="25" fxFlex.gt-sm="20" fxLayout="column" fxLayoutAlign="start center">
-        <p class="payment-date">+{{ commision }} M</p>
-        <p class="commision-payment">Recompensas pagadas</p>
+      <div class="commission-location-container">
+        <div class="commission-container">
+          <ng-container *ngIf="commision">
+            <p class="payment-date">+{{ commision }} M</p>
+            <p class="commision-payment">Recompensas pagadas</p>
+          </ng-container>
+        </div>
+        <button class="button-base location-button" (click)="location()" *ngIf="phygital">
+        <!-- <button class="button-base location-button" (click)="location()"> -->
+          <img src="assets/img/location.svg" alt="" />
+          Verifica puntos de venta
+        </button>
       </div>
     </div>
   </mat-card>
-  <div>
-    <div>
-      
+  <div class="info-about-skeleton loading" *ngIf="isLoading"></div>
 
-      <div fxHide.xs="true">
-        <mat-card class="mt-3 comisions">
-          <div class="about-bussiness">
-            <h3 class="subtitle-tips-other border-inferior">Recompensas</h3>
-            <p>En {{ description }} nuestros clickers han recibido a la fecha:</p>
-            <span>
-              <p class="payment-date">+{{ commision }} M</p>
-            </span>
-            <span>
-              <p class="commision-payment">RECOMPENSAS PAGADAS A LA FECHA</p>
-            </span>
-          </div>
-        </mat-card>
+  <mat-card class="search-card" *ngIf="hasproduct && !isLoading">
+    <p class="search-card__text">
+      ¿Cuál producto deseas comprar o
+      <span class="no-break">
+        referir?
+        <img
+          class="search-about-icon"
+          src="assets/img/icon-info-white.svg"
+          alt="alert"
+          matTooltip="Puedes buscar con el nombre del producto o con su código PLU"
+          (click)="tooltip.toggle()"
+          #tooltip="matTooltip"
+          matTooltipClass="purple-tip"
+        />
+      </span>
+    </p>
+    <app-search class="search-input" *ngIf="id === 1" (search)="searchBiggyExito($event)"></app-search>
+    <app-search class="search-input" *ngIf="id === 2" (search)="searchBiggyCarulla($event)"></app-search>
+  </mat-card>
+  <div class="search-card-skeleton loading" *ngIf="isLoading"></div>
+  <app-not-found *ngIf="!searchingIsLoading && showNotFound"></app-not-found>
 
-        <mat-card class="mt-3 tips">
-          <div class="about-bussiness">
-            <h3 class="subtitle-tips-other border-inferior">Tips de venta</h3>
-            <div *ngFor="let item of tips">
-              <h4 class="subtitle-about title-tip">{{ item.title }}</h4>
-              <p class="description-tip">{{ item.description }}</p>
-            </div>
-          </div>
-        </mat-card>
+  <div class="search-result-container" *ngIf="showResults">
+    <h3 class="search-result-title">Resultados de búsqueda</h3>
+    <button (click)="deleteSearch()" class="search-result-button button-base">Borrar resultados</button>
+  </div>
+
+  <div class="products-section-container">
+    <div class="products-cards products-cards-skeleton" *ngIf="searchingIsLoading">
+      <div class="product product-skeleton" *ngFor="let item of [].constructor(4)">
+        <div class="product-skeleton-card loading"></div>
       </div>
     </div>
 
-    <div>
-      <div fxLayout="row" class="card-library mt-2 container">
-        <img loading="lazy"class="imagen-absolute-oferts" fxHide.xs="true" src="/assets/img/banners/oferts.png" alt="ofertas" />
-        <img loading="lazy"class="imagen-resposive-mobile" fxHide.gt-xs="true" src="/assets/img/banners/oferts_mobile.png" alt="ofertas" />
-        <div class="position-relative banner-mobile heigth-image">
-          <h3 class="mb-1">Descarga las mejores ofertas para compartir.</h3>
-          <button mat-raised-button class="button-oferts" color="orange" (click)="libraryRoute()" id="download-users">Ver Ofertas</button>
-        </div>
-      </div>
+    <div class="products-cards" *ngIf="showResults">
+      <app-product-bussiness
+        *ngFor="let product of searchProductList | slice: 0:showSearchProducts; let i = index"
+        class="product"
+        idne="productTitle{{ i }}"
+        butonid="btnLink{{ i }}"
+        [nombreProducto]="product.title"
+        [descuento]="product.oldprice"
+        [precio]="product.price"
+        [imagen]="!!product.image.value ? product.image.value : '/assets/img/Na.svg'"
+        [altimagen]="product.name"
+        [pluexito]="product.plu"
+        [phygital]="phygital"
+        [clickear]="product.buttonclickear"
+        textoboton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+        (infoProduct)="dataProduct($event, product)"
+      ></app-product-bussiness>
+      <span class="show-more">
+        <button class="show-more-button button-base" (click)="showMoreSearchProducts()" [disabled]="showSearchProducts > totalItems">
+          Mostrar más
+        </button>
+      </span>
+    </div>
 
-      <div class="terms">
-        <mat-card>
-          <div class="mb-2">
-            <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.xs="column">
-              <h3 class="text-productos mt-0 mb-0">Términos & Condiciones</h3>
-              <span class="text-terms-conditions cursor-pointer" (click)="vermas()" *ngIf="visibleTerms === false">
-                {{ visibleTerms ? 'Ver menos' : 'Ver más' }}
-                <mat-icon *ngIf="visibleTerms" class="arrow-down">keyboard_arrow_up</mat-icon>
-                <mat-icon *ngIf="!visibleTerms" class="arrow-down">keyboard_arrow_down</mat-icon>
-              </span>
-            </div>
-            <div class="border-up-gray" *ngIf="visibleTerms">
-              <h4 class="subtitle-about mb-0">Excepciones</h4>
-              <p class="break mt-0">{{ generalInfo }}</p>
-              <h4 class="subtitle-about mt-1 mb-0">Casos especiales</h4>
-              <p class="break mt-0">{{ exceptionsInfo }}</p>
-              <h4 class="subtitle-about mb-0">Tiempos de verificación</h4>
-              <p class="break mt-0">{{ caseSpecial }}</p>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="end end">
-              <span class="text-terms-conditions cursor-pointer" (click)="vermas()" *ngIf="visibleTerms === true">
-                {{ visibleTerms ? 'Ver menos' : 'Ver más' }}
-                <mat-icon *ngIf="visibleTerms" class="arrow-down">keyboard_arrow_up</mat-icon>
-                <mat-icon *ngIf="!visibleTerms" class="arrow-down">keyboard_arrow_down</mat-icon>
-              </span>
-            </div>
-          </div>
-        </mat-card>
-      </div>
-
-      <app-search class="search" *ngIf="id === '1' && hasproduct" (search)="searchBiggyExito($event)"></app-search>
-      <app-search class="search" *ngIf="id === '2' && hasproduct" (search)="searchBiggyCarulla($event)"></app-search>
-
-      <app-search class="search" *ngIf="id !== '2' && id !== '1' && hasproduct" (search)="searchOtherbusiness($event)"></app-search>
-
-      <div *ngIf="showResults" class="results">
-        <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.xs="column">
-          <h3 class="text-productos border-bottom-orange-init">Resultados de búsqueda</h3>
-          <button mat-raised-button color="orange" (click)="deleteSearch()" class="button-selected mr-4 mb-4">Borrar resultados</button>
-        </div>
-
-        <div fxLayout="column" fxLayoutGap="10px">
-          <ng-container class="mt-4" *ngFor="let product of productsListExito | slice: 0:mostrarProductos; let i = index">
-            <app-product-bussiness
-              class="product-exito"
-              fxLayout="column"
-              fxFlex="24"
-              fxFlex.xs="100"
-              fxFlex.sm="30"
-              idne="productTitle{{ i }}"
-              butonid="btnLink{{ i }}"
-              [nombreProducto]="product.title"
-              [descuento]="product.oldprice"
-              [precio]="product.price"
-              [imagen]="!!product.image.value ? product.image.value : '/assets/img/Na.svg'"
-              [altimagen]="product.name"
-              [pluexito]="product.plu"
-              [phygital]="phygital"
-              [clickear]="product.buttonclickear"
-              textoboton="{{ 'PRODUCTS.GET_LINK' | translate }}"
-              exito="true"
-              (infoProduct)="dataProduct(product)"
-            ></app-product-bussiness>
-          </ng-container>
-          <span class="w-100" fxLayout="row" fxLayoutAlign="center center">
-            <button
-              mat-raised-button
-              class="button-height f-18 bw mb-3 blue-ligth"
-              (click)="verMasProductos()"
-              [disabled]="mostrarProductos > totalItems"
-            >
-              Mostrar más
-            </button>
-          </span>
-        </div>
-      </div>
-
-      <div class="not-found" *ngIf="showNotFound">
-        <app-not-found></app-not-found>
-      </div>
-
-      <div class="products" *ngIf="bussiness.length !== 0">
-        <h3 class="text-productos border-bottom-orange-init">Categorías</h3>
-
-        <div fxLayout="column" fxLayoutGap="10px" fxLayoutGap.xs="0px">
-          <div
-            fxLayout="column"
-            fxFlex="100"
-            fxFlex.sm="30"
-            fxFlex.gt-sm="24"
-            class="mb-3"
-            *ngFor="let bussiness of bussiness; let i = index"
+    <h3 class="categories-title">Categorías</h3>
+    <p class="categories-description" *ngIf="!isLoading">Encuentra las mejores promociones y campañas que {{ description }} te brinda.</p>
+    <div class="categories-description-skeleton loading" *ngIf="isLoading"></div>
+    <ng-container *ngIf="!bussinessIsLoading; else bussinessIsLoadingTemplate">
+      <div class="products-cards">
+        <app-product-bussiness
+          *ngFor="let bussiness of bussiness | slice: 0:showCategoriesProducts; let i = index"
+          class="product"
+          id="bussiness{{ i }}"
+          butonid="gtmNegocio{{ title }}{{ bussiness.description | trim }}"
+          [nombreProducto]="bussiness.description"
+          [porcentaje]="bussiness.infoaditional"
+          [imagen]="bussiness.imageurl"
+          [phygital]="phygital"
+          [clickear]="clickear"
+          Class="button-20 gtmNegocio{{ title }}{{ bussiness.description | trim }}"
+          textoboton="{{ 'PRODUCTS.GET_LINK' | translate }}"
+          (infoProduct)="dataSliderCategory($event, bussiness)"
+        ></app-product-bussiness>
+        <div class="show-more">
+          <button
+            class="show-more-button button-base"
+            (click)="showMoreCategories()"
+            [disabled]="showCategoriesProducts > bussiness.length"
           >
-            <app-product-bussiness
-              id="bussiness{{ i }}"
-              butonid="gtmNegocio{{ title }}{{ bussiness.description | trim }}"
-              [nombreProducto]="bussiness.description"
-              [precio]="bussiness.commission"
-              [porcentaje]="bussiness.infoaditional"
-              [imagen]="bussiness.imageurl"
-              [altimagen]="bussiness.description"
-              [phygital]="phygital"
-              [clickear]="clickear"
-              otro="true"
-              Class="mb-1 button-20 gtmNegocio{{ title }}{{ bussiness.description | trim }}"
-              container="img-container-viajes"
-              textoboton="{{ 'PRODUCTS.GET_LINK' | translate }}"
-              (infoProduct)="dataSliderCategory(bussiness)"
-              (infoPhygital)="location(bussiness)"
-            ></app-product-bussiness>
-          </div>
+            Mostrar más
+          </button>
         </div>
       </div>
-
-      <div *ngIf="bussiness.length === 0" fxLayout="column" fxLayoutAlign="center center">
-        <mat-icon class="nothing-icon">push_pin</mat-icon>
-        <p class="nothing-text">Aún no tenemos categorías para este negocio</p>
+    </ng-container>
+    <ng-template #bussinessIsLoadingTemplate>
+      <div class="products-cards products-cards-skeleton">
+        <div class="product product-skeleton" *ngFor="let item of [].constructor(4)">
+          <div class="product-skeleton-card loading"></div>
+        </div>
       </div>
+    </ng-template>
 
-      <div fxHide.gt-xs="true">
-        <mat-card class="mt-3 comisions">
-          <div class="about-bussiness">
-            <h3 class="subtitle-tips-other border-inferior">Recompensas</h3>
-            <p>En {{ description }} nuestros clickers han recibido a la fecha:</p>
-            <span>
-              <p class="payment-date">+{{ commision }} M</p>
-            </span>
-            <span>
-              <p class="commision-payment">RECOMPENSAS PAGADAS A LA FECHA</p>
-            </span>
-          </div>
-        </mat-card>
-
-        <mat-card class="mt-3 tips">
-          <div class="about-bussiness">
-            <h3 class="subtitle-tips-other border-inferior">Tips de venta</h3>
-            <div *ngFor="let item of tips">
-              <h4 class="subtitle-about title-tip">{{ item.title }}</h4>
-              <p class="description-tip">{{ item.description }}</p>
-            </div>
-          </div>
-        </mat-card>
-      </div>
+    <div class="no-categories-container" *ngIf="!bussinessIsLoading && bussiness.length === 0">
+      <mat-icon class="no-categories-icon">push_pin</mat-icon>
+      <p class="no-categories-text">Aún no tenemos categorías para este negocio</p>
     </div>
   </div>
+
+  <div class="see-offers-container" *ngIf="!isLoading" [ngStyle]="{ 'background-image': 'url(' + seeOffersImage + ')' }">
+    <h3 class="see-offers-text">Descarga las mejores ofertas para compartir.</h3>
+    <button class="see-offers-button button-base" (click)="libraryRoute()">Ver Ofertas</button>
+  </div>
+  <div class="see-offers-container-skeleton loading" *ngIf="isLoading"></div>
+
+  <div class="sale-tips-container" *ngIf="!isLoading && saleTips.length > 0">
+    <h3 class="bussiness-list-main-title">Tips de venta</h3>
+    <ul class="bussiness-list-style">
+      <li *ngFor="let item of saleTips" class="bussiness-list-item">
+        <h4 class="bussiness-list-title">{{ item.title }}</h4>
+        <p class="bussiness-list-description">{{ item.description }}</p>
+      </li>
+    </ul>
+  </div>
+  <div class="sale-tips-skeleton loading" *ngIf="isLoading"></div>
+
+  <ng-container *ngIf="(generalInfo || exceptionsInfo || caseSpecial) && !isLoading">
+    <div class="terms-and-conditions" [ngClass]="{ open: visibleTerms }">
+      <h3 class="bussiness-list-main-title">Términos y condiciones</h3>
+      <span class="terms-and-conditions-see-more cursor-pointer" (click)="vermas()">
+        {{ visibleTerms ? 'Ver menos' : 'Ver más' }}
+        <mat-icon *ngIf="!visibleTerms; else arrowUp">keyboard_arrow_down</mat-icon>
+        <ng-template #arrowUp>
+          <mat-icon>keyboard_arrow_up</mat-icon>
+        </ng-template>
+      </span>
+      <ul class="bussiness-list-style" *ngIf="visibleTerms">
+        <li class="bussiness-list-item" *ngIf="generalInfo">
+          <h4 class="bussiness-list-title">Excepciones</h4>
+          <p class="bussiness-list-description">{{ generalInfo }}</p>
+        </li>
+        <li class="bussiness-list-item" *ngIf="exceptionsInfo">
+          <h4 class="bussiness-list-title">Casos especiales</h4>
+          <p class="bussiness-list-description">{{ exceptionsInfo }}</p>
+        </li>
+        <li class="bussiness-list-item" *ngIf="caseSpecial">
+          <h4 class="bussiness-list-title">Tiempos de verificación</h4>
+          <p class="bussiness-list-description">{{ caseSpecial }}</p>
+        </li>
+      </ul>
+    </div>
+  </ng-container>
+  <div class="terms-and-conditions-skeleton loading" *ngIf="isLoading"></div>
 </section>
 
 <!-- template share -->
-
 <ng-template #templateCategories>
   <div *ngIf="!reference">
     <form [formGroup]="formLink">
@@ -290,7 +254,7 @@
         fxLayoutAlign="start start"
       >
         <span ngClass="gtmrs f-15 {{ classButtonShare }}" fxLayout="row" fxLayoutAlign="center center">
-          <img loading="lazy"ngClass="icon-compartir pr-2 {{ classButtonShare }}" src="/assets/img/Compartir.svg" alt="user" />
+          <img loading="lazy" ngClass="icon-compartir pr-2 {{ classButtonShare }}" src="/assets/img/Compartir.svg" alt="user" />
           Referir</span
         >
       </button>
@@ -304,7 +268,7 @@
         fxLayoutAlign="start start"
       >
         <span ngClass="gtmrs f-15 {{ classButtonBuy }}" fxLayout="row" fxLayoutAlign="center center">
-          <img loading="lazy"ngClass="icon-compartir pr-2 {{ classButtonBuy }}" src="/assets/img/Comprar.svg" alt="user" />
+          <img loading="lazy" ngClass="icon-compartir pr-2 {{ classButtonBuy }}" src="/assets/img/Comprar.svg" alt="user" />
           Comprar
         </span>
       </button>
@@ -360,7 +324,6 @@
 </ng-template>
 
 <!-- template exito, carulla -->
-
 <ng-template #templateEC>
   <div *ngIf="!reference">
     <form [formGroup]="formLink">
@@ -437,7 +400,7 @@
         fxLayoutAlign="start start"
       >
         <span ngClass="gtmrs f-15 {{ classButtonShare }}" fxLayout="row" fxLayoutAlign="center center">
-          <img loading="lazy"ngClass="icon-compartir pr-2 {{ classButtonShare }}" src="/assets/img/Compartir.svg" alt="user" />
+          <img loading="lazy" ngClass="icon-compartir pr-2 {{ classButtonShare }}" src="/assets/img/Compartir.svg" alt="user" />
           Referir</span
         >
       </button>
@@ -451,7 +414,7 @@
         fxLayoutAlign="start start"
       >
         <span ngClass="gtmrs f-15 {{ classButtonBuy }}" fxLayout="row" fxLayoutAlign="center center">
-          <img loading="lazy"ngClass="icon-compartir pr-2 {{ classButtonBuy }}" src="/assets/img/Comprar.svg" alt="user" />
+          <img loading="lazy" ngClass="icon-compartir pr-2 {{ classButtonBuy }}" src="/assets/img/Comprar.svg" alt="user" />
           Comprar
         </span>
       </button>

@@ -21,6 +21,7 @@ import { MasterDataService } from './services/master-data.service';
 import { UpdateService } from './services/update.service';
 import { ReviewClickamComponent } from './modules/shared/components/review-clickam/review-clickam.component';
 import Swal from 'sweetalert2';
+import { PreviousRouteService } from './services/previous-route.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -98,7 +99,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     location: Location,
     private personalInfo: MasterDataService,
-    @Inject(PLATFORM_ID) private platformId: object
+    @Inject(PLATFORM_ID) private platformId: object,
+    private previousRouteService: PreviousRouteService
   ) {
     this.sw.checkForUpdates();
 

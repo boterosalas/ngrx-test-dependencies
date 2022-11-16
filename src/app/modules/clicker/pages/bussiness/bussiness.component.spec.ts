@@ -25,6 +25,7 @@ import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { BreakpointService } from 'src/app/services/breakpoint.service';
 
 describe('BussinessComponent', () => {
   let component: BussinessComponent;
@@ -36,16 +37,16 @@ describe('BussinessComponent', () => {
     'biggySearchCarulla',
     'getCommissionsByBussiness',
     'getBusinessById',
-  ]);
+    'getBusinessByCategory'
+  ],{
+    bussinessList: []
+  });
 
+  const mockBreakPointService = jasmine.createSpyObj('BreakpointService', ['isWidthLessThanBreakpoint']);
   const mockLinksService = jasmine.createSpyObj('LinksService', ['saveLink', 'getSellers']);
-
   const mockUserService = jasmine.createSpyObj('UserService', ['getShortUrl', 'getuserdata', 'registeruserterms']);
-
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open']);
-
   const mockDialogRef = jasmine.createSpyObj('MatDialogRef', ['close', 'afterClosed', 'componentInstance']);
-
   let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   const dataUserC = {
@@ -266,6 +267,7 @@ describe('BussinessComponent', () => {
       providers: [
         { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: ContentService, useValue: mockContentService },
+        { provide: BreakpointService, useValue: mockBreakPointService },
         { provide: UserService, useValue: mockUserService },
         { provide: MatDialogRef, useValue: mockDialogRef },
         { provide: MAT_BOTTOM_SHEET_DATA, useValue: mockDialog },
@@ -278,7 +280,9 @@ describe('BussinessComponent', () => {
         },
       })
       .compileComponents();
+    mockBreakPointService.isWidthLessThanBreakpoint.and.returnValue(of(false));
     mockContentService.getBusinessContent.and.returnValue(of(bussiness));
+    mockContentService.getBusinessByCategory.and.returnValue(of([]));
     mockUserService.getuserdata.and.returnValue(of(dataUserC));
     mockContentService.getCommissionsByBussiness.and.returnValue(of(comison));
     mockContentService.getBusinessById.and.returnValue(of(info));
@@ -298,20 +302,13 @@ describe('BussinessComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-    expect(mockContentService.getBusinessContent).toHaveBeenCalled();
   });
-
-  it('go back', inject([Router], (router: Router) => {
-    spyOn(router, 'navigate').and.stub();
-    component.goback();
-    expect(router.navigate).toHaveBeenCalledWith(['./']);
-  }));
 
   it('save link', () => {
     component.urlshorten = 'https://tyny.url/xaxa';
     component.identification = '123456789';
     component.plu = '123456';
-    component.business = 'exito';
+    component.business = 1;
     component.date = '2019/09/09';
     component.saveLink();
     expect(mockLinksService.saveLink).toHaveBeenCalled();
@@ -321,7 +318,7 @@ describe('BussinessComponent', () => {
     component.urlshorten = 'https://tyny.url/xaxa';
     component.identification = '123456789';
     component.plu = '123456';
-    component.business = 'exito';
+    component.business = 1;
     component.date = '2019/09/09';
     component.saveLinkReference();
     expect(mockLinksService.saveLink).toHaveBeenCalled();
@@ -335,7 +332,7 @@ describe('BussinessComponent', () => {
 
   it('data category', () => {
     component.urlshorten = 'http://tynyurl.com/xsxsx';
-    component.dataSliderCategory(categorys);
+    component.dataSliderCategory('container',categorys);
     expect(mockDialog.open).toBeTruthy();
   });
 
@@ -396,8 +393,8 @@ describe('BussinessComponent', () => {
       url: '/agua-600ml-pague-5-lleve-6-131805/p',
     };
 
-    component.id = '2';
-    component.dataProduct(product);
+    component.id = 2;
+    component.dataProduct('container',product);
     expect(product).toBeDefined();
   });
 

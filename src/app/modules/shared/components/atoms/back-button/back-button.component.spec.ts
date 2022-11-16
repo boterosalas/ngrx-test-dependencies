@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
+import { PreviousRouteService } from 'src/app/services/previous-route.service';
 
 import { BackButtonComponent } from './back-button.component';
 
@@ -11,7 +13,11 @@ describe('BackButtonComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ BackButtonComponent ],
       imports:[
-        TranslateModule.forRoot()
+        TranslateModule.forRoot(),
+        RouterTestingModule
+      ],
+      providers: [
+        PreviousRouteService,
       ]
     })
     .compileComponents();

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: true,
-  // URL_SECURITY: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/BGSCLUZWVD/',
+  URL_SECURITY: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/BGSCLUZWVD/',
   // URL_PROFILE: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/GSUCYURYSK/',
   // URL_VALIDATE_EMPLOYEE: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/GSUCYURYSK/',
   // // URL_VALIDATE_EMPLOYEE: 'https://apitestexito.azure-api.net/Dllo-clickam-md-apiprofile/',
@@ -18,7 +18,7 @@ export const environment = {
   // SUBSCRIPTION: 'f5edbcd2315e479aad33d80c58052fcc',
   QA_CONTENT: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/JQFZDWVVLN/',
   DEV_CONTENT: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/JRSYVXFRAL/',
-  URL_SECURITY: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/UVCGDWUHSS/',
+  // URL_SECURITY: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/UVCGDWUHSS/',
   URL_PROFILE: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/HAKUBMQPYR/',
   URL_VALIDATE_EMPLOYEE: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/HAKUBMQPYR/',
   URL_CONTENT: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/JQFZDWVVLN/',
@@ -27,8 +27,8 @@ export const environment = {
   URL_REPORTS: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/FTJFPESUDT/',
   URL_MASTER: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/LYWCBAXGTW/',
   URL_EXTERNAL: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/JRDGSLTQHN/',
-  URL_BLOB: 'https://webclickamdev.blob.core.windows.net/',
   PDF: 'https://webclickamqa.blob.core.windows.net/clickacademy/pdf/',
+  URL_BLOB: 'https://webclickamdev.blob.core.windows.net/',
   firebaseConfig: {
     apiKey: 'AIzaSyDi89VEe3hUKkOxIoGyd4RUz_lv_9oazrc',
     authDomain: 'app-clickam-dev-278016.firebaseapp.com',

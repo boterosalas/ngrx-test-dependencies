@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 
-describe('ProductComponent', () => {
+describe('ProductBussinessComponent', () => {
   let component: ProductBussinessComponent;
   let fixture: ComponentFixture<ProductBussinessComponent>;
 
@@ -28,7 +28,7 @@ beforeEach(waitForAsync(() => {
   it('should create', () => {
     expect(component).toBeTruthy();
     spyOn(component.infoProduct, 'emit');
-    component.product();
+    component.product('container');
     expect(component.infoProduct.emit).toHaveBeenCalled();
   });
 });

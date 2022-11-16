@@ -28,12 +28,12 @@ export class ProductBussinessComponent implements OnInit {
   @Input() pluexito: string;
   @Output() infoProduct = new EventEmitter();
   @Output() infoPhygital = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  public product() {
-    this.infoProduct.emit();
+  public product(clickFrom: string) {
+    this.infoProduct.emit(clickFrom);
   }
 
   public phygitalModal() {

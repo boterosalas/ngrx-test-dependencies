@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { distinctUntilChanged, Subscription } from 'rxjs';
+import { FiendlyUrl } from 'src/app/helpers/friendly-url';
 import { AuthService } from 'src/app/services/auth.service';
 import { ContentService } from 'src/app/services/content.service';
 
@@ -59,17 +60,19 @@ export class BusinessListComponent implements OnInit {
       imageurl: bussiness.imageurl,
       description: bussiness.description,
     };
-    this.router.navigate([
-      '/bussiness',
-      {
-        id: params.id,
-        code: params.code,
-        infoAditional: params.infoAditional,
-        imageurl: params.imageurl,
-        allBussiness: true,
-        description: params.description,
-      },
-    ]);
+    const bussinessNameUrl = FiendlyUrl.removeAccentsAndSpaces(bussiness.description)
+    this.router.navigateByUrl(`/negocios/${bussinessNameUrl}`)
+    // this.router.navigate([
+    //   '/bussiness',
+    //   {
+    //     id: params.id,
+    //     code: params.code,
+    //     infoAditional: params.infoAditional,
+    //     imageurl: params.imageurl,
+    //     allBussiness: true,
+    //     description: params.description,
+    //   },
+    // ]);
   }
 
 }

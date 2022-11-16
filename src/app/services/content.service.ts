@@ -809,7 +809,7 @@ export class ContentService {
     return this.http.post(`${this.url + this.apiRegisterbusiness}`, data, this.httpOptions);
   }
 
-  public getBusinessContent(id: string) {
+  public getBusinessContent(id: number) {
     return this.http.get(`${this.url + this.apiGetBusinessContent}?idBusiness=${id}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
