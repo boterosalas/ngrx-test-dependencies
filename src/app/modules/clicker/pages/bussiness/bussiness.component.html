@@ -14,14 +14,12 @@
         <p class="bussiness-description">{{ nonEditedContent }}</p>
       </div>
       <div class="commission-location-container">
-        <div class="commission-container">
-          <ng-container *ngIf="commision">
-            <p class="payment-date">+{{ commision }} M</p>
-            <p class="commision-payment">Recompensas pagadas</p>
-          </ng-container>
+        <div class="commission-container" *ngIf="commision">
+          <p class="payment-date">+{{ commision }} M</p>
+          <p class="commision-payment">Recompensas pagadas</p>
         </div>
         <button class="button-base location-button" (click)="location()" *ngIf="phygital">
-        <!-- <button class="button-base location-button" (click)="location()"> -->
+          <!-- <button class="button-base location-button" (click)="location()"> -->
           <img src="assets/img/location.svg" alt="" />
           Verifica puntos de venta
         </button>
@@ -68,16 +66,13 @@
       <app-product-bussiness
         *ngFor="let product of searchProductList | slice: 0:showSearchProducts; let i = index"
         class="product"
-        idne="productTitle{{ i }}"
-        butonid="btnLink{{ i }}"
+        [gtm]="getGTMBussiness(title, product.title)"
         [nombreProducto]="product.title"
         [descuento]="product.oldprice"
         [precio]="product.price"
         [imagen]="!!product.image.value ? product.image.value : '/assets/img/Na.svg'"
-        [altimagen]="product.name"
         [pluexito]="product.plu"
-        [phygital]="phygital"
-        [clickear]="product.buttonclickear"
+        [clickear]="clickear"
         textoboton="{{ 'PRODUCTS.GET_LINK' | translate }}"
         (infoProduct)="dataProduct($event, product)"
       ></app-product-bussiness>
@@ -96,14 +91,11 @@
         <app-product-bussiness
           *ngFor="let bussiness of bussiness | slice: 0:showCategoriesProducts; let i = index"
           class="product"
-          id="bussiness{{ i }}"
-          butonid="gtmNegocio{{ title }}{{ bussiness.description | trim }}"
+          [gtm]="getGTMBussiness(title, bussiness.description)"
           [nombreProducto]="bussiness.description"
           [porcentaje]="bussiness.infoaditional"
           [imagen]="bussiness.imageurl"
-          [phygital]="phygital"
           [clickear]="clickear"
-          Class="button-20 gtmNegocio{{ title }}{{ bussiness.description | trim }}"
           textoboton="{{ 'PRODUCTS.GET_LINK' | translate }}"
           (infoProduct)="dataSliderCategory($event, bussiness)"
         ></app-product-bussiness>

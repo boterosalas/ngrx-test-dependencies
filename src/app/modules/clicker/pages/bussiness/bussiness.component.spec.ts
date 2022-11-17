@@ -411,25 +411,11 @@ describe('BussinessComponent', () => {
     expect(component.urlshorten).not.toBeUndefined();
   });
 
-  // it('buy', () => {
-  //   component.buy();
-  // });
-
   it('get date', () => {
     const date = new Date();
     component.getDate();
     expect(date).toBeDefined();
   });
-
-  // it('copyInputMessage', () => {
-  //   const buttonModal = document.querySelector(".gtmInicioClicL");
-  //   buttonModal.dispatchEvent(new Event("click"));
-  //   const button = document.querySelector('#btnCopy');
-  //   button.dispatchEvent(new Event('click'));
-  //   const nativeElementInput = fixture.nativeElement;
-  //   const input = nativeElementInput.querySelector('input');
-  //   expect(input).not.toBeUndefined();
-  // });
 
   it('modal product carulla', () => {
     const product = {
@@ -449,6 +435,18 @@ describe('BussinessComponent', () => {
     component.dataProduct('container', product);
     expect(product).toBeDefined();
   });
+
+  it('Should get bussiness gtm', () => {
+    const text = 'almacenes éxito';
+    const product = 'éxito tienda completa';
+    const gtm = component.getGTMBussiness(text,product);
+    expect(gtm).toBe('gtmNegocioAlmacenesExitoExitoTiendaCompleta');
+  })
+
+  it('Should get bussiness gtm when no params', () => {
+    const gtm = component.getGTMBussiness();
+    expect(gtm).toBe('gtmNegocio');
+  })
 
   describe('search carulla', () => {
     afterAll(() => {
