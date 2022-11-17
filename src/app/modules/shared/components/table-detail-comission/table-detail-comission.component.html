@@ -28,13 +28,13 @@
     <th mat-header-cell *matHeaderCellDef>
       {{ 'DETAILCOMISSION.PRODUCT' | translate }}
     </th>
-    <td mat-cell *matCellDef="let element">{{ element.productName }}</td>
+    <td mat-cell *matCellDef="let element">{{ 'DETAILCOMISSION.ORDER_CANCELED' | translate }}</td>
   </ng-container>
 
   <!-- state Column -->
   <ng-container matColumnDef="state">
     <th mat-header-cell *matHeaderCellDef>
-      {{ 'DETAILCOMISSION.STATE' | translate }}
+      {{ 'DETAILCOMISSION.REASON' | translate }}
     </th>
     <td mat-cell *matCellDef="let element">{{ element.statusCommission }}</td>
   </ng-container>

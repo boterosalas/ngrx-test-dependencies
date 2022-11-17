@@ -389,7 +389,9 @@
     "PRODUCT": "PRODUCTO",
     "STATE": "ESTADO",
     "QUANTITY": "CANTIDAD",
-    "COMMISION": "RECOMPENSA"
+    "COMMISION": "RECOMPENSA",
+    "REASON": "MOTIVO",
+    "ORDER_CANCELED": "Pedido cancelado"
   },
   "REFER": {
     "REFER": "Referir",
