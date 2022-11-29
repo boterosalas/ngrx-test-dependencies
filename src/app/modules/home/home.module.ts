@@ -19,6 +19,7 @@ import { ListBlogsComponent } from '../anonymous/components/list-blogs/list-blog
 import { TopRewardComponent } from '../anonymous/components/top-reward/top-reward.component';
 import { ShareButtonModule } from 'ngx-sharebuttons/button';
 import { TopbarComponent } from '../clicker/components/topbar/topbar.component';
+import { AlertaCargarDocumentosComponent } from '../clicker/components/alerta-cargar-documentos/alerta-cargar-documentos.component';
 
 const routes: Routes = [
   {
@@ -48,7 +49,8 @@ const routes: Routes = [
     RewardCardComponent,
     ListBlogsComponent,
     TopRewardComponent,
-    TopbarComponent
+    TopbarComponent,
+    AlertaCargarDocumentosComponent
   ],
   imports: [
     CommonModule,

@@ -1,8 +1,13 @@
 <!-- logged section -->
 
 <section *ngIf="auth.isLoggedIn()">
-  <!-- stories clickam looged -->
   <app-topbar></app-topbar>
+
+  <section class="max-1600-container cargar-documentos-container">
+    <app-alerta-cargar-documentos></app-alerta-cargar-documentos>
+  </section>
+
+  <!-- stories clickam looged -->
   <div class="max-1600-container my-3">
     <app-slider-stories></app-slider-stories>
   </div>
