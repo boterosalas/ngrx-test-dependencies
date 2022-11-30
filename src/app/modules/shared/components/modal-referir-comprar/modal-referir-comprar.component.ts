@@ -19,7 +19,7 @@ export class ModalReferirComprarComponent implements OnInit, OnDestroy {
   formLink: FormGroup;
   idCustomerForm: FormGroup;
   @Input() banner: any;
-  
+
   private ngNavigatorShareService: NgNavigatorShareService;
   saveMission$: Subscription = new Subscription();
   saveLink$: Subscription = new Subscription();
@@ -40,9 +40,9 @@ export class ModalReferirComprarComponent implements OnInit, OnDestroy {
   classButtonFacebook: string = '';
   classButtonTwitter: string = '';
   classButtonWhatsapp: string = '';
-  
+
   numberPattern = '^(0|[0-9][0-9]*)$';
-  
+
 
   constructor(
     private fb: FormBuilder,
@@ -54,7 +54,7 @@ export class ModalReferirComprarComponent implements OnInit, OnDestroy {
   ) {
     this.ngNavigatorShareService = ngNavigatorShareService;
   }
-  
+
   ngOnInit(): void {
     this.identification = this.token.userInfo().identification;
     this.idCustomerForm = this.fb.group({
@@ -66,7 +66,7 @@ export class ModalReferirComprarComponent implements OnInit, OnDestroy {
     this.banner && this.initGtmClasses(this.banner);
   }
 
-  initGtmClasses(category){
+  initGtmClasses(category) {
     this.classButtonCopy = `gtmClicLightboxCopiarLink${category.business}${category.description}`
       .replace(/\s/g, '')
       .normalize('NFD')
@@ -95,13 +95,13 @@ export class ModalReferirComprarComponent implements OnInit, OnDestroy {
       .replace(/\s/g, '')
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '');
-      this.url = category.link;
-      this.plu = category.description;
-      this.bussiness = category.idbusiness;
-      this.saveLink();
+    this.url = category.link;
+    this.plu = category.description;
+    this.bussiness = category.idbusiness;
+    this.saveLink();
   }
 
-  
+
   public copyInputMessage(inputElement: any) {
     inputElement.select();
     document.execCommand('copy');
@@ -139,26 +139,24 @@ export class ModalReferirComprarComponent implements OnInit, OnDestroy {
       window.open(this.urlshorten, '_blank');
     }
   }
-  
+
   public saveLinkReference() {
     const data = {
       link: this.url,
       identification: this.identification,
       plu: this.plu,
       business: this.bussiness,
-      creationDate: DateFormat.format(new Date(),'YYYY-MM-DD HH:MM'),
+      creationDate: DateFormat.format(new Date(), 'YYYY-MM-DD HH:MM'),
       identificationcustomer: this.idCustomerForm.controls.identification.value,
     };
-    // this.saveLinkReference$ = this.links.saveLink(data).subscribe((resp: ResponseService) => {
-    //   if (resp.state === 'Error') {
-    //     this.openSnackBar(resp.userMessage, 'cerrar');
-    //   } else {
-    //     this.openSnackBar(resp.userMessage, 'cerrar');
-    //     // this.idCustomerForm.controls.identificacion.setValue('');
-    //     this.dialog.dismiss();
-    //   }
-    // });
-    console.log('DATA',data);
+    this.saveLinkReference$ = this.links.saveLink(data).subscribe((resp: ResponseService) => {
+      if (resp.state === 'Error') {
+        this.openSnackBar(resp.userMessage, 'cerrar');
+      } else {
+        this.openSnackBar(resp.userMessage, 'cerrar');
+        // this.idCustomerForm.controls.identificacion.setValue('');
+      }
+    });
   }
 
   public saveLink(param?: string) {
@@ -167,10 +165,10 @@ export class ModalReferirComprarComponent implements OnInit, OnDestroy {
       identification: this.identification,
       plu: this.plu,
       business: this.bussiness,
-      creationDate: DateFormat.format(new Date(),'YYYY-MM-DD HH:MM'),
+      creationDate: DateFormat.format(new Date(), 'YYYY-MM-DD HH:MM'),
       identificationcustomer: this.idCustomerForm.controls.identification.value,
     };
-    console.log('data',data)
+    console.log('data', data)
     this.saveLink$ = this.links.saveLink(data).subscribe((resp: ResponseService) => {
       const splice = resp.objectResponse.link.split('//');
       this.urlshorten = 'https://' + splice[1];
@@ -185,7 +183,7 @@ export class ModalReferirComprarComponent implements OnInit, OnDestroy {
       }
     });
   }
-  
+
 
   public backStep() {
     this.reference = !this.reference;
