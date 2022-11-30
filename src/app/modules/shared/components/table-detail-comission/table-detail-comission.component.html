@@ -28,7 +28,7 @@
     <th mat-header-cell *matHeaderCellDef>
       {{ 'DETAILCOMISSION.PRODUCT' | translate }}
     </th>
-    <td mat-cell *matCellDef="let element">{{ 'DETAILCOMISSION.ORDER_CANCELED' | translate }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.productName }}</td>
   </ng-container>
 
   <!-- state Column -->
