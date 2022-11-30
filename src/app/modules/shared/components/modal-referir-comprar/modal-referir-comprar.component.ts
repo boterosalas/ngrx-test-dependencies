@@ -11,8 +11,7 @@ import { DateFormat } from '../../helpers/date-format';
 
 @Component({
   selector: 'app-modal-referir-comprar',
-  templateUrl: './modal-referir-comprar.component.html',
-  styleUrls: ['./modal-referir-comprar.component.scss']
+  templateUrl: './modal-referir-comprar.component.html'
 })
 export class ModalReferirComprarComponent implements OnInit, OnDestroy {
 
@@ -150,12 +149,7 @@ export class ModalReferirComprarComponent implements OnInit, OnDestroy {
       identificationcustomer: this.idCustomerForm.controls.identification.value,
     };
     this.saveLinkReference$ = this.links.saveLink(data).subscribe((resp: ResponseService) => {
-      if (resp.state === 'Error') {
-        this.openSnackBar(resp.userMessage, 'cerrar');
-      } else {
-        this.openSnackBar(resp.userMessage, 'cerrar');
-        // this.idCustomerForm.controls.identificacion.setValue('');
-      }
+      this.openSnackBar(resp.userMessage, 'cerrar');
     });
   }
 
