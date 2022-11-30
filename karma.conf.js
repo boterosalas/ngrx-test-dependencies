@@ -22,6 +22,7 @@ module.exports = function (config) {
       },
     },
     parallelOptions: {
+      // executors: 1,
       executors: 4, // Defaults to cpu-count - 1
       shardStrategy: 'round-robin',
     },

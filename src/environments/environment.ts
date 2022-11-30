@@ -24,6 +24,7 @@ export const environment = {
   URL_SECURITY: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/UVCGDWUHSS/',
   URL_REPORTS: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/FTJFPESUDT/',
   // URL_BLOB: 'https://webclickamqa.blob.core.windows.net/',
+  DOMAIN: 'https://webclickamdev.z13.web.core.windows.net',
   firebaseConfig: {
     apiKey: 'AIzaSyDi89VEe3hUKkOxIoGyd4RUz_lv_9oazrc',
     authDomain: 'app-clickam-dev-278016.firebaseapp.com',

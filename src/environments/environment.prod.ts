@@ -11,6 +11,7 @@ export const environment = {
   URL_SECURITY: 'https://lawrencio.grupo-exito.com/apiew/clickam/v1/WCMJXFCDTR/',
   URL_REPORTS: 'https://lawrencio.grupo-exito.com/apiew/clickam/v1/BSDMNWBMMA/',
   URL_BLOB: 'https://webclickampdn.blob.core.windows.net/',
+  DOMAIN: 'https://www.clickam.com.co',
   firebaseConfig: {
     apiKey: 'AIzaSyAZNoC1LqIWsTtXhjaWBneju-b_-xSIpnw',
     authDomain: 'app-clickam-pdn.firebaseapp.com',

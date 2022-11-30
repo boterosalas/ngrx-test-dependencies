@@ -1,0 +1,10 @@
+.principal-banner-container{
+    width: 100%;
+    .banner-image{
+        width: 100%;
+        height: auto;
+        &.banner-image-link{
+            cursor: pointer;
+        }
+    }
+}

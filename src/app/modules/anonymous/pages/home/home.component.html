@@ -8,7 +8,7 @@
   </div>
 
   <div class="max-1600-container py-3 gtmHomeBannerGanaMas" *ngIf="firstBuy === 'true'">
-    <app-image
+    <!-- <app-image
       fxHide.xs="true"
       imageClass="cursor-pointer w-100 my-3 gtmHomeBannerGanaMas"
       src="/assets/img/home/gana-lg.png"
@@ -23,7 +23,8 @@
       src="/assets/img/home/gana-mobile-lg.png"
       alt="negocios"
       (click)="openVideo()"
-    ></app-image>
+    ></app-image> -->
+    <app-banner-principal></app-banner-principal>
   </div>
 
   <div class="max-1600-container">
@@ -191,7 +192,7 @@
         <div fxLayout="row" fxLayoutAlign="space-between center" fxLayout.xs="column">
           <app-title showTitleh3="true" text="NEGOCIOS ALIADOS"></app-title>
           <span fxLayout="row" fxLayoutGap="5px" class="locations" ngClass.xs="mb-3">
-            <i class="tio-poi mr-2 f-14"></i> 
+            <i class="tio-poi mr-2 f-14"></i>
             Aprovecha el descuento en los puntos físicos de los negocios con este sello
           </span>
         </div>
