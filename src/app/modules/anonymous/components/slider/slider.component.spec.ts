@@ -20,7 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LinksService } from 'src/app/services/links.service';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatDialogRef } from '@angular/material/dialog';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { HomeComponent } from '../../pages/home/home.component';
 
 describe('SliderComponent', () => {
@@ -141,7 +141,7 @@ beforeEach(waitForAsync(() => {
         }),
       ],
       providers: [
-        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+        // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: ContentService, useValue: mockContentService },
         { provide: MatDialogRef, useValue: mockDialogRef },
         { provide: MAT_BOTTOM_SHEET_DATA, useValue: mockDialog },

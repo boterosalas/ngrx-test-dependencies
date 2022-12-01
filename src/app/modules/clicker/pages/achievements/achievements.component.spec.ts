@@ -11,7 +11,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LinksService } from 'src/app/services/links.service';
 import { Observable, of } from 'rxjs';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('AchievementsComponent', () => {
@@ -86,7 +86,10 @@ beforeEach(waitForAsync(() => {
           },
         }),
       ],
-      providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },{ provide: LinksService, useValue: mockLinksService }],
+      providers: [
+        // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+        { provide: LinksService, useValue: mockLinksService }
+      ],
     }).compileComponents();
     mockLinksService.getMedals.and.returnValue(of(medals));
   }));

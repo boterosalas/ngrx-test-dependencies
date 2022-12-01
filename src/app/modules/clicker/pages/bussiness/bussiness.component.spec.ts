@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -265,7 +265,7 @@ describe('BussinessComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
-        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+        // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: ContentService, useValue: mockContentService },
         { provide: BreakpointService, useValue: mockBreakPointService },
         { provide: UserService, useValue: mockUserService },

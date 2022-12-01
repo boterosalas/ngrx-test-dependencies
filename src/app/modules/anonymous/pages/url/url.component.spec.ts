@@ -7,7 +7,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ContentService } from 'src/app/services/content.service';
 import { Observable, of } from 'rxjs';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { HomeComponent } from '../home/home.component';
 localStorage.setItem(
   'ACCESS_TOKEN',
@@ -52,7 +52,9 @@ describe('UrlComponent', () => {
           },
         }),
       ],
-      providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },{ provide: ContentService, useValue: mockContentService }]
+      providers: [
+        // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+        { provide: ContentService, useValue: mockContentService }]
     }).compileComponents();
     mockContentService.getBusiness.and.returnValue(of(bussiness));
   }));

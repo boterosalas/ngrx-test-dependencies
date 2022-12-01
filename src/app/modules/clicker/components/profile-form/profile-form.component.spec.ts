@@ -18,7 +18,7 @@ import { UserService } from 'src/app/services/user.service';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 class MockUserService extends UserService {
@@ -215,7 +215,7 @@ beforeEach(waitForAsync(() => {
         }),
       ],
       providers: [
-        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+        // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: MatDialogRef, useValue: mockDialog },
         { provide: MasterDataService, useValue: mockMasterDataService },
         { provide: UserService, useClass: MockUserService },

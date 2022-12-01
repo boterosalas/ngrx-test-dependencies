@@ -12,7 +12,7 @@ import { ContentService } from 'src/app/services/content.service';
 
 import { BlogsComponent } from './blogs.component';
 import * as moment from 'moment';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { HomeComponent } from '../home/home.component';
 describe('BlogsComponent', () => {
   let component: BlogsComponent;
@@ -64,7 +64,10 @@ describe('BlogsComponent', () => {
         ],
 
         schemas: [NO_ERRORS_SCHEMA],
-        providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },{ provide: ContentService, useValue: mockContentService }],
+        providers: [
+          // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+          { provide: ContentService, useValue: mockContentService }
+        ],
       }).compileComponents();
       mockContentService.getBlogs.and.returnValue(of(response));
     })

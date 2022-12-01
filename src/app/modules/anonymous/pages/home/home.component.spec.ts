@@ -26,7 +26,7 @@ import { AngularFireModule } from '@angular/fire';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { TokenService } from 'src/app/services/token.service';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 class MockAuthService extends AuthService {
   isLoggedIn() {
@@ -569,7 +569,7 @@ describe('HomeComponent', () => {
           }),
         ],
         providers: [
-          { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+          // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
           { provide: UserService, useValue: mockUserService },
           { provide: AuthService, useClass: MockAuthService },
           { provide: UtilsService, useValue: mockUtilsService },

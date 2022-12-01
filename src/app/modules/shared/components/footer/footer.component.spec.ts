@@ -8,7 +8,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { AppMaterialModule } from '../../app-material/app-material.module';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
@@ -39,7 +39,9 @@ beforeEach(waitForAsync(() => {
           },
         }),
       ],
-      providers:[{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },],
+      providers:[
+        // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+      ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
