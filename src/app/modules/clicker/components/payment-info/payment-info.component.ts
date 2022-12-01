@@ -245,8 +245,8 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
 
   public sendPayment() {
     const registerForm = {
-      // cellphone: this.phone,
-      // firstNames: this.name,
+      cellphone: this.phone,
+      firstNames: this.name,
       // lastNames: this.lastName,
       // department: this.departmentCode,
       // municipality: this.cityCode,

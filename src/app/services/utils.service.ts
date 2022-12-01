@@ -6,7 +6,7 @@ import decode from 'jwt-decode';
 import { BehaviorSubject } from 'rxjs';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,7 @@ export class UtilsService {
     private auth: AuthService,
     private user: UserService,
     private _snackBar: MatSnackBar,
-    private authService: SocialAuthService
+    // private authService: SocialAuthService
     ) {
     this.titleSelect = new BehaviorSubject<string>('Seleccionar');
     this.checkedAll = new BehaviorSubject<boolean>(false);
@@ -133,7 +133,7 @@ export class UtilsService {
     this.auth.getRole$.next(null);
     this.auth.isLogged$.next(false);
     this.user.userInfo$.next(null);
-    this.authService.signOut();
+    // this.authService.signOut();
     await this.router.navigate(['/inicio']);
   }
 
