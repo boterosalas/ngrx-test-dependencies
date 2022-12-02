@@ -25,9 +25,12 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
     private _snackBar: MatSnackBar,
     private utils: UtilsService,
     private personalInfo: MasterDataService
-  ) {}
+  ) { }
 
   private subscription: Subscription = new Subscription();
+  bank: string;
+  bankAccountNumber: string;
+  typeBankAccount: string;
 
   externalForm: UntypedFormGroup;
   validFormat: boolean;
@@ -74,23 +77,39 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
   identification: string;
 
   ngOnInit() {
+    this.externalClickerForm();
     this.subscription = this.registerUser.userInfo$.subscribe((val) => {
+      console.log('userInfo', val);
       if (!!val) {
         this.userId = val.userId;
         this.identification = val.identification;
         this.name = val.firstNames;
         this.lastName = val.lastNames;
         this.phone = val.cellphone;
+        this.bank = val.bank;
+        this.bankAccountNumber = val.bankAccountNumber;
+        this.typeBankAccount = val.typeBankAccount;
       }
+      this.initForm();
+      this.getBanks();
     });
-
     this.disabledCity = true;
     this.nameFileCed1 = '';
     this.nameFileCed2 = '';
     this.nameFileCert = '';
     this.nameFileRUT = '';
-    this.externalClickerForm();
-    this.getBanks();
+
+  }
+
+  initForm() {
+    if (this.typeBankAccount) {
+      this.externalForm.controls.typeAccount.setValue(this.typeBankAccount);
+      this.externalForm.controls.typeAccount.updateValueAndValidity();
+    }
+    if (this.bankAccountNumber) {
+      this.externalForm.controls.numberAccount.setValue(`********${this.bankAccountNumber}`);
+      this.externalForm.controls.numberAccount.updateValueAndValidity();
+    }
   }
 
   /**
@@ -326,6 +345,9 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
   public getBanks() {
     this.subscription = this.personalInfo.getBanks().subscribe((res: ResponseService) => {
       this.banks = res.objectResponse;
+      if (this.bank) {
+        this.externalForm.controls.bank.setValue(this.bank);
+      }
     });
   }
 

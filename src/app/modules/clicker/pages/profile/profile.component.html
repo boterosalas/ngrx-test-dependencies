@@ -26,8 +26,12 @@
         <span class="gtmPerfilClicGestionarPagosClickam">DATOS FINANCIEROS</span>
       </ng-template>
       <!-- <app-payment-info *ngIf="(auth.getRole$ | async) !== 'ADMIN' && !isEmployee"></app-payment-info> -->
-      <app-payment-info *ngIf="(auth.getRole$ | async) !== 'ADMIN' && !managedPayments && !isEmployee"></app-payment-info>
-      <app-profile-form [showBankInfo]="true" [showInfoAccount]="false" *ngIf="(auth.getRole$ | async) !== 'ADMIN' && managedPayments && !isEmployee"></app-profile-form>
+      <app-payment-info *ngIf="(auth.getRole$ | async) !== 'ADMIN' && !isEmployee && !managedPayments"></app-payment-info>
+      <app-profile-form *ngIf="(auth.getRole$ | async) !== 'ADMIN' && !isEmployee && managedPayments" [showBankInfo]="true" [showInfoAccount]="false"></app-profile-form>
+      <!-- <ng-container *ngIf="(auth.getRole$ | async) !== 'ADMIN'">
+        <app-payment-info *ngIf="false"></app-payment-info>
+        <app-profile-form *ngIf="true" [showBankInfo]="true" [showInfoAccount]="false"></app-profile-form>
+      </ng-container> -->
     </mat-tab>
 
     <mat-tab>
