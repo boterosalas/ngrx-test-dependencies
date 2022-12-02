@@ -69,6 +69,16 @@
   <asl-google-signin-button></asl-google-signin-button>
 </div> -->
 
+<div #googleBtn id="buttonDiv"></div>
+<script>
+  function handleCredentialResponse(response) {
+    console.log('Encoded JWT ID token: ' + response.credential);
+  }
+  window.onload = function () {
+    
+  };
+</script>
+
 <p
   id="forgotPass"
   class="cursor-pointer f-13 text-decoration text-center gtmIniciarSesionClicLightboxOlvidasteTuContrasena"

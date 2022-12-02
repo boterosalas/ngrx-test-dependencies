@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener, Inject, PLATFORM_ID, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, Inject, PLATFORM_ID, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { UntypedFormGroup, Validators, UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -10,15 +10,18 @@ import { UtilsService } from 'src/app/services/utils.service';
 import decode from 'jwt-decode';
 import { LinksService } from 'src/app/services/links.service';
 import { isPlatformBrowser } from '@angular/common';
+import { environment } from 'src/environments/environment';
 // import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 declare var dataLayer: any;
+declare const google: any;
 
 @Component({
   selector: 'app-loginform',
   templateUrl: './loginform.component.html',
   styleUrls: ['./loginform.component.scss'],
 })
-export class LoginformComponent implements OnInit, OnDestroy {
+export class LoginformComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('googleBtn') googleBtn: ElementRef;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -28,7 +31,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
     private link: LinksService,
     @Inject(PLATFORM_ID) private platformId: object,
     // private authServiceSocial: SocialAuthService
-  ) {}
+  ) { }
 
   private subscription: Subscription = new Subscription();
 
@@ -49,6 +52,29 @@ export class LoginformComponent implements OnInit, OnDestroy {
     //   this.loggedIn = user != null;
     // });
   }
+
+  ngAfterViewInit(): void {
+    this.googleInit();
+  }
+
+  googleInit() {
+    google.accounts.id.initialize({
+      client_id: environment.GOOGLE_SIGNIN,
+      callback: this.handleCredentialResponse,
+    });
+    google.accounts.id.renderButton(
+      // document.getElementById('buttonDiv'),
+      this.googleBtn.nativeElement,
+      { theme: 'outline', size: 'large', width:'100%' } // customization attributes
+    );
+    google.accounts.id.prompt(); // also display the One Tap dialog
+  }
+
+  handleCredentialResponse(response: any) {
+    console.log('Encoded JWT ID token: ' + response.credential);
+  }
+
+
 
   /**
    * Metodo para loguearse
