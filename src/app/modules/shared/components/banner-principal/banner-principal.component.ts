@@ -66,8 +66,6 @@ export class BannerPrincipalComponent implements OnInit, OnDestroy, AfterViewIni
   getBanner() {
     this.banners$ = this.content.getOffersbyType({ id: 'BANNER', admin: false }).subscribe(res => {
       this.banner = res[0];
-      this.banner.imageurlweb = 'https://www.clickam.com.co/assets/img/home/gana-lg.png';
-      this.banner.imageurlmobile = 'https://www.clickam.com.co/assets/img/home/gana-mobile-lg.png';
       this.evaluateBannerBehaviour();
     });
   }
