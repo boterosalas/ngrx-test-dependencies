@@ -24,32 +24,6 @@ export class BannerPrincipalComponent implements OnInit, OnDestroy, AfterViewIni
   modalReferirComprarTemplate: TemplateRef<any>;
 
   banner: any;
-  // banner: any = {
-  //   imageurlweb: "https://www.clickam.com.co/assets/img/home/gana-lg.png",
-  //   business: "exito",
-  //   idbusiness: 1,
-  //   infoaditional: "16000",
-  //   type: "BANNER",
-  //   date: "2022-10-22T14:41:30.403",
-  //   orderby: 3,
-  //   active: true,
-  //   imagemobile: null,
-  //   imageweb: null,
-  //   datestart: null,
-  //   id: 144,
-  //   description: "Viajes",
-  //   link: "https://www.viajesexito.com/vuelos2?utm_source=clickam&utm_medium=referral&utm_campaign=vuelos&utm_term={1}",
-  //   // link: null,
-  //   imageurlmobile: "https://www.clickam.com.co/assets/img/home/gana-lg.png",
-  //   dateend: null,
-  //   textbutton: null,
-  //   colorbutton: null,
-  //   seccion: null,
-  //   new: false,
-  //   clicks: 0,
-  //   uniqueclicks: 0,
-  //   filter: "TODOS"
-  // }
 
   constructor(
     public auth: AuthService,
@@ -66,8 +40,6 @@ export class BannerPrincipalComponent implements OnInit, OnDestroy, AfterViewIni
   getBanner() {
     this.banners$ = this.content.getOffersbyType({ id: 'BANNER', admin: false }).subscribe(res => {
       this.banner = res[0];
-      this.banner.imageurlweb = 'https://www.clickam.com.co/assets/img/home/gana-lg.png';
-      this.banner.imageurlmobile = 'https://www.clickam.com.co/assets/img/home/gana-mobile-lg.png';
       this.evaluateBannerBehaviour();
     });
   }
