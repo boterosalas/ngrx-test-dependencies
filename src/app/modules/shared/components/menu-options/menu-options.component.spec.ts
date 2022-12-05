@@ -11,7 +11,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('MenuOptionsComponent', () => {
@@ -62,7 +62,7 @@ beforeEach(waitForAsync(() => {
       ],
       providers: [
         // { provide: AuthService, useValue: mockAuthService },
-        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+        // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: UtilsService, useValue: mockUtilsService },
       ],
       schemas: [NO_ERRORS_SCHEMA],

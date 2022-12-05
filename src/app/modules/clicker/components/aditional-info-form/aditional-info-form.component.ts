@@ -244,14 +244,12 @@ export class AditionalInfoFormComponent implements OnInit, OnDestroy {
   getDepartments() {
     this.subscription = this.personalInfo.getDepartments().subscribe((res: ResponseService) => {
       this.departments = res.objectResponse;
-      console.log('THIS.DEPARTMENTS', this.departments)
       const auxDepartment = this.departments.find(dep => dep.code === this.department.code);
       this.cities = auxDepartment ? auxDepartment.municipalities : [];
     });
   }
 
   selectDepartment(department) {
-    console.log('department',department)
     this.department = { code: department.code, description: department.description };
     this.cities = department.municipalities;
     this.addressForm.controls.city.setValue('');

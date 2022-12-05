@@ -37,7 +37,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.user.getProfile();
     this.getUserData();
     this.subscription = this.user.userInfo$.subscribe((val) => {
-      console.log('USER_PROFILE',val)
       if (!!val) {
         this.userId = val.userId;
         this.id = val.identification;

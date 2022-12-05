@@ -44,8 +44,9 @@ export class PopupComponent implements OnInit, OnDestroy {
       this.slideConfig.dots = true;
     }
   }
-
+  
   ngOnInit() {
+    console.log('data',this.data);
     this.dialogRef.beforeClosed()
       .subscribe(() => {
         this.saveVisitOffer();

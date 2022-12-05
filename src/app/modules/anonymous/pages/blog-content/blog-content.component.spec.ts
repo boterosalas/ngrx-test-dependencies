@@ -15,7 +15,7 @@ import { ContentService } from 'src/app/services/content.service';
 import { BlogContentComponent } from './blog-content.component';
 import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { HomeComponent } from '../home/home.component';
 describe('BlogContentComponent', () => {
   let component: BlogContentComponent;
@@ -69,7 +69,7 @@ beforeEach(waitForAsync(() => {
 
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
-        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+        // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: ContentService, useValue: mockContentService },
         { provide: MatDialog, useValue: mockDialog },
       ],

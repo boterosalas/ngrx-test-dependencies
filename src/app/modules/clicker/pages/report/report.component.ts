@@ -104,7 +104,11 @@ export class ReportComponent implements OnInit, OnDestroy {
       this.conversionRate = resp.objectResponse.generalResume.conversionRate;
       this.dataBreak1 = new MatTableDataSource<any>(resp.objectResponse.money.detailCutOff);
       this.dataBreak2 = new MatTableDataSource<any>(resp.objectResponse.money.detailAccumulated);
-      this.dataBreak3 = new MatTableDataSource<any>(resp.objectResponse.money.detailRejected);
+      let dataRejected;
+      if (resp.objectResponse.money.detailRejected) {
+        dataRejected = resp.objectResponse.money.detailRejected.map((elem: any) => ({ ...elem, statusCommission: 'Pedido cancelado' }));
+      }
+      this.dataBreak3 = new MatTableDataSource<any>(dataRejected);
       this.dataBreak4 = new MatTableDataSource<any>(resp.objectResponse.money.detailValidation);
       this.totalLinks = resp.objectResponse.generalResume.totalLinks;
       this.totalProducts = resp.objectResponse.generalResume.totalProducts;

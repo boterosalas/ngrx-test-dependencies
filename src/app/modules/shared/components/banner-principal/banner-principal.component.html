@@ -1,4 +1,4 @@
-<div class="principal-banner-container">
+<div class="principal-banner-container" *ngIf="banner">
   <a [href]="route" target="_blank" *ngIf="isAnExternalRedirect; else internalRedirectTemplate">
     <img class="banner-image banner-image-link" (click)="bannerClick()" [src]="banner.imageurlweb" alt="" />
   </a>

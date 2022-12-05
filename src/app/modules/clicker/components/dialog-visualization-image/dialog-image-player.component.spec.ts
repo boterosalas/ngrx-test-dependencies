@@ -14,7 +14,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ContentService } from 'src/app/services/content.service';
 import { UtilsService } from 'src/app/services/utils.service';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
@@ -66,7 +66,7 @@ beforeEach(waitForAsync(() => {
       ],
       providers: [
         UtilsService,
-        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+        // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: dialogMock },
         { provide: ContentService, useValue: mockContentService },

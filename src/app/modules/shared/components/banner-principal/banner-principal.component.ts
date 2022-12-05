@@ -18,36 +18,12 @@ export class BannerPrincipalComponent implements OnInit, OnDestroy, AfterViewIni
 
   isLogged$: Subscription = new Subscription();
   saveVisitOffer$: Subscription = new Subscription();
+  banners$: Subscription = new Subscription();
 
   @ViewChild('modalReferirComprarTemplate', { static: false })
   modalReferirComprarTemplate: TemplateRef<any>;
 
-  banner: any = {
-    imageurlweb: "https://www.clickam.com.co/assets/img/home/gana-lg.png",
-    business: "clickam",
-    idbusiness: 1,
-    infoaditional: "16000",
-    type: "BANNER",
-    date: "2022-10-22T14:41:30.403",
-    orderby: 3,
-    active: true,
-    imagemobile: null,
-    imageweb: null,
-    datestart: null,
-    id: 144,
-    description: "Viajes",
-    link: "https://www.viajesexito.com/vuelos2?utm_source=clickam&utm_medium=referral&utm_campaign=vuelos&utm_term={1}",
-    // link: null,
-    imageurlmobile: "https://www.clickam.com.co/assets/img/home/gana-lg.png",
-    dateend: null,
-    textbutton: null,
-    colorbutton: null,
-    seccion: null,
-    new: false,
-    clicks: 0,
-    uniqueclicks: 0,
-    filter: "TODOS"
-  }
+  banner: any;
 
   constructor(
     public auth: AuthService,
@@ -58,10 +34,14 @@ export class BannerPrincipalComponent implements OnInit, OnDestroy, AfterViewIni
   ) { }
 
   ngOnInit(): void {
-    // 1. Debo llamar el GET banner
-    // 2. Asignar el banner a this.banner
-    // 3. Llamar this.evaluateBannerBehaviour()
-    this.evaluateBannerBehaviour();
+    this.getBanner();
+  }
+
+  getBanner() {
+    this.banners$ = this.content.getOffersbyType({ id: 'BANNER', admin: false }).subscribe(res => {
+      this.banner = res[0];
+      this.evaluateBannerBehaviour();
+    });
   }
 
   ngAfterViewInit(): void {
@@ -71,7 +51,7 @@ export class BannerPrincipalComponent implements OnInit, OnDestroy, AfterViewIni
   evaluateBannerBehaviour() {
     if (this.banner.link) {
       this.route = this.banner.link;
-      if (this.banner.business === 'clickam') {
+      if (this.banner.business === 'clickam' || !this.banner.idbusiness) {
         this.isAnExternalRedirect = true;
       }
     }

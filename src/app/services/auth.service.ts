@@ -10,13 +10,18 @@ import { Forgotpassword } from '../interfaces/forgotpassword';
 import { Recoverpassword } from '../interfaces/recoverpassword';
 import { UserService } from './user.service';
 import { ResponseService } from '../interfaces/response';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService implements OnDestroy {
-  constructor(private http: HttpClient, private router: Router, public jwtHelper: JwtHelperService, private authService: SocialAuthService) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    public jwtHelper: JwtHelperService,
+    // private authService: SocialAuthService
+  ) {
     this.isLogged$.subscribe((val) => {
       this.getRole();
       if (!!val || this.isLoggedIn()) {
@@ -68,7 +73,7 @@ export class AuthService implements OnDestroy {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + this.authorization,
-      
+
     }),
   };
 
@@ -93,7 +98,7 @@ export class AuthService implements OnDestroy {
 
   public logout() {
     localStorage.clear();
-    this.authService.signOut();
+    // this.authService.signOut();
     setTimeout(() => {
       this.router.navigate(['/']);
     }, 500);
@@ -118,7 +123,7 @@ export class AuthService implements OnDestroy {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: any) => {
@@ -133,7 +138,7 @@ export class AuthService implements OnDestroy {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: any) => {
@@ -148,7 +153,7 @@ export class AuthService implements OnDestroy {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: any) => {
@@ -163,7 +168,7 @@ export class AuthService implements OnDestroy {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: any) => {
@@ -178,7 +183,7 @@ export class AuthService implements OnDestroy {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: any) => {
@@ -193,7 +198,7 @@ export class AuthService implements OnDestroy {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -208,7 +213,7 @@ export class AuthService implements OnDestroy {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -223,7 +228,7 @@ export class AuthService implements OnDestroy {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: ResponseService) => {
@@ -238,7 +243,7 @@ export class AuthService implements OnDestroy {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((bussiness: ResponseService) => {
@@ -253,7 +258,7 @@ export class AuthService implements OnDestroy {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((bussiness: ResponseService) => {
@@ -268,7 +273,7 @@ export class AuthService implements OnDestroy {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((bussiness: ResponseService) => {
@@ -283,7 +288,7 @@ export class AuthService implements OnDestroy {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((bussiness: ResponseService) => {
@@ -298,7 +303,7 @@ export class AuthService implements OnDestroy {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((bussiness: ResponseService) => {
@@ -334,7 +339,7 @@ export class AuthService implements OnDestroy {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: any) => {
@@ -348,7 +353,7 @@ export class AuthService implements OnDestroy {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((resp: any) => {
@@ -362,7 +367,7 @@ export class AuthService implements OnDestroy {
         errors.pipe(
           delay(3000),
           take(3),
-          tap((errorStatus) => {})
+          tap((errorStatus) => { })
         )
       ),
       map((bussiness: ResponseService) => {

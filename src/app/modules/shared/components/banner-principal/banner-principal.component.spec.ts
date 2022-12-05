@@ -18,8 +18,16 @@ describe('BannerPrincipalComponent', () => {
 
   const mockAuthService = jasmine.createSpyObj('AuthService', ['isLoggedIn'], { isLogged$: of(true) });
   const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showloginForm']);
-  const mockContentService = jasmine.createSpyObj('ContentService', ['saveVisitOffer']);
+  const mockContentService = jasmine.createSpyObj('ContentService', ['saveVisitOffer','getOffersbyType']);
   const mockTokenService = jasmine.createSpyObj('TokenService', ['userInfo']);
+
+  const banner = {
+    imageurlweb: '',
+    imageurlmobile: '',
+    link: '',
+    idbusiness: '',
+    business: '',
+  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -42,6 +50,7 @@ describe('BannerPrincipalComponent', () => {
     mockAuthService.isLoggedIn.and.returnValue(true);
     mockUtilsService.showloginForm.and.callFake(() => true);
     mockContentService.saveVisitOffer.and.returnValue(of(true));
+    mockContentService.getOffersbyType.and.returnValue(of([banner]));
     mockTokenService.userInfo.and.returnValue({ userid: 123 });
     mockAuthService.isLoggedIn.calls.reset();
     mockUtilsService.showloginForm.calls.reset();

@@ -7,7 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LinksService } from 'src/app/services/links.service';
 import { of } from 'rxjs/internal/observable/of';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
@@ -60,7 +60,10 @@ beforeEach(waitForAsync(() => {
           },
         }),
       ],
-      providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },{ provide: LinksService, useValue: mockLinksService }],
+      providers: [
+        // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+        { provide: LinksService, useValue: mockLinksService }
+      ],
     }).compileComponents();
     mockLinksService.getReports.and.returnValue(of(resume));
   }));

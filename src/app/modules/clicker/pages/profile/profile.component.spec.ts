@@ -11,7 +11,7 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
 import { UserService } from 'src/app/services/user.service';
 import { of } from 'rxjs/internal/observable/of';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
@@ -70,7 +70,7 @@ beforeEach(waitForAsync(() => {
       ],
       providers: [
         // { provide: UserService, useValue: mockUserService },
-        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+        // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: UserService, useClass: MockUserService },
       ],
       schemas: [NO_ERRORS_SCHEMA],

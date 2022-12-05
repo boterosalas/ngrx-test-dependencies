@@ -8,7 +8,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { JwtModule } from '@auth0/angular-jwt';
 import { UtilsService } from 'src/app/services/utils.service';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
 import { HomeComponent } from '../../pages/home/home.component';
 
@@ -40,7 +40,10 @@ beforeEach(waitForAsync(() => {
           },
         }),
       ],
-      providers: [{ provide: UtilsService, useValue: mockUtilsService }, { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },],
+      providers: [
+        { provide: UtilsService, useValue: mockUtilsService },
+        // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } }
+      ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     mockUtilsService.showRegisterForm.and.returnValue(true);

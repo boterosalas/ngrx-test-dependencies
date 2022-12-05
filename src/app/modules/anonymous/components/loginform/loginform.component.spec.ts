@@ -15,7 +15,7 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { LinksService } from 'src/app/services/links.service';
 import { UtilsService } from 'src/app/services/utils.service';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { HomeComponent } from '../../pages/home/home.component';
 
 describe('LoginformComponent', () => {
@@ -92,7 +92,7 @@ beforeEach(waitForAsync(() => {
       ],
       providers: [
         // { provide: Router, useValue: mockRouter},
-        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+        // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         TranslateService,
         { provide: AuthService, useValue: mockAuthService },
         { provide: LinksService, useValue: mockLinksService },

@@ -23,7 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { UtilsService } from './services/utils.service';
 import { AppMaterialModule } from './modules/shared/app-material/app-material.module';
-import { SocialLoginModule, SocialAuthServiceConfig, SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialLoginModule, SocialAuthServiceConfig, SocialAuthService } from '@abacritt/angularx-social-login';
 import { HomeComponent } from './modules/anonymous/pages/home/home.component';
 
 // const TRANSLATIONS_ES = require('../assets/i18n/es.json');
@@ -124,7 +124,7 @@ describe('AppComponent', () => {
         FormsModule,
         MatPasswordStrengthModule,
         ServiceWorkerModule.register('', { enabled: false }),
-        SocialLoginModule,
+        // SocialLoginModule,
         AngularFireModule.initializeApp({
           apiKey: 'AIzaSyBLEXtXZGfMEm6dLHtngNa_HWgEjjrk-14',
           authDomain: 'test-push-notification-633a0.firebaseapp.com',
@@ -151,7 +151,7 @@ describe('AppComponent', () => {
         BnNgIdleService,
         SwUpdate,
         UtilsService,
-        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+        // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
         { provide: ContentService, useValue: mockContentService },
         { provide: SidenavService, useValue: mockSidenavService },
         { provide: MasterDataService, useValue: mockMasterService },

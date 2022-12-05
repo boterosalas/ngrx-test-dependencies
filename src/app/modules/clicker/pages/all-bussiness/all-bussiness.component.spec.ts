@@ -11,7 +11,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { ContentService } from 'src/app/services/content.service';
 import { Observable, of } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { HomeComponent } from 'src/app/modules/anonymous/pages/home/home.component';
 
 describe('AllBussinessComponent', () => {
@@ -88,7 +88,10 @@ describe('AllBussinessComponent', () => {
             },
           }),
         ],
-        providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },{ provide: ContentService, useValue: mockContentService }],
+        providers: [
+          // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+          { provide: ContentService, useValue: mockContentService }
+        ],
       }).compileComponents();
       mockContentService.getBusinessByCategory.and.returnValue(of(bussiness));
       mockContentService.getOffersbyType.and.returnValue(of(carousel));

@@ -13,7 +13,7 @@ export const environment = {
   // URL_REFERAL: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/JFXDAXHPYG/',
   // URL_SECURITY: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/BGSCLUZWVD/',
   // URL_REPORTS: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/NHRLRSNZGX/',
-  // URL_BLOB: 'https://webclickamdev.blob.core.windows.net/',
+  URL_BLOB: 'https://webclickamdev.blob.core.windows.net/',
   // -----------QA----------------
   URL_MASTER: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/LYWCBAXGTW/',
   URL_COMISSION: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/MEHDKYQVAW/',
@@ -23,7 +23,7 @@ export const environment = {
   URL_REFERAL: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/DSXTDWKLTV/',
   URL_SECURITY: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/UVCGDWUHSS/',
   URL_REPORTS: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/FTJFPESUDT/',
-  URL_BLOB: 'https://webclickamqa.blob.core.windows.net/',
+  // URL_BLOB: 'https://webclickamqa.blob.core.windows.net/',
   DOMAIN: 'https://webclickamdev.z13.web.core.windows.net',
   firebaseConfig: {
     apiKey: 'AIzaSyDi89VEe3hUKkOxIoGyd4RUz_lv_9oazrc',

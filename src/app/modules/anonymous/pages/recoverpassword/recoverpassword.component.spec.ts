@@ -11,7 +11,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { HomeComponent } from '../home/home.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { AnonymousModule } from '../../anonymous.module';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable } from 'rxjs';
 
 describe('RecoverpasswordComponent', () => {
@@ -48,7 +48,9 @@ beforeEach(waitForAsync(() => {
           },
         }),
       ],
-      providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },],
+      providers: [
+        // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+      ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));

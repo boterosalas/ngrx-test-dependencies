@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { UtilsService } from 'src/app/services/utils.service';
 import { HomeComponent } from '../../pages/home/home.component';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 describe('ForgotpasswordformComponent', () => {
   let component: ForgotpasswordformComponent;
@@ -61,7 +61,7 @@ beforeEach(waitForAsync(() => {
       providers: [
         UtilsService,
         { provide: AuthService, useValue: mockAuthService },
-        { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } }
+        // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } }
         // { provide: UtilsService, useValue: mockUtilsService },
       ],
       schemas: [NO_ERRORS_SCHEMA],

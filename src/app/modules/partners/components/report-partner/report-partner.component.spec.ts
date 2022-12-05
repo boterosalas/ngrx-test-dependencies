@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { JwtModule } from '@auth0/angular-jwt';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+// import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Observable, of } from 'rxjs';
 import { DataRangeInterface } from 'src/app/interfaces/dateRangeInterface';
 import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
@@ -61,7 +61,10 @@ describe('ReportPartnerComponent', () => {
           },
         }),
       ],
-      providers: [{ provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },{ provide: LinksService, useValue: mockLinksService }],
+      providers: [
+        // { provide: SocialAuthService, useValue: { ...socialAuthServiceMock, authState: new Observable() } },
+        { provide: LinksService, useValue: mockLinksService }
+      ],
     }).compileComponents();
     mockLinksService.getBussinessPartnerKPI.and.returnValue(of(kpi));
     mockLinksService.getSalesByShops.and.returnValue(of({}));
