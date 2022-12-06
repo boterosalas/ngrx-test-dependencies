@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-alerta-cargar-documentos',
   templateUrl: './alerta-cargar-documentos.component.html',
   styleUrls: ['./alerta-cargar-documentos.component.scss']
 })
-export class AlertaCargarDocumentosComponent implements OnInit {
+export class AlertaCargarDocumentosComponent {
 
-  constructor() { }
+  @Input() hasminimuncommission: boolean = true;
+  showAlert: boolean = true;
 
-  ngOnInit(): void {
+  closeAlert() {
+    this.showAlert = false;
+  }
+
+  saveSelectedTab(){
+    localStorage.setItem('selectedTab','2');
   }
 
 }

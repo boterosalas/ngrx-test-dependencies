@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ import { MatTabGroup } from '@angular/material/tabs';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit, OnDestroy {
+export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
   private subscription: Subscription = new Subscription();
   userId: string;
   isLoggedIn: any;
@@ -30,8 +30,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   managedPayments: boolean;
   isEmployee: boolean;
   profile = false;
+  selectedIndex = 0;
 
-  constructor(private user: UserService, public auth: AuthService, private route: ActivatedRoute) {}
+  constructor(private user: UserService, public auth: AuthService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.user.getProfile();
@@ -66,6 +67,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
         document.querySelector('.mat-tab-label[aria-posinset="3"]').classList.add('gtmPerfilClicGestionarPagosClickam');
       }
     }, 1000);
+  }
+
+  ngAfterViewInit(): void {
+    this.setLocalStorageTab();
+  }
+
+  setLocalStorageTab(){
+    const localTab = parseInt(localStorage.getItem('selectedTab'));
+    this.selectedIndex = localTab || 0;
+    localStorage.removeItem('selectedTab');
   }
 
   public reset(file) {

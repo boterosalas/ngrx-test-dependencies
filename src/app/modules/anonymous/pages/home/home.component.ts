@@ -59,6 +59,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('templatePromo', { static: false })
   templatePromo: TemplateRef<any>;
   managedPayments: boolean;
+  hasminimuncommission: boolean;
   role: string;
   userId: any;
   message: any;
@@ -290,10 +291,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       if (role === 'CLICKER' || role === 'ADMIN' || role === 'SUPERADMIN') {
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.isEmployee = user.isEmployeeGrupoExito;
-          this.managedPayments = user.managedPayments;
+          // this.managedPayments = user.managedpayments;
+          this.managedPayments = false;
+          this.hasminimuncommission = user.hasminimuncommission;
           if (role === 'CLICKER') {
             this.getMissions();
-            this.newTerms = user.acceptTermsReferrals;
+            this.newTerms = user.accepttermsreferrals;
             if (this.newTerms === true) {
               this.showModalPayment();
             }

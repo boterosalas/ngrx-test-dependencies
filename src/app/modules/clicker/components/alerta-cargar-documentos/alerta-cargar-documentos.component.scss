@@ -43,6 +43,7 @@
       top: 12px;
       right: 12px;
       transform: scale(1.4);
+      cursor: pointer;
       @media screen and (min-width: 800px) {
         top: calc(50% - 12px);
         right: 24px;

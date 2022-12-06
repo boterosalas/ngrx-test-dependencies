@@ -1,16 +1,25 @@
-<div class="upload-documents">
+<div class="upload-documents" *ngIf="showAlert">
   <div class="orange-line"></div>
   <div class="upload-documents__content">
-    <mat-icon class="close-icon upload-documents__close">close</mat-icon>
+    <mat-icon class="close-icon upload-documents__close" (click)="closeAlert()">close</mat-icon>
     <div class="upload-documents__content-main">
       <img class="info-icon" src="assets/img/documents-info.svg" alt="" />
       <div class="upload-documents__text-info">
-        <h3 class="upload-documents__title">¡No te olvides de tus recompensas!</h3>
-        <p class="upload-documents__paragraph">Inscribe tu cuenta bancaria donde podremos consignar todas tus recompensas.</p>
+        <h3 class="upload-documents__title">
+          <ng-container *ngIf="hasminimuncommission; else titleTemplate"> ¡No te olvides de tus recompensas! </ng-container>
+          <ng-template #titleTemplate> ¡Aún tenemos tus recompensas! </ng-template>
+        </h3>
+        <p class="upload-documents__paragraph">
+          <ng-container *ngIf="hasminimuncommission; else paragraphTemplate"> Inscribe tu cuenta bancaria donde podremos consignar todas tus recompensas. </ng-container>
+          <ng-template #paragraphTemplate> No hemos podido hacer efectiva tus recompensas, revisa que la cuenta inscrita se encuentra activa. </ng-template>
+        </p>
       </div>
     </div>
     <div class="upload-documents__button-container">
-      <button class="upload-documents__button">Inscribir cuenta</button>
+      <a [routerLink]="['/mi-perfil']" class="upload-documents__button" (click)="saveSelectedTab()">
+        <ng-container *ngIf="hasminimuncommission; else buttonTemplate"> Inscribir cuenta </ng-container>
+        <ng-template #buttonTemplate> Revisar cuenta </ng-template>
+      </a>
     </div>
   </div>
 </div>

@@ -6,7 +6,7 @@
 
 <div class="container mb-4" [ngClass]="{ 'd-none': !profile, 'd-block': profile }">
 
-  <mat-tab-group #tabGroup>
+  <mat-tab-group #tabGroup [(selectedIndex)]=selectedIndex>
     <mat-tab>
       <ng-template mat-tab-label>
         <span class="gtmPerfilClicCuentaClickam">PERFIL</span>
