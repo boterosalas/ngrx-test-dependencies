@@ -199,9 +199,9 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
 
   public getUserData() {
     this.subscription = this.user.getuserdata().subscribe((user) => {
-      this.managedPayments = user.managedPayments;
-      this.isEmployeeUser = user.isEmployeeGrupoExito;
-      this.getStatusVerification(user.responseAccountBank);
+      this.managedPayments = user.managedpayments;
+      this.isEmployeeUser = user.isemployeegrupoexito;
+      this.getStatusVerification(user.responseaccountbank);
     });
   }
 

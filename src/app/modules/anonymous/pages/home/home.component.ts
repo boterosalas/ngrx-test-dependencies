@@ -290,9 +290,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.role = role;
       if (role === 'CLICKER' || role === 'ADMIN' || role === 'SUPERADMIN') {
         this.subscription = this.user.getuserdata().subscribe((user) => {
-          this.isEmployee = user.isEmployeeGrupoExito;
-          // this.managedPayments = user.managedpayments;
-          this.managedPayments = false;
+          this.isEmployee = user.isemployeegrupoexito;
+          this.managedPayments = user.managedpayments;
+          // this.managedPayments = false;
           this.hasminimuncommission = user.hasminimuncommission;
           if (role === 'CLICKER') {
             this.getMissions();

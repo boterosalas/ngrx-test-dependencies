@@ -50,6 +50,10 @@ class MockUserService {
     });
     return update;
   }
+
+  getDocuments() {
+    return of(this.update);
+  }
 }
 
 class MockUserServiceError {
@@ -79,6 +83,10 @@ class MockUserServiceError {
       res.next(this.update);
     });
     return update;
+  }
+  
+  getDocuments() {
+    return of(this.update);
   }
 }
 

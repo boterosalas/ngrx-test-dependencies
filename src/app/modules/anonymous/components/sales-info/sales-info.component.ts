@@ -34,10 +34,10 @@ export class SalesInfoComponent implements OnInit, OnDestroy {
   }
 
   public getUserdata(){
-    this.subscription = this.user.getuserdata().subscribe(({firstNames, lastNames}) => {
-      this.fullName = `${firstNames} ${lastNames}`;
-      this.initialName = firstNames.charAt(0);
-      this.initialLastName = lastNames.charAt(0);
+    this.subscription = this.user.getuserdata().subscribe(({firstnames, lastnames}) => {
+      this.fullName = `${firstnames} ${lastnames}`;
+      this.initialName = firstnames?.charAt(0);
+      this.initialLastName = lastnames?.charAt(0);
     });
   }
 

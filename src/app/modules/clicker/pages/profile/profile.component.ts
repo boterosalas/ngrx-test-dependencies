@@ -133,7 +133,7 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
     this.subscription = this.user.getuserdata().subscribe((user) => {
       this.managedPayments = user.managedPayments;
       // this.managedPayments = true;
-      this.isEmployee = user.isEmployeeGrupoExito;
+      this.isEmployee = user.isemployeegrupoexito;
       this.profile = true;
     });
   }

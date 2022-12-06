@@ -49,8 +49,8 @@ describe('ProfileFormComponent', () => {
   const mockMasterDataService = jasmine.createSpyObj('MasterDataService', ['getDepartments', 'getBanks']);
 
   const dataUserC = {
-    managedPayments: true,
-    isEmployeeUser: true,
+    managedpayments: true,
+    isemployeeuser: true,
   };
 
   const dataDepartments = {

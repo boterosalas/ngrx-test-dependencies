@@ -50,7 +50,7 @@ describe('BussinessComponent', () => {
   let socialAuthServiceMock = jasmine.createSpyObj('socialAuthService', ['authState', 'initState', 'refreshAuthToken', 'signIn', 'signOut']);
 
   const dataUserC = {
-    acceptTermsDeliver: true,
+    accepttermsdeliver: true,
   };
 
   const categorys = {

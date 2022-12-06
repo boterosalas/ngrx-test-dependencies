@@ -88,7 +88,6 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.externalClickerForm();
     this.subscription = this.registerUser.userInfo$.subscribe((val) => {
-      console.log('userInfo', val);
       if (!!val) {
         this.userId = val.userId;
         this.identification = val.identification;
@@ -111,32 +110,27 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
   }
 
   getNames() {
-    console.log('getNames');
     this.cedulaFrontal$ = this.registerUser.getDocuments('IdentificationCard1').subscribe((res: ResponseService) => {
       if (res.objectResponse) {
         this.fileCedulaFrontal.name = res.objectResponse.name;
-        console.log('this.fileCedulaFrontal',this.fileCedulaFrontal);
       }
     });
 
     this.cedulaPosterior$ = this.registerUser.getDocuments('IdentificationCard2').subscribe((res: ResponseService) => {
       if (res.objectResponse) {
         this.fileCedulaPosterior.name = res.objectResponse.name;
-        console.log('this.fileCedulaPosterior',this.fileCedulaPosterior);
       }
     });
 
     this.certificadoBancario$ = this.registerUser.getDocuments('BankCertificate').subscribe((res: ResponseService) => {
       if (res.objectResponse) {
         this.fileCertificadoBancario.name = res.objectResponse.name;
-        console.log('this.fileCertificadoBancario',this.fileCertificadoBancario);
       }
     });
 
     this.rut$ = this.registerUser.getDocuments('Rut').subscribe((res: ResponseService) => {
       if (res.objectResponse) {
         this.fileRut.name = res.objectResponse.name;
-        console.log('this.fileRut',this.fileRut);
       }
     });
 

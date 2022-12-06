@@ -104,6 +104,11 @@
         box-shadow: 0px 3px 9px #3a226a80;
         color: #ffffff;
         cursor: pointer;
+        display: flex;
+        border-radius: 10px;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
         &:disabled {
           box-shadow: none;
           background-color: $gray2;

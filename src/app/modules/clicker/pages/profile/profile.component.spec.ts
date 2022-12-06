@@ -24,8 +24,8 @@ class MockUserService extends UserService {
 }
 
 let dataUserC = {
-  managedPayments: true,
-  isEmployeeUser: true,
+  managedpayments: true,
+  isemployeeuser: true,
 };
 
 describe('ProfileComponent', () => {

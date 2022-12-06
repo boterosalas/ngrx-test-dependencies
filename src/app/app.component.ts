@@ -379,13 +379,13 @@ export class AppComponent implements OnInit, OnDestroy {
         this.email = this.token.userInfo().userName;
         this.documentType = this.token.userInfo().documentType;
         this.subscription = this.user.getuserdata().subscribe((user) => {
-          this.onboardingViwed = user.onBoardingViewed;
-          this.rateapp = user.rateApp;
-          this.firstName = user.firstNames;
-          this.lastName = user.lastNames;
-          this.managedPayments = user.managedPayments;
-          this.isEmployee = user.isEmployeeGrupoExito;
-          this.newTerms = user.acceptTermsReferrals;
+          this.onboardingViwed = user.onboardingviewed;
+          this.rateapp = user.rateapp;
+          this.firstName = user.firstnames;
+          this.lastName = user.lastnames;
+          this.managedPayments = user.managedpayments;
+          this.isEmployee = user.isemployeegrupoexito;
+          this.newTerms = user.accepttermsreferrals;
           if (!this.newTerms && role === 'CLICKER') {
             this.getTerms();
             this.termsAndConditions();
