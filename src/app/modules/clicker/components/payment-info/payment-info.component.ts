@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
@@ -6,7 +6,7 @@ import { LoaderService } from 'src/app/services/loader.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { MasterDataService } from 'src/app/services/master-data.service';
 import { Subscription, Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, take } from 'rxjs/operators';
 import { ResponseService } from 'src/app/interfaces/response';
 import Swal from 'sweetalert2';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,6 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   selector: 'app-payment-info',
   templateUrl: './payment-info.component.html',
   styleUrls: ['./payment-info.component.scss'],
+  // encapsulation: ViewEncapsulation.None
 })
 export class PaymentInfoComponent implements OnInit, OnDestroy {
   constructor(
@@ -25,12 +26,23 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
     private _snackBar: MatSnackBar,
     private utils: UtilsService,
     private personalInfo: MasterDataService
-  ) {}
+  ) { }
 
   private subscription: Subscription = new Subscription();
+  cedulaFrontal$: Subscription = new Subscription();
+  cedulaPosterior$: Subscription = new Subscription();
+  certificadoBancario$: Subscription = new Subscription();
+  rut$: Subscription = new Subscription();
+  bank: string;
+  bankAccountNumber: string;
+  typeBankAccount: string;
 
   externalForm: UntypedFormGroup;
   validFormat: boolean;
+  fileCedulaFrontal: any = {};
+  fileCedulaPosterior: any = {};
+  fileCertificadoBancario: any = {};
+  fileRut: any = {};
   nameFileCed1 = '';
   nameFileCed2 = '';
   nameFileCert = '';
@@ -74,23 +86,71 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
   identification: string;
 
   ngOnInit() {
+    this.externalClickerForm();
     this.subscription = this.registerUser.userInfo$.subscribe((val) => {
+      console.log('userInfo', val);
       if (!!val) {
         this.userId = val.userId;
         this.identification = val.identification;
         this.name = val.firstNames;
         this.lastName = val.lastNames;
         this.phone = val.cellphone;
+        this.bank = val.bank;
+        this.bankAccountNumber = val.bankAccountNumber;
+        this.typeBankAccount = val.typeBankAccount;
       }
+      this.initForm();
+      this.getBanks();
     });
-
+    this.getNames();
     this.disabledCity = true;
     this.nameFileCed1 = '';
     this.nameFileCed2 = '';
     this.nameFileCert = '';
     this.nameFileRUT = '';
-    this.externalClickerForm();
-    this.getBanks();
+  }
+
+  getNames() {
+    console.log('getNames');
+    this.cedulaFrontal$ = this.registerUser.getDocuments('IdentificationCard1').subscribe((res: ResponseService) => {
+      if (res.objectResponse) {
+        this.fileCedulaFrontal.name = res.objectResponse.name;
+        console.log('this.fileCedulaFrontal',this.fileCedulaFrontal);
+      }
+    });
+
+    this.cedulaPosterior$ = this.registerUser.getDocuments('IdentificationCard2').subscribe((res: ResponseService) => {
+      if (res.objectResponse) {
+        this.fileCedulaPosterior.name = res.objectResponse.name;
+        console.log('this.fileCedulaPosterior',this.fileCedulaPosterior);
+      }
+    });
+
+    this.certificadoBancario$ = this.registerUser.getDocuments('BankCertificate').subscribe((res: ResponseService) => {
+      if (res.objectResponse) {
+        this.fileCertificadoBancario.name = res.objectResponse.name;
+        console.log('this.fileCertificadoBancario',this.fileCertificadoBancario);
+      }
+    });
+
+    this.rut$ = this.registerUser.getDocuments('Rut').subscribe((res: ResponseService) => {
+      if (res.objectResponse) {
+        this.fileRut.name = res.objectResponse.name;
+        console.log('this.fileRut',this.fileRut);
+      }
+    });
+
+  }
+
+  initForm() {
+    if (this.typeBankAccount) {
+      this.externalForm.controls.typeAccount.setValue(this.typeBankAccount);
+      this.externalForm.controls.typeAccount.updateValueAndValidity();
+    }
+    if (this.bankAccountNumber) {
+      this.externalForm.controls.numberAccount.setValue(`********${this.bankAccountNumber}`);
+      this.externalForm.controls.numberAccount.updateValueAndValidity();
+    }
   }
 
   /**
@@ -138,103 +198,46 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
    */
 
   public onFileChangeFiles(event, param: string) {
-    if (event.target.files && event.target.files.length) {
-      let error = { incorrect: true };
+    if (event.file) {
 
-      const nameFile = event.target.files[0].name;
-      this.getExtension(nameFile);
+      const formData = new FormData();
+      formData.append('file', event.file);
+      formData.append('typeDocument', param);
+      formData.append('identification', this.identification);
+      formData.append('userId', this.userId);
 
-      if (this.validFormat) {
-        const formData = new FormData();
+      this.subscription = this.registerUser.uploadFiles(formData).subscribe((response: ResponseService) => {
+        if (response.state === 'Success') {
+          this._snackBar.open(response.userMessage, 'Cerrar', {
+            duration: 5000,
+          });
+        } else {
+          Swal.fire({
+            title: 'Error al subir archivo',
+            text: response.userMessage,
+            type: 'error',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'accept-register-alert-error',
+          });
+        }
 
-        formData.append('file', event.target.files[0]);
-        formData.append('typeDocument', param);
-        formData.append('identification', this.identification);
-        formData.append('userId', this.userId);
-
-        this.subscription = this.registerUser.uploadFiles(formData).subscribe((response: ResponseService) => {
-          if (response.state === 'Success') {
-            error = null;
-            this._snackBar.open(response.userMessage, 'Cerrar', {
-              duration: 5000,
-            });
-          } else {
-            Swal.fire({
-              title: 'Error al subir archivo',
-              text: response.userMessage,
-              type: 'error',
-              confirmButtonText: 'Aceptar',
-              confirmButtonClass: 'accept-register-alert-error',
-            });
-          }
-
-          switch (param) {
-            case 'Rut':
-              this.nameFileRUT = nameFile;
-              if (response.state === 'Success') {
-                this.showErrorRUT = this.showErrorFormatRUT = false;
-              } else {
-                this.showErrorRUT = true;
-              }
-              this.externalForm.controls.rut.setErrors(error);
-              break;
-            case 'BankCertificate':
-              this.nameFileCert = nameFile;
-              if (response.state === 'Success') {
-                this.showErrorCert = this.showErrorFormatCert = false;
-              } else {
-                this.showErrorCert = true;
-              }
-              this.externalForm.controls.cert.setErrors(error);
-              break;
-            case 'IdentificationCard1':
-              this.nameFileCed1 = nameFile;
-              if (response.state === 'Success') {
-                this.showErrorCed1 = this.showErrorFormatCed1 = false;
-              } else {
-                this.showErrorCed1 = true;
-              }
-              this.externalForm.controls.ced1.setErrors(error);
-              break;
-            case 'IdentificationCard2':
-              this.nameFileCed2 = nameFile;
-              if (response.state === 'Success') {
-                this.showErrorCed2 = this.showErrorFormatCed2 = false;
-              } else {
-                this.showErrorCed2 = true;
-              }
-              this.externalForm.controls.ced2.setErrors(error);
-              break;
-            default:
-              break;
-          }
-        });
-      } else {
         switch (param) {
-          case 'Rut':
-            this.nameFileRUT = nameFile;
-            this.showErrorRUT = this.showErrorFormatRUT = true;
-            this.externalForm.controls.rut.setErrors({ incorrect: true });
+          case 'cedulaFrontal':
+            this.fileCedulaFrontal = event.file;
             break;
-          case 'BankCertificate':
-            this.nameFileCert = nameFile;
-            this.showErrorCert = this.showErrorFormatCert = true;
-            this.externalForm.controls.cert.setErrors({ incorrect: true });
+          case 'cedulaPosterior':
+            this.fileCedulaPosterior = event.file;
             break;
-          case 'IdentificationCard1':
-            this.nameFileCed1 = nameFile;
-            this.showErrorCed1 = this.showErrorFormatCed1 = true;
-            this.externalForm.controls.ced1.setErrors({ incorrect: true });
+          case 'certificadoBancario':
+            this.fileCertificadoBancario = event.file;
             break;
-          case 'IdentificationCard2':
-            this.nameFileCed2 = nameFile;
-            this.showErrorCed2 = this.showErrorFormatCed2 = true;
-            this.externalForm.controls.ced1.setErrors({ incorrect: true });
+          case 'rut':
+            this.fileRut = event.file;
             break;
           default:
             break;
         }
-      }
+      });
     }
   }
 
@@ -326,10 +329,17 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
   public getBanks() {
     this.subscription = this.personalInfo.getBanks().subscribe((res: ResponseService) => {
       this.banks = res.objectResponse;
+      if (this.bank) {
+        this.externalForm.controls.bank.setValue(this.bank);
+      }
     });
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.cedulaFrontal$.unsubscribe();
+    this.cedulaPosterior$.unsubscribe();
+    this.certificadoBancario$.unsubscribe();
+    this.rut$.unsubscribe();
   }
 }

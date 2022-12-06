@@ -116,3 +116,19 @@ span.info {
     width: 280px;
   }
 }
+
+.aditional-info-container{
+  width: 100%;
+  .input-file-container{
+    width: 100%;
+    margin-bottom: 12px;
+    .attach-file-container{
+      .control-placeholder{
+        font-size: 16px;
+      }
+    }
+    @media screen and (min-width:800px) {
+      max-width: 500px;
+    }
+  }
+}

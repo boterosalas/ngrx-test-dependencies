@@ -140,7 +140,7 @@
                 </mat-select>
 
                 <mat-error id="requiredBank" *ngIf="externalForm.controls.bank.invalid && externalForm.controls.bank.errors.required">{{
-                  'GENERIC.REQUIRED' | translate: { formValue: 'Banco' }
+                  'GENERIC.REQUIRED' | translate : { formValue: 'Banco' }
                 }}</mat-error>
               </mat-form-field>
             </span>
@@ -167,7 +167,7 @@
                 <mat-error
                   id="requiredTypeAccount"
                   *ngIf="externalForm.controls.typeAccount.invalid && externalForm.controls.typeAccount.errors.required"
-                  >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Tipo de cuenta' } }}</mat-error
+                  >{{ 'GENERIC.REQUIRED' | translate : { formValue: 'Tipo de cuenta' } }}</mat-error
                 >
               </mat-form-field>
             </span>
@@ -190,7 +190,7 @@
                 <mat-error
                   id="requiredTypeAccount"
                   *ngIf="externalForm.controls.numberAccount.invalid && externalForm.controls.numberAccount.errors.required"
-                  >{{ 'GENERIC.REQUIRED' | translate: { formValue: 'Número de cuenta' } }}</mat-error
+                  >{{ 'GENERIC.REQUIRED' | translate : { formValue: 'Número de cuenta' } }}</mat-error
                 >
 
                 <mat-error
@@ -236,109 +236,148 @@
               (click)="sendPayment()"
               [disabled]="!externalForm.valid"
             >
-              <span class="gtmPerfilClicGestionarPagosClickam">{{ 'GENERIC.CONTINUE' | translate }}</span>
+              <span class="gtmPerfilClicGestionarPagosClickam">{{ 'GENERIC.SAVE' | translate }}</span>
             </button>
           </span>
         </div>
-
       </mat-card-content>
     </mat-card>
   </div>
-  <h3 class="f-18">{{ 'REGISTER.ADITIONAL_FILE' | translate }}</h3>
+  <section class="aditional-info-container">
+    <h3 class="f-18">{{ 'REGISTER.ADITIONAL_FILE' | translate }}</h3>
 
-  <p>{{ 'REGISTER.INFO_ADDITIONAL' | translate }}</p>
-  <p class="purple-text">
-    <strong>{{ 'REGISTER.INFO_ADDITIONAL_2' | translate }}</strong>
-  </p>
-  <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px">
-    <div fxLayout="column" fxLayoutAlign="center" class="space">
-      <strong class="gray">{{ 'REGISTER.CED1' | translate }}</strong>
-      <span *ngIf="nameFileCed1 === ''">No hay archivo seleccionado</span>
-      <span class="file-input" *ngIf="nameFileCed1 !== ''">{{ nameFileCed1 | truncate: '20' }}</span>
+    <p>{{ 'REGISTER.INFO_ADDITIONAL' | translate }}</p>
+    <p class="purple-text">
+      <strong>{{ 'REGISTER.INFO_ADDITIONAL_2' | translate }}</strong>
+    </p>
+
+    <div class="input-file-container">
+      <app-input-file
+        [validFormats]="['jpg', 'jpeg', 'pdf']"
+        (fileOutput)="onFileChangeFiles($event, 'cedulaFrontal')"
+        placeholder="Cédula parte frontal"
+        idControl="cedulaFrontalControl"
+        [errorFile]="fileCedulaFrontal.error"
+        [nameFile]="fileCedulaFrontal.name"
+      ></app-input-file>
     </div>
-    <div class="space">
-      <label for="ced1" id="upload" class="cursor-pointer">
-        <span *ngIf="!showErrorCed1">
-          <i class="tio-upload_on_cloud mt-1 f-25 purple2-text" *ngIf="nameFileCed1 === ''"></i>
-          <i class="tio-cloud_on mt-1 f-25 purple2-text" *ngIf="nameFileCed1 !== ''"></i>
-        </span>
-        <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorCed1"></i>
-      </label>
+    <div class="input-file-container">
+      <app-input-file
+        [validFormats]="['jpg', 'jpeg', 'pdf']"
+        (fileOutput)="onFileChangeFiles($event, 'cedulaPosterior')"
+        placeholder="Cédula parte porterior"
+        idControl="cedulaPosteriorControl"
+        [errorFile]="fileCedulaPosterior.error"
+        [nameFile]="fileCedulaPosterior.name"
+      ></app-input-file>
     </div>
-  </div>
-
-  <mat-error *ngIf="showErrorFormatCed1" class="small pb-2">
-    {{ 'GENERIC.INVALID_FORMAT_FILE_REGISTER' | translate }}
-  </mat-error>
-
-  <br />
-
-  <input (change)="onFileChangeFiles($event, 'IdentificationCard1')" id="ced1" type="file" formControlName="ced1" />
-
-  <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px">
-    <div fxLayout="column" fxLayoutAlign="center" class="space">
-      <strong class="gray">{{ 'REGISTER.CED2' | translate }}</strong>
-      <span *ngIf="nameFileCed2 === ''">No hay archivo seleccionado</span>
-      <span class="file-input" *ngIf="nameFileCed2 !== ''">{{ nameFileCed2 | truncate: '20' }}</span>
+    <div class="input-file-container">
+      <app-input-file
+        [validFormats]="['jpg', 'jpeg', 'pdf']"
+        (fileOutput)="onFileChangeFiles($event, 'certificadoBancario')"
+        placeholder="Certificación bancaria"
+        idControl="certificadoBancarioControl"
+        [errorFile]="fileCertificadoBancario.error"
+        [nameFile]="fileCertificadoBancario.name"
+      ></app-input-file>
     </div>
-    <div class="space">
-      <label for="ced2" id="upload" class="cursor-pointer">
-        <span *ngIf="!showErrorCed2">
-          <i class="tio-upload_on_cloud mt-1 f-25 purple2-text" *ngIf="nameFileCed2 === ''"></i>
-          <i class="tio-cloud_on mt-1 f-25 purple2-text" *ngIf="nameFileCed2 !== ''"></i>
-        </span>
-        <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorCed2"></i>
-      </label>
+    <div class="input-file-container">
+      <app-input-file
+        [validFormats]="['jpg', 'jpeg', 'pdf']"
+        (fileOutput)="onFileChangeFiles($event, 'rut')"
+        placeholder="RUT"
+        idControl="rutControl"
+        [errorFile]="fileRut.error"
+        [nameFile]="fileRut.name"
+      ></app-input-file>
     </div>
-  </div>
-  <mat-error *ngIf="showErrorFormatCed2" class="small pb-2">
-    {{ 'GENERIC.INVALID_FORMAT_FILE_REGISTER' | translate }}
-  </mat-error>
+  </section>
 
-  <br />
-
-  <input (change)="onFileChangeFiles($event, 'IdentificationCard2')" id="ced2" type="file" formControlName="ced2" />
-  <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" class="pb-3">
-    <div fxLayout="column" fxLayoutAlign="center" class="space">
-      <strong class="gray">{{ 'REGISTER.ACCOUNT_CERT' | translate }}</strong>
-      <span *ngIf="nameFileCert === ''">No hay archivo seleccionado</span>
-      <span class="file-input" *ngIf="nameFileCert !== ''">{{ nameFileCert | truncate: '20' }}</span>
+  <!-- <ng-container>
+    <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px">
+      <div fxLayout="column" fxLayoutAlign="center" class="space">
+        <strong class="gray">{{ 'REGISTER.CED1' | translate }}</strong>
+        <span *ngIf="nameFileCed1 === ''">No hay archivo seleccionado</span>
+        <span class="file-input" *ngIf="nameFileCed1 !== ''">{{ nameFileCed1 | truncate : '20' }}</span>
+      </div>
+      <div class="space">
+        <label for="ced1" id="upload" class="cursor-pointer">
+          <span *ngIf="!showErrorCed1">
+            <i class="tio-upload_on_cloud mt-1 f-25 purple2-text" *ngIf="nameFileCed1 === ''"></i>
+            <i class="tio-cloud_on mt-1 f-25 purple2-text" *ngIf="nameFileCed1 !== ''"></i>
+          </span>
+          <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorCed1"></i>
+        </label>
+      </div>
     </div>
-    <div class="space">
-      <label for="cert" id="upload" class="cursor-pointer">
-        <span *ngIf="!showErrorCert">
-          <i class="tio-upload_on_cloud mt-1 f-25 purple2-text" *ngIf="nameFileCert === ''"></i>
-          <i class="tio-cloud_on mt-1 f-25 purple2-text" *ngIf="nameFileCert !== ''"></i>
-        </span>
-        <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorCert"></i>
-      </label>
-    </div>
-  </div>
-  <mat-error *ngIf="showErrorFormatCert" class="small pb-2 d-block">
-    {{ 'GENERIC.INVALID_FORMAT_FILE_REGISTER' | translate }}
-  </mat-error>
+    <mat-error *ngIf="showErrorFormatCed1" class="small pb-2">
+      {{ 'GENERIC.INVALID_FORMAT_FILE_REGISTER' | translate }}
+    </mat-error>
+    <br />
+    <input (change)="onFileChangeFiles($event, 'IdentificationCard1')" id="ced1" type="file" formControlName="ced1" />
 
-  <input (change)="onFileChangeFiles($event, 'BankCertificate')" id="cert" type="file" formControlName="cert" />
-
-  <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" class="pb-3">
-    <div fxLayout="column" fxLayoutAlign="center" class="space">
-      <strong class="gray">{{ 'REGISTER.RUT' | translate }}</strong>
-      <span *ngIf="nameFileRUT === ''">No hay archivo seleccionado</span>
-      <span class="file-input" *ngIf="nameFileRUT !== ''">{{ nameFileRUT | truncate: '20' }}</span>
+    <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px">
+      <div fxLayout="column" fxLayoutAlign="center" class="space">
+        <strong class="gray">{{ 'REGISTER.CED2' | translate }}</strong>
+        <span *ngIf="nameFileCed2 === ''">No hay archivo seleccionado</span>
+        <span class="file-input" *ngIf="nameFileCed2 !== ''">{{ nameFileCed2 | truncate : '20' }}</span>
+      </div>
+      <div class="space">
+        <label for="ced2" id="upload" class="cursor-pointer">
+          <span *ngIf="!showErrorCed2">
+            <i class="tio-upload_on_cloud mt-1 f-25 purple2-text" *ngIf="nameFileCed2 === ''"></i>
+            <i class="tio-cloud_on mt-1 f-25 purple2-text" *ngIf="nameFileCed2 !== ''"></i>
+          </span>
+          <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorCed2"></i>
+        </label>
+      </div>
     </div>
-    <div class="space">
-      <label for="rut" id="upload" class="cursor-pointer">
-        <span *ngIf="!showErrorRUT">
-          <i class="tio-upload_on_cloud mt-1 f-25 purple2-text" *ngIf="nameFileRUT === ''"></i>
-          <i class="tio-cloud_on mt-1 f-25 purple2-text" *ngIf="nameFileRUT !== ''"></i>
-        </span>
-        <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorRUT"></i>
-      </label>
-    </div>
-  </div>
-  <mat-error *ngIf="showErrorFormatRUT" class="small pb-2 d-block">
-    {{ 'GENERIC.INVALID_FORMAT_FILE_REGISTER' | translate }}
-  </mat-error>
+    <mat-error *ngIf="showErrorFormatCed2" class="small pb-2">
+      {{ 'GENERIC.INVALID_FORMAT_FILE_REGISTER' | translate }}
+    </mat-error>
+    <br />
+    <input (change)="onFileChangeFiles($event, 'IdentificationCard2')" id="ced2" type="file" formControlName="ced2" />
 
-  <input (change)="onFileChangeFiles($event, 'Rut')" id="rut" type="file" formControlName="rut" />
+    <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" class="pb-3">
+      <div fxLayout="column" fxLayoutAlign="center" class="space">
+        <strong class="gray">{{ 'REGISTER.ACCOUNT_CERT' | translate }}</strong>
+        <span *ngIf="nameFileCert === ''">No hay archivo seleccionado</span>
+        <span class="file-input" *ngIf="nameFileCert !== ''">{{ nameFileCert | truncate : '20' }}</span>
+      </div>
+      <div class="space">
+        <label for="cert" id="upload" class="cursor-pointer">
+          <span *ngIf="!showErrorCert">
+            <i class="tio-upload_on_cloud mt-1 f-25 purple2-text" *ngIf="nameFileCert === ''"></i>
+            <i class="tio-cloud_on mt-1 f-25 purple2-text" *ngIf="nameFileCert !== ''"></i>
+          </span>
+          <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorCert"></i>
+        </label>
+      </div>
+    </div>
+    <mat-error *ngIf="showErrorFormatCert" class="small pb-2 d-block">
+      {{ 'GENERIC.INVALID_FORMAT_FILE_REGISTER' | translate }}
+    </mat-error>
+    <input (change)="onFileChangeFiles($event, 'BankCertificate')" id="cert" type="file" formControlName="cert" />
+
+    <div fxLayout="row" fxLayoutAlign="space-start center" fxLayoutGap="50px" class="pb-3">
+      <div fxLayout="column" fxLayoutAlign="center" class="space">
+        <strong class="gray">{{ 'REGISTER.RUT' | translate }}</strong>
+        <span *ngIf="nameFileRUT === ''">No hay archivo seleccionado</span>
+        <span class="file-input" *ngIf="nameFileRUT !== ''">{{ nameFileRUT | truncate : '20' }}</span>
+      </div>
+      <div class="space">
+        <label for="rut" id="upload" class="cursor-pointer">
+          <span *ngIf="!showErrorRUT">
+            <i class="tio-upload_on_cloud mt-1 f-25 purple2-text" *ngIf="nameFileRUT === ''"></i>
+            <i class="tio-cloud_on mt-1 f-25 purple2-text" *ngIf="nameFileRUT !== ''"></i>
+          </span>
+          <i class="tio-cloud_disabled mt-1 f-25 purple2-text" *ngIf="showErrorRUT"></i>
+        </label>
+      </div>
+    </div>
+    <mat-error *ngIf="showErrorFormatRUT" class="small pb-2 d-block">
+      {{ 'GENERIC.INVALID_FORMAT_FILE_REGISTER' | translate }}
+    </mat-error>
+    <input (change)="onFileChangeFiles($event, 'Rut')" id="rut" type="file" formControlName="rut" />
+  </ng-container> -->
 </form>

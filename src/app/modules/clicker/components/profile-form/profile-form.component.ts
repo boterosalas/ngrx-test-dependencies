@@ -7,7 +7,7 @@ import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { MatDialog } from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
 import { ConfirmPasswordValidator } from 'src/app/validators/confirm-password.validator';
 import { MasterDataService } from 'src/app/services/master-data.service';
@@ -177,7 +177,6 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
         this.isEmployee = val.isEmployeeGrupoExito;
         this.idVerified = val.verified;
       }
-
       this.formProfile();
       this.formProfileCell();
       this.formAccount();
@@ -213,7 +212,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
           const accountStatus = resp.objectResponse.find((status) => status.id === this.idVerified);
           if (accountStatus) {
             this.accountStatus = this.typesStatusAccount.find((type) => type.code === accountStatus.code);
-            if (description && accountStatus.code !== 'NOTVERIFIED' || accountStatus.code !=='INCOMPLETE') {
+            if (description && accountStatus.code !== 'NOTVERIFIED' || accountStatus.code !== 'INCOMPLETE') {
               this.accountStatus.description = description;
             }
           }
@@ -662,7 +661,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
             break;
           case 'IdentificationCard2':
             this.nameFileCed2 = nameFile;
-            this.showErrorCed2 =  true;
+            this.showErrorCed2 = true;
             this.showErrorFormatCed2 = true;
             break;
           default:
@@ -705,7 +704,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     this.user.getDocuments('Rut').subscribe((rut: ResponseService) => {
       if (rut.objectResponse !== null) {
         this.nameFileRut = rut.objectResponse.name;
-      } else{
+      } else {
         this.nameFileRut = '';
       }
     });

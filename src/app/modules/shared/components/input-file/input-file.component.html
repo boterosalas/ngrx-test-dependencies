@@ -1,0 +1,22 @@
+<div class="attach-file-container">
+  <label [for]="idControl" class="control-label">
+    <strong class="control-placeholder title-gray">
+      {{placeholder}}
+    </strong>
+    <span class="control-file-name" *ngIf="!nameFile"> No hay archivo seleccionado </span>
+    <span class="control-file-name" *ngIf="nameFile">
+      {{ nameFile | truncate: '40' }}
+    </span>
+    <ng-container *ngIf="!errorFile; else errorFileTemplate">
+      <img class="control-icon" *ngIf="!nameFile" [src]="blobUrl + 'img-ofertas/dashboard/cloud-upload-icon.svg'" alt="Icono" />
+      <img class="control-icon" *ngIf="nameFile" [src]="blobUrl + 'img-ofertas/dashboard/cloud-upload-successfull-icon.svg'" alt="Éxito" />
+    </ng-container>
+    <ng-template #errorFileTemplate>
+      <img class="control-icon w-icon" [src]="blobUrl + 'img-ofertas/dashboard/cloud-upload-error-icon.svg'" alt="Error" />
+    </ng-template>
+  </label>
+  <mat-error *ngIf="errorFile" class="control-error">
+    {{ errorFile }}
+  </mat-error>
+  <input class="input-control" (change)="uploadFileImage($event)" [accept]="validFormatsParam" [id]="idControl" type="file" />
+</div>
