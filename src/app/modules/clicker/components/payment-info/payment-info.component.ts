@@ -192,14 +192,23 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
    */
 
   public onFileChangeFiles(event, param: string) {
+    console.log('event',event);
     if (event.file) {
 
-      const formData = new FormData();
-      formData.append('file', event.file);
-      formData.append('typeDocument', param);
-      formData.append('identification', this.identification);
-      formData.append('userId', this.userId);
-
+      // const formData = new FormData();
+      // formData.append('file', event.file);
+      // formData.append('typeDocument', param);
+      // formData.append('identification', this.identification);
+      // formData.append('userId', this.userId);
+      
+      const formData = {
+        file: event.file,
+        typeDocument: param,
+        identification: this.identification,
+        userId: this.userId
+      }
+      
+      console.log('formData',formData);
       this.subscription = this.registerUser.uploadFiles(formData).subscribe((response: ResponseService) => {
         if (response.state === 'Success') {
           this._snackBar.open(response.userMessage, 'Cerrar', {

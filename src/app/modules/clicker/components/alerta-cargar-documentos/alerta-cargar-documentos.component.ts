@@ -7,8 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./alerta-cargar-documentos.component.scss']
 })
 export class AlertaCargarDocumentosComponent {
-
-  @Input() hasminimuncommission: boolean = true;
+  
   showAlert: boolean = true;
 
   closeAlert() {

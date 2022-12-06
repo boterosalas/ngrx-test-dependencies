@@ -4,7 +4,7 @@
   <app-topbar></app-topbar>
 
   <section class="max-1600-container cargar-documentos-container">
-    <app-alerta-cargar-documentos *ngIf="managedPayments === false" [hasminimuncommission]="hasminimuncommission"></app-alerta-cargar-documentos>
+    <app-alerta-cargar-documentos *ngIf="managedPayments === false && hasminimuncommission"></app-alerta-cargar-documentos>
   </section>
 
   <!-- stories clickam looged -->
