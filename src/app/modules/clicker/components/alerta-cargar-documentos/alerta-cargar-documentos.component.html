@@ -6,12 +6,20 @@
       <img class="info-icon" src="assets/img/documents-info.svg" alt="" />
       <div class="upload-documents__text-info">
         <h3 class="upload-documents__title">
-          <ng-container *ngIf="hasminimuncommission; else titleTemplate"> ¡No te olvides de tus recompensas! </ng-container>
-          <ng-template #titleTemplate> ¡Aún tenemos tus recompensas! </ng-template>
+          <a [routerLink]="['/mi-perfil']" (click)="saveSelectedTab()">
+            <ng-container *ngIf="hasminimuncommission; else titleTemplate"> ¡No te olvides de tus recompensas! </ng-container>
+            <ng-template #titleTemplate> ¡Aún tenemos tus recompensas! </ng-template>
+          </a>
         </h3>
-        <p class="upload-documents__paragraph">
-          <ng-container *ngIf="hasminimuncommission; else paragraphTemplate"> Inscribe tu cuenta bancaria donde podremos consignar todas tus recompensas. </ng-container>
-          <ng-template #paragraphTemplate> No hemos podido hacer efectiva tus recompensas, revisa que la cuenta inscrita se encuentra activa. </ng-template>
+        <p [routerLink]="['/mi-perfil']" class="upload-documents__paragraph">
+          <a [routerLink]="['/mi-perfil']" (click)="saveSelectedTab()">
+            <ng-container *ngIf="hasminimuncommission; else paragraphTemplate">
+              Inscribe tu cuenta bancaria donde podremos consignar todas tus recompensas.
+            </ng-container>
+            <ng-template #paragraphTemplate>
+              No hemos podido hacer efectiva tus recompensas, revisa que la cuenta inscrita se encuentra activa.
+            </ng-template>
+          </a>
         </p>
       </div>
     </div>
