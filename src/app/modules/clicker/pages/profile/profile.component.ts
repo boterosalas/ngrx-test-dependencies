@@ -131,8 +131,7 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public getUserData() {
     this.subscription = this.user.getuserdata().subscribe((user) => {
-      this.managedPayments = user.managedPayments;
-      // this.managedPayments = true;
+      this.managedPayments = user.managedpayments;
       this.isEmployee = user.isemployeegrupoexito;
       this.profile = true;
     });

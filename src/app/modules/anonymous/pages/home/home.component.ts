@@ -291,7 +291,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       if (role === 'CLICKER' || role === 'ADMIN' || role === 'SUPERADMIN') {
         this.subscription = this.user.getuserdata().subscribe((user) => {
           this.isEmployee = user.isemployeegrupoexito;
-          // this.managedPayments = user.managedpayments;
+          this.managedPayments = user.managedpayments;
           this.hasminimuncommission = user.hasminimuncommission;
           if (role === 'CLICKER') {
             this.getMissions();
@@ -404,7 +404,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public bussinessNavigation(bussiness) {
     const token = localStorage.getItem('ACCESS_TOKEN');
-    if (token === null) {
+    if (!token) {
       this.utils.showloginForm();
     }
 

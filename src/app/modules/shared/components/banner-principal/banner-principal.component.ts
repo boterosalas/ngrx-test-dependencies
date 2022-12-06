@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit, TemplateRef, ViewChild } f
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { of, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { BreakpointService } from 'src/app/services/breakpoint.service';
 import { ContentService } from 'src/app/services/content.service';
 import { TokenService } from 'src/app/services/token.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -14,7 +15,9 @@ import { DialogComponent } from '../dialog/dialog.component';
 })
 export class BannerPrincipalComponent implements OnInit, OnDestroy, AfterViewInit {
   route: string = '';
+  currentImage: string = '';
   isAnExternalRedirect: boolean = false;
+  breakpoint$: Subscription = new Subscription();
 
   isLogged$: Subscription = new Subscription();
   saveVisitOffer$: Subscription = new Subscription();
@@ -31,6 +34,7 @@ export class BannerPrincipalComponent implements OnInit, OnDestroy, AfterViewIni
     private dialog: MatBottomSheet,
     private content: ContentService,
     private token: TokenService,
+    private breakPointService: BreakpointService,
   ) { }
 
   ngOnInit(): void {
@@ -40,8 +44,19 @@ export class BannerPrincipalComponent implements OnInit, OnDestroy, AfterViewIni
   getBanner() {
     this.banners$ = this.content.getOffersbyType({ id: 'BANNER', admin: false }).subscribe(res => {
       this.banner = res[0];
+      this.breakpoint();
       this.evaluateBannerBehaviour();
     });
+  }
+
+  breakpoint() {
+    this.breakpoint$ = this.breakPointService
+      .isWidthLessThanBreakpoint('800')
+      .subscribe((res: boolean) => {
+        if(this.banner){
+          this.currentImage = res ? this.banner.imageurlmobile : this.banner.imageurlweb;
+        }
+      });
   }
 
   ngAfterViewInit(): void {
@@ -95,7 +110,7 @@ export class BannerPrincipalComponent implements OnInit, OnDestroy, AfterViewIni
         showClose: false,
         showCloseIcon: true,
         infoaditional: banner.infoaditional,
-        img: banner.imageurlweb,
+        img: banner.imageurlmobile,
         showProduct: true,
         showshowTitle: false,
         buttonClose: 'Cerrar',
@@ -108,5 +123,6 @@ export class BannerPrincipalComponent implements OnInit, OnDestroy, AfterViewIni
   ngOnDestroy(): void {
     this.isLogged$.unsubscribe();
     this.saveVisitOffer$.unsubscribe();
+    this.breakpoint$.unsubscribe();
   }
 }

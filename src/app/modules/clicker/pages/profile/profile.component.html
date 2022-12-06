@@ -5,8 +5,7 @@
 ></app-banner>
 
 <div class="container mb-4" [ngClass]="{ 'd-none': !profile, 'd-block': profile }">
-
-  <mat-tab-group #tabGroup [(selectedIndex)]=selectedIndex>
+  <mat-tab-group #tabGroup [(selectedIndex)]="selectedIndex">
     <mat-tab>
       <ng-template mat-tab-label>
         <span class="gtmPerfilClicCuentaClickam">PERFIL</span>
@@ -25,16 +24,16 @@
       <ng-template mat-tab-label>
         <span class="gtmPerfilClicGestionarPagosClickam">DATOS FINANCIEROS</span>
       </ng-template>
-      <!-- <app-payment-info *ngIf="(auth.getRole$ | async) !== 'ADMIN' && !isEmployee"></app-payment-info> -->
       <ng-container *ngIf="(auth.getRole$ | async) !== 'ADMIN' && !isEmployee">
-        <app-payment-info></app-payment-info>
-        <!-- <app-payment-info *ngIf="!managedPayments"></app-payment-info>
-        <app-profile-form *ngIf="managedPayments" [showBankInfo]="true" [showInfoAccount]="false"></app-profile-form> -->
+        <app-profile-form
+          *ngIf="managedPayments; else noManagedPayments"
+          [showBankInfo]="true"
+          [showInfoAccount]="false"
+        ></app-profile-form>
+        <ng-template #noManagedPayments>
+          <app-payment-info></app-payment-info>
+        </ng-template>
       </ng-container>
-      <!-- <ng-container *ngIf="(auth.getRole$ | async) !== 'ADMIN'">
-        <app-payment-info *ngIf="false"></app-payment-info>
-        <app-profile-form *ngIf="true" [showBankInfo]="true" [showInfoAccount]="false"></app-profile-form>
-      </ng-container> -->
     </mat-tab>
 
     <mat-tab>

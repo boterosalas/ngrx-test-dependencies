@@ -1,9 +1,9 @@
 <div class="principal-banner-container" *ngIf="banner">
   <a [href]="route" target="_blank" *ngIf="isAnExternalRedirect; else internalRedirectTemplate">
-    <img class="banner-image banner-image-link" (click)="bannerClick()" [src]="banner.imageweb" alt="" />
+    <img class="banner-image banner-image-link" (click)="bannerClick()" [src]="currentImage" alt="" />
   </a>
   <ng-template #internalRedirectTemplate>
-    <img class="banner-image" [ngClass]="{ 'banner-image-link': route }" (click)="bannerClick()" [src]="banner.imageweb" alt="" />
+    <img class="banner-image" [ngClass]="{ 'banner-image-link': route }" (click)="bannerClick()" [src]="currentImage" alt="" />
   </ng-template>
 </div>
 

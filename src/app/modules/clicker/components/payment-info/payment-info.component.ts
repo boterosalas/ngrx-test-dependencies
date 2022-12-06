@@ -39,6 +39,10 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
 
   externalForm: UntypedFormGroup;
   validFormat: boolean;
+  cedulaFrontalIsLoading: boolean = true;
+  cedulaPosteriorIsLoading: boolean = true;
+  certificadoBancarioIsLoading: boolean = true;
+  rutIsLoading: boolean = true;
   fileCedulaFrontal: any = {};
   fileCedulaPosterior: any = {};
   fileCertificadoBancario: any = {};
@@ -114,24 +118,28 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
       if (res.objectResponse) {
         this.fileCedulaFrontal.name = res.objectResponse.name;
       }
+      this.cedulaFrontalIsLoading = false;
     });
-
+    
     this.cedulaPosterior$ = this.registerUser.getDocuments('IdentificationCard2').subscribe((res: ResponseService) => {
       if (res.objectResponse) {
         this.fileCedulaPosterior.name = res.objectResponse.name;
       }
+      this.cedulaPosteriorIsLoading = false;
     });
-
+    
     this.certificadoBancario$ = this.registerUser.getDocuments('BankCertificate').subscribe((res: ResponseService) => {
       if (res.objectResponse) {
         this.fileCertificadoBancario.name = res.objectResponse.name;
       }
+      this.certificadoBancarioIsLoading = false;
     });
-
+    
     this.rut$ = this.registerUser.getDocuments('Rut').subscribe((res: ResponseService) => {
       if (res.objectResponse) {
         this.fileRut.name = res.objectResponse.name;
       }
+      this.rutIsLoading = false;
     });
 
   }
@@ -192,23 +200,12 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
    */
 
   public onFileChangeFiles(event, param: string) {
-    console.log('event',event);
     if (event.file) {
-
-      // const formData = new FormData();
-      // formData.append('file', event.file);
-      // formData.append('typeDocument', param);
-      // formData.append('identification', this.identification);
-      // formData.append('userId', this.userId);
-      
-      const formData = {
-        file: event.file,
-        typeDocument: param,
-        identification: this.identification,
-        userId: this.userId
-      }
-      
-      console.log('formData',formData);
+      const formData = new FormData();
+      formData.append('file', event.file);
+      formData.append('typeDocument', param);
+      formData.append('identification', this.identification);
+      formData.append('userId', this.userId);
       this.subscription = this.registerUser.uploadFiles(formData).subscribe((response: ResponseService) => {
         if (response.state === 'Success') {
           this._snackBar.open(response.userMessage, 'Cerrar', {
