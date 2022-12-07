@@ -202,12 +202,7 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
   public onFileChangeFiles(event, param: string) {
     const name = event.name;
     const nameSplit = name.split('.');
-    if (event.file) {
-      // const formData = new FormData();
-      // formData.append('file', event.file);
-      // formData.append('typeDocument', param);
-      // formData.append('identification', this.identification);
-      // formData.append('userId', this.userId);
+    if (event.file && !event.error) {
       const formData = {
         file: event.file,
         typeDocument: param,
