@@ -226,16 +226,16 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
         }
 
         switch (param) {
-          case 'cedulaFrontal':
+          case 'IdentificationCard1':
             this.fileCedulaFrontal = event.file;
             break;
-          case 'cedulaPosterior':
+          case 'IdentificationCard2':
             this.fileCedulaPosterior = event.file;
             break;
-          case 'certificadoBancario':
+          case 'BankCertificate':
             this.fileCertificadoBancario = event.file;
             break;
-          case 'rut':
+          case 'Rut':
             this.fileRut = event.file;
             break;
           default:
