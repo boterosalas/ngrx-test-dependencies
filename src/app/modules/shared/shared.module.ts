@@ -71,6 +71,7 @@ import { QrComponent } from './components/qr/qr.component';
 import { BannerPrincipalComponent } from './components/banner-principal/banner-principal.component';
 import { ModalReferirComprarComponent } from './components/modal-referir-comprar/modal-referir-comprar.component';
 import { InputFileComponent } from './components/input-file/input-file.component';
+import { CodigoConfirmacionComponent } from './components/codigo-confirmacion/codigo-confirmacion.component';
 
 @NgModule({
   declarations: [
@@ -125,7 +126,8 @@ import { InputFileComponent } from './components/input-file/input-file.component
     QrComponent,
     BannerPrincipalComponent,
     ModalReferirComprarComponent,
-    InputFileComponent
+    InputFileComponent,
+    CodigoConfirmacionComponent
   ],
   imports: [
     CommonModule,
@@ -203,7 +205,8 @@ import { InputFileComponent } from './components/input-file/input-file.component
     QrComponent,
     BannerPrincipalComponent,
     ModalReferirComprarComponent,
-    InputFileComponent
+    InputFileComponent,
+    CodigoConfirmacionComponent
   ],
 })
 export class SharedModule {}

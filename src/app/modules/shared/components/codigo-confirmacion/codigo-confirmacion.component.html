@@ -1,0 +1,19 @@
+<div class="confirmation-code-container">
+  <h3>Revisa tu correo</h3>
+  <p>
+    Hemos enviado un mensaje a tu correo con un código de confirmación. Ingrésalo en el siguiente campo para validar tu identidad. No
+    olvides revisar la bandeja de correos no deseados o spam.
+  </p>
+  <form (submit)="sendCode()">
+    <mat-form-field class="form-field-container">
+      <input matInput placeholder="Nombre" [formControl]="codeControl" type="text" class="form-field-input" />
+      <mat-error *ngIf="codeControl.invalid && codeControl.errors.required">
+        {{ 'GENERIC.REQUIRED' | translate : { formValue: 'Código' } }}
+      </mat-error>
+    </mat-form-field>
+    <div class="button-group-container">
+      <button type="button" class="button-base cancel-button">Cancelar</button>
+      <button type="submit" class="button-base">Aceptar</button>
+    </div>
+  </form>
+</div>

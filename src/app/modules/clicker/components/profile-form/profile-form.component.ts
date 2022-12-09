@@ -48,6 +48,18 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   @Input() showInfoAccount: boolean;
 
   public subscription: Subscription = new Subscription();
+  cedulaFrontal$: Subscription = new Subscription();
+  cedulaPosterior$: Subscription = new Subscription();
+  certificadoBancario$: Subscription = new Subscription();
+  rut$: Subscription = new Subscription();
+  cedulaFrontalIsLoading: boolean = true;
+  cedulaPosteriorIsLoading: boolean = true;
+  certificadoBancarioIsLoading: boolean = true;
+  rutIsLoading: boolean = true;
+  fileCedulaFrontal: any = {};
+  fileCedulaPosterior: any = {};
+  fileCertificadoBancario: any = {};
+  fileRut: any = {};
   profileForm: UntypedFormGroup;
   profileFormCell: UntypedFormGroup;
   profileFormPass: UntypedFormGroup;
@@ -94,10 +106,6 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   showErrorFormatCert = false;
   showErrorFormatCed1 = false;
   showErrorFormatCed2 = false;
-  fileRut: any;
-  fileBankCertificate: any;
-  fileCed1: any;
-  fileCed2: any;
   activebutton = false;
   wrongPass = false;
   numberPattern = '^(0|[0-9][0-9]*)$';
@@ -583,91 +591,40 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
    */
 
   public onFileChangeFiles(event, param: string) {
-    if (event.target.files && event.target.files.length) {
-      const nameFile = event.target.files[0].name;
-      this.getExtension(nameFile);
+    const name = event.name;
+    const nameSplit = name.split('.');
+    if (event.file && !event.error) {
+      const formData = {
+        file: event.file,
+        typeDocument: param,
+        identification: this.id,
+        extension: `.${nameSplit[nameSplit.length - 1]}`,
+        userId: this.userId
+      }
 
-      if (this.validFormat) {
-        const formData = new FormData();
-        formData.append('file', event.target.files[0]);
-        formData.append('typeDocument', param);
-        formData.append('identification', this.id);
-        formData.append('userId', this.userId);
-
-        this.subscription = this.user.uploadFiles(formData).subscribe((response: ResponseService) => {
-          if (response.state === 'Success') {
-            this.activebutton = true;
-          } else {
-            this.openSnackBar(response.userMessage, 'Cerrar');
-          }
-
-          switch (param) {
-            case 'Rut':
-              this.nameFileRut = nameFile;
-              if (response.state === 'Success') {
-                this.showErrorRut = false;
-                this.showErrorFormatRut = false;
-              } else {
-                this.showErrorRut = true;
-              }
-              break;
-            case 'BankCertificate':
-              this.nameFileCert = nameFile;
-              if (response.state === 'Success') {
-                this.showErrorCert = false;
-                this.showErrorFormatCert = false;
-              } else {
-                this.showErrorCert = true;
-              }
-              break;
-            case 'IdentificationCard1':
-              this.nameFileCed1 = nameFile;
-              if (response.state === 'Success') {
-                this.showErrorCed1 = false;
-                this.showErrorFormatCed1 = false;
-              } else {
-                this.showErrorCed1 = true;
-              }
-              break;
-            case 'IdentificationCard2':
-              this.nameFileCed2 = nameFile;
-              if (response.state === 'Success') {
-                this.showErrorCed2 = false;
-                this.showErrorFormatCed2 = false;
-              } else {
-                this.showErrorCed2 = true;
-              }
-              break;
-            default:
-              break;
-          }
-        });
-      } else {
+      this.subscription = this.user.uploadFiles(formData).subscribe((response: ResponseService) => {
+        if (response.state === 'Success') {
+          this.activebutton = true;
+        } else {
+          this.openSnackBar(response.userMessage, 'Cerrar');
+        }
         switch (param) {
-          case 'Rut':
-            this.nameFileRut = nameFile;
-            this.showErrorRut = true;
-            this.showErrorFormatRut = true;
-            break;
-          case 'BankCertificate':
-            this.nameFileCert = nameFile;
-            this.showErrorCert = true;
-            this.showErrorFormatCert = true;
-            break;
           case 'IdentificationCard1':
-            this.nameFileCed1 = nameFile;
-            this.showErrorCed1 = true;
-            this.showErrorFormatCed1 = true;
+            this.fileCedulaFrontal = event;
             break;
           case 'IdentificationCard2':
-            this.nameFileCed2 = nameFile;
-            this.showErrorCed2 = true;
-            this.showErrorFormatCed2 = true;
+            this.fileCedulaPosterior = event;
+            break;
+          case 'BankCertificate':
+            this.fileCertificadoBancario = event;
+            break;
+          case 'Rut':
+            this.fileRut = event;
             break;
           default:
             break;
         }
-      }
+      });
     }
   }
 
@@ -699,38 +656,33 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  public getNames() {
-
-    this.user.getDocuments('Rut').subscribe((rut: ResponseService) => {
-      if (rut.objectResponse !== null) {
-        this.nameFileRut = rut.objectResponse.name;
-      } else {
-        this.nameFileRut = '';
+  getNames() {
+    this.cedulaFrontal$ = this.user.getDocuments('IdentificationCard1').subscribe((res: ResponseService) => {
+      if (res.objectResponse) {
+        this.fileCedulaFrontal.name = res.objectResponse.name;
       }
+      this.cedulaFrontalIsLoading = false;
     });
-
-    this.user.getDocuments('BankCertificate').subscribe((cert: ResponseService) => {
-      if (cert.objectResponse !== null) {
-        this.nameFileCert = cert.objectResponse.name;
-      } else {
-        this.nameFileCert = '';
+    
+    this.cedulaPosterior$ = this.user.getDocuments('IdentificationCard2').subscribe((res: ResponseService) => {
+      if (res.objectResponse) {
+        this.fileCedulaPosterior.name = res.objectResponse.name;
       }
+      this.cedulaPosteriorIsLoading = false;
     });
-
-    this.user.getDocuments('IdentificationCard1').subscribe((idfront: ResponseService) => {
-      if (idfront.objectResponse !== null) {
-        this.nameFileCed1 = idfront.objectResponse.name;
-      } else {
-        this.nameFileCed1 = '';
+    
+    this.certificadoBancario$ = this.user.getDocuments('BankCertificate').subscribe((res: ResponseService) => {
+      if (res.objectResponse) {
+        this.fileCertificadoBancario.name = res.objectResponse.name;
       }
+      this.certificadoBancarioIsLoading = false;
     });
-
-    this.user.getDocuments('IdentificationCard2').subscribe((idback: ResponseService) => {
-      if (idback.objectResponse !== null) {
-        this.nameFileCed2 = idback.objectResponse.name;
-      } else {
-        this.nameFileCed2 = '';
+    
+    this.rut$ = this.user.getDocuments('Rut').subscribe((res: ResponseService) => {
+      if (res.objectResponse) {
+        this.fileRut.name = res.objectResponse.name;
       }
+      this.rutIsLoading = false;
     });
 
   }

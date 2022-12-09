@@ -188,7 +188,7 @@ describe('ProfileFormComponent', () => {
     objectResponse: null
   };
 
-beforeEach(waitForAsync(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ProfileFormComponent, DialogEditComponent, TruncatePipe],
       imports: [
@@ -201,7 +201,7 @@ beforeEach(waitForAsync(() => {
         MatPasswordStrengthModule,
         BrowserAnimationsModule,
         RouterTestingModule.withRoutes([
-          { path: 'inicio', component: HomeComponent}
+          { path: 'inicio', component: HomeComponent }
         ]),
         JwtModule.forRoot({
           config: {
@@ -346,9 +346,7 @@ beforeEach(waitForAsync(() => {
   });
 
   it('on file change trip valid ced 1', () => {
-    const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
-    const mockEvt = { target: { files: [mockFile] } };
-
+    const mockEvt = { file: 'base64', name: 'IdentificationCard1.jpg', error: ''};
     const service = fixture.debugElement.injector.get(UserService);
     spyOn(service, 'uploadFiles').and.returnValue(of(respUploadFiles));
     component.onFileChangeFiles(mockEvt, 'IdentificationCard1');
@@ -358,9 +356,7 @@ beforeEach(waitForAsync(() => {
   });
 
   it('on file change trip valid ced 2', () => {
-    const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
-    const mockEvt = { target: { files: [mockFile] } };
-
+    const mockEvt = { file: 'base64', name: 'IdentificationCard2.jpg', error: ''};
     const service = fixture.debugElement.injector.get(UserService);
     spyOn(service, 'uploadFiles').and.returnValue(of(respUploadFiles));
     component.onFileChangeFiles(mockEvt, 'IdentificationCard2');
@@ -370,9 +366,7 @@ beforeEach(waitForAsync(() => {
   });
 
   it('on file change trip valid cert', () => {
-    const mockFile = new File([''], 'name.jpg', { type: 'text/html' });
-    const mockEvt = { target: { files: [mockFile] } };
-
+    const mockEvt = { file: 'base64', name: 'BankCertificate.jpg', error: ''};
     const service = fixture.debugElement.injector.get(UserService);
     spyOn(service, 'uploadFiles').and.returnValue(of(respUploadFiles));
     component.onFileChangeFiles(mockEvt, 'BankCertificate');

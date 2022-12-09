@@ -1,12 +1,13 @@
 <div class="attach-file-container">
-  <label [for]="idControl" class="control-label">
+  <label [for]="idControl" class="control-label" [ngClass]="{ 'control-label-show-document': showDocumentIn }">
     <strong class="control-placeholder title-gray">
-      {{placeholder}}
+      {{ placeholder }}
     </strong>
     <span class="control-file-name" *ngIf="!nameFile"> No hay archivo seleccionado </span>
     <span class="control-file-name" *ngIf="nameFile">
-      {{ nameFile | truncate: '40' }}
+      {{ nameFile | truncate : '40' }}
     </span>
+    <i *ngIf="showDocumentIn" (click)="showDocument($event)" class="tio-search f-25 purple2-text show-document-icon"></i>
     <ng-container *ngIf="!errorFile; else errorFileTemplate">
       <img class="control-icon" *ngIf="!nameFile" [src]="blobUrl + 'img-ofertas/dashboard/cloud-upload-icon.svg'" alt="Icono" />
       <img class="control-icon" *ngIf="nameFile" [src]="blobUrl + 'img-ofertas/dashboard/cloud-upload-successfull-icon.svg'" alt="Éxito" />

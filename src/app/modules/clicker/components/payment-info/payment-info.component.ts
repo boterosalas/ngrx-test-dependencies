@@ -224,19 +224,18 @@ export class PaymentInfoComponent implements OnInit, OnDestroy {
             confirmButtonClass: 'accept-register-alert-error',
           });
         }
-
         switch (param) {
           case 'IdentificationCard1':
-            this.fileCedulaFrontal = event.file;
+            this.fileCedulaFrontal = event;
             break;
           case 'IdentificationCard2':
-            this.fileCedulaPosterior = event.file;
+            this.fileCedulaPosterior = event;
             break;
           case 'BankCertificate':
-            this.fileCertificadoBancario = event.file;
+            this.fileCertificadoBancario = event;
             break;
           case 'Rut':
-            this.fileRut = event.file;
+            this.fileRut = event;
             break;
           default:
             break;

@@ -95,39 +95,39 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
    * @param files archivos
    */
 
-  public sendFiles(files) {
-    const sendvalues = {
-      userid: this.userId,
-      value: true,
-      identification: this.id,
-      identificationCard1: files.fileIdentificationCard1,
-      identificationCard2: files.fileIdentificationCard2,
-      bankCertificate: files.fileBankCertificate,
-      // RUT: files.fileRut,
-    };
+  // public sendFiles(files) {
+  //   const sendvalues = {
+  //     userid: this.userId,
+  //     value: true,
+  //     identification: this.id,
+  //     identificationCard1: files.fileIdentificationCard1,
+  //     identificationCard2: files.fileIdentificationCard2,
+  //     bankCertificate: files.fileBankCertificate,
+  //     // RUT: files.fileRut,
+  //   };
 
-    this.subscription = this.user.uploadFiles(sendvalues).subscribe((res: ResponseService) => {
-      if (res.state !== 'Error') {
-        Swal.fire({
-          title: 'Carga de archivos correcta',
-          text: res.userMessage,
-          type: 'success',
-          confirmButtonText: 'Aceptar',
-          confirmButtonClass: 'upload-success',
-        }).then(() => {
-          this.reset(files);
-        });
-      } else {
-        Swal.fire({
-          title: 'Error en la Carga de archivos',
-          text: res.userMessage,
-          type: 'error',
-          confirmButtonText: 'Aceptar',
-          confirmButtonClass: 'upload-error',
-        });
-      }
-    });
-  }
+  //   this.subscription = this.user.uploadFiles(sendvalues).subscribe((res: ResponseService) => {
+  //     if (res.state !== 'Error') {
+  //       Swal.fire({
+  //         title: 'Carga de archivos correcta',
+  //         text: res.userMessage,
+  //         type: 'success',
+  //         confirmButtonText: 'Aceptar',
+  //         confirmButtonClass: 'upload-success',
+  //       }).then(() => {
+  //         this.reset(files);
+  //       });
+  //     } else {
+  //       Swal.fire({
+  //         title: 'Error en la Carga de archivos',
+  //         text: res.userMessage,
+  //         type: 'error',
+  //         confirmButtonText: 'Aceptar',
+  //         confirmButtonClass: 'upload-error',
+  //       });
+  //     }
+  //   });
+  // }
 
   public getUserData() {
     this.subscription = this.user.getuserdata().subscribe((user) => {

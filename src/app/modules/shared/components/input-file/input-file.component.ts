@@ -12,10 +12,12 @@ export class InputFileComponent implements OnInit {
   @Input() nameFile = '';
   @Input() errorFile = '';
   @Input() maxSize;
+  @Input() showDocumentIn: boolean = false;
   @Input() validFormats;
   @Input() idControl: string = `inputFile${new Date().getTime()}`;
   @Input() placeholder = 'ADJUNTAR ARCHIVO';
   @Output() fileOutput: EventEmitter<any> = new EventEmitter();
+  @Output() showDocumentOut: EventEmitter<any> = new EventEmitter();
   validFormatsParam: string = '';
 
   constructor() { }
@@ -63,6 +65,11 @@ export class InputFileComponent implements OnInit {
         error: this.errorFile
       })
     }
+  }
+
+  showDocument(event: any){
+    event.preventDefault();
+    this.showDocumentOut.emit('');
   }
 
 }
