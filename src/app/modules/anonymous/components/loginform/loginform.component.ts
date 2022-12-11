@@ -11,9 +11,9 @@ import decode from 'jwt-decode';
 import { LinksService } from 'src/app/services/links.service';
 import { isPlatformBrowser } from '@angular/common';
 import { environment } from 'src/environments/environment';
-// import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 declare var dataLayer: any;
 declare const google: any;
+declare const FB: any;
 
 @Component({
   selector: 'app-loginform',
@@ -30,7 +30,6 @@ export class LoginformComponent implements OnInit, OnDestroy, AfterViewInit {
     private utils: UtilsService,
     private link: LinksService,
     @Inject(PLATFORM_ID) private platformId: object,
-    // private authServiceSocial: SocialAuthService
   ) { }
 
   private subscription: Subscription = new Subscription();
@@ -38,7 +37,6 @@ export class LoginformComponent implements OnInit, OnDestroy, AfterViewInit {
   loginForm: UntypedFormGroup;
   isSubmitted = false;
   emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
-  // user: SocialUser | undefined;
   loggedIn: boolean;
 
   ngOnInit() {
@@ -46,15 +44,52 @@ export class LoginformComponent implements OnInit, OnDestroy, AfterViewInit {
       Username: ['', [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
       Password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
     });
-
-    // this.authServiceSocial.authState.subscribe((user) => {
-    //   this.user = user;
-    //   this.loggedIn = user != null;
-    // });
   }
 
   ngAfterViewInit(): void {
     this.googleInit();
+    this.fbInit();
+  }
+
+  fbInit() {
+    (<any>window).fbAsyncInit = function () {
+      FB.init({
+        appId: '470948245156151',
+        cookie: true,
+        xfbml: true,
+        version: 'v15.0'
+      });
+      FB.getLoginStatus(function (response) {
+        console.log(response);
+        if (response.status === 'connected') {
+          FB.logout();
+        }
+      });
+      FB.AppEvents.logPageView();
+
+    };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { return; }
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  }
+
+  fbLogin() {
+    FB.login((response) => {
+      console.log('response', response)
+      if (response.authResponse) {
+        FB.api('/me?fields=email,name,picture', (res) => {
+          console.log('res', res)
+        })
+      }
+    }, {
+      scope: 'email',
+      return_scopes: true
+    })
   }
 
   googleInit() {
@@ -63,9 +98,8 @@ export class LoginformComponent implements OnInit, OnDestroy, AfterViewInit {
       callback: this.handleCredentialResponse,
     });
     google.accounts.id.renderButton(
-      // document.getElementById('buttonDiv'),
       this.googleBtn.nativeElement,
-      { theme: 'outline', size: 'large', width:'100%' } // customization attributes
+      { theme: 'outline', size: 'large', width: '100%' } // customization attributes
     );
     google.accounts.id.prompt(); // also display the One Tap dialog
   }
@@ -173,8 +207,6 @@ export class LoginformComponent implements OnInit, OnDestroy, AfterViewInit {
         this.router.navigateByUrl(window.location.toString());
       } else {
         this.router.navigate(['/inicio']);
-        // const origin = window.location.origin;
-        // window.location.replace(`${origin}/inicio`);
       }
       this.authService.isLogged$.next(true);
     }
@@ -199,10 +231,6 @@ export class LoginformComponent implements OnInit, OnDestroy, AfterViewInit {
       localStorage.setItem('AmonuntReferred', amount.amountsReferred);
     });
   }
-
-  // signInWithFB(): void {
-  //   this.authServiceSocial.signIn(FacebookLoginProvider.PROVIDER_ID);
-  // }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

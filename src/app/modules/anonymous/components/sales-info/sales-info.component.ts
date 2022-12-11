@@ -36,8 +36,8 @@ export class SalesInfoComponent implements OnInit, OnDestroy {
   public getUserdata(){
     this.subscription = this.user.getuserdata().subscribe(({firstNames, lastNames}) => {
       this.fullName = `${firstNames} ${lastNames}`;
-      this.initialName = firstNames.charAt(0);
-      this.initialLastName = lastNames.charAt(0);
+      this.initialName = firstNames?.charAt(0);
+      this.initialLastName = lastNames?.charAt(0);
     });
   }
 
