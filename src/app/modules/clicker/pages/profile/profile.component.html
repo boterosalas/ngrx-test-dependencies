@@ -5,8 +5,7 @@
 ></app-banner>
 
 <div class="container mb-4" [ngClass]="{ 'd-none': !profile, 'd-block': profile }">
-
-  <mat-tab-group #tabGroup>
+  <mat-tab-group #tabGroup [(selectedIndex)]="selectedIndex">
     <mat-tab>
       <ng-template mat-tab-label>
         <span class="gtmPerfilClicCuentaClickam">PERFIL</span>
@@ -25,9 +24,16 @@
       <ng-template mat-tab-label>
         <span class="gtmPerfilClicGestionarPagosClickam">DATOS FINANCIEROS</span>
       </ng-template>
-      <!-- <app-payment-info *ngIf="(auth.getRole$ | async) !== 'ADMIN' && !isEmployee"></app-payment-info> -->
-      <app-payment-info *ngIf="(auth.getRole$ | async) !== 'ADMIN' && !managedPayments && !isEmployee"></app-payment-info>
-      <app-profile-form [showBankInfo]="true" [showInfoAccount]="false" *ngIf="(auth.getRole$ | async) !== 'ADMIN' && managedPayments && !isEmployee"></app-profile-form>
+      <ng-container *ngIf="(auth.getRole$ | async) !== 'ADMIN' && !isEmployee">
+        <app-profile-form
+          *ngIf="managedPayments; else noManagedPayments"
+          [showBankInfo]="true"
+          [showInfoAccount]="false"
+        ></app-profile-form>
+        <ng-template #noManagedPayments>
+          <app-payment-info></app-payment-info>
+        </ng-template>
+      </ng-container>
     </mat-tab>
 
     <mat-tab>
@@ -36,7 +42,5 @@
       </ng-template>
       <app-preferences></app-preferences>
     </mat-tab>
-
-
   </mat-tab-group>
 </div>

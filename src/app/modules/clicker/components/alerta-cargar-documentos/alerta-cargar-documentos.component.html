@@ -1,0 +1,20 @@
+<div class="upload-documents" *ngIf="showAlert">
+  <div class="orange-line"></div>
+  <div class="upload-documents__content">
+    <mat-icon class="close-icon upload-documents__close" (click)="closeAlert()">close</mat-icon>
+    <div class="upload-documents__content-main">
+      <img class="info-icon" src="assets/img/documents-info.svg" alt="" />
+      <div class="upload-documents__text-info">
+        <h3 class="upload-documents__title">
+          <a [routerLink]="['/mi-perfil']" (click)="saveSelectedTab()"> ¡No te olvides de tus recompensas! </a>
+        </h3>
+        <p class="upload-documents__paragraph">
+          <a [routerLink]="['/mi-perfil']" (click)="saveSelectedTab()"> Inscribe tu cuenta bancaria donde podremos consignar todas tus recompensas. </a>
+        </p>
+      </div>
+    </div>
+    <div class="upload-documents__button-container">
+      <a [routerLink]="['/mi-perfil']" class="upload-documents__button" (click)="saveSelectedTab()"> Inscribir cuenta </a>
+    </div>
+  </div>
+</div>

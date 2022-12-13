@@ -381,7 +381,6 @@ export class UserService {
     const httpOptionsSet = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.authorization,
-        
       }),
     };
 

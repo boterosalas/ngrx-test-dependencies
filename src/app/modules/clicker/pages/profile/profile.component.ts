@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ import { MatTabGroup } from '@angular/material/tabs';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit, OnDestroy {
+export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
   private subscription: Subscription = new Subscription();
   userId: string;
   isLoggedIn: any;
@@ -30,8 +30,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   managedPayments: boolean;
   isEmployee: boolean;
   profile = false;
+  selectedIndex = 0;
 
-  constructor(private user: UserService, public auth: AuthService, private route: ActivatedRoute) {}
+  constructor(private user: UserService, public auth: AuthService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.user.getProfile();
@@ -68,6 +69,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
+  ngAfterViewInit(): void {
+    this.setLocalStorageTab();
+  }
+
+  setLocalStorageTab(){
+    const localTab = parseInt(localStorage.getItem('selectedTab'));
+    this.selectedIndex = localTab || 0;
+    localStorage.removeItem('selectedTab');
+  }
+
   public reset(file) {
     file.nameFileCed1 = '';
     file.fileIdentificationCard1 = null;
@@ -84,44 +95,44 @@ export class ProfileComponent implements OnInit, OnDestroy {
    * @param files archivos
    */
 
-  public sendFiles(files) {
-    const sendvalues = {
-      userid: this.userId,
-      value: true,
-      identification: this.id,
-      identificationCard1: files.fileIdentificationCard1,
-      identificationCard2: files.fileIdentificationCard2,
-      bankCertificate: files.fileBankCertificate,
-      // RUT: files.fileRut,
-    };
+  // public sendFiles(files) {
+  //   const sendvalues = {
+  //     userid: this.userId,
+  //     value: true,
+  //     identification: this.id,
+  //     identificationCard1: files.fileIdentificationCard1,
+  //     identificationCard2: files.fileIdentificationCard2,
+  //     bankCertificate: files.fileBankCertificate,
+  //     // RUT: files.fileRut,
+  //   };
 
-    this.subscription = this.user.uploadFiles(sendvalues).subscribe((res: ResponseService) => {
-      if (res.state !== 'Error') {
-        Swal.fire({
-          title: 'Carga de archivos correcta',
-          text: res.userMessage,
-          type: 'success',
-          confirmButtonText: 'Aceptar',
-          confirmButtonClass: 'upload-success',
-        }).then(() => {
-          this.reset(files);
-        });
-      } else {
-        Swal.fire({
-          title: 'Error en la Carga de archivos',
-          text: res.userMessage,
-          type: 'error',
-          confirmButtonText: 'Aceptar',
-          confirmButtonClass: 'upload-error',
-        });
-      }
-    });
-  }
+  //   this.subscription = this.user.uploadFiles(sendvalues).subscribe((res: ResponseService) => {
+  //     if (res.state !== 'Error') {
+  //       Swal.fire({
+  //         title: 'Carga de archivos correcta',
+  //         text: res.userMessage,
+  //         type: 'success',
+  //         confirmButtonText: 'Aceptar',
+  //         confirmButtonClass: 'upload-success',
+  //       }).then(() => {
+  //         this.reset(files);
+  //       });
+  //     } else {
+  //       Swal.fire({
+  //         title: 'Error en la Carga de archivos',
+  //         text: res.userMessage,
+  //         type: 'error',
+  //         confirmButtonText: 'Aceptar',
+  //         confirmButtonClass: 'upload-error',
+  //       });
+  //     }
+  //   });
+  // }
 
   public getUserData() {
     this.subscription = this.user.getuserdata().subscribe((user) => {
-      this.managedPayments = user.managedPayments;
-      this.isEmployee = user.isEmployeeGrupoExito;
+      this.managedPayments = user.managedpayments;
+      this.isEmployee = user.isemployeegrupoexito;
       this.profile = true;
     });
   }

@@ -1,0 +1,125 @@
+@import 'variables';
+.upload-documents {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #ffffff;
+  @media screen and (min-width: 800px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+  .orange-line {
+    background-color: $third-color;
+    width: 100%;
+    height: 12px;
+    order: 2;
+    @media screen and (min-width: 800px) {
+      width: 12px;
+      height: auto;
+      order: 1;
+    }
+  }
+  .upload-documents__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px;
+    order: 1;
+    @media screen and (min-width: 800px) {
+      order: 2;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      flex: 1;
+      padding: 28px 68px 28px 20px;
+    }
+    .upload-documents__close {
+      position: absolute;
+      color: #37236a;
+      top: 12px;
+      right: 12px;
+      transform: scale(1.4);
+      cursor: pointer;
+      @media screen and (min-width: 800px) {
+        top: calc(50% - 12px);
+        right: 24px;
+      }
+    }
+    .upload-documents__content-main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      @media screen and (min-width: 800px) {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      .info-icon {
+        width: 30px;
+        height: 30px;
+        margin: 0px;
+        @media screen and (min-width: 800px) {
+          margin-right: 20px;
+        }
+      }
+      .upload-documents__text-info {
+        @media screen and (min-width: 800px) {
+          padding-right: 20px;
+        }
+        .upload-documents__title {
+          font-size: 20px;
+          margin: 12px 0px 0px 0px;
+          text-align: center;
+          @media screen and (min-width: 800px) {
+            margin: 0px;
+            text-align: left;
+          }
+          a {
+            text-decoration: none;
+            color: #37236a;
+          }
+        }
+        .upload-documents__paragraph {
+          font-size: 15px;
+          margin: 12px 0px;
+          text-align: center;
+          @media screen and (min-width: 800px) {
+            margin: 12px 0px 0px 0px;
+            text-align: left;
+          }
+          a {
+            text-decoration: none;
+            color: #37236a;
+          }
+        }
+      }
+    }
+    .upload-documents__button-container {
+      .upload-documents__button {
+        // padding: 16px 32px;
+        font-size: 16px;
+        width: 204px;
+        height: 40px;
+        border: none;
+        background-color: #37236a;
+        box-shadow: 0px 3px 9px #3a226a80;
+        color: #ffffff;
+        cursor: pointer;
+        display: flex;
+        border-radius: 10px;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        &:disabled {
+          box-shadow: none;
+          background-color: $gray2;
+        }
+      }
+    }
+  }
+}

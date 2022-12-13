@@ -186,7 +186,7 @@ describe('BannerPrincipalComponent', () => {
     const banner = {
       description: 'description',
       infoaditional: 'infoaditional',
-      imageurlweb: 'imageurlweb',
+      imageurlmobile: 'imageurlmobile',
       id: 123
     };
     const data = {
@@ -195,7 +195,7 @@ describe('BannerPrincipalComponent', () => {
       showClose: false,
       showCloseIcon: true,
       infoaditional: banner.infoaditional,
-      img: banner.imageurlweb,
+      img: banner.imageurlmobile,
       showProduct: true,
       showshowTitle: false,
       buttonClose: 'Cerrar',

@@ -100,7 +100,7 @@ describe('HomeComponent', () => {
   };
 
   let dataUserC = {
-    isEmployeeGrupoExito: true,
+    isemployeegrupoexito: true,
   };
 
   const dataUser = {

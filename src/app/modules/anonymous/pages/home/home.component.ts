@@ -58,7 +58,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   isEmployee: any;
   @ViewChild('templatePromo', { static: false })
   templatePromo: TemplateRef<any>;
-  managedPayments: boolean;
+  managedPayments: boolean = true;
+  hasminimuncommission: boolean = false;
   role: string;
   userId: any;
   message: any;
@@ -289,11 +290,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.role = role;
       if (role === 'CLICKER' || role === 'ADMIN' || role === 'SUPERADMIN') {
         this.subscription = this.user.getuserdata().subscribe((user) => {
-          this.isEmployee = user.isEmployeeGrupoExito;
-          this.managedPayments = user.managedPayments;
+          this.isEmployee = user.isemployeegrupoexito;
+          this.managedPayments = user.managedpayments;
+          this.hasminimuncommission = user.hasminimuncommission;
           if (role === 'CLICKER') {
             this.getMissions();
-            this.newTerms = user.acceptTermsReferrals;
+            this.newTerms = user.accepttermsreferrals;
             if (this.newTerms === true) {
               this.showModalPayment();
             }
@@ -402,7 +404,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public bussinessNavigation(bussiness) {
     const token = localStorage.getItem('ACCESS_TOKEN');
-    if (token === null) {
+    if (!token) {
       this.utils.showloginForm();
     }
 

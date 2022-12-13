@@ -1,0 +1,44 @@
+@import 'variables';
+.attach-file-container {
+  .control-label {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    padding-right: 50px;
+    &-show-document {
+      padding-right: 80px;
+    }
+    cursor: pointer;
+    .control-placeholder {
+      color: #a7a3b1;
+      font-size: 16px;
+      font-family: 'galano-bold', sans-serif;
+      margin-bottom: 4px;
+    }
+    .control-file-name {
+      color: #37236a;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    .show-document-icon {
+      position: absolute;
+      right: 50px;
+      top: calc(60% - 20px);
+      padding: 7px;
+    }
+    .control-icon {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      right: 8px;
+      top: calc(50% - 20px);
+    }
+  }
+  .control-error {
+    font-size: 12px;
+  }
+  .input-control {
+    display: none !important;
+  }
+}

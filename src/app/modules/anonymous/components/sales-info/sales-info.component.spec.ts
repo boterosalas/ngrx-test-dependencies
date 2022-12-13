@@ -47,8 +47,8 @@ describe('SalesInfoComponent', () => {
   };
 
   const user = {
-    firstNames: 'David',
-    lastNames: 'Betancur',
+    firstnames: 'David',
+    lastnames: 'Betancur',
   };
 
   beforeEach(async () => {

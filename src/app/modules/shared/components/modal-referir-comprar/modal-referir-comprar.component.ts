@@ -162,7 +162,6 @@ export class ModalReferirComprarComponent implements OnInit, OnDestroy {
       creationDate: DateFormat.format(new Date(), 'YYYY-MM-DD HH:MM'),
       identificationcustomer: this.idCustomerForm.controls.identification.value,
     };
-    console.log('data', data)
     this.saveLink$ = this.links.saveLink(data).subscribe((resp: ResponseService) => {
       const splice = resp.objectResponse.link.split('//');
       this.urlshorten = 'https://' + splice[1];

@@ -50,6 +50,10 @@ class MockUserService {
     });
     return update;
   }
+
+  getDocuments() {
+    return of(this.update);
+  }
 }
 
 class MockUserServiceError {
@@ -79,6 +83,10 @@ class MockUserServiceError {
       res.next(this.update);
     });
     return update;
+  }
+  
+  getDocuments() {
+    return of(this.update);
   }
 }
 
@@ -254,29 +262,25 @@ describe('PaymentInfoComponent', () => {
   });
 
   it('onFileChangeFiles rut', () => {
-    const mockFile = new File([''], 'Rut.jpg', { type: 'text/html' });
-    const mockEvt = { target: { files: [mockFile] } };
+    const mockEvt = { file: 'base64', name: 'Rut.jpg', error: ''};
     component.onFileChangeFiles(mockEvt, 'Rut');
     expect(component.onFileChangeFiles).not.toBeNull();
   });
 
   it('onFileChangeFiles BankCertificate', () => {
-    const mockFile = new File([''], 'BankCertificate.jpg', { type: 'text/html' });
-    const mockEvt = { target: { files: [mockFile] } };
+    const mockEvt = { file: 'base64', name: 'BankCertificate.jpg', error: ''};
     component.onFileChangeFiles(mockEvt, 'BankCertificate');
     expect(component.onFileChangeFiles).not.toBeNull();
   });
 
   it('onFileChangeFiles IdentificationCard1', () => {
-    const mockFile = new File([''], 'IdentificationCard1.jpg', { type: 'text/html' });
-    const mockEvt = { target: { files: [mockFile] } };
+    const mockEvt = { file: 'base64', name: 'IdentificationCard1.jpg', error: ''};
     component.onFileChangeFiles(mockEvt, 'IdentificationCard1');
     expect(component.onFileChangeFiles).not.toBeNull();
   });
 
   it('onFileChangeFiles IdentificationCard2', () => {
-    const mockFile = new File([''], 'IdentificationCard2.jpg', { type: 'text/html' });
-    const mockEvt = { target: { files: [mockFile] } };
+    const mockEvt = { file: 'base64', name: 'IdentificationCard2.jpg', error: ''};
     component.onFileChangeFiles(mockEvt, 'IdentificationCard2');
     expect(component.onFileChangeFiles).not.toBeNull();
   });
