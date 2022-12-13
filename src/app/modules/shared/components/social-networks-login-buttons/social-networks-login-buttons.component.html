@@ -1,0 +1,9 @@
+<div class="social-networks-container">
+    <div #googleBtn id="buttonDiv" class="btn-social-networks"></div>
+    <button (click)="fbLogin()" class="btn-social-networks facebook-btn">
+        <img class="facebook-btn-icon"
+            src="https://www.pngplay.com/wp-content/uploads/3/Blue-Facebook-Logo-PNG-Clipart-Background.png"
+            width="10" />
+        {{ isLogin ? 'Continuar' : 'Registrarse' }} con Facebook
+    </button>
+</div>

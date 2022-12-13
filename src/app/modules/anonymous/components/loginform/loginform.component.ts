@@ -12,16 +12,13 @@ import { LinksService } from 'src/app/services/links.service';
 import { isPlatformBrowser } from '@angular/common';
 import { environment } from 'src/environments/environment';
 declare var dataLayer: any;
-declare const google: any;
-declare const FB: any;
 
 @Component({
   selector: 'app-loginform',
   templateUrl: './loginform.component.html',
   styleUrls: ['./loginform.component.scss'],
 })
-export class LoginformComponent implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild('googleBtn') googleBtn: ElementRef;
+export class LoginformComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -46,69 +43,14 @@ export class LoginformComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    this.googleInit();
-    this.fbInit();
-  }
-
-  fbInit() {
-    (<any>window).fbAsyncInit = function () {
-      FB.init({
-        appId: '470948245156151',
-        cookie: true,
-        xfbml: true,
-        version: 'v15.0'
-      });
-      FB.getLoginStatus(function (response) {
-        console.log(response);
-        if (response.status === 'connected') {
-          FB.logout();
-        }
-      });
-      FB.AppEvents.logPageView();
-
+  showUser(user) {
+    console.log('USER', user);
+    const loginData = {
+      Password: btoa('Pruebas123'),
+      Username: 'pruebasclickam2@yopmail.com',
     };
-
-    (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) { return; }
-      js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+    this.loginHandle(loginData);
   }
-
-  fbLogin() {
-    FB.login((response) => {
-      console.log('response', response)
-      if (response.authResponse) {
-        FB.api('/me?fields=email,name,picture', (res) => {
-          console.log('res', res)
-        })
-      }
-    }, {
-      scope: 'email',
-      return_scopes: true
-    })
-  }
-
-  googleInit() {
-    google.accounts.id.initialize({
-      client_id: environment.GOOGLE_SIGNIN,
-      callback: this.handleCredentialResponse,
-    });
-    google.accounts.id.renderButton(
-      this.googleBtn.nativeElement,
-      { theme: 'outline', size: 'large', width: '100%' } // customization attributes
-    );
-    google.accounts.id.prompt(); // also display the One Tap dialog
-  }
-
-  handleCredentialResponse(response: any) {
-    console.log('Encoded JWT ID token: ' + response.credential);
-  }
-
-
 
   /**
    * Metodo para loguearse
@@ -120,14 +62,15 @@ export class LoginformComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.loginForm.invalid) {
       return;
     }
-
     const loginData = {
       Password: btoa(this.loginForm.value.Password),
       Username: this.loginForm.value.Username,
     };
-
     this.loading.show();
+    this.loginHandle(loginData);
+  }
 
+  loginHandle(loginData: any) {
     this.subscription = this.authService.login(loginData).subscribe(
       (resp: ResponseService) => {
         this.loading.hide();

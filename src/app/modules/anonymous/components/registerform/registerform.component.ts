@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener, ViewChild, TemplateRef, Inject, PLATFORM_ID } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ConfirmPasswordValidator } from 'src/app/validators/confirm-password.validator';
 import Swal from 'sweetalert2';
 import { ResponseService } from 'src/app/interfaces/response';
@@ -22,6 +22,11 @@ declare var dataLayer: any;
   styleUrls: ['./registerform.component.scss'],
 })
 export class RegisterformComponent implements OnInit, OnDestroy {
+  isASocialNetworkRegister: boolean = false;
+  socialFormIdTypeControl: FormControl;
+  socialFormIdControl: FormControl;
+  socialFormNameControl: FormControl;
+  socialNetworkUser: any;
   constructor(
     private fb: UntypedFormBuilder,
     private registerUser: UserService,
@@ -30,9 +35,8 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     private utils: UtilsService,
     private dialog: MatDialog,
     private content: ContentService,
-    private personalInfo: MasterDataService,
     @Inject(PLATFORM_ID) private platformId: object
-  ) {}
+  ) { }
 
   private subscription: Subscription = new Subscription();
   registerForm: UntypedFormGroup;
@@ -54,16 +58,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   amount: any;
   amountReferred: any;
 
-  contentTerminos: any;
-  contentTerminosPJ: any;
-  contentProteccion: any;
-  contentTransparencia: any;
-  contentPrograma: any;
-  textTerminos: any;
-  textTerminosPJ: any;
-  textProteccion: any;
-  textTransparencia: any;
-  textPrograma: any;
+
   showPerson = false;
   showBusiness = false;
   typedc = 'documento';
@@ -95,10 +90,16 @@ export class RegisterformComponent implements OnInit, OnDestroy {
         validator: [ConfirmPasswordValidator.MatchPassword, ConfirmEmailValidator.MatchEmail],
       }
     );
-    this.showRegisterForm = true;
+    // this.showRegisterForm = true;
 
     this.getidType();
     this.getBusiness();
+  }
+
+  showUser(user) {
+    this.showRegisterForm = false;
+    this.isASocialNetworkRegister = true;
+    this.socialNetworkUser = user;
   }
 
   public getBusiness() {
@@ -108,14 +109,10 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   }
 
   public termsAndConditions() {
-    this.getTerms();
-    const template = this.templateTerms;
-    const title = '';
-
     this.dialog.open(ModalGenericComponent, {
       data: {
-        title,
-        template,
+        title: '',
+        template: this.templateTerms,
       },
     });
   }
@@ -128,7 +125,13 @@ export class RegisterformComponent implements OnInit, OnDestroy {
 
   @HostListener('over')
   hideRegister() {
-    this.utils.showloginForm();
+    this.registerForm.reset();
+    if (this.showRegisterForm || this.isASocialNetworkRegister) {
+      this.showRegisterForm = false;
+      this.isASocialNetworkRegister = false;
+    } else {
+      this.utils.showloginForm();
+    }
   }
 
   /**
@@ -160,13 +163,13 @@ export class RegisterformComponent implements OnInit, OnDestroy {
         this.loading.hide();
         if (resp.state === 'Success') {
           if (isPlatformBrowser(this.platformId)) {
-          dataLayer.push({
-            event: 'pushEventGA',
-            categoria: 'Registro',
-            accion: 'ClicContinuar',
-            etiqueta: 'RegistroExitoso',
-          });
-        }
+            dataLayer.push({
+              event: 'pushEventGA',
+              categoria: 'Registro',
+              accion: 'ClicContinuar',
+              etiqueta: 'RegistroExitoso',
+            });
+          }
 
           Swal.fire({
             title: 'Revisa tu correo',
@@ -205,19 +208,9 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       }
     );
   }
-  getTerms() {
-    this.personalInfo.getTerms().subscribe((resp: any) => {
-      this.contentTerminos = resp.objectResponse[0].sectionvalue;
-      this.contentProteccion = resp.objectResponse[1].sectionvalue;
-      this.contentTransparencia = resp.objectResponse[2].sectionvalue;
-      this.contentPrograma = resp.objectResponse[3].sectionvalue;
-      this.contentTerminosPJ = resp.objectResponse[4].sectionvalue;
-      this.textTerminos = resp.objectResponse[0].sectiontitle;
-      this.textProteccion = resp.objectResponse[1].sectiontitle;
-      this.textTransparencia = resp.objectResponse[2].sectiontitle;
-      this.textPrograma = resp.objectResponse[3].sectiontitle;
-      this.textTerminosPJ = resp.objectResponse[4].sectiontitle;
-    });
+  registerFromSocialNetwork(event: any) {
+    const { idType, id, bussinessName, acceptTerms } = event;
+    console.log({ ...this.socialNetworkUser, idType, id, bussinessName, acceptTerms });
   }
   /**
    * check para aceptar terminos y condiciones

@@ -100,7 +100,9 @@
     "NO_FILE": "Ningún archivo seleccionado",
     "ERROR_DEPARTMENT": "Selecciona un departamento",
     "ERROR_CITY": "Selecciona una ciudad",
-    "REGISTER_ACCOUNT": "Registra tu cuenta"
+    "REGISTER_ACCOUNT": "Registra tu cuenta",
+    "FILL_YOUR_DATA": "Llena tus datos",
+    "REGISTER_MYSELF": "Registrarme"
   },
   "FORGOTPASSWORD": {
     "FORGOT_PASSWORD": "Recuperar contraseña",
