@@ -22,7 +22,7 @@ describe('LoginformComponent', () => {
   let component: LoginformComponent;
   let fixture: ComponentFixture<LoginformComponent>;
 
-  const mockAuthService = jasmine.createSpyObj('AuthService', ['login']);
+  const mockAuthService = jasmine.createSpyObj('AuthService', ['login','routeBased']);
 
   const mockLinksService = jasmine.createSpyObj('LinksService', ['getAmount']);
 
@@ -104,6 +104,7 @@ beforeEach(waitForAsync(() => {
 
   beforeEach(() => {
     mockAuthService.login.and.returnValue(of(dataUser));
+    mockAuthService.routeBased.and.returnValue(of({}));
     fixture = TestBed.createComponent(LoginformComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -115,7 +116,7 @@ beforeEach(waitForAsync(() => {
 
   it('getamount', () => {
     mockLinksService.getAmount.and.returnValue(of(amount));
-    component.getAmount();
+    (<any>component).link.getAmount();
     expect(mockLinksService.getAmount).toHaveBeenCalled();
   });
 
@@ -131,7 +132,7 @@ beforeEach(waitForAsync(() => {
     component.isSubmitted = false;
     component.loginForm.controls.Username.setValue('');
     component.loginForm.controls.Password.setValue('');
-    component.login();
+    component.login({});
     let valid = true;
     expect(valid).toBeTruthy();
   });
@@ -165,7 +166,7 @@ beforeEach(waitForAsync(() => {
         'david.betancur@pragma.com.co'
       );
       component.loginForm.controls.Password.setValue('123456');
-      component.login();
+      component.login({username:'david.betancur@pragma.com.co', password: '123456'});
       expect(mockAuthService.login).toHaveBeenCalled();
     });
 
@@ -180,7 +181,7 @@ beforeEach(waitForAsync(() => {
       component.isSubmitted = true;
       component.loginForm.controls.Username.setValue('t@gmail.com');
       component.loginForm.controls.Password.setValue('123123');
-      component.login();
+      component.login({username:'t@gmail.com', password: '123123'});
       expect(mockAuthService.login).toHaveBeenCalled();
     });
 

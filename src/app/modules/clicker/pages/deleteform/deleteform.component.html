@@ -113,9 +113,9 @@
           mat-button
           class="red"
           (click)="deleteAccountService()"
-          [disabled]="!profileFormDelete.valid"
           [ngClass]="{ 'red-disable': !profileFormDelete.valid }"
-        >
+          >
+          <!-- [disabled]="!profileFormDelete.valid" -->
           <span fxLayoutAlign="center space-between"> Eliminar mi cuenta </span>
         </button>
       </div>

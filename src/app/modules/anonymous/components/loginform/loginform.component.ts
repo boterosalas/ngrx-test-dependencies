@@ -44,14 +44,8 @@ export class LoginformComponent implements OnInit, OnDestroy {
   }
 
   showUser(user: any) {
-    // const loginData = {
-    //   token: btoa(user.id),
-    //   // Username: user.email,
-    //   // Password: btoa('Pruebas123'),
-    //   username: 'pruebasclickam3@yopmail.com',
-    // };
     console.log('USER', user);
-    // this.login(loginData);
+    this.login(user);
   }
 
   /**

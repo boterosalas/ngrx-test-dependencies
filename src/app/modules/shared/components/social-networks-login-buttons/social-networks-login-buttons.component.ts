@@ -31,6 +31,11 @@ export class SocialNetworksLoginButtonsComponent implements AfterViewInit {
         xfbml: true,
         version: 'v15.0'
       });
+      FB.getLoginStatus((response) => {
+        if (response.status === 'connected') {
+          FB.logout();
+        }
+      });
     };
 
     (function (d, s, id) {
@@ -42,13 +47,18 @@ export class SocialNetworksLoginButtonsComponent implements AfterViewInit {
     }(document, 'script', 'facebook-jssdk'));
   }
 
+  facebookEmit(response: any) {
+    this.user.emit(response);
+  }
+
   facebookLogin() {
-    const emit = this.user.emit.bind(this);
+    const emit = this.facebookEmit.bind(this);
     const isLogin = this.isLogin;
     FB.login(function ({ authResponse }) {
-      const { accessToken } = authResponse;
       if (authResponse) {
+        const { accessToken } = authResponse;
         FB.api('/me?fields=id,email,first_name,last_name', (res) => {
+          console.log('FB-USER', res);
           if (isLogin) {
             const { email } = res;
             emit({
@@ -70,7 +80,7 @@ export class SocialNetworksLoginButtonsComponent implements AfterViewInit {
     }, {
       scope: 'email',
       return_scopes: true
-    })
+    });
   }
 
   googleLogin() {
