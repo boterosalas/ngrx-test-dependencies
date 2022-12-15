@@ -5,7 +5,8 @@
   align-items: center;
   .btn-social-networks {
     margin: 8px auto;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     border-radius: 12px;
     border: 1px solid #dadce0;
     height: 52px;
