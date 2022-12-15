@@ -43,13 +43,15 @@ export class LoginformComponent implements OnInit, OnDestroy {
     });
   }
 
-  showUser(user) {
+  showUser(user: any) {
+    // const loginData = {
+    //   token: btoa(user.id),
+    //   // Username: user.email,
+    //   // Password: btoa('Pruebas123'),
+    //   username: 'pruebasclickam3@yopmail.com',
+    // };
     console.log('USER', user);
-    const loginData = {
-      Password: btoa('Pruebas123'),
-      Username: 'pruebasclickam2@yopmail.com',
-    };
-    this.loginHandle(loginData);
+    // this.login(loginData);
   }
 
   /**
@@ -57,7 +59,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
    * @params recibe Password y Username
    */
 
-  public login() {
+  public loginHandle() {
     this.isSubmitted = true;
     if (this.loginForm.invalid) {
       return;
@@ -66,22 +68,22 @@ export class LoginformComponent implements OnInit, OnDestroy {
       Password: btoa(this.loginForm.value.Password),
       Username: this.loginForm.value.Username,
     };
-    this.loading.show();
-    this.loginHandle(loginData);
+    this.login(loginData);
   }
-
-  loginHandle(loginData: any) {
-    this.subscription = this.authService.login(loginData).subscribe(
-      (resp: ResponseService) => {
+  
+  login(loginData: any) {
+    this.loading.show();
+    this.subscription = this.authService.login(loginData).subscribe({
+      next: (resp: ResponseService) => {
         this.loading.hide();
         if (resp.state === 'Success') {
           setTimeout(() => {
-            this.getAmount();
+            this.link.getAmount();
           }, 500);
           localStorage.setItem('ACCESS_TOKEN', resp.objectResponse.token);
           localStorage.setItem('REFRESH_TOKEN', resp.objectResponse.refreshToken);
           this.utils.hideloginForm();
-          this.routeBased();
+          this.authService.routeBased();
           if (isPlatformBrowser(this.platformId)) {
             dataLayer.push({
               event: 'pushEventGA',
@@ -107,7 +109,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
           });
         }
       },
-      (error) => {
+      error: (error) => {
         this.loading.hide();
         Swal.fire({
           title: error.statusText,
@@ -117,7 +119,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
           confirmButtonClass: 'accept-forgot-alert-invalid',
         });
       }
-    );
+    });
   }
 
   @HostListener('over')
@@ -138,41 +140,6 @@ export class LoginformComponent implements OnInit, OnDestroy {
   @HostListener('over')
   showActivate() {
     this.utils.showActivate();
-  }
-
-  /** Al momento de hacer login determina la ruta por el perfil de usuario */
-
-  private routeBased() {
-    const token = localStorage.getItem('ACCESS_TOKEN');
-    const tokenDecode = decode(token);
-    if (tokenDecode.role === 'CLICKER') {
-      if (window.location.toString().includes('url')) {
-        this.router.navigateByUrl(window.location.toString());
-      } else {
-        this.router.navigate(['/inicio']);
-      }
-      this.authService.isLogged$.next(true);
-    }
-    if (tokenDecode.role === 'ADMIN' || tokenDecode.role === 'SUPERADMIN') {
-      localStorage.clear();
-    }
-
-    if (tokenDecode.role === 'PARTNER' || tokenDecode.role === 'PARTNER-CASHIER') {
-      this.router.navigate(['/partner']);
-      this.authService.isLogged$.next(true);
-      if (tokenDecode.role === 'PARTNER-CASHIER') {
-        this.authService.getRole$.next('PARTNER-CASHIER');
-      } else {
-        this.authService.getRole$.next('PARTNER');
-      }
-    }
-  }
-
-  public getAmount() {
-    this.subscription = this.link.getAmount().subscribe((amount) => {
-      localStorage.setItem('Amount', amount.amountsCommission);
-      localStorage.setItem('AmonuntReferred', amount.amountsReferred);
-    });
   }
 
   ngOnDestroy(): void {

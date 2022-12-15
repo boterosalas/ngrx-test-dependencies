@@ -1,11 +1,13 @@
 <app-top title="Registro" (close)="hideRegister()"></app-top>
 
-<h3 class="text-center f-22">{{ isASocialNetworkRegister ? ('REGISTER.FILL_YOUR_DATA' | translate) : ('REGISTER.REGISTER_ACCOUNT' | translate) }}</h3>
+<h3 class="text-center f-22">{{ isASocialNetworkRegister ? ('REGISTER.FILL_YOUR_DATA' | translate) :
+  ('REGISTER.REGISTER_ACCOUNT' | translate) }}</h3>
 <ng-container *ngIf="!showRegisterForm && !isASocialNetworkRegister">
   <p class="register-description-text">Ingresa con tus redes sociales</p>
   <app-social-networks-login-buttons [isLogin]="false" (user)="showUser($event)"></app-social-networks-login-buttons>
   <button (click)="showRegisterForm = true" class="email-method-btn">
-    <img class="email-method-btn-icon" src="https://webclickamdev.blob.core.windows.net/email/email-register-icon.svg" alt="">
+    <img class="email-method-btn-icon" src="https://webclickamdev.blob.core.windows.net/email/email-register-icon.svg"
+      alt="">
     Regístrate con tu correo
   </button>
 </ng-container>
@@ -273,8 +275,8 @@
   </button>
 </form>
 
-<app-document-type-and-number *ngIf="isASocialNetworkRegister && !showRegisterForm"
-  [idUserType]="idUserType" (values)="registerFromSocialNetwork($event)"></app-document-type-and-number>
+<app-document-type-and-number *ngIf="isASocialNetworkRegister && !showRegisterForm" [idUserType]="idUserType"
+  (values)="registerFromSocialNetwork($event)"></app-document-type-and-number>
 
 <ng-template #templateTerms>
   <app-terms-and-conditions-modal (acceptTerms)="acceptModal()" [typedc]="typedc"></app-terms-and-conditions-modal>

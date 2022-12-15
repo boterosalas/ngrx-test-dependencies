@@ -51,7 +51,7 @@
   </mat-form-field>
   <div class="text-center">
     <button class="button mt-2 button-100 button-height gtmIniciarSesionClicLightboxIniciar" mat-raised-button id="login"
-      color="orange" (click)="login()" [disabled]="!loginForm.valid">
+      color="orange" (click)="loginHandle()" [disabled]="!loginForm.valid">
       <span class="gtmIniciarSesionClicLightboxIniciar">{{ 'LOGIN.LOGIN' | translate }}</span>
     </button>
   </div>

@@ -19,6 +19,7 @@ export class DocumentTypeAndNumberComponent implements OnInit {
   socialFormIdTypeControl = new FormControl(null, [Validators.required]);
   socialFormIdControl = new FormControl(null, [Validators.required, Validators.maxLength(11), Validators.pattern(this.numberPattern)]);
   socialFormNameControl = new FormControl(null, [Validators.required, Validators.maxLength(50), Validators.pattern(this.socialPattern)]);
+  socialFormCellphoneControl = new FormControl(null, [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern(this.numberPattern)]);
   socialFormAcceptTermsControl = new FormControl(null, Validators.required);
   @ViewChild('templateTerms', { static: false })
   templateTerms: TemplateRef<any>;
@@ -37,6 +38,7 @@ export class DocumentTypeAndNumberComponent implements OnInit {
       type: this.socialFormIdTypeControl,
       id: this.socialFormIdControl,
       name: this.socialFormNameControl,
+      phone: this.socialFormCellphoneControl,
       acceptTerms: this.socialFormAcceptTermsControl,
     });
   }
@@ -46,9 +48,10 @@ export class DocumentTypeAndNumberComponent implements OnInit {
     if(this.socialNetworkRegisterForm.valid){
       const data = {
         idType: this.socialFormIdTypeControl.value,
-        id: this.socialFormIdControl.value,
+        identification: this.socialFormIdControl.value,
         bussinessName: this.socialFormNameControl.value,
         acceptTerms: this.socialFormAcceptTermsControl.value,
+        cellphone: this.socialFormCellphoneControl.value
       };
       this.values.emit(data);
     }

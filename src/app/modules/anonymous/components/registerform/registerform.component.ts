@@ -14,6 +14,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { ContentService } from 'src/app/services/content.service';
 import { isPlatformBrowser } from '@angular/common';
+import { AuthService } from 'src/app/services/auth.service';
+import { LinksService } from 'src/app/services/links.service';
 declare var dataLayer: any;
 
 @Component({
@@ -28,6 +30,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   socialFormNameControl: FormControl;
   socialNetworkUser: any;
   constructor(
+    private authService: AuthService,
     private fb: UntypedFormBuilder,
     private registerUser: UserService,
     private router: Router,
@@ -35,10 +38,12 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     private utils: UtilsService,
     private dialog: MatDialog,
     private content: ContentService,
+    private link: LinksService,
     @Inject(PLATFORM_ID) private platformId: object
   ) { }
 
   private subscription: Subscription = new Subscription();
+  private registerFromSocialNetwork$: Subscription = new Subscription();
   registerForm: UntypedFormGroup;
   showTerms: boolean;
   showRegisterForm: boolean;
@@ -209,9 +214,85 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     );
   }
   registerFromSocialNetwork(event: any) {
-    const { idType, id, bussinessName, acceptTerms } = event;
-    console.log({ ...this.socialNetworkUser, idType, id, bussinessName, acceptTerms });
+    const { idType, identification, bussinessName, acceptTerms, cellphone } = event;
+    const registerForm = {
+      email: this.socialNetworkUser.email.toLowerCase(),
+      firstNames: this.socialNetworkUser.firstName,
+      lastNames: this.socialNetworkUser.lastName,
+      social: bussinessName,
+      identification: identification,
+      cellphone: cellphone,
+      // idbusiness: this.registerForm.controls.business.value === "null" ? null : this.registerForm.controls.business.value,
+      password: '',
+      // idReferrer: localStorage.getItem('idClicker'),
+      // idcampaign: parseInt(localStorage.getItem('campaign')),
+      idType: idType,
+      acceptHabeasData: acceptTerms,
+      acceptTerms: acceptTerms,
+      socialmedia: this.socialNetworkUser.origin || '',
+      token: this.socialNetworkUser.token
+    }
+    console.log('registerForm', registerForm);
+    this.registerFromSocialNetwork$ = this.registerUser.registerUser(registerForm).subscribe((res: any) => {
+      console.log('REGISTER', res);
+      // this.login({
+      //   token: this.socialNetworkUser.token,
+      //   username: this.socialNetworkUser.email.toLowerCase()
+      // });
+    })
   }
+
+  login(data: any) {
+    this.loading.show();
+    this.subscription = this.authService.login(data).subscribe({
+      next: (resp: ResponseService) => {
+        this.loading.hide();
+        if (resp.state === 'Success') {
+          setTimeout(() => {
+            this.link.getAmount();
+          }, 500);
+          localStorage.setItem('ACCESS_TOKEN', resp.objectResponse.token);
+          localStorage.setItem('REFRESH_TOKEN', resp.objectResponse.refreshToken);
+          this.utils.hideloginForm();
+          this.authService.routeBased();
+          if (isPlatformBrowser(this.platformId)) {
+            dataLayer.push({
+              event: 'pushEventGA',
+              categoria: 'IniciarSesion',
+              accion: 'ClicLightboxIniciar',
+              etiqueta: 'IniciarSesionExitoso',
+            });
+
+            dataLayer.push({
+              event: 'pushEventGA',
+              categoria: 'Inicio',
+              accion: 'ClicLateral',
+              etiqueta: this.socialNetworkUser.email.toLowerCase(),
+            });
+          }
+        } else {
+          Swal.fire({
+            title: 'Login inválido',
+            text: resp.userMessage,
+            type: 'error',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'accept-login-alert-error',
+          });
+        }
+      },
+      error: (error) => {
+        this.loading.hide();
+        Swal.fire({
+          title: error.statusText,
+          text: error.error.userMessage,
+          type: 'error',
+          confirmButtonText: 'Aceptar',
+          confirmButtonClass: 'accept-forgot-alert-invalid',
+        });
+      }
+    });
+  }
+  
   /**
    * check para aceptar terminos y condiciones
    */

@@ -41,7 +41,39 @@
             {{ 'GENERIC.INVALID_FORMAT' | translate: { val: 'Razón Social' } }}
         </mat-error>
     </mat-form-field>
-    <div>
+
+    <mat-form-field>
+        <input matInput id="phone" type="text" placeholder="{{ 'GENERIC.CELLPHONE' | translate }}"
+            formControlName="phone" spacebar required />
+        <mat-error id="requiredPhone"
+            *ngIf="socialFormCellphoneControl.invalid && socialFormCellphoneControl.errors.required">{{
+            'GENERIC.REQUIRED' | translate: { formValue: 'Celular' }
+            }}</mat-error>
+
+        <mat-error id="minPhone"
+            *ngIf="socialFormCellphoneControl.invalid && socialFormCellphoneControl.errors.minlength">{{
+            'GENERIC.MIN_CHARACTERS'
+            | translate
+            : {
+            minchar: socialFormCellphoneControl.errors.minlength.requiredLength
+            }
+            }}</mat-error>
+
+        <mat-error id="maxPhone"
+            *ngIf="socialFormCellphoneControl.invalid && socialFormCellphoneControl.errors.maxlength">{{
+            'GENERIC.MAX_CHARACTERS'
+            | translate
+            : {
+            maxchar: socialFormCellphoneControl.errors.maxlength.requiredLength
+            }
+            }}</mat-error>
+
+        <mat-error id="numberPhone"
+            *ngIf="socialFormCellphoneControl.invalid && socialFormCellphoneControl.errors.pattern">{{
+            'GENERIC.ONLY_NUMBERS' | translate
+            }}</mat-error>
+    </mat-form-field>
+    <div class="accept-terms-container">
         <span>
             <mat-checkbox class="gtmResgistraTuCuentaClicAceptarTerminosPoliticas"
                 [formControl]="socialFormAcceptTermsControl" id="chkaccept" (change)="acceptTermsCheck()">
@@ -54,10 +86,9 @@
     </div>
 
 
-    <button id="register"
-        class="submit-button gtmRegistraTuCuentaClicContinuarDatosPrincipales"
-        type="submit">
-        <span class="gtmRegistraTuCuentaClicContinuarDatosPrincipales">{{ 'REGISTER.REGISTER_MYSELF' | translate }}</span>
+    <button id="register" class="submit-button gtmRegistraTuCuentaClicContinuarDatosPrincipales" type="submit">
+        <span class="gtmRegistraTuCuentaClicContinuarDatosPrincipales">{{ 'REGISTER.REGISTER_MYSELF' | translate
+            }}</span>
     </button>
 </form>
 <ng-template #templateTerms>

@@ -250,7 +250,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.routeBased();
     this.getOffers();
     this.getUserDataUser();
-    this.getAmount();
+    this.link.getAmount();
     this.amount = localStorage.getItem('Amount');
     this.amountReferred = localStorage.getItem('AmonuntReferred');
     this.getTerms();
@@ -359,13 +359,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
       }
     );
-  }
-
-  public getAmount() {
-    this.subscription = this.link.getAmount().subscribe((amount) => {
-      localStorage.setItem('Amount', amount.amountsCommission);
-      localStorage.setItem('AmonuntReferred', amount.amountsReferred);
-    });
   }
 
   @HostListener('over')

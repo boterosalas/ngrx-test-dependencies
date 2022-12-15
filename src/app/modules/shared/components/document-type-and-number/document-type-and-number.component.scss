@@ -24,9 +24,12 @@
       background-color: $gray2;
     }
   }
-  .accept-terms {
-    font-size: 12px;
-    color: $gray2;
-    text-decoration: underline;
+  .accept-terms-container {
+    margin-top: 12px;
+    .accept-terms {
+      font-size: 12px;
+      color: $gray2;
+      text-decoration: underline;
+    }
   }
 }

@@ -1,9 +1,13 @@
 <div class="social-networks-container">
-    <div #googleBtn id="buttonDiv" class="btn-social-networks"></div>
-    <button (click)="fbLogin()" class="btn-social-networks facebook-btn">
-        <img class="facebook-btn-icon"
-            src="https://www.pngplay.com/wp-content/uploads/3/Blue-Facebook-Logo-PNG-Clipart-Background.png"
-            width="10" />
-        {{ isLogin ? 'Continuar' : 'Registrarse' }} con Facebook
+    <!-- <div #googleBtn id="buttonDiv" class="btn-social-networks"></div> -->
+    <button (click)="googleLogin()" class="btn-social-networks">
+        <img class="social-network-btn-icon google-btn-icon" [src]="origin + 'img/icons/google-login-icon.png'"
+            alt="Google" />
+        {{ isLogin ? 'Continúa' : 'Regístrate' }} con Google
+    </button>
+    <button (click)="facebookLogin()" class="btn-social-networks">
+        <img class="social-network-btn-icon facebook-btn-icon" [src]="origin + 'img/icons/facebook-login-icon.svg'"
+            alt="Facebook" />
+        {{ isLogin ? 'Continúa' : 'Regístrate' }} con Facebook
     </button>
 </div>

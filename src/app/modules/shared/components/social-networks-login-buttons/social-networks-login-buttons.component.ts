@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import decode from 'jwt-decode';
+import { HttpClient } from '@angular/common/http';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
 declare const google: any;
 declare const FB: any;
@@ -13,14 +13,14 @@ export class SocialNetworksLoginButtonsComponent implements AfterViewInit {
   @ViewChild('googleBtn') googleBtn: ElementRef;
   @Input() isLogin: boolean = true;
   @Output() user: EventEmitter<any> = new EventEmitter();
+  origin = environment.URL_BLOB;
+
+  constructor(
+    private httpClient: HttpClient
+  ) { }
 
   ngAfterViewInit(): void {
-    this.googleInit();
     this.fbInit();
-  }
-
-  emit(user: any) {
-    this.user.emit(user);
   }
 
   fbInit() {
@@ -31,13 +31,6 @@ export class SocialNetworksLoginButtonsComponent implements AfterViewInit {
         xfbml: true,
         version: 'v15.0'
       });
-      FB.getLoginStatus((response) => {
-        console.log(response);
-        if (response.status === 'connected') {
-          FB.logout();
-        }
-      });
-      FB.AppEvents.logPageView();
     };
 
     (function (d, s, id) {
@@ -49,13 +42,29 @@ export class SocialNetworksLoginButtonsComponent implements AfterViewInit {
     }(document, 'script', 'facebook-jssdk'));
   }
 
-  fbLogin() {
-    const emit = this.handleCredentialResponse.bind(this);
-    FB.login(function(response){
-      console.log('response', response)
-      if (response.authResponse) {
+  facebookLogin() {
+    const emit = this.user.emit.bind(this);
+    const isLogin = this.isLogin;
+    FB.login(function ({ authResponse }) {
+      const { accessToken } = authResponse;
+      if (authResponse) {
         FB.api('/me?fields=id,email,first_name,last_name', (res) => {
-          emit(res);
+          if (isLogin) {
+            const { email } = res;
+            emit({
+              token: accessToken,
+              username: email,
+            });
+          } else {
+            const { email, first_name, last_name } = res;
+            emit({
+              email,
+              firstName: first_name,
+              lastName: last_name,
+              origin: 'FACEBOOK',
+              token: accessToken,
+            });
+          }
         })
       }
     }, {
@@ -64,42 +73,34 @@ export class SocialNetworksLoginButtonsComponent implements AfterViewInit {
     })
   }
 
-  googleInit() {
-    google.accounts.id.initialize({
+  googleLogin() {
+    google.accounts.oauth2.initTokenClient({
       client_id: environment.GOOGLE_SIGNIN_CLIENT_ID,
-      callback: this.handleCredentialResponse.bind(this),
-    });
-    google.accounts.id.renderButton(
-      this.googleBtn.nativeElement,
-      // customization attributes
-      {
-        type: 'standard',
-        theme: 'outline',
-        size: 'large',
-        text: this.isLogin ? 'continue_with' : 'signup_with',
-        shape: 'rectangular',
-        logo_alignment: 'center',
-        width: '300',
-        height: '100'
-      }
-    );
+      scope: 'https://www.googleapis.com/auth/userinfo.profile',
+      callback: this.googleLoginCallback.bind(this),
+    }).requestAccessToken();
   }
 
-  handleCredentialResponse(response: any) {
-    const user: any = {}
-    if(response.credential){
-      const token = decode(response.credential);
-      user.email = token.email;
-      user.firstName = token.given_name;
-      user.lastName = token.family_name;
-      user.id = token.sub
-    }else{
-      user.email = response.email;
-      user.firstName = response.first_name;
-      user.lastName = response.last_name;
-      user.id = response.id;
-    }
-    this.user.emit(user);
+  googleLoginCallback(response: any) {
+    const { access_token } = response;
+    this.httpClient.get(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${access_token}`).subscribe((res: any) => {
+      if (this.isLogin) {
+        const { email } = res;
+        this.user.emit({
+          token: access_token,
+          username: email,
+        })
+      } else {
+        const { email, given_name, family_name } = res;
+        this.user.emit({
+          email,
+          firstName: given_name,
+          lastName: family_name,
+          origin: 'GOOGLE',
+          token: access_token,
+        })
+      }
+    })
   }
 
 }
