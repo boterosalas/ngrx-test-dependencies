@@ -70,7 +70,6 @@ describe('DocumentTypeAndNumberComponent', () => {
     component.socialFormCellphoneControl.updateValueAndValidity();
     component.socialFormCellphoneControl.updateValueAndValidity();
     component.socialFormCellphoneControl.updateValueAndValidity();
-    console.log('FORM', component.socialNetworkRegisterForm);
     component.register();
     expect(markAllAsTouchedSpy).toHaveBeenCalled();
     expect(emitSpy).toHaveBeenCalled();

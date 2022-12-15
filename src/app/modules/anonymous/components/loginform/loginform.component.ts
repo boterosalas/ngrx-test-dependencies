@@ -44,7 +44,6 @@ export class LoginformComponent implements OnInit, OnDestroy {
   }
 
   showUser(user: any) {
-    console.log('USER', user);
     this.login(user);
   }
 

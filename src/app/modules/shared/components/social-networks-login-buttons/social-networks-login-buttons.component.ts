@@ -58,7 +58,6 @@ export class SocialNetworksLoginButtonsComponent implements AfterViewInit {
       if (authResponse) {
         const { accessToken } = authResponse;
         FB.api('/me?fields=id,email,first_name,last_name', (res) => {
-          console.log('FB-USER', res);
           if (isLogin) {
             const { email } = res;
             emit({

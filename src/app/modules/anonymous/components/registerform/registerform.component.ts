@@ -231,10 +231,8 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       acceptTerms: acceptTerms,
       socialmedia: this.socialNetworkUser.origin || '',
       token: this.socialNetworkUser.token
-    }
-    console.log('registerForm', registerForm);
+    };
     this.registerFromSocialNetwork$ = this.registerUser.registerUser(registerForm).subscribe((res: any) => {
-      console.log('REGISTER', res);
       this.login({
         token: this.socialNetworkUser.token,
         username: this.socialNetworkUser.email.toLowerCase()
