@@ -10,6 +10,8 @@ export const environment = {
   URL_REFERAL: 'https://lawrencio.grupo-exito.com/apiew/clickam/v1/ALPDQLKDKG/',
   URL_SECURITY: 'https://lawrencio.grupo-exito.com/apiew/clickam/v1/WCMJXFCDTR/',
   URL_REPORTS: 'https://lawrencio.grupo-exito.com/apiew/clickam/v1/BSDMNWBMMA/',
+  GOOGLE_SIGNIN_CLIENT_ID: '641434884837-r4skr226upafgvekvfgu599h44u1lpck.apps.googleusercontent.com',
+  FACEBOOK_SIGNIN_APP_ID: '470948245156151',
   URL_BLOB: 'https://webclickampdn.blob.core.windows.net/',
   DOMAIN: 'https://www.clickam.com.co',
   firebaseConfig: {
