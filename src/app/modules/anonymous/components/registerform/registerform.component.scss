@@ -75,27 +75,9 @@ input[type='file'] {
   }
 }
 
-.email-method-btn {
-  margin: 8px auto;
-  width: 300px;
-  border-radius: 12px;
-  border: 1px solid #dadce0;
-  height: 52px;
-  vertical-align: middle;
-  text-align: center;
-  background-color: #ffffff;
-  letter-spacing: 0.25px;
-  font-size: 14px;
-  white-space: nowrap;
-  color: #37236A;
-  font-weight: 600;
-  cursor: pointer;
-  display: block;
-  box-shadow: 0px 3px 9px #3A226A80;
-  .email-method-btn-icon {
+.social-networks-login-btn {
+  .email-icon {
     width: 20px;
-    vertical-align: sub;
-    margin-right: 7px;
   }
 }
 .register-description-text {

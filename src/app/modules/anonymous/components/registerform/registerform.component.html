@@ -5,8 +5,8 @@
 <ng-container *ngIf="!showRegisterForm && !isASocialNetworkRegister">
   <p class="register-description-text">Ingresa con tus redes sociales</p>
   <app-social-networks-login-buttons [isLogin]="false" (user)="showUser($event)"></app-social-networks-login-buttons>
-  <button (click)="showRegisterForm = true" class="email-method-btn">
-    <img class="email-method-btn-icon" src="https://webclickamdev.blob.core.windows.net/email/email-register-icon.svg"
+  <button (click)="showRegisterForm = true" class="social-networks-login-btn">
+    <img class="social-network-btn-icon email-icon" src="https://webclickamdev.blob.core.windows.net/email/email-register-icon.svg"
       alt="">
     Regístrate con tu correo
   </button>

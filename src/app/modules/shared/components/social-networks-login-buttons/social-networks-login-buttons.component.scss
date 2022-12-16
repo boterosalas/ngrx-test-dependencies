@@ -1,30 +1,10 @@
+// @import 'general';
 .social-networks-container {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  .btn-social-networks {
-    margin: 8px auto;
-    width: 100%;
-    max-width: 300px;
-    border-radius: 12px;
-    border: 1px solid #dadce0;
-    height: 52px;
-    vertical-align: middle;
-    text-align: center;
-    padding: 0px 12px;
-    background-color: #ffffff;
-    letter-spacing: 0.25px;
-    font-size: 14px;
-    white-space: nowrap;
-    color: #37236A;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0px 3px 9px #3A226A80;
-    .social-network-btn-icon {
-      vertical-align: sub;
-      margin-right: 7px;
-    }
+  .social-networks-login-btn {
     .facebook-btn-icon {
       width: 10px;
     }

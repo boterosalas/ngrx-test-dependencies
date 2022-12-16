@@ -1,11 +1,10 @@
 <div class="social-networks-container">
-    <!-- <div #googleBtn id="buttonDiv" class="btn-social-networks"></div> -->
-    <button (click)="googleLogin()" class="btn-social-networks">
+    <button (click)="googleLogin()" class="social-networks-login-btn">
         <img class="social-network-btn-icon google-btn-icon" [src]="origin + 'img/icons/google-login-icon.png'"
             alt="Google" />
         {{ isLogin ? 'Continúa' : 'Regístrate' }} con Google
     </button>
-    <button (click)="facebookLogin()" class="btn-social-networks">
+    <button (click)="facebookLogin()" class="social-networks-login-btn">
         <img class="social-network-btn-icon facebook-btn-icon" [src]="origin + 'img/icons/facebook-login-icon.svg'"
             alt="Facebook" />
         {{ isLogin ? 'Continúa' : 'Regístrate' }} con Facebook
