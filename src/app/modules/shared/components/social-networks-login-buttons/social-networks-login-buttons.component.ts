@@ -35,12 +35,8 @@ export class SocialNetworksLoginButtonsComponent implements AfterViewInit {
         xfbml: true,
         version: 'v15.0'
       });
-      FB.getLoginStatus((response) => {
-        if (response.status === 'connected') {
-          FB.logout();
-        }
-      });
     };
+    
 
     (function (d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -56,6 +52,12 @@ export class SocialNetworksLoginButtonsComponent implements AfterViewInit {
   }
 
   facebookLogin() {
+    FB.getLoginStatus((response) => {
+      console.log('FACBEOOK', response);
+      // if (response.status === 'connected') {
+      //   FB.logout();
+      // }
+    });
     const emit = this.facebookEmit.bind(this);
     const isLogin = this.isLogin;
     FB.login(function ({ authResponse }) {
@@ -82,7 +84,8 @@ export class SocialNetworksLoginButtonsComponent implements AfterViewInit {
       }
     }, {
       scope: 'email',
-      return_scopes: true
+      return_scopes: true,
+      auth_type: 'reauthenticate'
     });
   }
 
