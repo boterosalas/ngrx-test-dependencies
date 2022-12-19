@@ -52,12 +52,6 @@ export class SocialNetworksLoginButtonsComponent implements AfterViewInit {
   }
 
   facebookLogin() {
-    FB.getLoginStatus((response) => {
-      console.log('FACBEOOK', response);
-      // if (response.status === 'connected') {
-      //   FB.logout();
-      // }
-    });
     const emit = this.facebookEmit.bind(this);
     const isLogin = this.isLogin;
     FB.login(function ({ authResponse }) {
