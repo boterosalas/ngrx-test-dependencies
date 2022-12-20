@@ -17,11 +17,7 @@ export class SocialNetworksLoginButtonsComponent implements AfterViewInit {
 
   constructor(
     private httpClient: HttpClient
-  ) {
-    const script = document.createElement('script');
-    script.src = 'https://accounts.google.com/gsi/client';
-    document.querySelector('head').appendChild(script);
-  }
+  ) { }
 
   ngAfterViewInit(): void {
     this.fbInit();
