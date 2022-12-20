@@ -85,6 +85,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { BusinessAlliesComponent } from './pages/business-allies/business-allies.component';
 import { ClickamerWayComponent } from './components/clickamer-way/clickamer-way.component';
 import { DownloadAppComponent } from './pages/download-app/download-app.component';
+import { ClickerModule } from '../clicker/clicker.module';
 
 const routes: Routes = [
   {

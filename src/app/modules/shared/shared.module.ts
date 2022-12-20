@@ -127,7 +127,7 @@ import { CodigoConfirmacionComponent } from './components/codigo-confirmacion/co
     BannerPrincipalComponent,
     ModalReferirComprarComponent,
     InputFileComponent,
-    CodigoConfirmacionComponent
+    CodigoConfirmacionComponent,
   ],
   imports: [
     CommonModule,
@@ -206,7 +206,7 @@ import { CodigoConfirmacionComponent } from './components/codigo-confirmacion/co
     BannerPrincipalComponent,
     ModalReferirComprarComponent,
     InputFileComponent,
-    CodigoConfirmacionComponent
+    CodigoConfirmacionComponent,
   ],
 })
 export class SharedModule {}

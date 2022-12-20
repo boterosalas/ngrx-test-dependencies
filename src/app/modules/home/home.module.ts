@@ -19,7 +19,8 @@ import { ListBlogsComponent } from '../anonymous/components/list-blogs/list-blog
 import { TopRewardComponent } from '../anonymous/components/top-reward/top-reward.component';
 import { ShareButtonModule } from 'ngx-sharebuttons/button';
 import { TopbarComponent } from '../clicker/components/topbar/topbar.component';
-import { AlertaCargarDocumentosComponent } from '../clicker/components/alerta-cargar-documentos/alerta-cargar-documentos.component';
+import { AlertaCargarDocumentosComponent } from './components/alerta-cargar-documentos/alerta-cargar-documentos.component';
+import { VideoHomeCardComponent } from './components/video-home-card/video-home-card.component';
 
 const routes: Routes = [
   {
@@ -50,7 +51,8 @@ const routes: Routes = [
     ListBlogsComponent,
     TopRewardComponent,
     TopbarComponent,
-    AlertaCargarDocumentosComponent
+    AlertaCargarDocumentosComponent,
+    VideoHomeCardComponent,
   ],
   imports: [
     CommonModule,
@@ -62,7 +64,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SlickCarouselModule,
     FlexLayoutModule,
-    ShareButtonModule
+    ShareButtonModule,
   ],
   exports: [RouterModule, SliderStoriesComponent, NewBlogComponent],
 })
