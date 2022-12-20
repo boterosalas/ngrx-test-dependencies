@@ -105,6 +105,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     this.showRegisterForm = false;
     this.isASocialNetworkRegister = true;
     this.socialNetworkUser = user;
+    console.log('User', this.socialNetworkUser);
   }
 
   public getBusiness() {
