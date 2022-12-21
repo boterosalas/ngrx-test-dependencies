@@ -32,7 +32,7 @@ export class SocialNetworksLoginButtonsComponent implements AfterViewInit {
         version: 'v15.0'
       });
     };
-    
+
 
     (function (d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -82,7 +82,8 @@ export class SocialNetworksLoginButtonsComponent implements AfterViewInit {
   googleLogin() {
     google.accounts.oauth2.initTokenClient({
       client_id: environment.GOOGLE_SIGNIN_CLIENT_ID,
-      scope: 'https://www.googleapis.com/auth/userinfo.profile',
+      scope: 'https://www.googleapis.com/auth/userinfo.profile \
+      https://www.googleapis.com/auth/userinfo.email',
       callback: this.googleLoginCallback.bind(this),
     }).requestAccessToken();
   }
@@ -90,6 +91,7 @@ export class SocialNetworksLoginButtonsComponent implements AfterViewInit {
   googleLoginCallback(response: any) {
     const { access_token } = response;
     this.httpClient.get(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${access_token}`).subscribe((res: any) => {
+      console.log('GOOGLE', res);
       if (this.isLogin) {
         const { email } = res;
         this.user.emit({
