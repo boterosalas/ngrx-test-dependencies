@@ -223,17 +223,19 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       social: bussinessName,
       identification: identification,
       cellphone: cellphone,
-      // idbusiness: this.registerForm.controls.business.value === "null" ? null : this.registerForm.controls.business.value,
-      password: '',
-      // idReferrer: localStorage.getItem('idClicker'),
-      // idcampaign: parseInt(localStorage.getItem('campaign')),
+      // password: '',
       idType: idType,
       acceptHabeasData: acceptTerms,
       acceptTerms: acceptTerms,
       socialmedia: this.socialNetworkUser.origin || '',
       token: this.socialNetworkUser.token
     };
+    console.log('registerForm', registerForm);
     this.registerFromSocialNetwork$ = this.registerUser.registerUser(registerForm).subscribe((res: any) => {
+      console.log({
+        token: this.socialNetworkUser.token,
+        username: this.socialNetworkUser.email.toLowerCase()
+      })
       this.login({
         token: this.socialNetworkUser.token,
         username: this.socialNetworkUser.email.toLowerCase()
@@ -291,7 +293,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       }
     });
   }
-  
+
   /**
    * check para aceptar terminos y condiciones
    */
