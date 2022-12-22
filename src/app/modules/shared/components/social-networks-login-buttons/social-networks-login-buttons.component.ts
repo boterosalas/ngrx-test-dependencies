@@ -82,8 +82,8 @@ export class SocialNetworksLoginButtonsComponent implements AfterViewInit {
   googleLogin() {
     google.accounts.oauth2.initTokenClient({
       client_id: environment.GOOGLE_SIGNIN_CLIENT_ID,
-      scope: 'https://www.googleapis.com/auth/userinfo.profile \
-      https://www.googleapis.com/auth/userinfo.email',
+      scope: 'https://www.googleapis.com/auth/userinfo.profile ' +
+        'https://www.googleapis.com/auth/userinfo.email',
       callback: this.googleLoginCallback.bind(this),
     }).requestAccessToken();
   }
