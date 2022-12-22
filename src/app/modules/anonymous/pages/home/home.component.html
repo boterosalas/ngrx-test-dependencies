@@ -35,18 +35,18 @@
   <div class="max-1600-container">
     <div class="mat-container">
       <div class="left-container">
-        <mat-card class="card mat-card-box-shadow cursor-pointer" [routerLink]="['/reportes']">
-          <app-sales-info class="w-100"></app-sales-info>
+        <mat-card class="card mat-card-box-shadow cursor-pointer margin-card" [routerLink]="['/reportes']">
+          <app-sales-info class="w-100" className="card-sales-info"></app-sales-info>
         </mat-card>
 
-        <mat-card class="card mat-card-box-shadow">
-          <app-title showTitleh3="true" text="INVITA Y GANA"></app-title>
-          <input class="mb-4" id="urlLink" matInput [value]="url" #linkInput readonly />
+        <mat-card class="card mat-card-box-shadow invita-gana">
+          <app-title showTitleh3="true" text="INVITA Y GANA" commonClass="home-card-component"></app-title>
+          <input class="mb-4 inputCardMat" id="urlLink" matInput [value]="url" #linkInput readonly />
 
           <br />
           <span fxLayout="row">
             <div class="share-desktop w-100" fxHide.xs="true" id="share" fxLayout="row wrap-reverse" fxLayoutAlign="space-around">
-              <div fxLayout="row" class="mb-10" fxLayoutGap="10px">
+              <div fxLayout="row" fxLayoutGap="10px">
                 <span class="share-refer gtmRfiereYGanaClicReferirwhatsapp" fxLayout="column" fxFlex="33" fxLayoutAlign="center center">
                   <a
                     (click)="generateLink()"
@@ -83,7 +83,7 @@
                   </button>
                 </span>
               </div>
-              <div fxLayout="column" class="mb-10 copy-link">
+              <div fxLayout="column" class="copy-link">
                 <app-button
                   title="Copiar enlace"
                   width="100%"

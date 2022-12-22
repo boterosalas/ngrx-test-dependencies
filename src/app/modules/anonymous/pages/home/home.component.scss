@@ -275,8 +275,19 @@
   .right-container {
     width: 100%;
     padding: 12px;
+    display: flex;
+    justify-content: center;
     @media screen and (min-width: 840px) {
-      width: 60%;
     }
+
+    @media (min-width: 840px) and (max-width: 1200px) {
+    }
+  }
+  .margin-card {
+    margin-bottom: 24px !important;
+  }
+
+  .inputCardMat {
+    margin-bottom: 0 !important;
   }
 }
