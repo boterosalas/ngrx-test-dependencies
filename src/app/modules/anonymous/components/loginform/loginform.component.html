@@ -2,10 +2,6 @@
 
 <h3 class="text-center title-login">{{ 'LOGIN.LOGIN' | translate }}</h3>
 
-<app-social-networks-login-buttons [isLogin]="true" (user)="showUser($event)"></app-social-networks-login-buttons>
-
-<p class="email-login-text">O ingresa con tu correo electrónico</p>
-
 <form class="login-container" [formGroup]="loginForm">
   <mat-form-field>
     <input matInput id="email" type="email" placeholder="{{ 'GENERIC.EMAIL' | translate }}" formControlName="Username"
