@@ -49,6 +49,8 @@ import { PreferencesComponent } from './components/preferences/preferences.compo
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { CardCatalogPdfComponent } from './components/card-catalog-pdf/card-catalog-pdf.component';
 import { PhygitalLocationComponent } from './components/phygital-location/phygital-location.component';
+import { UserReportComponent } from './pages/user-report/user-report.component';
+import { RewardsByBussinessComponent } from './pages/user-report/components/rewards-by-bussiness/rewards-by-bussiness.component';
 const routes: Routes = [
   {
     path: 'mi-perfil/:pagos',
@@ -67,7 +69,8 @@ const routes: Routes = [
   },
   {
     path: 'reportes',
-    component: ReportComponent,
+    component: UserReportComponent,
+    // component: ReportComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -159,6 +162,8 @@ const routes: Routes = [
         CatalogComponent,
         CardCatalogPdfComponent,
         PhygitalLocationComponent,
+        UserReportComponent,
+        RewardsByBussinessComponent,
     ],
     imports: [
         CommonModule,

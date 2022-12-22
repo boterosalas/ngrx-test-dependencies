@@ -1,0 +1,17 @@
+.graph-bussiness-container {
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 840px) {
+    flex-direction: row;
+  }
+  .graph-container {
+    width: 70%;
+    padding: 12px;
+    border: 1px solid #ccc;
+  }
+  .bussiness-container {
+    width: 30%;
+    padding: 12px;
+    border: 1px solid #ccc;
+  }
+}
