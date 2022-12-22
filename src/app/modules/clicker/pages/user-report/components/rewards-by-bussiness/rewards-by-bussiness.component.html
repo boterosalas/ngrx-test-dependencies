@@ -1,1 +1,15 @@
-<p>rewards-by-bussiness works!</p>
+<div class="rewards">
+  <div class="rewards__item" *ngFor="let rewards of ojbRewards">
+    <figure>
+      <img [src]="rewards.img" alt="no-image" class="rewards__img" />
+    </figure>
+
+    <div class="rewards__info">
+      <p class="rewards__title">{{ rewards.title }}</p>
+      <p class="rewards__money">{{ rewards.money }}</p>
+      <p class="rewards__count">{{ rewards.count }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="no-rewards"></div>
