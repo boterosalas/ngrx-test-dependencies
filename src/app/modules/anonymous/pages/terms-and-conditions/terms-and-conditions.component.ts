@@ -29,15 +29,8 @@ export class TermsAndConditionsComponent implements OnInit, OnDestroy {
     this.amount = localStorage.getItem('Amount');
     this.amountReferred = localStorage.getItem('AmonuntReferred');
     this.getTerms();
-    this.getAmount();
+    this.link.getAmount();
     this.addTagsclass();
-  }
-
-  public getAmount() {
-    this.subscription = this.link.getAmount().subscribe((amount) => {
-      localStorage.setItem('Amount', amount.amountsCommission);
-      localStorage.setItem('AmonuntReferred', amount.amountsReferred);
-    });
   }
 
   public addTagsclass() {

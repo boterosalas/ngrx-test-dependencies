@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener, ViewChild, TemplateRef, Inject, PLATFORM_ID } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ConfirmPasswordValidator } from 'src/app/validators/confirm-password.validator';
 import Swal from 'sweetalert2';
 import { ResponseService } from 'src/app/interfaces/response';
@@ -14,6 +14,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericComponent } from 'src/app/modules/shared/components/modal-generic/modal-generic.component';
 import { ContentService } from 'src/app/services/content.service';
 import { isPlatformBrowser } from '@angular/common';
+import { AuthService } from 'src/app/services/auth.service';
+import { LinksService } from 'src/app/services/links.service';
 declare var dataLayer: any;
 
 @Component({
@@ -22,7 +24,13 @@ declare var dataLayer: any;
   styleUrls: ['./registerform.component.scss'],
 })
 export class RegisterformComponent implements OnInit, OnDestroy {
+  isASocialNetworkRegister: boolean = false;
+  socialFormIdTypeControl: FormControl;
+  socialFormIdControl: FormControl;
+  socialFormNameControl: FormControl;
+  socialNetworkUser: any;
   constructor(
+    private authService: AuthService,
     private fb: UntypedFormBuilder,
     private registerUser: UserService,
     private router: Router,
@@ -30,11 +38,12 @@ export class RegisterformComponent implements OnInit, OnDestroy {
     private utils: UtilsService,
     private dialog: MatDialog,
     private content: ContentService,
-    private personalInfo: MasterDataService,
+    private link: LinksService,
     @Inject(PLATFORM_ID) private platformId: object
-  ) {}
+  ) { }
 
   private subscription: Subscription = new Subscription();
+  private registerFromSocialNetwork$: Subscription = new Subscription();
   registerForm: UntypedFormGroup;
   showTerms: boolean;
   showRegisterForm: boolean;
@@ -54,16 +63,7 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   amount: any;
   amountReferred: any;
 
-  contentTerminos: any;
-  contentTerminosPJ: any;
-  contentProteccion: any;
-  contentTransparencia: any;
-  contentPrograma: any;
-  textTerminos: any;
-  textTerminosPJ: any;
-  textProteccion: any;
-  textTransparencia: any;
-  textPrograma: any;
+
   showPerson = false;
   showBusiness = false;
   typedc = 'documento';
@@ -95,10 +95,17 @@ export class RegisterformComponent implements OnInit, OnDestroy {
         validator: [ConfirmPasswordValidator.MatchPassword, ConfirmEmailValidator.MatchEmail],
       }
     );
-    this.showRegisterForm = true;
+    // this.showRegisterForm = true;
 
     this.getidType();
     this.getBusiness();
+  }
+
+  showUser(user) {
+    this.showRegisterForm = false;
+    this.isASocialNetworkRegister = true;
+    this.socialNetworkUser = user;
+    console.log('User', this.socialNetworkUser);
   }
 
   public getBusiness() {
@@ -108,14 +115,10 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   }
 
   public termsAndConditions() {
-    this.getTerms();
-    const template = this.templateTerms;
-    const title = '';
-
     this.dialog.open(ModalGenericComponent, {
       data: {
-        title,
-        template,
+        title: '',
+        template: this.templateTerms,
       },
     });
   }
@@ -128,7 +131,13 @@ export class RegisterformComponent implements OnInit, OnDestroy {
 
   @HostListener('over')
   hideRegister() {
-    this.utils.showloginForm();
+    this.registerForm.reset();
+    if (this.showRegisterForm || this.isASocialNetworkRegister) {
+      this.showRegisterForm = false;
+      this.isASocialNetworkRegister = false;
+    } else {
+      this.utils.showloginForm();
+    }
   }
 
   /**
@@ -160,13 +169,13 @@ export class RegisterformComponent implements OnInit, OnDestroy {
         this.loading.hide();
         if (resp.state === 'Success') {
           if (isPlatformBrowser(this.platformId)) {
-          dataLayer.push({
-            event: 'pushEventGA',
-            categoria: 'Registro',
-            accion: 'ClicContinuar',
-            etiqueta: 'RegistroExitoso',
-          });
-        }
+            dataLayer.push({
+              event: 'pushEventGA',
+              categoria: 'Registro',
+              accion: 'ClicContinuar',
+              etiqueta: 'RegistroExitoso',
+            });
+          }
 
           Swal.fire({
             title: 'Revisa tu correo',
@@ -205,20 +214,86 @@ export class RegisterformComponent implements OnInit, OnDestroy {
       }
     );
   }
-  getTerms() {
-    this.personalInfo.getTerms().subscribe((resp: any) => {
-      this.contentTerminos = resp.objectResponse[0].sectionvalue;
-      this.contentProteccion = resp.objectResponse[1].sectionvalue;
-      this.contentTransparencia = resp.objectResponse[2].sectionvalue;
-      this.contentPrograma = resp.objectResponse[3].sectionvalue;
-      this.contentTerminosPJ = resp.objectResponse[4].sectionvalue;
-      this.textTerminos = resp.objectResponse[0].sectiontitle;
-      this.textProteccion = resp.objectResponse[1].sectiontitle;
-      this.textTransparencia = resp.objectResponse[2].sectiontitle;
-      this.textPrograma = resp.objectResponse[3].sectiontitle;
-      this.textTerminosPJ = resp.objectResponse[4].sectiontitle;
+  registerFromSocialNetwork(event: any) {
+    const { idType, identification, bussinessName, acceptTerms, cellphone } = event;
+    const registerForm = {
+      email: this.socialNetworkUser.email.toLowerCase(),
+      firstNames: this.socialNetworkUser.firstName,
+      lastNames: this.socialNetworkUser.lastName,
+      social: bussinessName,
+      identification: identification,
+      cellphone: cellphone,
+      // password: '',
+      idType: idType,
+      acceptHabeasData: acceptTerms,
+      acceptTerms: acceptTerms,
+      socialmedia: this.socialNetworkUser.origin || '',
+      token: this.socialNetworkUser.token
+    };
+    console.log('registerForm', registerForm);
+    this.registerFromSocialNetwork$ = this.registerUser.registerUser(registerForm).subscribe((res: any) => {
+      console.log({
+        token: this.socialNetworkUser.token,
+        username: this.socialNetworkUser.email.toLowerCase()
+      })
+      this.login({
+        token: this.socialNetworkUser.token,
+        username: this.socialNetworkUser.email.toLowerCase()
+      });
+    })
+  }
+
+  login(data: any) {
+    this.loading.show();
+    this.subscription = this.authService.login(data).subscribe({
+      next: (resp: ResponseService) => {
+        this.loading.hide();
+        if (resp.state === 'Success') {
+          setTimeout(() => {
+            this.link.getAmount();
+          }, 500);
+          localStorage.setItem('ACCESS_TOKEN', resp.objectResponse.token);
+          localStorage.setItem('REFRESH_TOKEN', resp.objectResponse.refreshToken);
+          this.utils.hideloginForm();
+          this.authService.routeBased();
+          if (isPlatformBrowser(this.platformId)) {
+            dataLayer.push({
+              event: 'pushEventGA',
+              categoria: 'IniciarSesion',
+              accion: 'ClicLightboxIniciar',
+              etiqueta: 'IniciarSesionExitoso',
+            });
+
+            dataLayer.push({
+              event: 'pushEventGA',
+              categoria: 'Inicio',
+              accion: 'ClicLateral',
+              etiqueta: this.socialNetworkUser.email.toLowerCase(),
+            });
+          }
+        } else {
+          Swal.fire({
+            title: 'Login inválido',
+            text: resp.userMessage,
+            type: 'error',
+            confirmButtonText: 'Aceptar',
+            confirmButtonClass: 'accept-login-alert-error',
+          });
+        }
+      },
+      error: (error) => {
+        this.loading.hide();
+        Swal.fire({
+          title: error.statusText,
+          text: error.error.userMessage,
+          type: 'error',
+          confirmButtonText: 'Aceptar',
+          confirmButtonClass: 'accept-forgot-alert-invalid',
+        });
+      }
     });
   }
+
   /**
    * check para aceptar terminos y condiciones
    */

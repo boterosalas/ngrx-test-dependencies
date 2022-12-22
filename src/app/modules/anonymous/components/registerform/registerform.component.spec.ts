@@ -16,6 +16,7 @@ import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { UtilsService } from 'src/app/services/utils.service';
+import { LinksService } from 'src/app/services/links.service';
 import { MatDialog } from '@angular/material/dialog';
 import { HomeComponent } from '../../pages/home/home.component';
 
@@ -28,6 +29,7 @@ describe('RegisterformComponent', () => {
   const mockDialog = jasmine.createSpyObj('MatDialog', ['open', 'closeAll']);
 
   const mockUtilsService = jasmine.createSpyObj('UtilsService', ['showloginForm']);
+  const mockLinksService = jasmine.createSpyObj('LinksService', ['getAmount']);
 
   const idType = [
     {
@@ -130,7 +132,7 @@ describe('RegisterformComponent', () => {
       },
     ],
   };
-beforeEach(waitForAsync(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [RegisterformComponent],
       imports: [
@@ -143,7 +145,7 @@ beforeEach(waitForAsync(() => {
         MatPasswordStrengthModule,
         SharedModule,
         RouterTestingModule.withRoutes([
-          { path: 'inicio', component: HomeComponent}
+          { path: 'inicio', component: HomeComponent }
         ]),
         TranslateModule.forRoot({}),
         JwtModule.forRoot({
@@ -161,12 +163,14 @@ beforeEach(waitForAsync(() => {
         { provide: MasterDataService, useValue: mockMasterService },
         { provide: UserService, useValue: mockUserService },
         { provide: UtilsService, useValue: mockUtilsService },
+        { provide: LinksService, useValue: mockLinksService },
         { provide: Router, useValue: mockRouter },
         { provide: MatDialog, useValue: mockDialog },
       ],
     }).compileComponents();
     mockMasterService.getTerms.and.returnValue(of(responseTerms));
     mockUserService.idType.and.returnValue(of(idType));
+    mockLinksService.getAmount.and.returnValue();
     mockUserService.registerUser.and.returnValue(of(register));
   }));
 
@@ -222,19 +226,15 @@ beforeEach(waitForAsync(() => {
     });
 
     it('next step register id 1', () => {
-      component.registerForm.controls.idType.setValue('1');
-      component.registerForm.controls.id.setValue('123456789');
-      expect(component.showRegisterForm).toBeTruthy();
-    });
-
-    it('next step register id 2', () => {
-      component.registerForm.controls.idType.setValue('2');
-      expect(component.showRegisterForm).toBeTruthy();
+      component.selectId('1');
+      expect(component.showBusiness).toBe(false);
+      expect(component.showPerson).toBe(true);
     });
 
     it('next step register id 3', () => {
-      component.registerForm.controls.idType.setValue('3');
-      expect(component.showRegisterForm).toBeTruthy();
+      component.selectId('3');
+      expect(component.showBusiness).toBe(true);
+      expect(component.showPerson).toBe(false);
     });
   });
 

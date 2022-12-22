@@ -260,11 +260,11 @@ export class BussinessComponent implements OnInit, OnDestroy {
 
     wordsTitle = wordsTitle.map((word) => word.normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
     wordsTitle = wordsTitle.map((word) => word.replace(/[^\w\s]/gi, ''));
-    wordsTitle = wordsTitle.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLocaleLowerCase());
+    wordsTitle = wordsTitle.map((word) => word?.charAt(0).toUpperCase() + word.slice(1).toLocaleLowerCase());
 
     wordsProduct = wordsProduct.map((word) => word.normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
     wordsProduct = wordsProduct.map((word) => word.replace(/[^\w\s]/gi, ''));
-    wordsProduct = wordsProduct.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLocaleLowerCase());
+    wordsProduct = wordsProduct.map((word) => word?.charAt(0).toUpperCase() + word.slice(1).toLocaleLowerCase());
 
     return `gtmNegocio${wordsTitle.join('')}${wordsProduct.join('')}`;
   }

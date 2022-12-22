@@ -430,7 +430,7 @@ const routes: Routes = [
     RateTestimonyComponent,
     BusinessAlliesComponent,
     ClickamerWayComponent,
-    DownloadAppComponent,
+    DownloadAppComponent
   ],
   imports: [
     FormsModule,

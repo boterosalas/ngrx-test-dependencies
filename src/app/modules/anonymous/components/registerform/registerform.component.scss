@@ -74,3 +74,16 @@ input[type='file'] {
     width: 200px;
   }
 }
+
+.social-networks-login-btn {
+  .email-icon {
+    width: 20px;
+  }
+}
+.register-description-text {
+  font-size: 16px;
+  color: $primary-color !important;
+  width: 100%;
+  text-align: center;
+  margin: 20px auto 60px;
+}

@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, retry, delay, retryWhen, concatMap, take, tap } from 'rxjs/operators';
 import { ResponseService } from '../interfaces/response';
-import { Observable, of, throwError, concat } from 'rxjs';
+import { Observable, of, throwError, concat, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LinksService {
+export class LinksService implements OnDestroy {
+  getAmount$: Subscription = new Subscription();
   constructor(private http: HttpClient) { }
 
   url = environment.URL_REFERAL;
@@ -218,7 +219,7 @@ export class LinksService {
   }
 
   public getAmount() {
-    return this.http.get(`${this.urlComission}${this.apiGetAmounts}`, this.httpOptions).pipe(
+    this.getAmount$ = this.http.get(`${this.urlComission}${this.apiGetAmounts}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),
@@ -229,7 +230,10 @@ export class LinksService {
       map((resp: ResponseService) => {
         return resp.objectResponse;
       })
-    );
+    ).subscribe((amount) => {
+      localStorage.setItem('Amount', amount.amountsCommission);
+      localStorage.setItem('AmonuntReferred', amount.amountsReferred);
+    });
   }
 
   public getReferrals(params) {
@@ -855,6 +859,8 @@ export class LinksService {
     );
   }
 
-
+  ngOnDestroy(): void {
+    this.getAmount$.unsubscribe();
+  }
 
 }

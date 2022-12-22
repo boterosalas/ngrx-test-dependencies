@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener, Inject, PLATFORM_ID, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, Inject, PLATFORM_ID, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { UntypedFormGroup, Validators, UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -10,7 +10,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import decode from 'jwt-decode';
 import { LinksService } from 'src/app/services/links.service';
 import { isPlatformBrowser } from '@angular/common';
-// import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { environment } from 'src/environments/environment';
 declare var dataLayer: any;
 
 @Component({
@@ -27,15 +27,13 @@ export class LoginformComponent implements OnInit, OnDestroy {
     private utils: UtilsService,
     private link: LinksService,
     @Inject(PLATFORM_ID) private platformId: object,
-    // private authServiceSocial: SocialAuthService
-  ) {}
+  ) { }
 
   private subscription: Subscription = new Subscription();
 
   loginForm: UntypedFormGroup;
   isSubmitted = false;
   emailPattern = '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}';
-  // user: SocialUser | undefined;
   loggedIn: boolean;
 
   ngOnInit() {
@@ -43,11 +41,10 @@ export class LoginformComponent implements OnInit, OnDestroy {
       Username: ['', [Validators.required, Validators.pattern(this.emailPattern), Validators.maxLength(64)]],
       Password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
     });
+  }
 
-    // this.authServiceSocial.authState.subscribe((user) => {
-    //   this.user = user;
-    //   this.loggedIn = user != null;
-    // });
+  showUser(user: any) {
+    this.login(user);
   }
 
   /**
@@ -55,30 +52,31 @@ export class LoginformComponent implements OnInit, OnDestroy {
    * @params recibe Password y Username
    */
 
-  public login() {
+  public loginHandle() {
     this.isSubmitted = true;
     if (this.loginForm.invalid) {
       return;
     }
-
     const loginData = {
       Password: btoa(this.loginForm.value.Password),
       Username: this.loginForm.value.Username,
     };
-
+    this.login(loginData);
+  }
+  
+  login(loginData: any) {
     this.loading.show();
-
-    this.subscription = this.authService.login(loginData).subscribe(
-      (resp: ResponseService) => {
+    this.subscription = this.authService.login(loginData).subscribe({
+      next: (resp: ResponseService) => {
         this.loading.hide();
         if (resp.state === 'Success') {
           setTimeout(() => {
-            this.getAmount();
+            this.link.getAmount();
           }, 500);
           localStorage.setItem('ACCESS_TOKEN', resp.objectResponse.token);
           localStorage.setItem('REFRESH_TOKEN', resp.objectResponse.refreshToken);
           this.utils.hideloginForm();
-          this.routeBased();
+          this.authService.routeBased();
           if (isPlatformBrowser(this.platformId)) {
             dataLayer.push({
               event: 'pushEventGA',
@@ -104,7 +102,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
           });
         }
       },
-      (error) => {
+      error: (error) => {
         this.loading.hide();
         Swal.fire({
           title: error.statusText,
@@ -114,7 +112,7 @@ export class LoginformComponent implements OnInit, OnDestroy {
           confirmButtonClass: 'accept-forgot-alert-invalid',
         });
       }
-    );
+    });
   }
 
   @HostListener('over')
@@ -136,47 +134,6 @@ export class LoginformComponent implements OnInit, OnDestroy {
   showActivate() {
     this.utils.showActivate();
   }
-
-  /** Al momento de hacer login determina la ruta por el perfil de usuario */
-
-  private routeBased() {
-    const token = localStorage.getItem('ACCESS_TOKEN');
-    const tokenDecode = decode(token);
-    if (tokenDecode.role === 'CLICKER') {
-      if (window.location.toString().includes('url')) {
-        this.router.navigateByUrl(window.location.toString());
-      } else {
-        this.router.navigate(['/inicio']);
-        // const origin = window.location.origin;
-        // window.location.replace(`${origin}/inicio`);
-      }
-      this.authService.isLogged$.next(true);
-    }
-    if (tokenDecode.role === 'ADMIN' || tokenDecode.role === 'SUPERADMIN') {
-      localStorage.clear();
-    }
-
-    if (tokenDecode.role === 'PARTNER' || tokenDecode.role === 'PARTNER-CASHIER') {
-      this.router.navigate(['/partner']);
-      this.authService.isLogged$.next(true);
-      if (tokenDecode.role === 'PARTNER-CASHIER') {
-        this.authService.getRole$.next('PARTNER-CASHIER');
-      } else {
-        this.authService.getRole$.next('PARTNER');
-      }
-    }
-  }
-
-  public getAmount() {
-    this.subscription = this.link.getAmount().subscribe((amount) => {
-      localStorage.setItem('Amount', amount.amountsCommission);
-      localStorage.setItem('AmonuntReferred', amount.amountsReferred);
-    });
-  }
-
-  // signInWithFB(): void {
-  //   this.authServiceSocial.signIn(FacebookLoginProvider.PROVIDER_ID);
-  // }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

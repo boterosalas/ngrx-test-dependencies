@@ -43,7 +43,7 @@ export class BannerPrincipalComponent implements OnInit, OnDestroy, AfterViewIni
 
   getBanner() {
     this.banners$ = this.content.getOffersbyType({ id: 'BANNER', admin: false }).subscribe(res => {
-      this.banner = res[0];
+      this.banner = res[0] || {};
       this.breakpoint();
       this.evaluateBannerBehaviour();
     });

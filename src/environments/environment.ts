@@ -23,6 +23,8 @@ export const environment = {
   URL_REFERAL: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/DSXTDWKLTV/',
   URL_SECURITY: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/UVCGDWUHSS/',
   URL_REPORTS: 'https://wolframio.grupo-exito.com/apiew/clickam/v1/FTJFPESUDT/',
+  GOOGLE_SIGNIN_CLIENT_ID: '641434884837-r4skr226upafgvekvfgu599h44u1lpck.apps.googleusercontent.com',
+  FACEBOOK_SIGNIN_APP_ID: '470948245156151',
   // URL_BLOB: 'https://webclickamqa.blob.core.windows.net/',
   DOMAIN: 'https://webclickamdev.z13.web.core.windows.net',
   firebaseConfig: {

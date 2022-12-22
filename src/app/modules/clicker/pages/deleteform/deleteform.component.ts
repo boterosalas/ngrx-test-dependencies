@@ -65,7 +65,8 @@ export class DeleteformComponent implements OnInit {
     });
     this.getInfomonth();
     this.profileFormDelete = this.fb.group({
-      Password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+      // Password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+      Password: [''],
     });
   }
   public getInfomonth() {

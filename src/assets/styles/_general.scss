@@ -1006,6 +1006,7 @@ table {
 
   .fullheight {
     width: 28%;
+    min-width: 350px;
     right: 0;
     overflow-x: hidden;
     overflow-y: auto;
@@ -3081,4 +3082,27 @@ app-date-range form input {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+}
+.social-networks-login-btn {
+  margin: 8px auto;
+  max-width: 300px;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #dadce0;
+  height: 52px;
+  vertical-align: middle;
+  text-align: center;
+  background-color: #ffffff;
+  letter-spacing: 0.25px;
+  font-size: 14px;
+  white-space: nowrap;
+  color: #37236A;
+  font-weight: 600;
+  cursor: pointer;
+  display: block;
+  box-shadow: 0px 3px 9px #3A226A80;
+  .social-network-btn-icon {
+    vertical-align: sub;
+    margin-right: 7px;
+  }
 }

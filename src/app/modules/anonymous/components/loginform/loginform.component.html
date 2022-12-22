@@ -2,59 +2,56 @@
 
 <h3 class="text-center title-login">{{ 'LOGIN.LOGIN' | translate }}</h3>
 
+<app-social-networks-login-buttons [isLogin]="true" (user)="showUser($event)"></app-social-networks-login-buttons>
+
+<p class="email-login-text">O ingresa con tu correo electrónico</p>
+
 <form class="login-container" [formGroup]="loginForm">
   <mat-form-field>
-    <input matInput id="email" type="email" placeholder="{{ 'GENERIC.EMAIL' | translate }}" formControlName="Username" spacebar required />
+    <input matInput id="email" type="email" placeholder="{{ 'GENERIC.EMAIL' | translate }}" formControlName="Username"
+      spacebar required />
     <span matPrefix><mat-icon color="gray">person</mat-icon></span>
-    <mat-error id="introduceEmail" *ngIf="loginForm.controls.Username.invalid && loginForm.controls.Username.errors.required">{{
+    <mat-error id="introduceEmail"
+      *ngIf="loginForm.controls.Username.invalid && loginForm.controls.Username.errors.required">{{
       'LOGIN.INTRODUCE_EMAIL' | translate
-    }}</mat-error>
-    <mat-error id="invalidEmail" *ngIf="loginForm.controls.Username.invalid && loginForm.controls.Username.errors.pattern">{{
+      }}</mat-error>
+    <mat-error id="invalidEmail"
+      *ngIf="loginForm.controls.Username.invalid && loginForm.controls.Username.errors.pattern">{{
       'LOGIN.INVALID_EMAIL' | translate
-    }}</mat-error>
+      }}</mat-error>
   </mat-form-field>
 
   <mat-form-field>
     <mat-pass-toggle-visibility #toggleVisbility matSuffix></mat-pass-toggle-visibility>
-    <input
-      matInput
-      id="password"
-      [type]="toggleVisbility.type"
-      placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
-      formControlName="Password"
-      spacebar
-      required
-    />
+    <input matInput id="password" [type]="toggleVisbility.type" placeholder="{{ 'GENERIC.PASSWORD' | translate }}"
+      formControlName="Password" spacebar required />
     <span matPrefix><mat-icon color="gray">lock</mat-icon></span>
-    <mat-error id="introducePassword" *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.required">{{
+    <mat-error id="introducePassword"
+      *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.required">{{
       'LOGIN.INTRODUCE_PASSWORD' | translate
-    }}</mat-error>
+      }}</mat-error>
 
-    <mat-error id="minPassword" *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.minlength">{{
+    <mat-error id="minPassword"
+      *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.minlength">{{
       'GENERIC.MIN_CHARACTERS'
-        | translate
-          : {
-              minchar: loginForm.controls.Password.errors.minlength.requiredLength
-            }
-    }}</mat-error>
+      | translate
+      : {
+      minchar: loginForm.controls.Password.errors.minlength.requiredLength
+      }
+      }}</mat-error>
 
-    <mat-error id="maxPassword" *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.maxlength">{{
+    <mat-error id="maxPassword"
+      *ngIf="loginForm.controls.Password.invalid && loginForm.controls.Password.errors.maxlength">{{
       'GENERIC.MAX_CHARACTERS'
-        | translate
-          : {
-              maxchar: loginForm.controls.Password.errors.maxlength.requiredLength
-            }
-    }}</mat-error>
+      | translate
+      : {
+      maxchar: loginForm.controls.Password.errors.maxlength.requiredLength
+      }
+      }}</mat-error>
   </mat-form-field>
   <div class="text-center">
-    <button
-      class="button button-100 button-height gtmIniciarSesionClicLightboxIniciar"
-      mat-raised-button
-      id="login"
-      color="orange"
-      (click)="login()"
-      [disabled]="!loginForm.valid"
-    >
+    <button class="button mt-2 button-100 button-height gtmIniciarSesionClicLightboxIniciar" mat-raised-button id="login"
+      color="orange" (click)="loginHandle()" [disabled]="!loginForm.valid">
       <span class="gtmIniciarSesionClicLightboxIniciar">{{ 'LOGIN.LOGIN' | translate }}</span>
     </button>
   </div>
@@ -69,27 +66,20 @@
   <asl-google-signin-button></asl-google-signin-button>
 </div> -->
 
-<p
-  id="forgotPass"
+<p id="forgotPass"
   class="cursor-pointer f-13 text-decoration text-center gtmIniciarSesionClicLightboxOlvidasteTuContrasena"
-  (click)="showForgot()"
->
+  (click)="showForgot()">
   {{ 'LOGIN.FORGOT_PASSWORD' | translate }}
 </p>
 
-<p
-  id="activateAccount"
+<p id="activateAccount"
   class="cursor-pointer f-13 text-decoration text-center gtmIniciarSesionClicLightboxOlvidasteTuContrasena"
-  (click)="showActivate()"
->
+  (click)="showActivate()">
   {{ 'LOGIN.ACTIVATE' | translate }}
 </p>
 
-<button
-  mat-raised-button
-  color="orange"
+<button mat-raised-button color="orange"
   ngClass="orange-border button button-100 button-height mt-3 gtmIniciarSesionClicLightboxRegistrarse"
-  (click)="showRegister()"
->
+  (click)="showRegister()">
   <span class="gtmIniciarSesionClicLightboxRegistrarteAqui">{{ 'GENERIC.REGISTER2' | translate }}</span>
 </button>

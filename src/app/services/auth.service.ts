@@ -83,6 +83,32 @@ export class AuthService implements OnDestroy {
   getRole$ = new BehaviorSubject<any>(null);
   subs = [];
 
+  routeBased() {
+    const token = localStorage.getItem('ACCESS_TOKEN');
+    const tokenDecode = decode(token);
+    if (tokenDecode.role === 'CLICKER') {
+      if (window.location.toString().includes('url')) {
+        this.router.navigateByUrl(window.location.toString());
+      } else {
+        this.router.navigate(['/inicio']);
+      }
+      this.isLogged$.next(true);
+    }
+    if (tokenDecode.role === 'ADMIN' || tokenDecode.role === 'SUPERADMIN') {
+      localStorage.clear();
+    }
+
+    if (tokenDecode.role === 'PARTNER' || tokenDecode.role === 'PARTNER-CASHIER') {
+      this.router.navigate(['/partner']);
+      this.isLogged$.next(true);
+      if (tokenDecode.role === 'PARTNER-CASHIER') {
+        this.getRole$.next('PARTNER-CASHIER');
+      } else {
+        this.getRole$.next('PARTNER');
+      }
+    }
+  }
+
   public login(userInfo: any) {
     return this.http.post(`${this.url + this.apiLogin}`, userInfo, this.httpOptions);
   }

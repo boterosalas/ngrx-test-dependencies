@@ -1,0 +1,35 @@
+@import 'variables';
+.social-form-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  .social-form-field-container {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  .submit-button {
+    width: 100%;
+    padding: 16px 32px;
+    font-size: 16px;
+    border: none;
+    background-color: $primary-color;
+    box-shadow: 0px 3px 9px #3a226a80;
+    color: #ffffff;
+    cursor: pointer;
+    margin-top: 20px;
+    &:disabled {
+      box-shadow: none;
+      background-color: $gray2;
+    }
+  }
+  .accept-terms-container {
+    margin-top: 12px;
+    .accept-terms {
+      font-size: 12px;
+      color: $gray2;
+      text-decoration: underline;
+    }
+  }
+}
