@@ -1,6 +1,6 @@
 <form [formGroup]="socialNetworkRegisterForm" class="social-form-container" (submit)="register()">
     <mat-form-field class="social-form-field-container">
-        <mat-select (selectionChange)="selectId($event.value)" placeholder="{{ 'REGISTER.ID_TYPE' | translate }}"
+        <mat-select (selectionChange)="selectId($event.value)" placeholder="{{ 'REGISTER.DOCUMENT_TYPE' | translate }}"
             id="idtype" [formControl]="socialFormIdTypeControl" required>
             <mat-option disabled>{{ 'REGISTER.ID_TYPE' | translate }}</mat-option>
             <mat-option *ngFor="let typeId of idUserType" value="{{ typeId.id }}">{{ typeId.value }}</mat-option>
