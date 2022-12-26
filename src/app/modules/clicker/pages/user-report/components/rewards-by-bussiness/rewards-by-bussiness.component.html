@@ -8,7 +8,7 @@
       <p class="rewards__count">{{ rewards.count }}</p>
     </div>
   </div>
-  <div *ngIf="!isVisible" class="no-rewards">
+  <div *ngIf="ojbRewards.length < 1" class="no-rewards">
     <img src="assets/img/wind-card-reward.svg" alt="" />
     <p class="no-rewards__title">Aún no tienes recompensas registradas</p>
   </div>

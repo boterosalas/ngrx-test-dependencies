@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -8,51 +8,11 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class RewardsByBussinessComponent implements OnInit {
   isVisible: boolean = false;
-  ojbRewards = [];
 
-  subject: BehaviorSubject<any> = new BehaviorSubject<any>([
-    {
-      img: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-business/20220218113151.svg',
-      title: 'Almaecnes Éxito',
-      money: 23000000,
-      count: '12 productos',
-    },
-    {
-      img: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-business/20220223110021.svg',
-      title: 'Almaecnes Éxito',
-      money: 23000000,
-      count: '12 productos',
-    },
-    {
-      img: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-business/20220329163519.svg',
-      title: 'Almaecnes Éxito',
-      money: 23000000,
-      count: '12 productos',
-    },
-    {
-      img: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.svg',
-      title: 'Almaecnes Éxito',
-      money: 23000000,
-      count: '12 productos',
-    },
-  ]);
+  @Input()
+  ojbRewards = [];
 
   constructor() {}
 
-  ngOnInit(): void {
-    this.subject.subscribe(
-      (data) => {
-        if (data.length > 1) {
-          this.isVisible = true;
-        } else {
-          this.isVisible = false;
-        }
-        this.ojbRewards = data;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    console.log(this.isVisible);
-  }
+  ngOnInit(): void {}
 }
