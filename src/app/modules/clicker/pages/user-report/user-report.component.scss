@@ -1,7 +1,7 @@
 .graph-bussiness-container {
   display: flex;
   flex-direction: column;
-  @media screen and (min-width: 840px) {
+  @media screen and (min-width: 1230px) {
     flex-direction: row;
   }
   .graph-container {

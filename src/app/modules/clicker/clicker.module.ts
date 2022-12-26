@@ -51,6 +51,10 @@ import { CardCatalogPdfComponent } from './components/card-catalog-pdf/card-cata
 import { PhygitalLocationComponent } from './components/phygital-location/phygital-location.component';
 import { UserReportComponent } from './pages/user-report/user-report.component';
 import { RewardsByBussinessComponent } from './pages/user-report/components/rewards-by-bussiness/rewards-by-bussiness.component';
+import { ResumeCardComponent } from './pages/user-report/components/resume-card/resume-card.component';
+import { ResumeCardsContainerComponent } from './pages/user-report/components/resume-cards-container/resume-cards-container.component';
+import { SwiperModule } from 'swiper/angular';
+
 const routes: Routes = [
   {
     path: 'mi-perfil/:pagos',
@@ -164,6 +168,8 @@ const routes: Routes = [
         PhygitalLocationComponent,
         UserReportComponent,
         RewardsByBussinessComponent,
+        ResumeCardComponent,
+        ResumeCardsContainerComponent,
     ],
     imports: [
         CommonModule,
@@ -180,6 +186,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         AnonymousModule,
         NgxPaginationModule,
+        SwiperModule
     ],
     exports: [
         RouterModule,

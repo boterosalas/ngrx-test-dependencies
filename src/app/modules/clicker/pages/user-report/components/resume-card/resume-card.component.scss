@@ -1,0 +1,41 @@
+.card-container {
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0px 16px 16px #f25c5c33;
+  .card-title {
+    font-size: 14px;
+    color: #ffffff;
+    margin: 0px 0px 8px 0px;
+  }
+  .card-amount {
+    font-size: 30px;
+    color: #ffffff;
+    font-weight: bold;
+    margin: 0px;
+    .more-info {
+      color: #ffffff;
+      font-size: 18px;
+      vertical-align: super;
+      margin-left: 4px;
+    }
+  }
+  .compare-info {
+    font-size: 12px;
+    color: #ffffff;
+    margin: 8px 0px 0px 0px;
+  }
+  &.validation-card {
+    background: transparent linear-gradient(90deg, #f4b062 0%, #f6c486 100%) 0% 0% no-repeat padding-box;
+  }
+  &.rewards-card {
+    background: transparent linear-gradient(90deg, #5db458 0%, #79ce68 100%) 0% 0% no-repeat padding-box;
+  }
+  &.outstanding-card {
+    background: transparent linear-gradient(90deg, #f27e5b 0%, #f4a68a 100%) 0% 0% no-repeat padding-box;
+  }
+  &.rejected-card {
+    background: transparent linear-gradient(90deg, #f25c5c 0%, #f48b8b 100%) 0% 0% no-repeat padding-box;
+  }
+}
