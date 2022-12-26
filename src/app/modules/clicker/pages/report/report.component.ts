@@ -172,7 +172,7 @@ export class ReportComponent implements OnInit, OnDestroy {
 
       case 'validation':
         template = this.templateBreak4;
-        title = 'Detalle saldo por validar';
+        title = 'Detalle saldo en validación';
         id = 'break4-modal';
         break;
 

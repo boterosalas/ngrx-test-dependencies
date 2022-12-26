@@ -5,17 +5,12 @@
       <span class="payment-card">{{ number }}</span>
       <span class="text-white">
         {{ text }}
-        <img
-          class="pl-2 icon-alert"
-          src="assets/img/icon-info-white.svg"
-          alt="alert"
-          matTooltip="{{ textToolTip }}"
-          matTooltipClass="purple-tip"
-        />
+        <img class="pl-2 icon-alert" src="assets/img/icon-info-white.svg" alt="alert" matTooltip="{{ textToolTip }}"
+          matTooltipClass="purple-tip" #tooltip="matTooltip" (click)="tooltip.toggle()" />
       </span>
     </div>
     <div>
-      <img loading="lazy"*ngIf="showIcon" class="z-index-1" [src]="imgCard" alt="icono comisiones" />
+      <img loading="lazy" *ngIf="showIcon" class="z-index-1" [src]="imgCard" alt="icono comisiones" />
     </div>
   </div>
   <a class="button-card  mt-2 cursor-pointer {{ Classtag }}" (click)="detail()">

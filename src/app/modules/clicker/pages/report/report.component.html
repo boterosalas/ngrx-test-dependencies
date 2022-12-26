@@ -41,8 +41,8 @@
             Classtag="gtmReportesClicMisComisionesVerDetalle3"
             classCard="color-card-1 mw widht-card padding-card"
             [showIcon]="false"
-            [text]="'Saldo pendiente por pagar'"
-            textToolTip="Este dinero corresponde a los saldos acumulados en los saldos anteriores, y te será pagado cuando completes el monto mínimo ."
+            text="Saldo pendiente por pagar"
+            textToolTip="Este dinero corresponde a los saldos acumulados en los saldos anteriores, y te será pagado cuando completes el monto mínimo."
             (openDetail)="break('balance')"
           ></app-card-data>
         </span>
@@ -135,7 +135,7 @@
 
 <ng-template #templateBreak4>
   <p>
-    Tus ganancias estan en proceso de verificación y serán pasadas a tu saldo pendiente por pagar cuando el negocio confirme las ventas.
+    Son las recompensas que la marca aliada está revisando si efectivamente se cerró la venta, una vez aprobado verás este saldo en “saldo pendiente por pagar” o “recompensas de este mes”, si la venta es rechazada la verás en “recompensas rechazadas”.
   </p>
   <app-table-detail-comission [dataSource]="dataBreak4"></app-table-detail-comission>
 </ng-template>
