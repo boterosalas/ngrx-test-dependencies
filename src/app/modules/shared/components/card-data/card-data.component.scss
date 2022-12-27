@@ -11,11 +11,10 @@
 
 .mw {
   min-width: 130px;
-  &-a{
+  &-a {
     min-width: 173px;
   }
 }
-
 
 .icon-alert {
   width: 25px;
@@ -29,7 +28,7 @@
   width: 100%;
 }
 
-.padding-card{
+.padding-card {
   padding-top: 20px !important;
   padding-left: 24px !important;
 }
@@ -38,28 +37,28 @@
   background: transparent linear-gradient(90deg, #61b751 0%, #79ce68 100%) 0% 0% no-repeat padding-box;
   border-radius: 10px !important;
   height: 142px;
-  box-shadow: 0px 16px 16px #6AC2591A;
+  box-shadow: 0px 16px 16px #6ac2591a;
 }
 
 .color-card-1 {
   background: transparent linear-gradient(90deg, #ffae5e 0%, #ffc183 100%) 0% 0% no-repeat padding-box;
   border-radius: 10px !important;
   height: 142px;
-  box-shadow: 0px 16px 16px #F187651A;
+  box-shadow: 0px 16px 16px #f187651a;
 }
 
 .color-card-3 {
   background: transparent linear-gradient(90deg, #f25c5c 0%, #f48b8b 100%) 0% 0% no-repeat padding-box;
   border-radius: 10px !important;
   height: 142px;
-  box-shadow: 0px 16px 16px #F36F6F1A;
+  box-shadow: 0px 16px 16px #f36f6f1a;
 }
 
 .color-card-4 {
-  background: transparent linear-gradient(90deg, #F27E5B 0%, #F4A68A 100%) 0% 0% no-repeat padding-box;
+  background: transparent linear-gradient(270deg, #608ddd 0%, #5f71da 100%) 0% 0% no-repeat padding-box;
   border-radius: 10px !important;
   height: 142px;
-  box-shadow: 0px 16px 16px #F36F6F1A;
+  box-shadow: 0px 16px 16px #f36f6f1a;
 }
 
 @media screen and (max-width: 425px) {
@@ -118,22 +117,22 @@
   position: relative;
 }
 
-.admin{
+.admin {
   align-items: center;
   justify-content: center;
-  .text-white{
+  .text-white {
     font-family: $font-galano;
     min-height: 28px;
   }
-  .payment-card{
+  .payment-card {
     font-size: 16px;
   }
-  .icon-alert{
-    position:absolute;
+  .icon-alert {
+    position: absolute;
     top: 10px;
     right: 10px;
   }
-  .info{
+  .info {
     text-align: center;
   }
 }
