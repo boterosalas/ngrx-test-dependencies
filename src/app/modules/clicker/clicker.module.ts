@@ -54,6 +54,7 @@ import { RewardsByBussinessComponent } from './pages/user-report/components/rewa
 import { ResumeCardComponent } from './pages/user-report/components/resume-card/resume-card.component';
 import { ResumeCardsContainerComponent } from './pages/user-report/components/resume-cards-container/resume-cards-container.component';
 import { SwiperModule } from 'swiper/angular';
+import { RewardsGraphComponent } from './pages/user-report/components/rewards-graph/rewards-graph.component';
 
 const routes: Routes = [
   {
@@ -170,6 +171,7 @@ const routes: Routes = [
         RewardsByBussinessComponent,
         ResumeCardComponent,
         ResumeCardsContainerComponent,
+        RewardsGraphComponent,
     ],
     imports: [
         CommonModule,
