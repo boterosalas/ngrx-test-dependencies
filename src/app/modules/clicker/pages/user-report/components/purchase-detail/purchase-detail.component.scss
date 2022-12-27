@@ -1,0 +1,41 @@
+@import 'variables';
+@import 'general';
+@import 'skeleton';
+
+table {
+  width: 100%;
+  th {
+    font-family: $font-galano-bold;
+    color: $primary-color;
+    text-align: center;
+    letter-spacing: 0px;
+    color: #37236a;
+    text-transform: uppercase;
+    opacity: 1;
+  }
+  td {
+    padding-right: 15px;
+    text-align: center;
+  }
+}
+
+.iconb {
+  width: 45px;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.table-data {
+  color: #37236a;
+  font-family: $font-family-sans-serif;
+
+  &.data-status {
+    width: 104px;
+    height: 22px;
+    color: #ffffff;
+    padding: 6px 16px;
+    border-radius: 18px;
+  }
+}

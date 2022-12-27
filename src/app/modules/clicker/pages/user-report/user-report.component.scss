@@ -20,4 +20,13 @@
       width: 30%;
     }
   }
+
+  .purchase-detail-container {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    @media screen and (min-width: 900px) {
+      width: 100%;
+    }
+  }
 }

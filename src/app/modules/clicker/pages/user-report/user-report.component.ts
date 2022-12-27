@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -8,8 +9,9 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UserReportComponent implements OnInit {
   objResponseRewards = [];
+  objResponsePurchaseDetail: any;
 
-  subject: BehaviorSubject<any> = new BehaviorSubject<any>([
+  subjectReward: BehaviorSubject<any> = new BehaviorSubject<any>([
     {
       img: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-business/20220218113151.svg',
       title: 'Almaecnes Éxito',
@@ -36,11 +38,54 @@ export class UserReportComponent implements OnInit {
     },
   ]);
 
+  subjectDetalleRecompensa: BehaviorSubject<any> = new BehaviorSubject<any>([
+    {
+      date: '10/01/20',
+      product: 'Camisa rosa',
+      amout: 1,
+      business: 'Almacenes Éxito',
+      saleValue: 132000,
+      reward: 13000,
+      status: 'Por validar',
+    },
+    {
+      date: '10/01/20',
+      product: 'Camisa rosa',
+      amout: 1,
+      business: 'Almacenes Éxito',
+      saleValue: 132000,
+      reward: 13000,
+      status: 'Rechazada',
+    },
+    {
+      date: '10/01/20',
+      product: 'Camisa rosa',
+      amout: 1,
+      business: 'Almacenes Éxito',
+      saleValue: 132000,
+      reward: 13000,
+      status: 'Acumulado',
+    },
+    {
+      date: '10/01/20',
+      product: 'Camisa rosa',
+      amout: 1,
+      business: 'Almacenes Éxito',
+      saleValue: 132000,
+      reward: 13000,
+      status: 'Por pagar',
+    },
+  ]);
+
   constructor() {}
 
   ngOnInit(): void {
-    this.subject.subscribe((data) => {
+    this.subjectReward.subscribe((data) => {
       this.objResponseRewards = data;
+    });
+
+    this.subjectDetalleRecompensa.subscribe((data) => {
+      this.objResponsePurchaseDetail = new MatTableDataSource<any>(data);
     });
   }
 }

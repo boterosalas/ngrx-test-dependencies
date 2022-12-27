@@ -1,0 +1,68 @@
+<div fxLayout="row" fxLayoutGap="2px" class="overflow-auto mb-3 help">
+  <div fxLayout="column" fxFlex="100">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+      <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef>FECHA</th>
+        <td mat-cell *matCellDef="let element">
+          <span class="table-data">
+            {{ element.date }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="producto">
+        <th mat-header-cell *matHeaderCellDef>PRODUCTO</th>
+        <td mat-cell *matCellDef="let element">
+          <span class="table-data">
+            {{ element.product }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cantidad">
+        <th mat-header-cell *matHeaderCellDef>CANTIDAD</th>
+        <td mat-cell *matCellDef="let element">
+          <span class="table-data">
+            {{ element.amout }}
+          </span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="negocio">
+        <th mat-header-cell *matHeaderCellDef>NEGOCIO</th>
+        <td mat-cell *matCellDef="let element">
+          <span class="table-data">
+            {{ element.business }}
+          </span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="valordeVenta">
+        <th mat-header-cell *matHeaderCellDef>VALOR DE VENTA</th>
+        <td mat-cell *matCellDef="let element">
+          <span class="table-data">
+            {{ element.saleValue | currency : '' : 'symbol' : '1.0-0' }}
+          </span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="recompensa">
+        <th mat-header-cell *matHeaderCellDef>RECOMPENSA</th>
+        <td mat-cell *matCellDef="let element">
+          <span class="table-data">
+            {{ element.reward | currency : '' : 'symbol' : '1.0-0' }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef>ESTADO</th>
+        <td mat-cell *matCellDef="let element">
+          <span class="table-data data-status" [ngStyle]="{ background: validateStatus(element.status) }">
+            {{ element.status }}
+          </span>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+    </table>
+  </div>
+</div>
