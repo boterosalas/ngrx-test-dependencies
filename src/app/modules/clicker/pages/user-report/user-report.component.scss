@@ -8,11 +8,14 @@
     }
     .graph-container {
       width: 100%;
-      padding: 28px;
-      padding-bottom: 12px;
       border-radius: 12px;
+      padding: 28px 0px;
       box-shadow: 0px 16px 16px #9aaacf1a;
       background-color: #ffffff;
+      @media screen and (min-width: 900px) {
+        padding: 28px;
+        padding-bottom: 12px;
+      }
       @media screen and (min-width: 1230px) {
         width: calc(70% - 20px);
         margin-right: 20px;
