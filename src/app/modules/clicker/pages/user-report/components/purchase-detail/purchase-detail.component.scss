@@ -2,42 +2,94 @@
 @import 'general';
 @import 'skeleton';
 
-table {
+.mat-table {
   width: 100%;
-  th {
-    font-family: $font-galano-bold;
-    color: $primary-color;
-    text-align: center;
-    letter-spacing: 0px;
-    color: #37236a;
-    text-transform: uppercase;
-    opacity: 1;
-  }
-  td {
-    padding-right: 15px;
-    text-align: center;
-  }
 }
 
-.iconb {
-  width: 45px;
+.mat-row.example-detail-row {
+  min-height: 0;
 }
 
-.overflow-auto {
-  overflow: auto;
+.mat-row.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row .mat-cell {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 108px;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+.table-header {
+  color: #37236a;
+  font-family: $font-galano-bold;
+  text-transform: uppercase;
+
+  /*   &.data-status {
+    width: 104px;
+    height: 22px;
+    color: #ffffff;
+    padding: 6px 16px;
+    border-radius: 18px;
+  } */
 }
 
 .table-data {
   color: #37236a;
   font-family: $font-family-sans-serif;
+}
+.element-containt {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 
-  &.data-status {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 109px;
-    color: #ffffff;
-    padding: 6px 16px;
-    border-radius: 18px;
+  .element-containt-row1 {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: left;
+  }
+
+  .element-containt-row2 {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: end;
+  }
+  .element-containt-title {
+    color: #37236a;
+    text-transform: uppercase;
+    font-family: $font-galano-bold;
+  }
+  .element-containt-description {
+    color: #37236a;
+    font-family: $font-family-sans-serif;
+  }
+}
+.display-none {
+  display: none;
+
+  @media screen and (min-width: 840px) {
+    display: inherit;
   }
 }

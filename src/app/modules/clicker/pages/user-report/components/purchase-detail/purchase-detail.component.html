@@ -1,68 +1,51 @@
-<div fxLayout="row" fxLayoutGap="2px" class="max-1600-container overflow-auto mb-3 help">
-  <div fxLayout="column" fxFlex="100">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
-      <ng-container matColumnDef="fecha">
-        <th mat-header-cell *matHeaderCellDef>FECHA</th>
-        <td mat-cell *matCellDef="let element">
-          <span class="table-data">
-            {{ element.date }}
-          </span>
-        </td>
-      </ng-container>
+<mat-table [dataSource]="dataSource" [multiTemplateDataRows]="showInfoCard" class="mat-elevation-z8">
+  <ng-container matColumnDef="{{ column }}" *ngFor="let column of columnsToDisplay; let i = index">
+    <mat-header-cell *matHeaderCellDef [ngClass]="{ 'display-none': columnsStatus[i].hideInMobile }">
+      <span class="table-header"> {{ column }} </span>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element" [ngClass]="{ 'display-none': columnsStatus[i].hideInMobile }">
+      <span class="table-data">
+        {{ element[column] }}
+      </span>
+    </mat-cell>
+  </ng-container>
+  <!-- listo expandible -->
+  <ng-container matColumnDef="expandedDetail">
+    <mat-cell *matCellDef="let element">
+      <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+        <div class="element-containt">
+          <div class="element-containt-row1">
+            <span class="element-containt-title">producto</span>
+            <span class="element-containt-description"> {{ element.producto }}</span>
 
-      <ng-container matColumnDef="producto">
-        <th mat-header-cell *matHeaderCellDef>PRODUCTO</th>
-        <td mat-cell *matCellDef="let element">
-          <span class="table-data">
-            {{ element.product }}
-          </span>
-        </td>
-      </ng-container>
+            <span class="element-containt-title">negocio</span>
+            <span class="element-containt-description">
+              {{ element.negocio }}
+            </span>
+          </div>
 
-      <ng-container matColumnDef="cantidad">
-        <th mat-header-cell *matHeaderCellDef>CANTIDAD</th>
-        <td mat-cell *matCellDef="let element">
-          <span class="table-data">
-            {{ element.amout }}
-          </span>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="negocio">
-        <th mat-header-cell *matHeaderCellDef>NEGOCIO</th>
-        <td mat-cell *matCellDef="let element">
-          <span class="table-data">
-            {{ element.business }}
-          </span>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="valordeVenta">
-        <th mat-header-cell *matHeaderCellDef>VALOR DE VENTA</th>
-        <td mat-cell *matCellDef="let element">
-          <span class="table-data">
-            {{ element.saleValue | currency : '' : 'symbol' : '1.0-0' }}
-          </span>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="recompensa">
-        <th mat-header-cell *matHeaderCellDef>RECOMPENSA</th>
-        <td mat-cell *matCellDef="let element">
-          <span class="table-data">
-            {{ element.reward | currency : '' : 'symbol' : '1.0-0' }}
-          </span>
-        </td>
-      </ng-container>
+          <div class="element-containt-row2">
+            <span class="element-containt-title">cantidad</span>
+            <span class="element-containt-description"> {{ element.cantidad }}</span>
 
-      <ng-container matColumnDef="estado">
-        <th mat-header-cell *matHeaderCellDef>ESTADO</th>
-        <td mat-cell *matCellDef="let element">
-          <span class="table-data data-status" [ngStyle]="{ background: validateStatus(element.status) }">
-            {{ element.status }}
-          </span>
-        </td>
-      </ng-container>
+            <span class="element-containt-title">valor venta</span>
+            <span class="element-containt-description">
+              {{ element.valordeVenta | currency : '' : 'symbol' : '1.0-0' }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </mat-cell>
+  </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
-    </table>
-  </div>
-</div>
+  <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+  <mat-row
+    *matRowDef="let element; columns: columnsToDisplay"
+    class="example-element-row"
+    [class.example-expanded-row]="expandedElement === element"
+    (click)="expandedElement = expandedElement === element ? null : element"
+  >
+    <!--     [ngClass]="{ 'display-none': columnsStatus.hideInMobile }" -->
+  </mat-row>
+  <mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row>
+</mat-table>
