@@ -52,6 +52,10 @@ import { PhygitalLocationComponent } from './components/phygital-location/phygit
 import { UserReportComponent } from './pages/user-report/user-report.component';
 import { RewardsByBussinessComponent } from './pages/user-report/components/rewards-by-bussiness/rewards-by-bussiness.component';
 import { PurchaseDetailComponent } from './pages/user-report/components/purchase-detail/purchase-detail.component';
+import { ResumeCardComponent } from './pages/user-report/components/resume-card/resume-card.component';
+import { ResumeCardsContainerComponent } from './pages/user-report/components/resume-cards-container/resume-cards-container.component';
+import { SwiperModule } from 'swiper/angular';
+import { RewardsGraphComponent } from './pages/user-report/components/rewards-graph/rewards-graph.component';
 
 const routes: Routes = [
   {
@@ -166,6 +170,9 @@ const routes: Routes = [
     PhygitalLocationComponent,
     UserReportComponent,
     RewardsByBussinessComponent,
+    ResumeCardComponent,
+    ResumeCardsContainerComponent,
+    RewardsGraphComponent,
     PurchaseDetailComponent,
   ],
   imports: [
@@ -183,6 +190,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     AnonymousModule,
     NgxPaginationModule,
+    SwiperModule,
   ],
   exports: [RouterModule],
 })
