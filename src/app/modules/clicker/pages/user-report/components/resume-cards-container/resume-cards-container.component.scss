@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'general';
+@import 'skeleton';
 @import 'swiper/scss';
 .resume-cards-container {
   display: flex;
@@ -12,22 +13,25 @@
     margin-top: 16px;
   }
   .resume-card {
-    width: 33.3%;
-    padding: 8px;
+    width: calc(33.3% - 8px);
+    margin: 1px 0px;
     min-width: 230px;
     @media screen and (min-width: 1230px) {
-      width: 25%;
+      width: calc(25% - 8px);
+      padding: 8px;
+    }
+    &.loading {
+      min-height: 100px;
+      border-radius: 12px;
     }
     &.verification-card {
       padding: 0px;
       width: 100%;
+      margin: 0px;
       @media screen and (min-width: 1230px) {
-        margin-bottom: 8px;
-      }
-      @media screen and (min-width: 1230px) {
-        width: 25%;
-        margin-bottom: 0px;
+        width: calc(25% - 8px);
         padding: 8px 8px 8px 0px;
+        margin-left: 0px;
       }
     }
     &:nth-child(2) {
@@ -38,6 +42,9 @@
     }
     &:last-child {
       padding-right: 0px;
+      @media screen and (min-width: 1230px) {
+        margin-right: 0px;
+      }
     }
   }
   .resume-card-carousel {
@@ -49,7 +56,10 @@
           margin-left: 16px;
         }
         .resume-card {
-          .card-container {
+          &.loading {
+            width: 100%;
+          }
+          .resume-card-container {
             width: auto;
           }
         }

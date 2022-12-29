@@ -1,20 +1,47 @@
 <section class="max-1600-container resume-cards-container">
-    <app-resume-card class="resume-card verification-card validation-card" cardClass="validation-card"
-        title="Saldo en validación" [amount]="125000"
-        tooltipText="Son las recompensas que la marca aliada está revisando si efectivamente se cerró la venta, una vez aprobado verás este saldo en “saldo pendiente por pagar” o “recompensas de este mes” si la venta es rechazada la verás en “recompensas rechazadas”.">
-    </app-resume-card>
+
     <ng-container *ngIf="device==='desktop'">
-        <app-resume-card *ngFor="let card of resumeCards" class="resume-card" [cardClass]="card.class"
-            [title]="card.title" [amount]="card.amount" [tooltipText]="card.tooltip">
-        </app-resume-card>
+        <ng-container *ngIf="isLoading; else noLoading">
+            <div class="resume-card loading verification-card"></div>
+            <div class="resume-card loading" *ngFor="let item of [].constructor(3)"></div>
+        </ng-container>
+        <ng-template #noLoading>
+            <app-resume-card class="resume-card verification-card validation-card" cardClass="validation-card"
+                title="Saldo en validación" [amount]="dataSet?.enValidacion || 0"
+                tooltipText="Son las recompensas que la marca aliada está revisando si efectivamente se cerró la venta, una vez aprobado verás este saldo en “saldo pendiente por pagar” o “recompensas de este mes” si la venta es rechazada la verás en “recompensas rechazadas”.">
+            </app-resume-card>
+            <ng-container *ngIf="device==='desktop' && resumeCards.length>0">
+                <app-resume-card *ngFor="let card of resumeCards" class="resume-card" [cardClass]="card.class"
+                    [title]="card.title" [amount]="card.amount" [tooltipText]="card.tooltip">
+                </app-resume-card>
+            </ng-container>
+        </ng-template>
     </ng-container>
 
-    <swiper [freeMode]="freeModeOptions" class="resume-card-carousel" [slidesPerView]="1.16" [spaceBetween]="20"
-        [autoHeight]="true" *ngIf="device==='mobile'" [breakpoints]="swiperBreakpoints">
-        <ng-template swiperSlide *ngFor="let card of resumeCards">
-            <app-resume-card class="resume-card" [cardClass]="card.class" [title]="card.title" [amount]="card.amount"
-                [tooltipText]="card.tooltip">
+    <ng-container *ngIf="device==='mobile'">
+        <ng-container *ngIf="isLoading; else noLoading">
+            <div class="resume-card loading verification-card"></div>
+            <swiper [freeMode]="freeModeOptions" class="resume-card-carousel" [slidesPerView]="1.16" [spaceBetween]="20"
+                [autoHeight]="true" [breakpoints]="swiperBreakpoints">
+                <ng-template swiperSlide *ngFor="let item of [].constructor(3)">
+                    <div class="resume-card loading"></div>
+                </ng-template>
+            </swiper>
+        </ng-container>
+        <ng-template #noLoading>
+            <app-resume-card class="resume-card verification-card validation-card" cardClass="validation-card"
+                title="Saldo en validación" [amount]="dataSet?.enValidacion || 0"
+                tooltipText="Son las recompensas que la marca aliada está revisando si efectivamente se cerró la venta, una vez aprobado verás este saldo en “saldo pendiente por pagar” o “recompensas de este mes” si la venta es rechazada la verás en “recompensas rechazadas”.">
             </app-resume-card>
+            <swiper [freeMode]="freeModeOptions" class="resume-card-carousel" [slidesPerView]="1.16" [spaceBetween]="20"
+                [autoHeight]="true" *ngIf="device==='mobile' && resumeCards.length>0" [breakpoints]="swiperBreakpoints">
+                <ng-template swiperSlide *ngFor="let card of resumeCards">
+                    <app-resume-card class="resume-card" [cardClass]="card.class" [title]="card.title"
+                        [amount]="card.amount" [tooltipText]="card.tooltip">
+                    </app-resume-card>
+                </ng-template>
+            </swiper>
         </ng-template>
-    </swiper>
+    </ng-container>
+
 </section>
