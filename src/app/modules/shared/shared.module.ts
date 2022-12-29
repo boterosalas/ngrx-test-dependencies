@@ -70,8 +70,6 @@ import { BusinessListComponent } from './components/business-list/business-list.
 import { QrComponent } from './components/qr/qr.component';
 import { BannerPrincipalComponent } from './components/banner-principal/banner-principal.component';
 import { ModalReferirComprarComponent } from './components/modal-referir-comprar/modal-referir-comprar.component';
-import { SocialNetworksLoginButtonsComponent } from './components/social-networks-login-buttons/social-networks-login-buttons.component';
-import { DocumentTypeAndNumberComponent } from './components/document-type-and-number/document-type-and-number.component';
 import { TermsAndConditionsModalComponent } from './components/terms-and-conditions-modal/terms-and-conditions-modal.component';
 import { InputFileComponent } from './components/input-file/input-file.component';
 import { CodigoConfirmacionComponent } from './components/codigo-confirmacion/codigo-confirmacion.component';
@@ -129,8 +127,6 @@ import { CodigoConfirmacionComponent } from './components/codigo-confirmacion/co
     QrComponent,
     BannerPrincipalComponent,
     ModalReferirComprarComponent,
-    SocialNetworksLoginButtonsComponent,
-    DocumentTypeAndNumberComponent,
     TermsAndConditionsModalComponent,
     InputFileComponent,
     CodigoConfirmacionComponent,
@@ -211,8 +207,6 @@ import { CodigoConfirmacionComponent } from './components/codigo-confirmacion/co
     QrComponent,
     BannerPrincipalComponent,
     ModalReferirComprarComponent,
-    SocialNetworksLoginButtonsComponent,
-    DocumentTypeAndNumberComponent,
     TermsAndConditionsModalComponent,
     InputFileComponent,
     CodigoConfirmacionComponent,

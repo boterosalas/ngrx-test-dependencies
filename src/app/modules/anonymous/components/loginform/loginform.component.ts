@@ -43,10 +43,6 @@ export class LoginformComponent implements OnInit, OnDestroy {
     });
   }
 
-  showUser(user: any) {
-    this.login(user);
-  }
-
   /**
    * Metodo para loguearse
    * @params recibe Password y Username

@@ -1,21 +1,11 @@
 <app-top title="Registro" (close)="hideRegister()"></app-top>
 
-<h3 class="text-center f-22">{{ isASocialNetworkRegister ? ('REGISTER.FILL_YOUR_DATA' | translate) :
-  ('REGISTER.REGISTER_ACCOUNT' | translate) }}</h3>
-<ng-container *ngIf="!showRegisterForm && !isASocialNetworkRegister">
-  <p class="register-description-text">Ingresa con tus redes sociales</p>
-  <app-social-networks-login-buttons [isLogin]="false" (user)="showUser($event)"></app-social-networks-login-buttons>
-  <button (click)="showRegisterForm = true" class="social-networks-login-btn">
-    <img class="social-network-btn-icon email-icon" src="https://webclickamdev.blob.core.windows.net/email/email-register-icon.svg"
-      alt="">
-    Regístrate con tu correo
-  </button>
-</ng-container>
+<h3 class="text-center f-22">{{ 'REGISTER.REGISTER_ACCOUNT' | translate }}</h3>
 
-<form class="register-container" [formGroup]="registerForm" *ngIf="!isASocialNetworkRegister && showRegisterForm">
+<form class="register-container" [formGroup]="registerForm">
 
   <mat-form-field>
-    <mat-select (selectionChange)="selectId($event.value)" placeholder="{{ 'REGISTER.ID_TYPE' | translate }}"
+    <mat-select (selectionChange)="selectId($event.value)" placeholder="{{ 'REGISTER.DOCUMENT_TYPE' | translate }}"
       id="idtype" formControlName="idType" required>
       <mat-option disabled>{{ 'REGISTER.ID_TYPE' | translate }}</mat-option>
       <mat-option *ngFor="let typeId of idUserType" value="{{ typeId.id }}">{{ typeId.value }}</mat-option>
@@ -274,9 +264,6 @@
     <span class="gtmRegistraTuCuentaClicContinuarDatosPrincipales">{{ 'REGISTER.REGISTER_MYSELF' | translate }}</span>
   </button>
 </form>
-
-<app-document-type-and-number *ngIf="isASocialNetworkRegister && !showRegisterForm" [idUserType]="idUserType"
-  (values)="registerFromSocialNetwork($event)"></app-document-type-and-number>
 
 <ng-template #templateTerms>
   <app-terms-and-conditions-modal (acceptTerms)="acceptModal()" [typedc]="typedc"></app-terms-and-conditions-modal>

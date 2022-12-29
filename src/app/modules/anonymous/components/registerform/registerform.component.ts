@@ -24,7 +24,6 @@ declare var dataLayer: any;
   styleUrls: ['./registerform.component.scss'],
 })
 export class RegisterformComponent implements OnInit, OnDestroy {
-  isASocialNetworkRegister: boolean = false;
   socialFormIdTypeControl: FormControl;
   socialFormIdControl: FormControl;
   socialFormNameControl: FormControl;
@@ -43,10 +42,8 @@ export class RegisterformComponent implements OnInit, OnDestroy {
   ) { }
 
   private subscription: Subscription = new Subscription();
-  private registerFromSocialNetwork$: Subscription = new Subscription();
   registerForm: UntypedFormGroup;
   showTerms: boolean;
-  showRegisterForm: boolean;
   showLoginForm: boolean;
   acceptTerms: boolean = null;
   idUserType = [];
@@ -95,17 +92,9 @@ export class RegisterformComponent implements OnInit, OnDestroy {
         validator: [ConfirmPasswordValidator.MatchPassword, ConfirmEmailValidator.MatchEmail],
       }
     );
-    // this.showRegisterForm = true;
 
     this.getidType();
     this.getBusiness();
-  }
-
-  showUser(user) {
-    this.showRegisterForm = false;
-    this.isASocialNetworkRegister = true;
-    this.socialNetworkUser = user;
-    console.log('User', this.socialNetworkUser);
   }
 
   public getBusiness() {
@@ -131,13 +120,8 @@ export class RegisterformComponent implements OnInit, OnDestroy {
 
   @HostListener('over')
   hideRegister() {
+    this.utils.showloginForm();
     this.registerForm.reset();
-    if (this.showRegisterForm || this.isASocialNetworkRegister) {
-      this.showRegisterForm = false;
-      this.isASocialNetworkRegister = false;
-    } else {
-      this.utils.showloginForm();
-    }
   }
 
   /**
@@ -213,85 +197,6 @@ export class RegisterformComponent implements OnInit, OnDestroy {
         });
       }
     );
-  }
-  registerFromSocialNetwork(event: any) {
-    const { idType, identification, bussinessName, acceptTerms, cellphone } = event;
-    const registerForm = {
-      email: this.socialNetworkUser.email.toLowerCase(),
-      firstNames: this.socialNetworkUser.firstName,
-      lastNames: this.socialNetworkUser.lastName,
-      social: bussinessName,
-      identification: identification,
-      cellphone: cellphone,
-      // password: '',
-      idType: idType,
-      acceptHabeasData: acceptTerms,
-      acceptTerms: acceptTerms,
-      socialmedia: this.socialNetworkUser.origin || '',
-      token: this.socialNetworkUser.token
-    };
-    console.log('registerForm', registerForm);
-    this.registerFromSocialNetwork$ = this.registerUser.registerUser(registerForm).subscribe((res: any) => {
-      console.log({
-        token: this.socialNetworkUser.token,
-        username: this.socialNetworkUser.email.toLowerCase()
-      })
-      this.login({
-        token: this.socialNetworkUser.token,
-        username: this.socialNetworkUser.email.toLowerCase()
-      });
-    })
-  }
-
-  login(data: any) {
-    this.loading.show();
-    this.subscription = this.authService.login(data).subscribe({
-      next: (resp: ResponseService) => {
-        this.loading.hide();
-        if (resp.state === 'Success') {
-          setTimeout(() => {
-            this.link.getAmount();
-          }, 500);
-          localStorage.setItem('ACCESS_TOKEN', resp.objectResponse.token);
-          localStorage.setItem('REFRESH_TOKEN', resp.objectResponse.refreshToken);
-          this.utils.hideloginForm();
-          this.authService.routeBased();
-          if (isPlatformBrowser(this.platformId)) {
-            dataLayer.push({
-              event: 'pushEventGA',
-              categoria: 'IniciarSesion',
-              accion: 'ClicLightboxIniciar',
-              etiqueta: 'IniciarSesionExitoso',
-            });
-
-            dataLayer.push({
-              event: 'pushEventGA',
-              categoria: 'Inicio',
-              accion: 'ClicLateral',
-              etiqueta: this.socialNetworkUser.email.toLowerCase(),
-            });
-          }
-        } else {
-          Swal.fire({
-            title: 'Login inválido',
-            text: resp.userMessage,
-            type: 'error',
-            confirmButtonText: 'Aceptar',
-            confirmButtonClass: 'accept-login-alert-error',
-          });
-        }
-      },
-      error: (error) => {
-        this.loading.hide();
-        Swal.fire({
-          title: error.statusText,
-          text: error.error.userMessage,
-          type: 'error',
-          confirmButtonText: 'Aceptar',
-          confirmButtonClass: 'accept-forgot-alert-invalid',
-        });
-      }
-    });
   }
 
   /**

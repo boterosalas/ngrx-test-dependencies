@@ -2629,7 +2629,7 @@ h3#bussiness2 {
   }
 }
 
-.cdk-overlay-pane.transversal-popup{
+.cdk-overlay-pane.transversal-popup {
   width: 94% !important;
   max-width: 400px !important;
   min-width: 290px !important;
@@ -2640,8 +2640,8 @@ h3#bussiness2 {
     border-radius: 10px;
   }
 }
-@media screen and(min-width:800px){
-  .cdk-overlay-pane.transversal-popup{
+@media screen and(min-width:800px) {
+  .cdk-overlay-pane.transversal-popup {
     width: 94% !important;
     max-width: 740px !important;
     min-width: 290px !important;
@@ -3077,9 +3077,9 @@ app-date-range form input {
 
 .max-1600-container {
   width: 100%;
-  max-width: 1600px;
-  padding-right: 15px;
-  padding-left: 15px;
+  max-width: 1632px;
+  padding-right: 16px;
+  padding-left: 16px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -3096,11 +3096,11 @@ app-date-range form input {
   letter-spacing: 0.25px;
   font-size: 14px;
   white-space: nowrap;
-  color: #37236A;
+  color: #37236a;
   font-weight: 600;
   cursor: pointer;
   display: block;
-  box-shadow: 0px 3px 9px #3A226A80;
+  box-shadow: 0px 3px 9px #3a226a80;
   .social-network-btn-icon {
     vertical-align: sub;
     margin-right: 7px;

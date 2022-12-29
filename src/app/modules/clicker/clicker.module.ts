@@ -49,6 +49,13 @@ import { PreferencesComponent } from './components/preferences/preferences.compo
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { CardCatalogPdfComponent } from './components/card-catalog-pdf/card-catalog-pdf.component';
 import { PhygitalLocationComponent } from './components/phygital-location/phygital-location.component';
+import { UserReportComponent } from './pages/user-report/user-report.component';
+import { RewardsByBussinessComponent } from './pages/user-report/components/rewards-by-bussiness/rewards-by-bussiness.component';
+import { PurchaseDetailComponent } from './pages/user-report/components/purchase-detail/purchase-detail.component';
+import { ResumeCardComponent } from './pages/user-report/components/resume-card/resume-card.component';
+import { ResumeCardsContainerComponent } from './pages/user-report/components/resume-cards-container/resume-cards-container.component';
+import { SwiperModule } from 'swiper/angular';
+import { RewardsGraphComponent } from './pages/user-report/components/rewards-graph/rewards-graph.component';
 
 const routes: Routes = [
   {
@@ -68,7 +75,8 @@ const routes: Routes = [
   },
   {
     path: 'reportes',
-    component: ReportComponent,
+    component: UserReportComponent,
+    // component: ReportComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -160,6 +168,12 @@ const routes: Routes = [
     CatalogComponent,
     CardCatalogPdfComponent,
     PhygitalLocationComponent,
+    UserReportComponent,
+    RewardsByBussinessComponent,
+    ResumeCardComponent,
+    ResumeCardsContainerComponent,
+    RewardsGraphComponent,
+    PurchaseDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -176,6 +190,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     AnonymousModule,
     NgxPaginationModule,
+    SwiperModule,
   ],
   exports: [RouterModule],
 })

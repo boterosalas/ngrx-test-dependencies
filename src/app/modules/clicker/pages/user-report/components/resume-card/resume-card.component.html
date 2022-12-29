@@ -1,0 +1,11 @@
+<article class="card-container" [ngClass]="cardClass">
+    <h4 class="card-title">{{title}}</h4>
+    <p class="card-amount">
+        {{ amount | currency: '$ ':'symbol':'1.0-0' }}
+        <i class="tio-info f-20 purple2-text more-info" matTooltipClass="purple-tip" [matTooltip]="tooltipText"
+            (click)="tooltip.show()" #tooltip="matTooltip"></i>
+    </p>
+    <p class="compare-info">
+        +10% frente al mes anterior
+    </p>
+</article>
