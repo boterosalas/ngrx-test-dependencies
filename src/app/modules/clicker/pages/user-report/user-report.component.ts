@@ -2,11 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LinksService } from 'src/app/services/links.service';
 import { TokenService } from 'src/app/services/token.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-user-report',
   templateUrl: './user-report.component.html',
-  styleUrls: ['./user-report.component.scss']
+  styleUrls: ['./user-report.component.scss'],
 })
 export class UserReportComponent implements OnInit, OnDestroy {
 
@@ -21,11 +23,6 @@ export class UserReportComponent implements OnInit, OnDestroy {
     private token: TokenService,
   ) {
     this.userId = this.token.user.userid;
-  }
-
-  ngOnInit(): void {
-    this.getPayments();
-    this.getInfoMonth();
   }
 
   getPayments(from = 1, to = this.pageTo) {
@@ -59,5 +56,84 @@ export class UserReportComponent implements OnInit, OnDestroy {
     this.getPayment$.unsubscribe();
     this.getReportUser$.unsubscribe();
   }
+  objResponseRewards = [];
+  objResponsePurchaseDetail: any;
 
+  subjectReward: BehaviorSubject<any> = new BehaviorSubject<any>([
+    {
+      img: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-business/20220218113151.svg',
+      title: 'Almaecnes Éxito',
+      money: 23000000,
+      count: '12 productos',
+    },
+    {
+      img: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-business/20220223110021.svg',
+      title: 'Almaecnes Éxito',
+      money: 23000000,
+      count: '12 productos',
+    },
+    {
+      img: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-business/20220329163519.svg',
+      title: 'Almaecnes Éxito',
+      money: 23000000,
+      count: '12 productos',
+    },
+    {
+      img: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.svg',
+      title: 'Almaecnes Éxito',
+      money: 23000000,
+      count: '12 productos',
+    },
+  ]);
+
+  subjectDetalleRecompensa: BehaviorSubject<any> = new BehaviorSubject<any>([
+    {
+      date: '10/01/20',
+      product: 'Camisa rosa',
+      amout: 1,
+      business: 'Almacenes Éxito',
+      saleValue: 132000,
+      reward: 13000,
+      status: 'Por validar',
+    },
+    {
+      date: '10/01/20',
+      product: 'Camisa rosa',
+      amout: 1,
+      business: 'Almacenes Éxito',
+      saleValue: 132000,
+      reward: 13000,
+      status: 'Rechazada',
+    },
+    {
+      date: '10/01/20',
+      product: 'Camisa rosa',
+      amout: 1,
+      business: 'Almacenes Éxito',
+      saleValue: 132000,
+      reward: 13000,
+      status: 'Acumulado',
+    },
+    {
+      date: '10/01/20',
+      product: 'Camisa rosa',
+      amout: 1,
+      business: 'Almacenes Éxito',
+      saleValue: 132000,
+      reward: 13000,
+      status: 'Por pagar',
+    },
+  ]);
+
+  ngOnInit(): void {
+    this.getPayments();
+    this.getInfoMonth();
+    this.subjectReward.subscribe((data) => {
+      this.objResponseRewards = data;
+    });
+
+    this.subjectDetalleRecompensa.subscribe((data) => {
+      this.objResponsePurchaseDetail = new MatTableDataSource<any>(data);
+    });
+  }
 }

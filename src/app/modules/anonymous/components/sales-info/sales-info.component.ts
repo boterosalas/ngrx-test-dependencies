@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ResponseService } from 'src/app/interfaces/response';
 import { LinksService } from 'src/app/services/links.service';
@@ -8,17 +8,19 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-sales-info',
   templateUrl: './sales-info.component.html',
-  styleUrls: ['./sales-info.component.scss']
+  styleUrls: ['./sales-info.component.scss'],
 })
 export class SalesInfoComponent implements OnInit, OnDestroy {
-  
   userId: string;
 
-  constructor(private user: UserService, private link: LinksService, private token: TokenService) { 
+  constructor(private user: UserService, private link: LinksService, private token: TokenService) {
     this.userId = token.user.userid;
   }
 
   private subscription: Subscription = new Subscription();
+
+  @Input()
+  className: string = 'card-sales-info';
 
   fullName: string;
   initialName: string;
@@ -33,8 +35,8 @@ export class SalesInfoComponent implements OnInit, OnDestroy {
     this.getInfomonth();
   }
 
-  public getUserdata(){
-    this.subscription = this.user.getuserdata().subscribe(({firstnames, lastnames}) => {
+  public getUserdata() {
+    this.subscription = this.user.getuserdata().subscribe(({ firstnames, lastnames }) => {
       this.fullName = `${firstnames} ${lastnames}`;
       this.initialName = firstnames?.charAt(0);
       this.initialLastName = lastnames?.charAt(0);
@@ -43,16 +45,15 @@ export class SalesInfoComponent implements OnInit, OnDestroy {
 
   public getInfomonth() {
     this.link.getReportUser(this.userId).subscribe((resp: ResponseService) => {
-      const {generalResume} = resp.objectResponse
+      const { generalResume } = resp.objectResponse;
       this.totalComission = generalResume.totalCommissions;
       this.linksCreated = generalResume.totalLinks;
-      this.sellProducts =  generalResume.totalProducts;
-      this.conversionRate =  generalResume.conversionRate;
+      this.sellProducts = generalResume.totalProducts;
+      this.conversionRate = generalResume.conversionRate;
     });
   }
 
   ngOnDestroy(): void {
-      this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
-
 }

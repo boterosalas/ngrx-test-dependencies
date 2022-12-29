@@ -1,1 +1,15 @@
-<p>rewards-by-bussiness works!</p>
+<div class="rewards {{ ojbRewards.length < 1 ? 'conteng-exist' : '' }}">
+  <div class="rewards__item" *ngFor="let rewards of ojbRewards">
+    <img [src]="rewards.img" alt="no-image" class="rewards__img" />
+
+    <div class="rewards__info">
+      <p class="rewards__title">{{ rewards.title }}</p>
+      <p class="rewards__money">{{ rewards.money | currency : '' : 'symbol' : '1.0-0' }}</p>
+      <p class="rewards__count">{{ rewards.count }}</p>
+    </div>
+  </div>
+  <div *ngIf="ojbRewards.length < 1" class="no-rewards">
+    <img src="assets/img/wind-card-reward.svg" alt="" />
+    <p class="no-rewards__title">Aún no tienes recompensas registradas</p>
+  </div>
+</div>

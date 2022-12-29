@@ -1,16 +1,24 @@
 <div class="report-container">
-    <app-banner color="purple" title="{{ 'REPORTS.REPORTS' | translate }}"
-        img="/assets/img/banners/banner-reportes-pc.jpg"
-        imgMobile="/assets/img/banners/banner-reportes-mobile.jpg"></app-banner>
+  <app-banner
+    color="purple"
+    title="{{ 'REPORTS.REPORTS' | translate }}"
+    img="/assets/img/banners/banner-reportes-pc.jpg"
+    imgMobile="/assets/img/banners/banner-reportes-mobile.jpg"
+  ></app-banner>
 
     <app-resume-cards-container [dataSet]="resumeCards"></app-resume-cards-container>
 
-    <section class="max-1600-container graph-bussiness-container">
-        <article class="graph-container">
-            <app-rewards-graph></app-rewards-graph>
-        </article>
-        <article class="bussiness-container">
-            <app-rewards-by-bussiness></app-rewards-by-bussiness>
-        </article>
-    </section>
+  <section class="max-1600-container graph-bussiness-container">
+    <article class="graph-container">
+      <app-rewards-graph></app-rewards-graph>
+    </article>
+    <article class="bussiness-container">
+      <app-rewards-by-bussiness [ojbRewards]="objResponseRewards"></app-rewards-by-bussiness>
+    </article>
+  </section>
+  <section class="max-1600-container">
+    <article class="purchase-container">
+      <app-purchase-detail></app-purchase-detail>
+    </article>
+  </section>
 </div>
