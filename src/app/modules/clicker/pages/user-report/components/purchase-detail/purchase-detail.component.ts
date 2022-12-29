@@ -67,6 +67,11 @@ export class PurchaseDetailComponent implements OnInit, OnDestroy {
       this.showInfoCard = data;
     });
   }
+
+  convertString(value: string) {
+    return value.toLowerCase().replace(' ', '');
+  }
+
   ngOnDestroy(): void {
     this.breakpointService$.unsubscribe();
   }
@@ -99,6 +104,33 @@ const ELEMENT_DATA: any = [
     valordeVenta: 132000,
     recompensa: 13000,
     estado: 'Acumulado',
+  },
+  {
+    fecha: '10/01/20',
+    producto: 'Camisa rosa',
+    cantidad: 1,
+    negocio: 'Almacenes Éxito',
+    valordeVenta: 132000,
+    recompensa: 13000,
+    estado: 'Por pagar',
+  },
+  {
+    fecha: '10/01/20',
+    producto: 'Camisa rosa',
+    cantidad: 1,
+    negocio: 'Almacenes Éxito',
+    valordeVenta: 132000,
+    recompensa: 13000,
+    estado: 'Por pagar',
+  },
+  {
+    fecha: '10/01/20',
+    producto: 'Camisa rosa',
+    cantidad: 1,
+    negocio: 'Almacenes Éxito',
+    valordeVenta: 132000,
+    recompensa: 13000,
+    estado: 'Por pagar',
   },
   {
     fecha: '10/01/20',
