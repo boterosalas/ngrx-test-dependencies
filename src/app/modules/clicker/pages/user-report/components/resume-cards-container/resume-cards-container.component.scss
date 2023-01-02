@@ -24,14 +24,14 @@
       min-height: 100px;
       border-radius: 12px;
     }
-    &.verification-card {
+    &.validation-card {
       padding: 0px;
       width: 100%;
-      margin: 0px;
+      margin: 0px 0px 16px 0px;
       @media screen and (min-width: 1230px) {
         width: calc(25% - 8px);
         padding: 8px 8px 8px 0px;
-        margin-left: 0px;
+        margin: 1px 0px;
       }
     }
     &:nth-child(2) {

@@ -84,6 +84,12 @@ export class UserReportComponent implements OnInit, OnDestroy {
       money: 23000000,
       count: '12 productos',
     },
+    {
+      img: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.svg',
+      title: 'Almaecnes Éxito',
+      money: 23000000,
+      count: '12 productos',
+    },
   ]);
 
   subjectDetalleRecompensa: BehaviorSubject<any> = new BehaviorSubject<any>([

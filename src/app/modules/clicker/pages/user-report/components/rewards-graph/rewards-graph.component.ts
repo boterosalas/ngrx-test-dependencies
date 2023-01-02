@@ -67,6 +67,9 @@ export class RewardsGraphComponent implements OnInit {
         ]
       },
       options: {
+        layout: {
+          padding: 0
+        },
         responsive: true,
         maintainAspectRatio: false,
         interaction: {
@@ -84,7 +87,7 @@ export class RewardsGraphComponent implements OnInit {
             callbacks: {
               title: (items) => {
                 const item = items[0];
-                return formatThousand(item.formattedValue);
+                return `${item.label} - ${formatThousand(item.formattedValue)}`;
               },
               label: () => null,
               labelTextColor: function () {
@@ -138,7 +141,7 @@ export class RewardsGraphComponent implements OnInit {
                 family: "galano-medium, sans-serif",
                 size: 14,
               },
-              padding: 24,
+              padding: 8,
               callback: function nFormatter(num: number, digits) {
                 const lookup = [
                   { value: 1, symbol: "" },

@@ -1,3 +1,10 @@
-<div class="chart-container">
-    <canvas id="RewardsChart" class="rewards-chart">{{ chart }}</canvas>
+<div class="rewards-graph">
+    <p class="compare-percent">
+        <mat-icon *ngIf="true" class="compare-percent__icon more">arrow_upward</mat-icon>
+        <mat-icon *ngIf="false" class="compare-percent__icon less">arrow_downward</mat-icon>
+        <strong>+ 10%</strong> frente al mes anterior
+    </p>
+    <div class="chart-container">
+        <canvas id="RewardsChart" class="rewards-chart">{{ chart }}</canvas>
+    </div>
 </div>

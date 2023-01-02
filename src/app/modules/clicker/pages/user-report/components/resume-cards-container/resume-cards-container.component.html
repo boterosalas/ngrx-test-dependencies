@@ -2,11 +2,11 @@
 
     <ng-container *ngIf="device==='desktop'">
         <ng-container *ngIf="isLoading; else noLoading">
-            <div class="resume-card loading verification-card"></div>
+            <div class="resume-card loading validation-card"></div>
             <div class="resume-card loading" *ngFor="let item of [].constructor(3)"></div>
         </ng-container>
         <ng-template #noLoading>
-            <app-resume-card class="resume-card verification-card validation-card" cardClass="validation-card"
+            <app-resume-card class="resume-card validation-card" cardClass="validation-card"
                 title="Saldo en validación" [amount]="dataSet?.enValidacion || 0"
                 tooltipText="Son las recompensas que la marca aliada está revisando si efectivamente se cerró la venta, una vez aprobado verás este saldo en “saldo pendiente por pagar” o “recompensas de este mes” si la venta es rechazada la verás en “recompensas rechazadas”.">
             </app-resume-card>
@@ -20,7 +20,7 @@
 
     <ng-container *ngIf="device==='mobile'">
         <ng-container *ngIf="isLoading; else noLoading">
-            <div class="resume-card loading verification-card"></div>
+            <div class="resume-card loading validation-card"></div>
             <swiper [freeMode]="freeModeOptions" class="resume-card-carousel" [slidesPerView]="1.16" [spaceBetween]="20"
                 [autoHeight]="true" [breakpoints]="swiperBreakpoints">
                 <ng-template swiperSlide *ngFor="let item of [].constructor(3)">
@@ -29,7 +29,7 @@
             </swiper>
         </ng-container>
         <ng-template #noLoading>
-            <app-resume-card class="resume-card verification-card validation-card" cardClass="validation-card"
+            <app-resume-card class="resume-card validation-card" cardClass="validation-card"
                 title="Saldo en validación" [amount]="dataSet?.enValidacion || 0"
                 tooltipText="Son las recompensas que la marca aliada está revisando si efectivamente se cerró la venta, una vez aprobado verás este saldo en “saldo pendiente por pagar” o “recompensas de este mes” si la venta es rechazada la verás en “recompensas rechazadas”.">
             </app-resume-card>

@@ -3,53 +3,48 @@
 @import 'skeleton';
 
 .rewards {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 0px 16px 16px #9aaacf1a;
-  border-radius: 12px;
-  opacity: 1;
-  padding: 15px;
-  max-width: 372px;
+
   &__item {
     display: flex;
-    margin-right: 19px;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  &__info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    line-height: 10px;
-    text-align: left;
-    p {
-      margin: 4px 0;
+    margin-bottom: 12px;
+    width: 100%;
+    .rewards__image-container {
+      width: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      .rewards__image {
+        object-fit: contain;
+        object-position: center;
+        width: 100%;
+        max-height: 70px;
+      }
     }
-  }
-
-  &__title {
-    font-family: $font-family-sans-serif;
-    color: #37236a;
-  }
-
-  &__money {
-    font-family: $font-galano-bold;
-    color: #37236a;
-  }
-
-  &__count {
-    font-family: $font-galano;
-    color: #8c80b4;
-    opacity: 1;
-  }
-
-  &__img {
-    width: 108px;
-    min-width: 108px;
-    max-width: 108px;
+    .rewards__info {
+      width: calc(100% - 100px);
+      .rewards__title {
+        color: #37236a;
+        font-family: $font-family-sans-serif;
+        font-size: 16px;
+        margin: 4px 0px;
+      }
+      .rewards__money {
+        color: #37236a;
+        font-family: $font-galano-bold;
+        font-size: 14px;
+        margin: 4px 0px;
+      }
+      .rewards__count {
+        color: #8c80b4;
+        font-family: $font-galano;
+        font-size: 14px;
+        margin: 4px 0px;
+      }
+    }
   }
 
   @media screen and (min-width: 900px) {
@@ -72,7 +67,7 @@
     text-align: center;
   }
 }
-.conteng-exist {
+.content-exist {
   justify-content: center;
   align-items: center;
 }

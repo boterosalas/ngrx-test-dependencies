@@ -29,36 +29,43 @@ export class PurchaseDetailComponent implements OnInit, OnDestroy {
 
   columnsStatus = [
     {
-      label: 'fecha',
+      label: 'Fecha',
+      className: 'fecha',
       hideInMobile: false,
     },
     {
-      label: 'producto',
+      label: 'Negocio',
+      className: 'negocio',
       hideInMobile: true,
     },
     {
-      label: 'cantidad',
+      label: 'Producto',
+      className: 'producto',
       hideInMobile: true,
     },
     {
-      label: 'negocio',
+      label: 'Cantidad',
+      className: 'cantidad',
       hideInMobile: true,
     },
     {
-      label: 'valordeVenta',
+      label: 'Valor de venta',
+      className: 'valordeventa',
       hideInMobile: true,
     },
     {
-      label: 'recompensa',
+      label: 'Recompensa',
+      className: 'recompensa',
       hideInMobile: false,
     },
     {
-      label: 'estado',
+      label: 'Estado',
+      className: 'estado',
       hideInMobile: false,
     },
   ];
 
-  columnsToDisplay: any = this.columnsStatus.map((x) => x.label);
+  columnsToDisplay: any = this.columnsStatus.map((x) => x.className);
 
   expandedElement: any | null;
 
@@ -79,65 +86,65 @@ export class PurchaseDetailComponent implements OnInit, OnDestroy {
 
 const ELEMENT_DATA: any = [
   {
-    fecha: '10/01/20',
+    fecha: '10/01/2022',
     producto: 'Camisa rosa',
     cantidad: 1,
     negocio: 'Almacenes Éxito',
-    valordeVenta: 132000,
+    valordeventa: 132000,
     recompensa: 13000,
     estado: 'Por validar',
   },
   {
-    fecha: '10/01/20',
+    fecha: '10/01/2022',
     producto: 'Camisa rosa',
     cantidad: 1,
     negocio: 'Almacenes Éxito',
-    valordeVenta: 132000,
+    valordeventa: 132000,
     recompensa: 13000,
     estado: 'Rechazada',
   },
   {
-    fecha: '10/01/20',
+    fecha: '10/01/2022',
     producto: 'Camisa rosa',
     cantidad: 1,
     negocio: 'Almacenes Éxito',
-    valordeVenta: 132000,
+    valordeventa: 132000,
     recompensa: 13000,
     estado: 'Acumulado',
   },
   {
-    fecha: '10/01/20',
+    fecha: '10/01/2022',
     producto: 'Camisa rosa',
     cantidad: 1,
     negocio: 'Almacenes Éxito',
-    valordeVenta: 132000,
+    valordeventa: 132000,
     recompensa: 13000,
     estado: 'Por pagar',
   },
   {
-    fecha: '10/01/20',
+    fecha: '10/01/2022',
     producto: 'Camisa rosa',
     cantidad: 1,
     negocio: 'Almacenes Éxito',
-    valordeVenta: 132000,
+    valordeventa: 132000,
     recompensa: 13000,
     estado: 'Por pagar',
   },
   {
-    fecha: '10/01/20',
+    fecha: '10/01/2022',
     producto: 'Camisa rosa',
     cantidad: 1,
     negocio: 'Almacenes Éxito',
-    valordeVenta: 132000,
+    valordeventa: 132000,
     recompensa: 13000,
     estado: 'Por pagar',
   },
   {
-    fecha: '10/01/20',
+    fecha: '10/01/2022',
     producto: 'Camisa rosa',
     cantidad: 1,
     negocio: 'Almacenes Éxito',
-    valordeVenta: 132000,
+    valordeventa: 132000,
     recompensa: 13000,
     estado: 'Por pagar',
   },

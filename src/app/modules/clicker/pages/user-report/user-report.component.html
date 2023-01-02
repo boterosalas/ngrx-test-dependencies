@@ -1,24 +1,30 @@
 <div class="report-container">
-  <app-banner
-    color="purple"
-    title="{{ 'REPORTS.REPORTS' | translate }}"
-    img="/assets/img/banners/banner-reportes-pc.jpg"
-    imgMobile="/assets/img/banners/banner-reportes-mobile.jpg"
-  ></app-banner>
+    <app-banner color="purple" title="{{ 'REPORTS.REPORTS' | translate }}"
+        img="/assets/img/banners/banner-reportes-pc.jpg"
+        imgMobile="/assets/img/banners/banner-reportes-mobile.jpg"></app-banner>
 
     <app-resume-cards-container [dataSet]="resumeCards"></app-resume-cards-container>
 
-  <section class="max-1600-container graph-bussiness-container">
-    <article class="graph-container">
-      <app-rewards-graph></app-rewards-graph>
-    </article>
-    <article class="bussiness-container">
-      <app-rewards-by-bussiness [ojbRewards]="objResponseRewards"></app-rewards-by-bussiness>
-    </article>
-  </section>
-  <section class="max-1600-container">
-    <article class="purchase-container">
-      <app-purchase-detail></app-purchase-detail>
-    </article>
-  </section>
+    <div class="max-1600-container title-container">
+        <h3 class="section-title graph-title">Comportamiento por recompensas</h3>
+        <h3 class="section-title bussiness-title">Recompensas por negocio</h3>
+    </div>
+    <section class="max-1600-container graph-bussiness-container">
+        <article class="graph-container">
+            <h3 class="section-title">Comportamiento por recompensas</h3>
+            <div class="user-report-card-container">
+                <app-rewards-graph></app-rewards-graph>
+            </div>
+        </article>
+        <article class="bussiness-container">
+            <h3 class="section-title">Recompensas por negocio</h3>
+            <div class="user-report-card-container">
+                <app-rewards-by-bussiness [ojbRewards]="objResponseRewards"></app-rewards-by-bussiness>
+            </div>
+        </article>
+    </section>
+    <section class="max-1600-container purchase-container">
+        <h3 class="section-title">Detalle de recompensas</h3>
+        <app-purchase-detail></app-purchase-detail>
+    </section>
 </div>

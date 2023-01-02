@@ -1,40 +1,71 @@
+@import 'variables';
+@import 'general';
+@import 'skeleton';
 .report-container {
   background-color: #f7f7f7;
+  .title-container {
+    display: none;
+    @media screen and (min-width: 900px) {
+      display: flex;
+      flex-direction: row;
+    }
+    .graph-title {
+      width: calc(70% - 20px);
+      margin-right: 20px;
+    }
+    .bussiness-title {
+      width: 30%;
+    }
+  }
   .graph-bussiness-container {
     display: flex;
     flex-direction: column;
-    @media screen and (min-width: 1230px) {
+    @media screen and (min-width: 900px) {
       flex-direction: row;
     }
     .graph-container {
-      width: 100%;
-      border-radius: 12px;
-      padding: 28px 0px;
-      box-shadow: 0px 16px 16px #9aaacf1a;
-      background-color: #ffffff;
       @media screen and (min-width: 900px) {
-        padding: 28px;
         padding-bottom: 12px;
-      }
-      @media screen and (min-width: 1230px) {
         width: calc(70% - 20px);
         margin-right: 20px;
       }
+      .user-report-card-container {
+        padding: 20px 8px 8px 8px;
+        @media screen and (min-width: 840px) {
+          padding: 20px 16px 8px 16px;
+        }
+      }
     }
     .bussiness-container {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      @media screen and (min-width: 1230px) {
+      @media screen and (min-width: 900px) {
         width: 30%;
+      }
+    }
+    .section-title {
+      margin-top: 8px;
+      @media screen and (min-width: 900px) {
+        display: none;
       }
     }
   }
   .purchase-container {
-    width: 100%;
-    border-radius: 12px;
-    padding: 28px 0px;
-    box-shadow: 0px 16px 16px #9aaacf1a;
-    background-color: #ffffff;
+    margin-bottom: 20px;
   }
+}
+
+.user-report-card-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 16px 16px #9aaacf1a;
+  margin-bottom: 20px;
+  padding: 28px;
+  width: 100%;
+}
+
+.section-title {
+  font-size: 20px;
+  font-family: $font-galano-bold;
+  color: #37236a;
+  margin: 0px;
+  margin-bottom: 16px;
 }
