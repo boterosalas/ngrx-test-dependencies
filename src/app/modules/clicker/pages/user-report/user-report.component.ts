@@ -12,6 +12,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UserReportComponent implements OnInit, OnDestroy {
 
+  isLoading: boolean = false;
   getPayment$: Subscription = new Subscription();
   getReportUser$: Subscription = new Subscription();
   resumeCards: any;

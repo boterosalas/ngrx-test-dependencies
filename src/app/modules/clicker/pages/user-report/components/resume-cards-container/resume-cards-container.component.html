@@ -10,7 +10,7 @@
                 title="Saldo en validación" [amount]="dataSet?.enValidacion || 0"
                 tooltipText="Son las recompensas que la marca aliada está revisando si efectivamente se cerró la venta, una vez aprobado verás este saldo en “saldo pendiente por pagar” o “recompensas de este mes” si la venta es rechazada la verás en “recompensas rechazadas”.">
             </app-resume-card>
-            <ng-container *ngIf="device==='desktop' && resumeCards.length>0">
+            <ng-container *ngIf="resumeCards.length > 0">
                 <app-resume-card *ngFor="let card of resumeCards" class="resume-card" [cardClass]="card.class"
                     [title]="card.title" [amount]="card.amount" [tooltipText]="card.tooltip">
                 </app-resume-card>

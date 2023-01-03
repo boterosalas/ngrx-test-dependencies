@@ -134,27 +134,27 @@
       }
     }
     .column-cantidad {
-      min-width: 100px;
+      width: 100px;
       flex: none;
       .table-header,
       .table-data {
         margin-left: auto;
       }
     }
-    .column-valordeventa,
+    .column-venta,
     .column-recompensa {
       word-wrap: break-word !important;
       white-space: unset !important;
-      min-width: 110px;
       overflow-wrap: break-word;
       word-wrap: break-word;
+      min-width: 130px !important;
       .table-header,
       .table-data {
         margin-left: auto;
       }
       @media screen and (min-width: 840px) {
+        width: 130px !important;
         flex: none;
-        width: auto;
       }
     }
     .column-estado {
@@ -163,6 +163,7 @@
       .table-header,
       .table-data {
         margin: auto;
+        padding: 0px;
       }
       @media screen and (min-width: 840px) {
         width: 150px !important;

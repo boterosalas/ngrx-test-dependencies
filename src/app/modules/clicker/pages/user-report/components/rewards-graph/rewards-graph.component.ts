@@ -16,6 +16,7 @@ const formatThousand = function (value: any) {
 })
 export class RewardsGraphComponent implements OnInit {
   chart: any;
+  isLoading: boolean = true;
 
   constructor() { }
 
@@ -24,7 +25,6 @@ export class RewardsGraphComponent implements OnInit {
   }
 
   createChart() {
-
     this.chart = new Chart("RewardsChart", {
       type: 'line', //this denotes tha type of chart
 

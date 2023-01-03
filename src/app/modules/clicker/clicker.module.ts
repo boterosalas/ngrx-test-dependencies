@@ -56,6 +56,7 @@ import { ResumeCardComponent } from './pages/user-report/components/resume-card/
 import { ResumeCardsContainerComponent } from './pages/user-report/components/resume-cards-container/resume-cards-container.component';
 import { SwiperModule } from 'swiper/angular';
 import { RewardsGraphComponent } from './pages/user-report/components/rewards-graph/rewards-graph.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 const routes: Routes = [
   {
@@ -191,7 +192,8 @@ const routes: Routes = [
     AnonymousModule,
     NgxPaginationModule,
     SwiperModule,
+    NgxMaterialTimepickerModule
   ],
   exports: [RouterModule],
 })
-export class ClickerModule {}
+export class ClickerModule { }

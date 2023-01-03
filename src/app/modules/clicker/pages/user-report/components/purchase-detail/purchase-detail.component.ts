@@ -2,6 +2,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { BreakpointService } from '../../../../../../services/breakpoint.service';
 import { Subscription } from 'rxjs';
+import { LinksService } from 'src/app/services/links.service';
+import { DateFormat } from 'src/app/modules/shared/helpers/date-format';
 
 @Component({
   selector: 'app-purchase-detail',
@@ -16,16 +18,53 @@ import { Subscription } from 'rxjs';
   ],
 })
 export class PurchaseDetailComponent implements OnInit, OnDestroy {
+  @Input() dataSource = ELEMENT_DATA;
+  dataSourceOwn: any;
+  hourDate: any = '';
+  minHours: any = '';
+  datePublication: any = '';
+  @Input() totalItems: any = 41;
+  @Input() pageSize: any = 20;
+  @Input() pageIndex: any = 0;
+  from: any;
+  pageTo: any;
   breakpointService$ = new Subscription();
+  getPayment$: Subscription = new Subscription();
   showInfoCard: boolean = false;
+  @Input() userId: string;
 
-  constructor(private breakpointService: BreakpointService) {}
+  constructor(
+    private breakpointService: BreakpointService,
+    private payment: LinksService,
+  ) { }
 
   ngOnInit() {
     this.detectDevice();
   }
 
-  dataSource = ELEMENT_DATA;
+  getHistory() {
+    console.log('getHistory');
+  }
+
+  hourChange(horu) {
+    const data = new Date();
+    const dataH = DateFormat.format(data, 'YYYY-MM-DD');
+    const dataOp = DateFormat.format(horu.value, 'YYYY-MM-DD');
+    if (dataH === dataOp) {
+      this.hourDate = '';
+      this.minHours = DateFormat.timeFormat(data);
+    } else {
+      this.hourDate = '';
+      this.minHours = '12:00 AM';
+    }
+  }
+
+  getPayments(from = 1, to = this.pageTo) {
+    const params = { from, to };
+    this.getPayment$ = this.payment.getPayment(this.userId, params).subscribe((payment: any) => {
+      console.log({ payment })
+    });
+  }
 
   columnsStatus = [
     {
@@ -49,8 +88,8 @@ export class PurchaseDetailComponent implements OnInit, OnDestroy {
       hideInMobile: true,
     },
     {
-      label: 'Valor de venta',
-      className: 'valordeventa',
+      label: 'Venta',
+      className: 'venta',
       hideInMobile: true,
     },
     {
@@ -79,6 +118,13 @@ export class PurchaseDetailComponent implements OnInit, OnDestroy {
     return value.toLowerCase().replace(' ', '');
   }
 
+  pagination(paginate: any) {
+    this.pageIndex = paginate;
+    this.from = this.pageSize * this.pageIndex + 1 - 20;
+    this.pageTo = this.pageSize * (this.pageIndex + 1) - 20;
+    this.getPayments(this.from, this.pageTo);
+  }
+
   ngOnDestroy(): void {
     this.breakpointService$.unsubscribe();
   }
@@ -90,7 +136,7 @@ const ELEMENT_DATA: any = [
     producto: 'Camisa rosa',
     cantidad: 1,
     negocio: 'Almacenes Éxito',
-    valordeventa: 132000,
+    venta: 132000,
     recompensa: 13000,
     estado: 'Por validar',
   },
@@ -99,7 +145,7 @@ const ELEMENT_DATA: any = [
     producto: 'Camisa rosa',
     cantidad: 1,
     negocio: 'Almacenes Éxito',
-    valordeventa: 132000,
+    venta: 132000,
     recompensa: 13000,
     estado: 'Rechazada',
   },
@@ -108,7 +154,7 @@ const ELEMENT_DATA: any = [
     producto: 'Camisa rosa',
     cantidad: 1,
     negocio: 'Almacenes Éxito',
-    valordeventa: 132000,
+    venta: 132000,
     recompensa: 13000,
     estado: 'Acumulado',
   },
@@ -117,7 +163,7 @@ const ELEMENT_DATA: any = [
     producto: 'Camisa rosa',
     cantidad: 1,
     negocio: 'Almacenes Éxito',
-    valordeventa: 132000,
+    venta: 132000,
     recompensa: 13000,
     estado: 'Por pagar',
   },
@@ -126,7 +172,7 @@ const ELEMENT_DATA: any = [
     producto: 'Camisa rosa',
     cantidad: 1,
     negocio: 'Almacenes Éxito',
-    valordeventa: 132000,
+    venta: 132000,
     recompensa: 13000,
     estado: 'Por pagar',
   },
@@ -135,7 +181,7 @@ const ELEMENT_DATA: any = [
     producto: 'Camisa rosa',
     cantidad: 1,
     negocio: 'Almacenes Éxito',
-    valordeventa: 132000,
+    venta: 132000,
     recompensa: 13000,
     estado: 'Por pagar',
   },
@@ -144,7 +190,7 @@ const ELEMENT_DATA: any = [
     producto: 'Camisa rosa',
     cantidad: 1,
     negocio: 'Almacenes Éxito',
-    valordeventa: 132000,
+    venta: 132000,
     recompensa: 13000,
     estado: 'Por pagar',
   },

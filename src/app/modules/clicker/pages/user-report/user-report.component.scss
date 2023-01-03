@@ -51,6 +51,36 @@
   .purchase-container {
     margin-bottom: 20px;
   }
+  .graph-bussiness-loading {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    @media screen and (min-width: 840px) {
+      flex-direction: row;
+    }
+    .graph-loading {
+      width: 100%;
+      height: 300px;
+      border-radius: 12px;
+      @media screen and (min-width: 840px) {
+        width: calc(70% - 20px);
+        margin-right: 20px;
+      }
+    }
+    .bussiness-loading {
+      width: 100%;
+      height: 300px;
+      border-radius: 12px;
+      @media screen and (min-width: 840px) {
+        width: 30%;
+      }
+    }
+  }
+  .purchase-loading {
+    width: 100%;
+    height: 250px;
+    border-radius: 12px;
+  }
 }
 
 .user-report-card-container {
@@ -68,4 +98,9 @@
   color: #37236a;
   margin: 0px;
   margin-bottom: 16px;
+}
+
+.loading-card {
+  height: 300px;
+  border-radius: 12px;
 }

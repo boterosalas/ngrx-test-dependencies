@@ -49,7 +49,6 @@ export class ResumeCardsContainerComponent implements OnInit, OnDestroy, OnChang
   ngOnChanges(changes: SimpleChanges): void {
     const { dataSet } = changes;
     if (dataSet.currentValue) {
-      this.isLoading = false;
       this.dataSet = dataSet.currentValue;
       this.resumeCards = [
         {
@@ -70,7 +69,8 @@ export class ResumeCardsContainerComponent implements OnInit, OnDestroy, OnChang
           amount: this.dataSet.rechazados,
           tooltip: 'Las recompensas que no se hicieron efectivas ya que la compra no fue efectuada de forma exitosa.'
         },
-      ]
+      ];
+      this.isLoading = false;
     }
   }
 

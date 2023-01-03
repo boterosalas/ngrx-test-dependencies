@@ -11,20 +11,39 @@
     </div>
     <section class="max-1600-container graph-bussiness-container">
         <article class="graph-container">
-            <h3 class="section-title">Comportamiento por recompensas</h3>
-            <div class="user-report-card-container">
-                <app-rewards-graph></app-rewards-graph>
-            </div>
+            <ng-container>
+                <h3 class="section-title">Comportamiento por recompensas</h3>
+                <ng-container *ngIf="isLoading; else noLoadingRewardsGraph">
+                    <div class="loading loading-card"></div>
+                </ng-container>
+                <ng-template #noLoadingRewardsGraph>
+                    <div class="user-report-card-container">
+                        <app-rewards-graph></app-rewards-graph>
+                    </div>
+                </ng-template>
+            </ng-container>
         </article>
         <article class="bussiness-container">
-            <h3 class="section-title">Recompensas por negocio</h3>
-            <div class="user-report-card-container">
-                <app-rewards-by-bussiness [ojbRewards]="objResponseRewards"></app-rewards-by-bussiness>
-            </div>
+            <ng-container>
+                <h3 class="section-title">Recompensas por negocio</h3>
+                <ng-container *ngIf="isLoading; else noLoadingRewardsByBussiness">
+                    <div class="loading loading-card"></div>
+                </ng-container>
+                <ng-template #noLoadingRewardsByBussiness>
+                    <div class="user-report-card-container">
+                        <app-rewards-by-bussiness [ojbRewards]="objResponseRewards"></app-rewards-by-bussiness>
+                    </div>
+                </ng-template>
+            </ng-container>
         </article>
     </section>
     <section class="max-1600-container purchase-container">
         <h3 class="section-title">Detalle de recompensas</h3>
-        <app-purchase-detail></app-purchase-detail>
+        <ng-container *ngIf="isLoading; else noLoadingPurchaseDetail">
+            <div class="loading loading-card"></div>
+        </ng-container>
+        <ng-template #noLoadingPurchaseDetail>
+            <app-purchase-detail [userId]="userId"></app-purchase-detail>
+        </ng-template>
     </section>
 </div>
