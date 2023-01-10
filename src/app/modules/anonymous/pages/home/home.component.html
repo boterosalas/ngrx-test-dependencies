@@ -3,8 +3,8 @@
 <section *ngIf="auth.isLoggedIn()">
   <app-topbar></app-topbar>
 
-  <section class="max-1600-container cargar-documentos-container">
-    <app-alerta-cargar-documentos *ngIf="!managedPayments && hasminimuncommission"></app-alerta-cargar-documentos>
+  <section class="max-1600-container cargar-documentos-container" *ngIf="!managedPayments && hasminimuncommission">
+    <app-alerta-cargar-documentos></app-alerta-cargar-documentos>
   </section>
 
   <!-- stories clickam looged -->
