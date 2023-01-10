@@ -6,11 +6,8 @@
   /*   height: 100%; */
   background-size: cover;
   border-radius: 12px;
-  max-height: 268px;
-}
-
-@media (max-width: 840px) {
-  .video-home-card {
-    width: 100%;
+  width: 100%;
+  @media (min-width: 840px) {
+    max-height: 300px;
   }
 }

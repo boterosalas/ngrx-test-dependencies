@@ -7,12 +7,11 @@
         </ng-container>
         <ng-template #noLoading>
             <app-resume-card class="resume-card validation-card" cardClass="validation-card"
-                title="Saldo en validación" [amount]="dataSet?.enValidacion || 0"
-                tooltipText="Son las recompensas que la marca aliada está revisando si efectivamente se cerró la venta, una vez aprobado verás este saldo en “saldo pendiente por pagar” o “recompensas de este mes” si la venta es rechazada la verás en “recompensas rechazadas”.">
+                [title]="cardValidacion.title" [amount]="cardValidacion.amount" [tooltipText]="cardValidacion.tooltip">
             </app-resume-card>
             <ng-container *ngIf="resumeCards.length > 0">
                 <app-resume-card *ngFor="let card of resumeCards" class="resume-card" [cardClass]="card.class"
-                    [title]="card.title" [amount]="card.amount" [tooltipText]="card.tooltip">
+                    [title]="card.title" [amount]="card.amount" [tooltipText]="card.tooltip" [percent]="card.percent">
                 </app-resume-card>
             </ng-container>
         </ng-template>
@@ -30,14 +29,13 @@
         </ng-container>
         <ng-template #noLoading>
             <app-resume-card class="resume-card validation-card" cardClass="validation-card"
-                title="Saldo en validación" [amount]="dataSet?.enValidacion || 0"
-                tooltipText="Son las recompensas que la marca aliada está revisando si efectivamente se cerró la venta, una vez aprobado verás este saldo en “saldo pendiente por pagar” o “recompensas de este mes” si la venta es rechazada la verás en “recompensas rechazadas”.">
+                [title]="cardValidacion.title" [amount]="cardValidacion.amount" [tooltipText]="cardValidacion.tooltip">
             </app-resume-card>
             <swiper [freeMode]="freeModeOptions" class="resume-card-carousel" [slidesPerView]="1.16" [spaceBetween]="20"
                 [autoHeight]="true" *ngIf="device==='mobile' && resumeCards.length>0" [breakpoints]="swiperBreakpoints">
                 <ng-template swiperSlide *ngFor="let card of resumeCards">
                     <app-resume-card class="resume-card" [cardClass]="card.class" [title]="card.title"
-                        [amount]="card.amount" [tooltipText]="card.tooltip">
+                        [amount]="card.amount" [tooltipText]="card.tooltip" [percent]="card.percent">
                     </app-resume-card>
                 </ng-template>
             </swiper>

@@ -3,7 +3,6 @@
   height: 100%;
   padding: 12px;
   border-radius: 12px;
-  box-shadow: 0px 16px 16px #f25c5c33;
   .card-title {
     font-size: 14px;
     color: #ffffff;
@@ -27,15 +26,19 @@
     margin: 8px 0px 0px 0px;
   }
   &.validation-card {
-    background: transparent linear-gradient(90deg, #608DDD 0%, #5F71DA 100%) 0% 0% no-repeat padding-box;
+    background: transparent linear-gradient(90deg, #608ddd 0%, #5f71da 100%) 0% 0% no-repeat padding-box;
+    box-shadow: 0px 16px 16px rgba(95, 113, 218, 0.2);
   }
   &.rewards-card {
     background: transparent linear-gradient(90deg, #5db458 0%, #79ce68 100%) 0% 0% no-repeat padding-box;
+    box-shadow: 0px 16px 16px rgba(97, 183, 81, 0.2);
   }
   &.outstanding-card {
     background: transparent linear-gradient(90deg, #f4b062 0%, #f6c486 100%) 0% 0% no-repeat padding-box;
+    box-shadow: 0px 16px 16px rgba(244, 176, 98, 0.2);
   }
   &.rejected-card {
     background: transparent linear-gradient(90deg, #f25c5c 0%, #f48b8b 100%) 0% 0% no-repeat padding-box;
+    box-shadow: 0px 16px 16px rgba(242, 92, 92, 0.2);
   }
 }

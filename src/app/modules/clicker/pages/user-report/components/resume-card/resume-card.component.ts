@@ -10,6 +10,7 @@ export class ResumeCardComponent implements OnInit {
   @Input() amount: number = 0;
   @Input() tooltipText: string = '';
   @Input() cardClass: string = '';
+  @Input() percent: string = '';
 
   constructor() { }
 

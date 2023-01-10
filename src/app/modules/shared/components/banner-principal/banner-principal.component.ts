@@ -53,7 +53,7 @@ export class BannerPrincipalComponent implements OnInit, OnDestroy, AfterViewIni
     this.breakpoint$ = this.breakPointService
       .isWidthLessThanBreakpoint('800')
       .subscribe((res: boolean) => {
-        if(this.banner){
+        if (this.banner) {
           this.currentImage = res ? this.banner.imageurlmobile : this.banner.imageurlweb;
         }
       });

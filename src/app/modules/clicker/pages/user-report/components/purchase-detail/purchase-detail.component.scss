@@ -1,7 +1,86 @@
 @import 'variables';
 @import 'general';
 @import 'skeleton';
-
+.purchase-title {
+  font-size: 20px;
+  color: #37236a;
+  margin: 20px 0px 0px 0px;
+  font-family: $font-galano-bold;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  &__text {
+    margin: 0px 16px 16px 0px;
+  }
+  .datepicker-container {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #9aaacf1a;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 14px;
+    margin-bottom: 16px;
+    width: 260px;
+    .mat-form-field {
+      .mat-form-field-wrapper {
+        padding-bottom: 0px !important;
+        .mat-form-field-flex {
+          padding-top: 0px !important;
+          background-color: #fff;
+          .mat-form-field-infix {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            border: none;
+            padding: 4px 0px;
+            .mat-date-range-input {
+              margin-top: 8px;
+            }
+            .mat-datepicker-toggle {
+              margin-left: -10.5px;
+              margin-top: -4px;
+              .mat-button-wrapper {
+                color: #37236a;
+              }
+            }
+            .mat-form-field-label-wrapper {
+              padding-top: 0px !important;
+              top: auto !important;
+              display: flex;
+              align-items: center;
+              .mat-form-field-label {
+                padding-left: 28px;
+                margin-top: 0px !important;
+                top: auto !important;
+              }
+            }
+            .mat-icon-search {
+              &__disabled {
+                opacity: 0.5;
+              }
+            }
+          }
+        }
+        .mat-form-field-underline {
+          display: none !important;
+        }
+      }
+      &.mat-form-field-should-float {
+        .mat-form-field-label {
+          padding-left: 40px !important;
+        }
+      }
+    }
+    .mat-datepicker-input {
+      border: none;
+      box-shadow: none;
+    }
+  }
+}
 .purchase-table-container {
   width: 100%;
   border-radius: 12px;
@@ -103,7 +182,7 @@
       &.data-status {
         padding: 6px 16px;
         border-radius: 18px;
-        padding: 4px 12px;
+        padding: 4px 0px !important;
         text-align: center;
         color: #fff;
         min-width: 110px;
@@ -121,16 +200,26 @@
         }
       }
     }
-    .column-fecha {
-      min-width: 90px;
+    .column-showMore {
+      width: 40px;
       padding-left: 12px;
+      flex: none !important;
       @media screen and (min-width: 840px) {
-        padding-left: 24px;
+        display: none;
+      }
+    }
+    .column-fecha {
+      width: 100px;
+      @media screen and (min-width: 840px) {
         width: 130px !important;
         flex: none;
       }
-      .table-data {
-        padding: 0px;
+      .table-data,
+      .table-header {
+        padding-left: 0px;
+        @media screen and (min-width: 840px) {
+          padding-left: 24px;
+        }
       }
     }
     .column-cantidad {
@@ -157,6 +246,17 @@
         flex: none;
       }
     }
+    .column-producto,
+    .column-negocio {
+      .table-data {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .mat-tooltip {
+        margin: 0px !important;
+      }
+    }
     .column-estado {
       min-width: 120px;
       padding-right: 12px;
@@ -178,4 +278,17 @@
       }
     }
   }
+  .no-info-message {
+    width: 100%;
+    padding: 16px;
+    text-align: center;
+    margin: 0px;
+    font-size: 24px 0px;
+    color: #8c80b4;
+    letter-spacing: -0.32px;
+  }
+}
+.loading-card {
+  height: 300px;
+  border-radius: 12px;
 }

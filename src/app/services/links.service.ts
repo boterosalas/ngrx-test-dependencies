@@ -69,6 +69,7 @@ export class LinksService implements OnDestroy {
   apiOrder = 'business/orderbusiness';
   apiSellers = 'seller/getsellers';
   apiGetReport = 'reports/clickerperformancereport';
+  apiGetReportById = 'reports/GetReportClickerRewards';
   apiGetReportMonth = 'reports/getcommissionpaymentreport';
   apiAudit = 'reports/getaudit';
   apikpiNovelties = 'new/getkpinovelties';
@@ -570,6 +571,23 @@ export class LinksService implements OnDestroy {
 
   public getReportUser(id?: string) {
     return this.http.get(`${this.ulrReport}${this.apiGetReport}?userid=${id}`, this.httpOptions).pipe(
+      retryWhen((errors) =>
+        errors.pipe(
+          delay(3000),
+          take(3),
+          tap((errorStatus) => { })
+        )
+      )
+    );
+  }
+
+  public getRewardsReportById(params: any) {
+    let queryString = '?';
+    Object.keys(params).forEach((x, idx) => {
+      queryString += `${x}=${Object.values(params)[idx]}&`
+    })
+    queryString = queryString.substring(0, queryString.length - 1);
+    return this.http.get(`${this.ulrReport}${this.apiGetReportById}${queryString.length > 1 ? queryString : ''}`, this.httpOptions).pipe(
       retryWhen((errors) =>
         errors.pipe(
           delay(3000),

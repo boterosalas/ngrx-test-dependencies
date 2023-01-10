@@ -4,14 +4,14 @@ export class DateFormat {
         if (DateFormat.isValidDate(date)) {
             const year = date.getFullYear();
             const month = `0${date.getMonth() + 1}`;
-            const day = date.getDate();
+            const day = `0${date.getDate()}`;
             switch (format) {
                 case 'YYYY-MM-DD':
-                    return `${year}-${month.substring(month.length - 2)}-${day}`;
+                    return `${year}-${month.substring(month.length - 2)}-${day.substring(day.length - 2)}`;
                 case 'YYYY-MM-DD HH:MM A':
-                    return `${year}-${month.substring(month.length - 2)}-${day} ${DateFormat.timeFormat(date, true)}`;
+                    return `${year}-${month.substring(month.length - 2)}-${day.substring(day.length - 2)} ${DateFormat.timeFormat(date, true)}`;
                 case 'YYYY-MM-DD HH:MM':
-                    return `${year}-${month.substring(month.length - 2)}-${day} ${DateFormat.timeFormat(date, false)}`;
+                    return `${year}-${month.substring(month.length - 2)}-${day.substring(day.length - 2)} ${DateFormat.timeFormat(date, false)}`;
             }
         } else {
             return '';

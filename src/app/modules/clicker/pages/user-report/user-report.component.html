@@ -3,22 +3,21 @@
         img="/assets/img/banners/banner-reportes-pc.jpg"
         imgMobile="/assets/img/banners/banner-reportes-mobile.jpg"></app-banner>
 
-    <app-resume-cards-container [dataSet]="resumeCards"></app-resume-cards-container>
+    <app-resume-cards-container [recompensas]="cardRecompensas" [enValidacion]="cardEnValidacion"
+        [pendientePorPago]="cardPendientePorPago" [rechazados]="cardRechazados"
+        [recompensasPercent]="recompensasPercent" [isLoading]="cardsAreLoading"></app-resume-cards-container>
 
-    <div class="max-1600-container title-container">
-        <h3 class="section-title graph-title">Comportamiento por recompensas</h3>
-        <h3 class="section-title bussiness-title">Recompensas por negocio</h3>
-    </div>
     <section class="max-1600-container graph-bussiness-container">
         <article class="graph-container">
             <ng-container>
                 <h3 class="section-title">Comportamiento por recompensas</h3>
-                <ng-container *ngIf="isLoading; else noLoadingRewardsGraph">
+                <ng-container *ngIf="graphIsLoading; else noLoadingRewardsGraph">
                     <div class="loading loading-card"></div>
                 </ng-container>
                 <ng-template #noLoadingRewardsGraph>
                     <div class="user-report-card-container">
-                        <app-rewards-graph></app-rewards-graph>
+                        <app-rewards-graph [dataIn]="graphData"
+                            [recompensasPercent]="recompensasPercent"></app-rewards-graph>
                     </div>
                 </ng-template>
             </ng-container>
@@ -26,24 +25,23 @@
         <article class="bussiness-container">
             <ng-container>
                 <h3 class="section-title">Recompensas por negocio</h3>
-                <ng-container *ngIf="isLoading; else noLoadingRewardsByBussiness">
+                <ng-container *ngIf="graphIsLoading; else noLoadingRewardsByBussiness">
                     <div class="loading loading-card"></div>
                 </ng-container>
                 <ng-template #noLoadingRewardsByBussiness>
                     <div class="user-report-card-container">
-                        <app-rewards-by-bussiness [ojbRewards]="objResponseRewards"></app-rewards-by-bussiness>
+                        <app-rewards-by-bussiness [ojbRewards]="bussinessTopRewards"></app-rewards-by-bussiness>
                     </div>
                 </ng-template>
             </ng-container>
         </article>
     </section>
     <section class="max-1600-container purchase-container">
-        <h3 class="section-title">Detalle de recompensas</h3>
-        <ng-container *ngIf="isLoading; else noLoadingPurchaseDetail">
+        <ng-container *ngIf="graphIsLoading; else noLoadingPurchaseDetail">
             <div class="loading loading-card"></div>
         </ng-container>
         <ng-template #noLoadingPurchaseDetail>
-            <app-purchase-detail [userId]="userId"></app-purchase-detail>
+            <app-purchase-detail [userId]="userId" [dataSource]="purchaseDetailData" [totalItems]="totalItems"></app-purchase-detail>
         </ng-template>
     </section>
 </div>

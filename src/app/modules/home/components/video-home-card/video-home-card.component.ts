@@ -1,18 +1,48 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { BreakpointService } from 'src/app/services/breakpoint.service';
+import { ContentService } from 'src/app/services/content.service';
 
 @Component({
   selector: 'app-video-home-card',
   templateUrl: './video-home-card.component.html',
   styleUrls: ['./video-home-card.component.scss'],
 })
-export class VideoHomeCardComponent implements OnInit {
-  videoHome: any = {
-    url: 'https://www.google.com/?hl=es',
-    img: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-offers-web/20220831101916_web.jpg',
-  };
+export class VideoHomeCardComponent implements OnInit, OnDestroy {
+  videoHome$: Subscription = new Subscription();
+  breakpoint$: Subscription = new Subscription();
+  currentImage: string = '';
+  videoHome: any = {};
 
-  constructor() {}
+  constructor(
+    private content: ContentService,
+    private breakPointService: BreakpointService,
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getVideoHome();
+  }
+
+  getVideoHome() {
+    this.videoHome$ = this.content.getOffersbyType({ id: 'VIDEOHOME', admin: false }).subscribe(res => {
+      this.videoHome = res[0] || {};
+      console.log({ videoHome: res });
+      this.breakpoint();
+    });
+  }
+
+  breakpoint() {
+    this.breakpoint$ = this.breakPointService
+      .isWidthLessThanBreakpoint('840')
+      .subscribe((res: boolean) => {
+        if (this.videoHome) {
+          this.currentImage = res ? this.videoHome.imageurlmobile : this.videoHome.imageurlweb;
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.videoHome$.unsubscribe();
+    this.breakpoint$.unsubscribe();
+  }
 }

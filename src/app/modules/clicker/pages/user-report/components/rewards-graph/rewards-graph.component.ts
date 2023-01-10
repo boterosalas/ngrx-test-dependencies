@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
 
 const formatThousand = function (value: any) {
@@ -17,40 +17,58 @@ const formatThousand = function (value: any) {
 export class RewardsGraphComponent implements OnInit {
   chart: any;
   isLoading: boolean = true;
+  showLastNMonths = 12;
+  @Input() dataIn: any = [];
+  @Input() recompensasPercent: any;
+  graphData: any[];
+
+  monthsTraductor = {
+    'enero': 'January',
+    'febrero': 'February',
+    'marzo': 'March',
+    'abril': 'April',
+    'mayo': 'May',
+    'junio': 'June',
+    'julio': 'July',
+    'agosto': 'August',
+    'septiembre': 'September',
+    'octubre': 'October',
+    'noviembre': 'November',
+    'diciembre': 'December',
+  };
 
   constructor() { }
 
   ngOnInit(): void {
+    this.createGraphData();
     this.createChart();
   }
 
-  createChart() {
-    this.chart = new Chart("RewardsChart", {
-      type: 'line', //this denotes tha type of chart
+  createGraphData() {
+    const months = [];
+    for (let i = 1; i <= this.showLastNMonths; i++) {
+      months.push(new Date(new Date().setMonth(new Date().getMonth() - i)).toLocaleString('es-CO', { month: 'long' }))
+    }
+    this.graphData = months.map(month => {
+      const reward = this.dataIn.find((x: any) => x.Month === this.monthsTraductor[month]);
+      const total = reward ? reward.commissionValue : 0;
+      return { month: this.capitalize(month), total };
+    }).reverse();
+  }
 
+  capitalize(word: string) {
+    return word.charAt(0).toUpperCase() + word.slice(1).toLocaleLowerCase();
+  }
+
+  createChart() {
+    const validateTotal = this.graphData.filter(x => x.total > 0);
+    this.chart = new Chart("RewardsChart", {
+      type: 'line',
       data: {// values on X-Axis
-        labels: [
-          'Ene',
-          'Feb',
-          'Mar',
-          'Abr',
-          'May',
-          'Jun',
-          'Jul',
-          'Ago',
-        ],
+        labels: this.graphData.map(x => x.month.substr(0, 3)),
         datasets: [
           {
-            data: [
-              '4670',
-              '576',
-              '572',
-              '79097',
-              '92',
-              '574000',
-              '573',
-              '576'
-            ],
+            data: validateTotal.length > 0 ? this.graphData.map(x => x.total) : [],
             backgroundColor: 'transparent',
             pointBackgroundColor: '#FFFFFF',
             pointBorderColor: '#230040',
@@ -120,7 +138,7 @@ export class RewardsGraphComponent implements OnInit {
         scales: {
           x: {
             ticks: {
-              color: '#230040',
+              color: validateTotal.length > 0 ? '#230040' : '#E8E8ED',
               font: {
                 family: "galano-medium, sans-serif",
                 size: 14
@@ -135,14 +153,17 @@ export class RewardsGraphComponent implements OnInit {
             },
           },
           y: {
+            max: validateTotal.length > 0 ? null : 100000,
             ticks: {
-              color: '#230040',
+              count: validateTotal.length > 0 ? 10 : 6,
+              source: 'auto',
+              color: validateTotal.length > 0 ? '#230040' : '#E8E8ED',
               font: {
                 family: "galano-medium, sans-serif",
                 size: 14,
               },
               padding: 8,
-              callback: function nFormatter(num: number, digits) {
+              callback: function nFormatter(num: number) {
                 const lookup = [
                   { value: 1, symbol: "" },
                   { value: 1e3, symbol: "k" },
@@ -156,7 +177,7 @@ export class RewardsGraphComponent implements OnInit {
                 var item = lookup.slice().reverse().find(function (item) {
                   return num >= item.value;
                 });
-                return item ? `$ ${(num / item.value).toFixed(digits).replace(rx, "$1")}${item.symbol}` : "0";
+                return item ? `$ ${(num / item.value).toFixed(0).replace(rx, "$1")}${item.symbol}` : "$ 0";
               }
             },
             beginAtZero: true,

@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LinksService } from 'src/app/services/links.service';
 import { TokenService } from 'src/app/services/token.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { BehaviorSubject } from 'rxjs';
+import { ContentService } from 'src/app/services/content.service';
+import { formatPurchaseData } from './helpers/formatPurchaseDetail';
 
 @Component({
   selector: 'app-user-report',
@@ -12,135 +12,92 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UserReportComponent implements OnInit, OnDestroy {
 
-  isLoading: boolean = false;
+  cardsAreLoading: boolean = true;
+  graphIsLoading: boolean = true;
   getPayment$: Subscription = new Subscription();
   getReportUser$: Subscription = new Subscription();
+  getRewardsReport$: Subscription = new Subscription();
+  bussinessList$: Subscription = new Subscription();
+  graphData: any;
+  purchaseDetailData: any = [];
   resumeCards: any;
   userId: string;
   pageTo: number = 20;
+  bussinessList: any[];
+  bussinessTopRewards = [];
+  rewardsDetail: any[];
+  cardRecompensas: number = 0;
+  cardEnValidacion: number = 0;
+  cardPendientePorPago: number = 0;
+  cardRechazados: number = 0;
+  recompensasPercent: number = 0;
+  totalItems: number = 0;
 
   constructor(
     private payment: LinksService,
     private token: TokenService,
+    private content: ContentService
   ) {
     this.userId = this.token.user.userid;
   }
 
-  getPayments(from = 1, to = this.pageTo) {
-    const params = { from, to };
-    this.getPayment$ = this.payment.getPayment(this.userId, params).subscribe((payment: any) => {
-      console.log({ payment })
+  ngOnInit(): void {
+    this.getBussinessByCategory();
+  }
+
+  getBussinessByCategory() {
+    this.bussinessList$ = this.content
+      .getAllBusiness(true)
+      .subscribe((bussiness) => {
+        this.bussinessList = bussiness;
+        this.getRewardsReport();
+        this.getReportUser();
+      });
+  }
+
+  getReportUser() {
+    this.getReportUser$ = this.payment.getReportUser(this.userId).subscribe((resp: any) => {
+      console.log({ getReportUser: resp });
+      this.cardRecompensas = parseInt(resp.objectResponse.money.cutOffValue) || 0;
+      this.cardEnValidacion = parseInt(resp.objectResponse.money.validation) || 0;
+      this.cardPendientePorPago = parseInt(resp.objectResponse.money.accumulated) || 0;
+      this.cardRechazados = parseInt(resp.objectResponse.money.rejected) || 0;
+      this.recompensasPercent = Math.round(resp.objectResponse.money.cutOffValuePercent);
+      this.cardsAreLoading = false;
     });
   }
 
-  getInfoMonth() {
-    this.getReportUser$ = this.payment.getReportUser(this.userId).subscribe((resp: any) => {
-      console.log({ getReportUser: resp });
-      this.resumeCards = {
-        recompensas: parseInt(resp.objectResponse.money.cutOffValue) || 0,
-        enValidacion: parseInt(resp.objectResponse.money.validation) || 0,
-        pendientePorPago: parseInt(resp.objectResponse.money.accumulated) || 0,
-        rechazados: parseInt(resp.objectResponse.money.rejected) || 0
+  getRewardsReport() {
+    const params: any = {
+      from: 1,
+      to: 20,
+      userId: this.userId
+    };
+    this.getRewardsReport$ = this.payment.getRewardsReportById(params).subscribe((resp: any) => {
+      console.log({ getRewardsReportById: resp });
+      this.graphData = resp.objectResponse.generalResumeRewards.graph;
+      this.bussinessTopRewards = this.formatBussinessRewardsTop(resp.objectResponse.generalResumeRewards.totalBusiness);
+      this.purchaseDetailData = formatPurchaseData(resp.objectResponse.generalResumeRewards.cutOffValueRewards);
+      this.totalItems = resp.objectResponse.generalResumeRewards.total;
+      this.graphIsLoading = false;
+    });
+  }
+
+  formatBussinessRewardsTop(bussiness: any[]) {
+    return bussiness.map(elem => {
+      const currentBussiness = this.bussinessList.find(x => x.code === elem.business) || {};
+      return {
+        bussiness: currentBussiness ? currentBussiness.description || '--' : '--',
+        total: parseFloat(elem.total),
+        quantity: parseInt(elem.quantity),
+        img: currentBussiness.imageurl
       }
-      // this.totalAcumulated = resp.objectResponse.generalResume.totalCommissions;
-      // this.available = resp.objectResponse.money.accumulated;
-      // this.validation = resp.objectResponse.money.validation;
-      // this.account = resp.objectResponse.money.cutOffValue;
-      // this.rejected = resp.objectResponse.money.rejected || '0';
-      // this.conversionRate = resp.objectResponse.generalResume.conversionRate;
-      // this.totalLinks = resp.objectResponse.generalResume.totalLinks;
-      // this.totalProducts = resp.objectResponse.generalResume.totalProducts;
     });
   }
 
   ngOnDestroy(): void {
     this.getPayment$.unsubscribe();
     this.getReportUser$.unsubscribe();
-  }
-  objResponseRewards = [];
-  objResponsePurchaseDetail: any;
-
-  subjectReward: BehaviorSubject<any> = new BehaviorSubject<any>([
-    {
-      img: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-business/20220218113151.svg',
-      title: 'Almaecnes Éxito',
-      money: 23000000,
-      count: '12 productos',
-    },
-    {
-      img: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-business/20220223110021.svg',
-      title: 'Almaecnes Éxito',
-      money: 23000000,
-      count: '12 productos',
-    },
-    {
-      img: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-business/20220329163519.svg',
-      title: 'Almaecnes Éxito',
-      money: 23000000,
-      count: '12 productos',
-    },
-    {
-      img: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.svg',
-      title: 'Almaecnes Éxito',
-      money: 23000000,
-      count: '12 productos',
-    },
-    {
-      img: 'https://webclickamqa.blob.core.windows.net/img-ofertas/pic-business/ico-seguros.svg',
-      title: 'Almaecnes Éxito',
-      money: 23000000,
-      count: '12 productos',
-    },
-  ]);
-
-  subjectDetalleRecompensa: BehaviorSubject<any> = new BehaviorSubject<any>([
-    {
-      date: '10/01/20',
-      product: 'Camisa rosa',
-      amout: 1,
-      business: 'Almacenes Éxito',
-      saleValue: 132000,
-      reward: 13000,
-      status: 'Por validar',
-    },
-    {
-      date: '10/01/20',
-      product: 'Camisa rosa',
-      amout: 1,
-      business: 'Almacenes Éxito',
-      saleValue: 132000,
-      reward: 13000,
-      status: 'Rechazada',
-    },
-    {
-      date: '10/01/20',
-      product: 'Camisa rosa',
-      amout: 1,
-      business: 'Almacenes Éxito',
-      saleValue: 132000,
-      reward: 13000,
-      status: 'Acumulado',
-    },
-    {
-      date: '10/01/20',
-      product: 'Camisa rosa',
-      amout: 1,
-      business: 'Almacenes Éxito',
-      saleValue: 132000,
-      reward: 13000,
-      status: 'Por pagar',
-    },
-  ]);
-
-  ngOnInit(): void {
-    this.getPayments();
-    this.getInfoMonth();
-    this.subjectReward.subscribe((data) => {
-      this.objResponseRewards = data;
-    });
-
-    this.subjectDetalleRecompensa.subscribe((data) => {
-      this.objResponsePurchaseDetail = new MatTableDataSource<any>(data);
-    });
+    this.getRewardsReport$.unsubscribe();
   }
 }

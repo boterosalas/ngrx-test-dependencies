@@ -20,4 +20,12 @@ describe('RewardsGraphComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Should onInit', () => {
+    const spyCreateGraphData = spyOn(component,'createGraphData').and.callFake(()=>true);
+    const spyCreateChart = spyOn(component,'createChart').and.callFake(()=>true);
+    component.ngOnInit();
+    expect(spyCreateGraphData).toHaveBeenCalled();
+    expect(spyCreateChart).toHaveBeenCalled();
+  });
 });

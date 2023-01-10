@@ -5,7 +5,7 @@
         <i class="tio-info f-20 purple2-text more-info" matTooltipClass="purple-tip" [matTooltip]="tooltipText"
             (click)="tooltip.show()" #tooltip="matTooltip"></i>
     </p>
-    <p class="compare-info">
-        +10% frente al mes anterior
+    <p class="compare-info" *ngIf="percent">
+        {{percent}}% frente al mes anterior
     </p>
 </article>

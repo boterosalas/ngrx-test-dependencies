@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ResumeCardComponent } from './resume-card.component';
+import { AppMaterialModule } from 'src/app/modules/shared/app-material/app-material.module';
 
 describe('ResumeCardComponent', () => {
   let component: ResumeCardComponent;
@@ -8,7 +9,10 @@ describe('ResumeCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ResumeCardComponent ]
+      declarations: [ ResumeCardComponent ],
+      imports: [
+        AppMaterialModule
+      ]
     })
     .compileComponents();
 

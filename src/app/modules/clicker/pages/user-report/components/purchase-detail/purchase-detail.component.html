@@ -1,96 +1,128 @@
-<h3>
-  <div fxLayout="row" class="mt-2">
-    <mat-datepicker class="icon-date" touchUi #picker></mat-datepicker>
-    <mat-datepicker-toggle class="icon-date" matSuffix [for]="picker"></mat-datepicker-toggle>
-    <input matInput [ngModelOptions]="{ standalone: true }" (click)="picker.open()" [matDatepicker]="picker" readonly
-      (dateChange)="hourChange($event)" [placeholder]="'datePublicationHolder'" (ngModelChange)="getHistory()"
-      [(ngModel)]="datePublication" class="border-input mat-elevation-z1 p-2 border-radius" />
+<h3 class="purchase-title">
+  <span class="purchase-title__text">Detalle de recompensas</span>
+  <div class="datepicker-container">
+    <mat-form-field appearance="fill">
+      <mat-datepicker-toggle matIconSuffix (click)="openDatePicker(picker)"></mat-datepicker-toggle>
+      <mat-label (click)="openDatePicker(picker)">Ingresa un rango de tiempo</mat-label>
+      <mat-date-range-input [rangePicker]="picker" (click)="openDatePicker(picker)" class="date-range-fill">
+        <input matStartDate placeholder="Fecha inicial" [formControl]="initDate">
+        <input matEndDate placeholder="Fecha final" [formControl]="endDate">
+      </mat-date-range-input>
+      <mat-icon *ngIf="search; else cleanFilterTemplate" (click)="applyFilter(picker)"
+        [ngClass]="{'mat-icon-search__disabled':!searchIsValid()}" class="mat-icon-search">search</mat-icon>
+      <ng-template #cleanFilterTemplate>
+        <mat-icon class="clean-filter" (click)="cleanFilter()">close</mat-icon>
+      </ng-template>
+      <mat-date-range-picker #picker touchUi></mat-date-range-picker>
+    </mat-form-field>
   </div>
 </h3>
-<article class="purchase-table-container">
-  <table mat-table
-    [dataSource]="dataSource | paginate: { itemsPerPage: pageSize, currentPage: pageIndex, totalItems: totalItems }"
-    [multiTemplateDataRows]="showInfoCard" class="mat-elevation-z8">
-    <ng-container matColumnDef="{{ column }}" *ngFor="let column of columnsToDisplay; let i = index">
-      <mat-header-cell *matHeaderCellDef class="column-{{columnsStatus[i].className}} data-header"
-        [ngClass]="{ 'hide-data': columnsStatus[i].hideInMobile }">
-        <span class="table-header"> {{ columnsStatus[i].label }} </span>
-      </mat-header-cell>
-      <mat-cell *matCellDef="let element" [ngClass]="{ 'hide-data': columnsStatus[i].hideInMobile }"
-        class="column-{{columnsStatus[i].className}} data-cell">
-        <span
-          class="table-data {{ columnsStatus[i].className === 'estado' ? convertString(element.estado) + '-color' : '' }}"
-          [ngClass]="{ 'data-status': columnsStatus[i].className === 'estado' }">
-          <ng-container
-            *ngIf="columnsStatus[i].className === 'recompensa' || columnsStatus[i].className === 'venta'; else noCurrencyTemplate">
-            {{ element[column] | currency : '' : 'symbol' : '1.0-0' }}
+<ng-container *ngIf="isLoading; else noLoading">
+  <div class="loading loading-card"></div>
+</ng-container>
+<ng-template #noLoading>
+  <article class="purchase-table-container">
+    <table mat-table
+      [dataSource]="dataSource | paginate: { itemsPerPage: pageSize, currentPage: pageIndex, totalItems: totalItems }"
+      [multiTemplateDataRows]="showInfoCard" class="mat-elevation-z8">
+      <ng-container matColumnDef="{{ column }}" *ngFor="let column of columnsToDisplay; let i = index">
+        <mat-header-cell *matHeaderCellDef class="column-{{columnsStatus[i].className}} data-header"
+          [ngClass]="{ 'hide-data': columnsStatus[i].hideInMobile }">
+          <span class="table-header" *ngIf="i !== 0"> {{ columnsStatus[i].label }} </span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="{ 'hide-data': columnsStatus[i].hideInMobile }"
+          class="column-{{columnsStatus[i].className}} data-cell">
+          <ng-container *ngIf="i===0;else columnTemplate">
+            <mat-icon>{{ expandedElement === element ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
           </ng-container>
-          <ng-template #noCurrencyTemplate>
-            {{ element[column] }}
+          <ng-template #columnTemplate>
+            <ng-container
+              *ngIf="columnsStatus[i].className === 'recompensa' || columnsStatus[i].className === 'venta'; else noCurrencyTemplate">
+              <span class="table-data">
+                {{ element[columnsStatus[i].code] | currency : '' : 'symbol' : '1.0-0' }}
+              </span>
+            </ng-container>
+            <ng-template #noCurrencyTemplate>
+              <ng-container *ngIf="column === 'business' || column === 'productName'; else otherData">
+                <span class="table-data" (click)="tooltip.show()" #tooltip="matTooltip"
+                  matTooltip="{{ element[columnsStatus[i].code] | titlecase }}">
+                  {{ element[columnsStatus[i].code] | titlecase }}
+                </span>
+              </ng-container>
+              <ng-template #otherData>
+                <span
+                  class="table-data {{ columnsStatus[i].className === 'estado' ? convertString(element.statusCommission) + '-color' : '' }}"
+                  [ngClass]="{ 'data-status': columnsStatus[i].className === 'estado' }">
+                  {{ element[columnsStatus[i].code] }}
+                </span>
+              </ng-template>
+            </ng-template>
           </ng-template>
-        </span>
-      </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="expandedDetail">
-      <mat-cell *matCellDef="let element">
-        <div class="row-detail-element" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-          <div class="element-containt-row">
-            <div class="info-item">
-              <span class="element-containt-title">producto</span>
-              <span class="element-containt-description"> {{ element.producto }}</span>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="expandedDetail">
+        <mat-cell *matCellDef="let element">
+          <div class="row-detail-element" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+            <div class="element-containt-row">
+              <div class="info-item">
+                <span class="element-containt-title">producto</span>
+                <span class="element-containt-description"> {{ element.productName }}</span>
+              </div>
+              <div class="info-item">
+                <span class="element-containt-title">cantidad</span>
+                <span class="element-containt-description"> {{ element.quantity }}</span>
+              </div>
             </div>
-            <div class="info-item">
-              <span class="element-containt-title">cantidad</span>
-              <span class="element-containt-description"> {{ element.cantidad }}</span>
+            <div class="element-containt-row">
+              <div class="info-item">
+                <span class="element-containt-title">negocio</span>
+                <span class="element-containt-description">
+                  {{ element.business | titlecase }}
+                </span>
+              </div>
+              <div class="info-item">
+                <span class="element-containt-title">venta</span>
+                <span class="element-containt-description">
+                  {{ element.totalSale | currency : '' : 'symbol' : '1.0-0' }}
+                </span>
+              </div>
             </div>
           </div>
-          <div class="element-containt-row">
-            <div class="info-item">
-              <span class="element-containt-title">negocio</span>
-              <span class="element-containt-description">
-                {{ element.negocio }}
-              </span>
-            </div>
-            <div class="info-item">
-              <span class="element-containt-title">venta</span>
-              <span class="element-containt-description">
-                {{ element.venta | currency : '' : 'symbol' : '1.0-0' }}
-              </span>
-            </div>
-          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+      <mat-row *matRowDef="let element; columns: columnsToDisplay" class="element-row"
+        [ngClass]="{'expanded-handle':expandedElement === element && showInfoCard}"
+        (click)="expandedElement = expandedElement === element ? null : element">
+      </mat-row>
+      <mat-row *matRowDef="let row; columns: ['expandedDetail']" [ngClass]="{'expanded-row':expandedElement === row}"
+        class="row-detail element-row"></mat-row>
+    </table>
+    <p class="no-info-message" *ngIf="dataSource.length === 0">
+      No has generado ventas en el rango de fecha seleccionado
+    </p>
+  </article>
+</ng-template>
+<pagination-template #p="paginationApi" (pageChange)="pagination($event)">
+  <div fxLayout="row" fxLayoutGap="12px" class="paginator mt-3" fxLayoutAlign="end center">
+    <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
+      <a (click)="p.previous()"> <i class="tio-back_ui"></i> </a>
+    </div>
+
+    <div class="bubble" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
+      <div *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+        <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+          <span class="cursor-pointer">{{ page.label }}</span>
+        </a>
+        <div *ngIf="p.getCurrent() === page.value">
+          <span class="cursor-pointer">{{ page.label }}</span>
         </div>
-      </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-    <mat-row *matRowDef="let element; columns: columnsToDisplay" class="element-row"
-      [ngClass]="{'expanded-handle':expandedElement === element && showInfoCard}"
-      (click)="expandedElement = expandedElement === element ? null : element">
-    </mat-row>
-    <mat-row *matRowDef="let row; columns: ['expandedDetail']" [ngClass]="{'expanded-row':expandedElement === row}"
-      class="row-detail element-row"></mat-row>
-  </table>
-  <pagination-template #p="paginationApi" (pageChange)="pagination($event)">
-    <div fxLayout="row" fxLayoutGap="12px" class="paginator mt-3" fxLayoutAlign="end center">
-      <span class="items">Items por página {{ pageSize }}</span>
-      <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
-        <a (click)="p.previous()"> <i class="tio-back_ui"></i> </a>
-      </div>
-
-      <div class="bubble" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
-        <div *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
-          <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
-            <span class="cursor-pointer">{{ page.label }}</span>
-          </a>
-          <div *ngIf="p.getCurrent() === page.value">
-            <span class="cursor-pointer">{{ page.label }}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="pagination-next" [class.disabled]="p.isLastPage()">
-        <a (click)="p.next()"> <i class="tio-next_ui"></i> </a>
       </div>
     </div>
-  </pagination-template>
-</article>
+
+    <div class="pagination-next" [class.disabled]="p.isLastPage()">
+      <a (click)="p.next()"> <i class="tio-next_ui"></i> </a>
+    </div>
+  </div>
+</pagination-template>

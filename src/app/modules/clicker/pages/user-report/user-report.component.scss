@@ -20,32 +20,33 @@
   .graph-bussiness-container {
     display: flex;
     flex-direction: column;
-    @media screen and (min-width: 900px) {
+    @media screen and (min-width: 1100px) {
       flex-direction: row;
+      // align-items: stretch;
     }
     .graph-container {
-      @media screen and (min-width: 900px) {
+      width: 100%;
+      @media screen and (min-width: 1100px) {
         padding-bottom: 12px;
         width: calc(70% - 20px);
         margin-right: 20px;
       }
       .user-report-card-container {
         padding: 20px 8px 8px 8px;
+        // height: 100%;
         @media screen and (min-width: 840px) {
           padding: 20px 16px 8px 16px;
         }
       }
     }
     .bussiness-container {
-      @media screen and (min-width: 900px) {
+      width: 100%;
+      @media screen and (min-width: 1100px) {
         width: 30%;
       }
     }
     .section-title {
       margin-top: 8px;
-      @media screen and (min-width: 900px) {
-        display: none;
-      }
     }
   }
   .purchase-container {
