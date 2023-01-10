@@ -6,7 +6,6 @@
 
     <div class="rewards__info">
       <p class="rewards__title">{{ rewards.bussiness }}</p>
-      <!-- <p class="rewards__title">Almacenes Éxito Almacenes Éxito</p> -->
       <p class="rewards__money">{{ rewards.total | currency : '' : 'symbol' : '1.0-0' }}</p>
       <p class="rewards__count">{{ rewards.quantity }} {{ rewards.quantity === 1 ? 'Producto' : 'Productos' }}</p>
     </div>

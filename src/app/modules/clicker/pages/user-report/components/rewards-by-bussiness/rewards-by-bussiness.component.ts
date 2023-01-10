@@ -8,10 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class RewardsByBussinessComponent implements OnInit {
   isVisible: boolean = false;
 
-  @Input()
-  ojbRewards = [];
+  @Input() ojbRewards = [];
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

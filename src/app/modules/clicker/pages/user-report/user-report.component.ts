@@ -56,14 +56,24 @@ export class UserReportComponent implements OnInit, OnDestroy {
   }
 
   getReportUser() {
-    this.getReportUser$ = this.payment.getReportUser(this.userId).subscribe((resp: any) => {
-      console.log({ getReportUser: resp });
-      this.cardRecompensas = parseInt(resp.objectResponse.money.cutOffValue) || 0;
-      this.cardEnValidacion = parseInt(resp.objectResponse.money.validation) || 0;
-      this.cardPendientePorPago = parseInt(resp.objectResponse.money.accumulated) || 0;
-      this.cardRechazados = parseInt(resp.objectResponse.money.rejected) || 0;
-      this.recompensasPercent = Math.round(resp.objectResponse.money.cutOffValuePercent);
-      this.cardsAreLoading = false;
+    this.getReportUser$ = this.payment.getReportUser(this.userId).subscribe({
+      next: (resp: any) => {
+        console.log({ getReportUser: resp });
+        this.cardRecompensas = parseInt(resp.objectResponse.money.cutOffValue) || 0;
+        this.cardEnValidacion = parseInt(resp.objectResponse.money.validation) || 0;
+        this.cardPendientePorPago = parseInt(resp.objectResponse.money.accumulated) || 0;
+        this.cardRechazados = parseInt(resp.objectResponse.money.rejected) || 0;
+        this.recompensasPercent = Math.round(resp.objectResponse.money.cutOffValuePercent);
+        this.cardsAreLoading = false;
+      },
+      error: () => {
+        this.cardRecompensas = 0;
+        this.cardEnValidacion = 0;
+        this.cardPendientePorPago = 0;
+        this.cardRechazados = 0;
+        this.recompensasPercent = 0;
+        this.cardsAreLoading = false;
+      }
     });
   }
 
@@ -73,15 +83,22 @@ export class UserReportComponent implements OnInit, OnDestroy {
       to: 20,
       userId: this.userId
     };
-    this.getRewardsReport$ = this.payment.getRewardsReportById(params).subscribe((resp: any) => {
-      console.log({ getRewardsReportById: resp });
-      // this.graphData = resp.objectResponse.generalResumeRewards.graph || [];
-      // this.bussinessTopRewards = this.formatBussinessRewardsTop(resp.objectResponse.generalResumeRewards.totalBusiness);
-      this.graphData = null || [];
-      this.bussinessTopRewards = this.formatBussinessRewardsTop(null);
-      this.purchaseDetailData = formatPurchaseData(resp.objectResponse.generalResumeRewards.cutOffValueRewards);
-      this.totalItems = resp.objectResponse.generalResumeRewards.total;
-      this.graphIsLoading = false;
+    this.getRewardsReport$ = this.payment.getRewardsReportById(params).subscribe({
+      next: (resp: any) => {
+        console.log({ getRewardsReportById: resp });
+        this.graphData = resp.objectResponse.generalResumeRewards.graph || [];
+        this.bussinessTopRewards = this.formatBussinessRewardsTop(resp.objectResponse.generalResumeRewards.totalBusiness);
+        this.purchaseDetailData = formatPurchaseData(resp.objectResponse.generalResumeRewards.cutOffValueRewards);
+        this.totalItems = resp.objectResponse.generalResumeRewards.total;
+        this.graphIsLoading = false;
+      },
+      error: () => {
+        this.graphData = [];
+        this.bussinessTopRewards = [];
+        this.purchaseDetailData = [];
+        this.totalItems = 0;
+        this.graphIsLoading = false;
+      }
     });
   }
 

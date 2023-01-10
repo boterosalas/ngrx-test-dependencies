@@ -50,7 +50,7 @@ export class RewardsGraphComponent implements OnInit {
       months.push(new Date(new Date().setMonth(new Date().getMonth() - i)).toLocaleString('es-CO', { month: 'long' }))
     }
     this.graphData = months.map(month => {
-      const reward = this.dataIn.find((x: any) => x.Month === this.monthsTraductor[month]);
+      const reward = this.dataIn.find((x: any) => x.month === this.monthsTraductor[month]);
       const total = reward ? reward.commissionValue : 0;
       return { month: this.capitalize(month), total };
     }).reverse();
