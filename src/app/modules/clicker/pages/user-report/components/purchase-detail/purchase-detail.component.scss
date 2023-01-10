@@ -180,7 +180,6 @@
       color: #37236a;
       font-family: $font-family-sans-serif;
       &.data-status {
-        padding: 6px 16px;
         border-radius: 18px;
         padding: 4px 0px !important;
         text-align: center;
@@ -232,10 +231,9 @@
     }
     .column-venta,
     .column-recompensa {
-      word-wrap: break-word !important;
       white-space: unset !important;
       overflow-wrap: break-word;
-      word-wrap: break-word;
+      word-wrap: break-word !important;
       min-width: 130px !important;
       .table-header,
       .table-data {
