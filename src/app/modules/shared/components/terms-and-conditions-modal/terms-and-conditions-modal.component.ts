@@ -3,8 +3,7 @@ import { MasterDataService } from 'src/app/services/master-data.service';
 
 @Component({
   selector: 'app-terms-and-conditions-modal',
-  templateUrl: './terms-and-conditions-modal.component.html',
-  styleUrls: ['./terms-and-conditions-modal.component.scss']
+  templateUrl: './terms-and-conditions-modal.component.html'
 })
 export class TermsAndConditionsModalComponent implements OnInit {
 

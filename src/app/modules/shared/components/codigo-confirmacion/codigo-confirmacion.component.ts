@@ -4,7 +4,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 @Component({
   selector: 'app-codigo-confirmacion',
   templateUrl: './codigo-confirmacion.component.html',
-  styleUrls: ['./codigo-confirmacion.component.scss']
 })
 export class CodigoConfirmacionComponent implements OnInit {
 

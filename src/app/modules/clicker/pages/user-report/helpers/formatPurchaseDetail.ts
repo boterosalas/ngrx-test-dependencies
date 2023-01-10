@@ -17,7 +17,6 @@ export const formatPurchaseData = (data: any[]) => {
 
 const formatStatus = (status: string) => {
     const statusFormatted = {
-        'pagado': 'Por pagar',
         'pendiente de pago': 'Por pagar',
         'rechazado': 'Rechazada',
         'validacion': 'Por validar',

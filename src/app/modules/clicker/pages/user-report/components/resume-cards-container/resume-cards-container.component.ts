@@ -80,7 +80,7 @@ export class ResumeCardsContainerComponent implements OnInit, OnDestroy, OnChang
         amount: rechazados.currentValue,
         tooltip: 'Las recompensas que no se hicieron efectivas ya que la compra no fue efectuada de forma exitosa.'
       }
-    };
+    }
   }
 
   breakpoint() {

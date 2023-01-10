@@ -75,8 +75,10 @@ export class UserReportComponent implements OnInit, OnDestroy {
     };
     this.getRewardsReport$ = this.payment.getRewardsReportById(params).subscribe((resp: any) => {
       console.log({ getRewardsReportById: resp });
-      this.graphData = resp.objectResponse.generalResumeRewards.graph;
-      this.bussinessTopRewards = this.formatBussinessRewardsTop(resp.objectResponse.generalResumeRewards.totalBusiness);
+      // this.graphData = resp.objectResponse.generalResumeRewards.graph || [];
+      // this.bussinessTopRewards = this.formatBussinessRewardsTop(resp.objectResponse.generalResumeRewards.totalBusiness);
+      this.graphData = null || [];
+      this.bussinessTopRewards = this.formatBussinessRewardsTop(null);
       this.purchaseDetailData = formatPurchaseData(resp.objectResponse.generalResumeRewards.cutOffValueRewards);
       this.totalItems = resp.objectResponse.generalResumeRewards.total;
       this.graphIsLoading = false;
@@ -84,6 +86,7 @@ export class UserReportComponent implements OnInit, OnDestroy {
   }
 
   formatBussinessRewardsTop(bussiness: any[]) {
+    if (!bussiness) return [];
     return bussiness.map(elem => {
       const currentBussiness = this.bussinessList.find(x => x.code === elem.business) || {};
       return {
