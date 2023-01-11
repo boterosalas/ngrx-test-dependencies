@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, retry, delay, retryWhen, concatMap, take, tap } from 'rxjs/operators';
+import { map, retry, delay, retryWhen, concatMap, take, tap, mergeMap } from 'rxjs/operators';
 import { ResponseService } from '../interfaces/response';
 import { Observable, of, throwError, concat, Subscription } from 'rxjs';
 
@@ -570,15 +570,7 @@ export class LinksService implements OnDestroy {
   }
 
   public getReportUser(id?: string) {
-    return this.http.get(`${this.ulrReport}${this.apiGetReport}?userid=${id}`, this.httpOptions).pipe(
-      retryWhen((errors) =>
-        errors.pipe(
-          delay(3000),
-          take(3),
-          tap((errorStatus) => { })
-        )
-      )
-    );
+    return this.http.get(`${this.ulrReport}${this.apiGetReport}?userid=${id}`, this.httpOptions);
   }
 
   public getRewardsReportById(params: any) {

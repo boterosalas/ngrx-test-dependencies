@@ -9,6 +9,9 @@
   align-items: center;
   min-height: 350px;
   justify-content: flex-start;
+  &.no-items{
+    justify-content: center;
+  }
   &__item {
     display: flex;
     margin-bottom: 12px;

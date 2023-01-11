@@ -1,4 +1,4 @@
-<div class="rewards">
+<div class="rewards" [ngClass]="{'no-items':ojbRewards.length === 0}">
   <div class="rewards__item" *ngFor="let rewards of ojbRewards">
     <div class="rewards__image-container">
       <img [src]="rewards.img" [alt]="rewards.title" class="rewards__image" />

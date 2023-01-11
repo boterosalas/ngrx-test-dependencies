@@ -44,12 +44,20 @@ export class SalesInfoComponent implements OnInit, OnDestroy {
   }
 
   public getInfomonth() {
-    this.link.getReportUser(this.userId).subscribe((resp: ResponseService) => {
-      const { generalResume } = resp.objectResponse;
-      this.totalComission = generalResume.totalCommissions;
-      this.linksCreated = generalResume.totalLinks;
-      this.sellProducts = generalResume.totalProducts;
-      this.conversionRate = generalResume.conversionRate;
+    this.link.getReportUser(this.userId).subscribe({
+      next: (resp: ResponseService) => {
+        const { generalResume } = resp.objectResponse;
+        this.totalComission = generalResume.totalCommissions;
+        this.linksCreated = generalResume.totalLinks;
+        this.sellProducts = generalResume.totalProducts;
+        this.conversionRate = generalResume.conversionRate;
+      },
+      error: () => {
+        this.totalComission = '0';
+        this.linksCreated = '0';
+        this.sellProducts = '0';
+        this.conversionRate = '0';
+      }
     });
   }
 

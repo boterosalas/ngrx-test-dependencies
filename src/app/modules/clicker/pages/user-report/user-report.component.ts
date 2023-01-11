@@ -73,7 +73,7 @@ export class UserReportComponent implements OnInit, OnDestroy {
         this.cardRechazados = 0;
         this.recompensasPercent = 0;
         this.cardsAreLoading = false;
-      }
+      },
     });
   }
 

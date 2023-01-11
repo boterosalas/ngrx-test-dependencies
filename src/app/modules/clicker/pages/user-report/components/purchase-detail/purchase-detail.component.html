@@ -46,7 +46,7 @@
               <ng-container *ngIf="column === 'business' || column === 'productName'; else otherData">
                 <span class="table-data" (click)="tooltip.show()" #tooltip="matTooltip"
                   matTooltip="{{ element[columnsStatus[i].code] | titlecase }}">
-                  {{ element[columnsStatus[i].code] | titlecase }}
+                  {{ element[columnsStatus[i].code] | titlecase | truncate:'30' }}
                 </span>
               </ng-container>
               <ng-template #otherData>
