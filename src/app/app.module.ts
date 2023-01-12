@@ -50,6 +50,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 // import { GoogleLoginProvider, FacebookLoginProvider } from '@abacritt/angularx-social-login';
 import { ScullyLibModule } from '@scullyio/ng-lib';
 import { LoginformComponent } from './modules/anonymous/components/loginform/loginform.component';
+import { StoreModule } from '@ngrx/store';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -106,6 +107,7 @@ export function jwtTokenGetter() {
       useTransferState: true,
       alwaysMonitor: true,
     }),
+    StoreModule.forRoot({}, {}),
   ],
   providers: [
     {
