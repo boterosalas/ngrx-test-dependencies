@@ -51,6 +51,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ScullyLibModule } from '@scullyio/ng-lib';
 import { LoginformComponent } from './modules/anonymous/components/loginform/loginform.component';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -108,6 +109,7 @@ export function jwtTokenGetter() {
       alwaysMonitor: true,
     }),
     StoreModule.forRoot({}, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [
     {

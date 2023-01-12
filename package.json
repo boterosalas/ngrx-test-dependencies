@@ -42,6 +42,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@kolkov/angular-editor": "3.0.0-beta.0",
     "@ngrx/store": "^14.3.2",
+    "@ngrx/store-devtools": "^14.3.2",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "@schematics/angular": "^14.0.4",
